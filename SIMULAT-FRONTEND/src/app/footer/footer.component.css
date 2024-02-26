@@ -1,0 +1,16 @@
+footer{
+    @apply bg-red-500 flex-1
+}
+
+h5{
+    @apply font-bold
+}
+
+ul{
+    @apply list-none list-outside
+}
+
+li:hover{
+    @apply to-red-300 
+}
+

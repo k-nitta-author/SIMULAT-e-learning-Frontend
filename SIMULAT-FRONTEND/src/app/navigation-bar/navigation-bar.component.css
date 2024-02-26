@@ -1,0 +1,17 @@
+nav{
+    @apply bg-stone-500 h-full w-96
+}
+
+ul{
+    @apply list-outside list-none
+}
+
+li{
+    @apply text-center
+}
+
+li:hover{
+
+    @apply bg-slate-300
+
+}

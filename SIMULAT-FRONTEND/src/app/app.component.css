@@ -1,0 +1,17 @@
+
+
+.testing{
+    @apply bg-slate-500
+}
+
+.main-body{
+    @apply flex
+}
+
+.main-content{
+    @apply bg-yellow-300 flex-1 text-justify
+}
+
+app-footer{
+    @apply mx-auto w-full
+}

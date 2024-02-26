@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+body{
+  padding: 0;
+}
+
+@font-face {
+  font-family: Poppins-Light;
+  src: url(assets/Poppins/Poppins-Light.ttf) format("truetype");
+}
+
+*{
+    font-family: Poppins-Light
+}
