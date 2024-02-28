@@ -1,17 +1,28 @@
 nav{
-    @apply bg-stone-500 h-full w-96
+    @apply bg-white w-full flex justify-between
 }
 
 ul{
-    @apply list-outside list-none
+    @apply list-outside list-none flex items-end
 }
 
 li{
-    @apply text-center
+    @apply text-center w-24 block py-4 px-8
 }
 
 li:hover{
 
     @apply bg-slate-300
+
+}
+
+li a{
+    @apply text-marian-blue;
+    text-decoration: none;
+
+}
+
+li a:hover{
+    
 
 }

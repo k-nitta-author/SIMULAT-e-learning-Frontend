@@ -1,15 +1,20 @@
+::ng-deep * {
+      
+    margin: 0;
+    padding: 0;
+  }
 
+body{
+    @apply flex flex-col min-h-screen
+}
 
 .testing{
     @apply bg-slate-500
 }
 
-.main-body{
-    @apply flex
-}
 
 .main-content{
-    @apply bg-yellow-300 flex-1 text-justify
+    @apply bg-yellow-300 grow
 }
 
 app-footer{

@@ -1,5 +1,9 @@
 footer{
-    @apply bg-red-500 flex-1
+    @apply bg-marian-blue text-white flex justify-between px-40
+}
+
+.section_copyright_statement{
+    @apply flex
 }
 
 h5{

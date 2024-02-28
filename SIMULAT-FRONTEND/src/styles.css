@@ -3,6 +3,7 @@
 
 body{
   padding: 0;
+  @apply bg-marian-blue
 }
 
 @font-face {
@@ -13,3 +14,4 @@ body{
 *{
     font-family: Poppins-Light
 }
+

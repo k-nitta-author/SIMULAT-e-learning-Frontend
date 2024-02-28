@@ -1,0 +1,13 @@
+.homepage_container{
+
+    @apply flex flex-col p-9
+}
+
+.landing_section{
+    @apply flex flex-row gap-4
+}
+
+.landing_section .test{
+    @apply bg-slate-600 flex-grow p-5
+}
+
