@@ -1,1 +1,60 @@
-<p>class-dashboard-page works!</p>
+<section class="dashboard">
+    <header>
+        <h2>Course Title</h2>
+        <h3>Course Code</h3>
+    </header>
+    <main class="dashboard-main">
+        <section class="student-progress-view dashboard-view">
+            <h3>Your Progress</h3>
+            
+            <!--TODO: Replace the below with more dynamic generation of component according to data source-->
+            <section class="student-progress-circle-group">
+                    <app-progress-circle></app-progress-circle>
+                    <app-progress-circle></app-progress-circle>
+                    <app-progress-circle></app-progress-circle>
+                    <app-progress-circle></app-progress-circle>
+                    <app-progress-circle></app-progress-circle>
+                    <app-progress-circle></app-progress-circle>
+            </section>
+            
+            <button>
+                View All Activities
+            </button>
+        </section>
+
+    <section class="student-viewgroup-section">
+        <section class="student-weekly-challenge-view dashboard-view">
+            <h3>Weekly Challenge</h3>
+
+        </section>
+
+        <section class="student-leaderboard-view dashboard-view">
+            <h3>Leader Board</h3>
+        </section>
+
+    </section>
+
+        <section class="student-viewgroup-section">
+
+            <section class="student-study-groups-view dashboard-view">
+                <h3>Study Groups</h3>
+            
+                <button>
+                    View More
+                </button>
+
+            </section>
+
+            <section class="student-community-wall-view dashboard-view">
+                <h3>Community Wall</h3>
+
+                <button>
+                    View More
+                </button>
+            </section>
+
+        </section>
+
+
+    </main>
+</section>

@@ -1,0 +1,43 @@
+.dashboard{
+    @apply p-2
+}
+
+.dashboard-main{
+    @apply flex-col gap-10
+}
+
+.dashboard-view{
+    @apply bg-gray-100 rounded-md p-5 mb-6 w-1/2 min-h-48
+}
+
+.student-progress-view{
+
+    @apply w-auto min-h-60
+
+}
+
+.student-progress-circle-group{
+    @apply flex flex-wrap gap-9
+}
+
+.student-weekly-challenge-view{
+
+
+}
+
+.student-leaderboard-view{
+
+
+}
+
+.student-study-groups-view{
+    @apply min-w-48
+}
+
+.student-community-wall-view{
+    
+}
+
+.student-viewgroup-section{
+    @apply flex gap-4 justify-between
+}

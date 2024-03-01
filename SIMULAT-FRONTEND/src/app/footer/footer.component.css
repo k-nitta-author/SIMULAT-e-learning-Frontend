@@ -18,3 +18,8 @@ li:hover{
     @apply to-red-300 
 }
 
+section a {
+    @apply text-white no-underline hover:text-amber-200
+}
+
+

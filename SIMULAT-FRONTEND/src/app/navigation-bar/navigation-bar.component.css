@@ -1,5 +1,5 @@
 nav{
-    @apply bg-white w-full flex justify-between
+    @apply bg-marian-blue w-full flex justify-between
 }
 
 ul{
@@ -22,7 +22,7 @@ li a{
 
 }
 
-li a:hover{
-    
+li a{
+    @apply text-white
 
 }
