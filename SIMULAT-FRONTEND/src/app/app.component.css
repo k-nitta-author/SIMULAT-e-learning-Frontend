@@ -4,8 +4,9 @@
     padding: 0;
   }
 
-body{
-    @apply flex flex-col min-h-screen
+
+.landing-view{
+    
 }
 
 .testing{
@@ -14,9 +15,9 @@ body{
 
 
 .main-content{
-    @apply bg-yellow-300 grow
+    @apply p-3 bg-white
 }
 
 app-footer{
-    @apply mx-auto w-full
+    @apply w-full
 }

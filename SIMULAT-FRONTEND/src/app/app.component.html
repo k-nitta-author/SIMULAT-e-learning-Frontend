@@ -1,15 +1,17 @@
 
+<main class="landing-view">
+  <h1>{{title}}</h1>
 
-<h1>{{title}}</h1>
 
+  <header class="main-body">
+    <app-navigation-bar></app-navigation-bar>
 
-<main class="main-body">
-  <app-navigation-bar></app-navigation-bar>
+  </header>
 
-</main>
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
 
-<main class="main-content">
-  <router-outlet></router-outlet>
 </main>
 
 
