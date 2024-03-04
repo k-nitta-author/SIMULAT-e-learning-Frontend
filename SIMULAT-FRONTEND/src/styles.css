@@ -6,6 +6,10 @@ body{
   @apply bg-marian-blue
 }
 
+.button-1-style{
+  @apply text-white bg-marian-blue max-w-32
+}
+
 @font-face {
   font-family: Poppins-Light;
   src: url(assets/Poppins/Poppins-Light.ttf) format("truetype");
@@ -14,4 +18,6 @@ body{
 *{
     font-family: Poppins-Light
 }
+
+
 
