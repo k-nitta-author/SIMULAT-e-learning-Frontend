@@ -1,0 +1,19 @@
+{
+    "students":[
+        {
+            "name": "james",
+            "age": 19
+        }
+    ],
+
+    "courses":[
+        {
+            "name":"course_1",
+            "course_code": "CC0_1"
+        },
+        {
+            "name":"course_1",
+            "course_code": "CC0_1"
+        }
+    ]
+}

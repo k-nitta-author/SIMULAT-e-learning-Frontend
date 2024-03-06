@@ -3,7 +3,7 @@
 }
 
 .circle_background{
-    @apply rounded-full bg-marian-blue w-36 h-36 flex flex-wrap justify-center items-center
+    @apply rounded-full bg-marian-blue w-36 h-36 flex flex-wrap justify-center items-center 
 }
 
 .item-score{
