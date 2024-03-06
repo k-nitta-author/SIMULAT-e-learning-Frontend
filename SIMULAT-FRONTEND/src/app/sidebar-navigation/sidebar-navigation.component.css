@@ -1,0 +1,15 @@
+nav{
+    @apply bg-marian-blue w-16 h-full pt-14 mr-8
+}
+
+ul{
+    @apply list-none sticky top-0
+}
+
+li{
+    @apply h-16
+}
+
+li:hover{
+    @apply bg-cyan-50
+}

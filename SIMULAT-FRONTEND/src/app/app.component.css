@@ -15,7 +15,7 @@
 
 
 .main-content{
-    @apply p-3 bg-white
+    @apply flex flex-row bg-white
 }
 
 app-footer{
