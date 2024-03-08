@@ -1,5 +1,8 @@
 nav{
-    @apply bg-marian-blue w-full flex justify-between
+    @apply bg-white w-full flex justify-between  text-marian-blue 
+    px-8
+    py-4
+    filter drop-shadow-xl
 }
 
 ul{
@@ -7,22 +10,21 @@ ul{
 }
 
 li{
-    @apply text-center w-24 block
+    @apply text-center w-24
 }
 
 li:hover{
 
-    @apply bg-slate-300
+    @apply bg-marian-blue
 
 }
 
 li a{
-    @apply text-marian-blue block w-4 h-8;
+    @apply block w-4 h-8;
     text-decoration: none;
 
 }
 
 li a{
-    @apply text-white
 
 }

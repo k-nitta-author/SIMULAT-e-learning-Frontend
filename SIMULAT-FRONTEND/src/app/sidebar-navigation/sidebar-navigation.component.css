@@ -1,5 +1,5 @@
 nav{
-    @apply bg-marian-blue w-16 h-full pt-14 mr-8
+    @apply bg-marian-blue max-w-32 h-full fixed
 }
 
 ul{
@@ -7,7 +7,7 @@ ul{
 }
 
 li{
-    @apply h-16
+    @apply flex justify-center items-center p-4
 }
 
 li:hover{
