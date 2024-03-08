@@ -1,0 +1,12 @@
+section{
+    @apply flex flex-col justify-between
+}
+
+
+form{
+    @apply flex flex-col
+}
+
+form input[type="text"]{
+    @apply h-40
+}
