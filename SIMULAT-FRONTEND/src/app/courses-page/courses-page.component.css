@@ -1,5 +1,5 @@
 main{
-    @apply px-3 py-9 
+    @apply flex flex-row
 }
 
 section{
