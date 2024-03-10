@@ -4,20 +4,20 @@
     padding: 0;
   }
 
-
-.landing-view{
-    
-}
-
 .testing{
     @apply bg-slate-500
 }
 
-
 .main-content{
-    @apply flex flex-row bg-white
+    @apply bg-white ml-32 
+    
 }
+
+
 
 app-footer{
     @apply w-full
 }
+
+
+

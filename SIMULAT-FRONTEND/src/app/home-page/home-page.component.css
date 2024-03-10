@@ -1,13 +1,7 @@
-.homepage_container{
-
-    @apply flex flex-col p-9
+main{
+    @apply p-8
 }
 
-.landing_section{
-    @apply flex flex-row gap-4
+.login-section{
+    @apply max-w-lg
 }
-
-.landing_section .test{
-    @apply bg-slate-600 flex-grow p-5
-}
-
