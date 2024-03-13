@@ -1,3 +1,18 @@
 form{
-    @apply flex flex-col
+    @apply
+    
+    flex
+    flex-col
+    
+    p-3
+
+    rounded-lg
+
+    bg-slate-300
+}
+
+
+form input[type="text"] {
+
+    
 }

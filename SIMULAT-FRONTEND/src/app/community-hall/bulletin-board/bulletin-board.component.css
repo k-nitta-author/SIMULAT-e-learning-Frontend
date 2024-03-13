@@ -1,0 +1,9 @@
+section{
+    @apply
+
+    rounded-lg
+
+    bg-gray-300
+
+    min-h-40
+}

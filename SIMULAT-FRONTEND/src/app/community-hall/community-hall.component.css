@@ -1,7 +1,38 @@
-.section-1{
-    @apply flex
+main{
+    @apply
+
+    flex
+    flex-col
+    gap-y-5
+
+    p-8
+}
+
+.section-1, .section-2{
+    @apply
+
+    w-full
+
+    flex
+    flex-row
+
+    gap-3
+
+}
+
+.section-1 *, .section-2 *{
+    @apply 
+    
+    flex-grow
+    bg-gray-300
+
+    rounded-lg
+
+    p-3
 }
 
 .section-2{
-    @apply flex  
+    @apply
+
+    min-h-72
 }
