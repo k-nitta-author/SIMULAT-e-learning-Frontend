@@ -1,0 +1,15 @@
+section{
+    @apply
+
+    flex
+    flex-row
+
+    gap-9
+}
+
+img{
+
+    @apply
+
+    size-40
+}

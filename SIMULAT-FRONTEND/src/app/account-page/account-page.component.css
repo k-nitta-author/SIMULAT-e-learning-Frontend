@@ -1,0 +1,29 @@
+main{
+    @apply p-9
+
+    flex
+    flex-col
+
+    gap-6
+}
+
+.section-1, .section-2{
+    @apply
+    
+    flex
+    flex-row
+
+    gap-6
+    
+}
+
+.section-1 *, .section-2 *{
+    @apply
+
+    grow
+    bg-gray-300
+    
+    p-6
+
+    rounded-lg
+}

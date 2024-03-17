@@ -1,0 +1,47 @@
+section{
+    @apply
+
+    text-center
+}
+
+main{
+    @apply
+
+    text-left
+}
+
+aside{
+    @apply
+
+    flex
+    flex-col
+}
+
+.token-field{
+    @apply
+
+    bg-white
+
+    p-1
+    px-2
+
+    rounded-lg
+
+}
+
+.token-field button{
+    @apply
+
+    inline
+    p-1
+    m-0
+
+    rounded-r-lg
+
+    relative
+
+    top-0
+    right-0
+
+    max-w-none
+}
