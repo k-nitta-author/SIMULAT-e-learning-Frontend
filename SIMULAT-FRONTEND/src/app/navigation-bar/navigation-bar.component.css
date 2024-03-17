@@ -1,7 +1,7 @@
 nav{
     @apply bg-white w-full flex justify-between  text-marian-blue 
-    px-8
-    py-4
+    px-0
+    py-2
     filter drop-shadow-xl
 }
 
@@ -22,9 +22,5 @@ li:hover{
 li a{
     @apply block w-4 h-8;
     text-decoration: none;
-
-}
-
-li a{
 
 }

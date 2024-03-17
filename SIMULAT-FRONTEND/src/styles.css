@@ -3,11 +3,14 @@
 
 body{
   padding: 0;
-  @apply bg-marian-blue
 }
 
 .button-1-style{
   @apply text-white bg-marian-blue max-w-32 border-none px-4 py-2 mt-3 
+}
+
+.logo-icon{
+  @apply w-12 h-12
 }
 
 input[type=submit]{
