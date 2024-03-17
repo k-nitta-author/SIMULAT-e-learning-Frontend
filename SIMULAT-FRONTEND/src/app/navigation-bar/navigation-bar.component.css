@@ -1,7 +1,7 @@
 nav{
     @apply bg-white w-full flex justify-between  text-marian-blue 
-    px-8
-    py-4
+    px-0
+    py-2
     filter drop-shadow-xl
 }
 

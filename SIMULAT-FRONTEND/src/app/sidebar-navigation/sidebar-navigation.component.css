@@ -1,5 +1,5 @@
 nav{
-    @apply bg-marian-blue max-w-32 h-full fixed
+    @apply bg-marian-blue max-w-16 h-full fixed top-0
 }
 
 ul{
@@ -7,9 +7,13 @@ ul{
 }
 
 li{
-    @apply flex justify-center items-center p-4
+    @apply flex justify-center items-center p-5
 }
 
 li:hover{
-    @apply bg-cyan-50
+    @apply bg-blue-600 fill-marian-blue
+}
+
+.nav-icon{
+    @apply w-8 h-8 outline-red-900
 }
