@@ -9,6 +9,10 @@ export class WeavyService {
 
   constructor() { 
     this.weavy.url ="https://1845cba530934b15a37270a57712b558.weavy.io";
-    this.weavy.tokenFactory = async (refresh: Boolean) => "wyu_n9qihJlqpS1QNmrF4UsfbcfkM6Vzwl4DfkAL"
+    // The following key is a sample key for the USERS API
+    this.weavy.tokenFactory = async (refresh: Boolean) => "wyu_YmxTsYyugCXGeSD33FUUOhX6WmmDoD3Ha2XX"
+
+    // The following key is our own generated key - uncomment when backend for users is ready
+    // this.weavy.tokenFactory = async (refresh: Boolean) => "wys_OqTZZ6EniKdWT18wiu6p5d0RIkrKvF1qC67F"
   }
 }

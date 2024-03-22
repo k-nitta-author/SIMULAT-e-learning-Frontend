@@ -1,0 +1,36 @@
+/* CSS for Messenger Window */
+.weavy-container {
+    position: relative;
+    width: 100%; /* Adjust width as needed */
+    height: 100%; /* Adjust height as needed */
+    overflow: auto; /* Adjust overflow behavior */
+  }
+  
+  /* Styling the Messenger Component */
+  .wy-messenger {
+    width: 100%; /* Adjust width as needed */
+    height: 100%; /* Adjust height as needed */
+    background-color: #f0f0f0; /* Example background color */
+    border: 1px solid #ccc; /* Example border */
+    border-radius: 5px; /* Example border radius */
+    padding: 10px; /* Example padding */
+    box-sizing: border-box; /* Ensure padding is included in width */
+  }
+  
+  /* Styling for Messenger Header */
+  .wy-messenger .header {
+    background-color: #ddd; /* Example header background color */
+    padding: 5px; /* Example header padding */
+  }
+  
+  /* Styling for Messenger Body */
+  .wy-messenger .body {
+    padding: 10px; /* Example body padding */
+  }
+  
+  /* Styling for Messenger Footer */
+  .wy-messenger .footer {
+    background-color: #ddd; /* Example footer background color */
+    padding: 5px; /* Example footer padding */
+  }
+  
