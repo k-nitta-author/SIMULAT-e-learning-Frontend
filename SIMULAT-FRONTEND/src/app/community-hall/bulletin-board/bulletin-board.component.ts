@@ -1,12 +1,24 @@
-import { Component } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { WeavyService } from '../../weavy.service';
 
 @Component({
   selector: 'app-bulletin-board',
   standalone: true,
-  imports: [],
   templateUrl: './bulletin-board.component.html',
-  styleUrl: './bulletin-board.component.css'
+  styleUrls: ['./bulletin-board.component.css'],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class BulletinBoardComponent {
 
+  constructor(private weavyService: WeavyService) { }
+
 }
+
+@NgModule({
+  imports: [CommonModule, BulletinBoardComponent],
+  providers: [WeavyService],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  exports: [BulletinBoardComponent]
+})
+export class BulletinBoardModule { }
