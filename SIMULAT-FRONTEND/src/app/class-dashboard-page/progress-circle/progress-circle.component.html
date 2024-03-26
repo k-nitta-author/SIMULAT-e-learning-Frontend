@@ -1,10 +1,12 @@
 <section class="whole_section">
     <section 
+
+        [ngClass]=getColorClass()
         class="circle_background"
         appColorSelector
         >
         <span class="item-score">
-            50%
+            {{ getProgressText() }}
         </span>
     </section>
     <h4>class name</h4>

@@ -6,6 +6,26 @@
     @apply rounded-full bg-marian-blue w-36 h-36 flex flex-wrap justify-center items-center 
 }
 
+.less-complete{
+    @apply  bg-red-600
+}
+
+.more-complete{
+    @apply  bg-green-500
+}
+
+.med-complete{
+    @apply bg-yellow-500
+}
+
+.med-low-complete{
+    @apply bg-orange-400
+}
+
+.med-high-complete{
+    @apply bg-lime-400
+}
+
 .item-score{
     @apply text-white text-xl
 }
