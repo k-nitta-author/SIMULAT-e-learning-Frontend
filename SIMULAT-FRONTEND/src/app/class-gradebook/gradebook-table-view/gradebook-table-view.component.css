@@ -1,0 +1,64 @@
+table{
+    @apply 
+    
+    bg-gray-300
+
+    w-full
+
+    p-8
+
+    rounded-lg
+
+}
+
+thead{
+
+    @apply
+
+
+    border-b-2
+    border-s-blue-50
+    border-2
+}
+
+tr{
+    @apply
+
+    
+    border
+    border-black
+
+
+}
+
+.grade_cell{
+    @apply
+
+    border-solid
+    
+    
+    rounded-lg
+    
+}
+
+.name_cell{
+
+    @apply
+
+    font-bold
+}
+
+.status_cell{
+
+
+    @apply
+
+    bg-red-600
+
+    p-3
+
+    rounded-lg
+
+
+
+}
