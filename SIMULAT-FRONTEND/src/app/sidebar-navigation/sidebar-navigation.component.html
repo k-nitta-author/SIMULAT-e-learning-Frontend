@@ -1,4 +1,4 @@
-<nav>
+<nav [ngClass]="{'show-sidebar': isSidebarOpen,  'hide-sidebar':!isSidebarOpen}">
     <ul>
 
         <li>
@@ -6,11 +6,11 @@
         </li>
 
         <li>
-            <a routerLink="/support"><img src="./assets/icons/hamburger.svg" title="Expand" class="nav-icon"></a>
+            <a routerLink="#" (click)="toggleSidebar()"><img src="./assets/icons/hamburger.svg" title="Expand" class="nav-icon"></a>
         </li>
 
         <li>
-            <a routerLink="/dashboard"><img src="./assets/icons/class-dashboard.svg" title="Class Dashboard" class="nav-icon"></a>
+            <a routerLink="/dashboard"><img src="./assets/icons/class-dashboard.svg" title="Class Dashboard" class="nav-icon"><span>TEST</span></a>
         </li>
 
         <li>

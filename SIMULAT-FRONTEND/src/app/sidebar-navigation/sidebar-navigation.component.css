@@ -1,5 +1,13 @@
 nav{
-    @apply bg-marian-blue max-w-16 h-full fixed top-0
+    @apply bg-marian-blue h-full fixed top-0 transition-[width] ease-in-out duration-500 overflow-x-hidden
+}
+
+.show-sidebar{
+    @apply w-1/4
+}
+
+.hide-sidebar{
+    @apply w-16
 }
 
 ul{
@@ -7,11 +15,18 @@ ul{
 }
 
 li{
-    @apply flex justify-center items-center p-5
+    @apply flex justify-start items-center p-5
+
 }
 
 li:hover{
     @apply bg-blue-600 fill-marian-blue
+}
+
+li a{
+    @apply
+
+    no-underline
 }
 
 .nav-icon{
