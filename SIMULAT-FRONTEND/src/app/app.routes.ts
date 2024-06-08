@@ -15,10 +15,12 @@ import { ActivitiesPageComponent } from './activities-page/activities-page.compo
 
 import { TermsOfServiceComponent } from './legal-pages/terms-of-service/terms-of-service.component';
 import { PrivacyPolicyComponent } from './legal-pages/privacy-policy/privacy-policy.component';
+import { RegistrationPageComponent } from './registration-page/registration-page.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomePageComponent},
+    { path: 'register', component: RegistrationPageComponent},
     { path: 'inbox', component: InboxPageComponent},
     { path: 'support', component: SupportPageComponent},
     { path: 'account', component: AccountPageComponent},

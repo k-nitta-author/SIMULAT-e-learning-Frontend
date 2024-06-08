@@ -1,0 +1,60 @@
+h1{
+    @apply
+
+    text-marian-blue
+}
+
+section{
+
+    @apply
+
+    flex
+    flex-row
+
+    gap-0
+}
+
+main{
+    @apply
+
+    w-1/2
+
+
+    flex
+    flex-col
+
+    items-center
+    justify-center
+
+    
+}
+
+main form{
+
+    @apply
+
+    flex
+    flex-col
+
+    gap-y-4
+
+
+
+}
+
+input{
+    @apply
+
+    rounded-md
+
+    border
+    border-blue-400
+    border-2
+}
+
+aside{
+    @apply
+
+    w-1/2
+    bg-red-500
+}
