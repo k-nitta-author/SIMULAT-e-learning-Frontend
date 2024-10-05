@@ -1,21 +1,21 @@
 import { Routes } from '@angular/router';
 
-import { HomePageComponent } from './home-page/home-page.component';
-import { InboxPageComponent } from './inbox-page/inbox-page.component';
-import { SupportPageComponent } from './support-page/support-page.component';
-import { AccountPageComponent } from './account-page/account-page.component';
-import { ClassDashboardPageComponent } from './class-dashboard-page/class-dashboard-page.component';
-import { CoursesPageComponent } from './courses-page/courses-page.component';
+// general pages (home, inbox, support, account, legal) - the same for all users
+import { HomePageComponent } from './general/home-page/home-page.component';
+import { InboxPageComponent } from './general/inbox-page/inbox-page.component';
+import { SupportPageComponent } from './general/support-page/support-page.component';
+import { AccountPageComponent } from './general/account-page/account-page.component';
+import { CommunityHallComponent } from './general/community-hall/community-hall.component';
+import { TermsOfServiceComponent } from './general/legal-pages/terms-of-service/terms-of-service.component';
+import { PrivacyPolicyComponent } from './general/legal-pages/privacy-policy/privacy-policy.component';
+import { RegistrationPageComponent } from './general/registration-page/registration-page.component';
 
-
-import { CommunityHallComponent } from './community-hall/community-hall.component';
-import { ClassGradebookComponent } from './class-gradebook/class-gradebook.component';
-import { RankingsPageComponent } from './rankings-page/rankings-page.component';
-import { ActivitiesPageComponent } from './activities-page/activities-page.component';
-
-import { TermsOfServiceComponent } from './legal-pages/terms-of-service/terms-of-service.component';
-import { PrivacyPolicyComponent } from './legal-pages/privacy-policy/privacy-policy.component';
-import { RegistrationPageComponent } from './registration-page/registration-page.component';
+// student view pages - only for students
+import { ClassDashboardPageComponent } from './student-view/class-dashboard-page/class-dashboard-page.component';
+import { CoursesPageComponent } from './student-view/courses-page/courses-page.component';
+import { ClassGradebookComponent } from './student-view/class-gradebook/class-gradebook.component';
+import { RankingsPageComponent } from './student-view/rankings-page/rankings-page.component';
+import { ActivitiesPageComponent } from './student-view/activities-page/activities-page.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },

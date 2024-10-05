@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { DashItemComponent } from '../course_views/dash-item/dash-item.component';
-import { NotificationsViewComponent } from '../notifications-view/notifications-view.component';
+import { NotificationsViewComponent } from '../../general/notifications-view/notifications-view.component';
 
 @Component({
   selector: 'app-courses-page',
