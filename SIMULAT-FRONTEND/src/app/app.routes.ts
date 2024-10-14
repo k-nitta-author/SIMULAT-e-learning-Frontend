@@ -17,6 +17,14 @@ import { ClassGradebookComponent } from './student-view/class-gradebook/class-gr
 import { RankingsPageComponent } from './student-view/rankings-page/rankings-page.component';
 import { ActivitiesPageComponent } from './student-view/activities-page/activities-page.component';
 
+// admin view pages - only for admins
+import { StudentAddComponent } from './admin-view/students/student-add/student-add.component';
+import { StudentEditComponent } from './admin-view/students/student-edit/student-edit.component';
+import { InstructorAddComponent } from './admin-view/instructors/instructor-add/instructor-add.component';
+import { InstructorDeleteComponent } from './admin-view/instructors/instructor-delete/instructor-delete.component';
+import { InstructorEditComponent } from './admin-view/instructors/instructor-edit/instructor-edit.component';
+import { StudentDeleteComponent } from './admin-view/students/student-delete/student-delete.component';
+
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomePageComponent},
@@ -31,5 +39,11 @@ export const routes: Routes = [
     { path: 'dashboard/gradebook', component: ClassGradebookComponent},
     { path: 'dashboard/rankings', component: RankingsPageComponent},
     { path: 'dashboard/community-hall', component: CommunityHallComponent},
-    { path: 'dashboard/activities', component: ActivitiesPageComponent}
+    { path: 'dashboard/activities', component: ActivitiesPageComponent},
+    { path: 'admin/students/add', component: StudentAddComponent },
+    { path: 'admin/students/edit/:id', component: StudentEditComponent },
+    { path: 'admin/students/delete/:id', component: StudentDeleteComponent },
+    { path: 'admin/instructors/add', component: InstructorAddComponent },
+    { path: 'admin/instructors/edit/:id', component: InstructorEditComponent },
+    { path: 'admin/instructors/delete/:id', component: InstructorDeleteComponent },
 ];

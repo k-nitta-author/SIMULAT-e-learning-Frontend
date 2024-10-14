@@ -11,6 +11,7 @@ import { CoursesPageComponent } from './student-view/courses-page/courses-page.c
 import { ClassDashboardPageComponent } from './student-view/class-dashboard-page/class-dashboard-page.component';
 
 import { routes } from './app.routes';
+import { GeneralModule } from './general/general.module';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { routes } from './app.routes';
     AppComponent,
     AccountPageComponent,
     CoursesPageComponent,
-    ClassDashboardPageComponent
+    ClassDashboardPageComponent,
+    GeneralModule
   ],
   exports:[
     RouterModule
