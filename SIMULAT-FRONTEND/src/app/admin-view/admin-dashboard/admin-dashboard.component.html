@@ -1,1 +1,60 @@
-<p>admin-dashboard works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin-dashboard.component.css">
+</head>
+<body>
+    <div class="admin-dashboard">
+        <h1>Admin Dashboard</h1>
+        <div class="dashboard-content">
+            <div class="section">
+                <h2>Users</h2>
+                <div class="list-item">
+                    <span>Students List</span>
+                    <button>View Students</button>
+                </div>
+                <div class="list-item">
+                    <span>Instructors List</span>
+                    <button>View Instructors</button>
+                </div>
+            </div>
+            <div class="section">
+                <h2>
+                    Courses
+                    <div class="course-filter">
+                        <select class="course-dropdown">
+                            <option value="all">All Terms</option>
+                            <option value="first">First Term</option>
+                            <option value="second">Second Term</option>
+                            <option value="third">Third Term</option>
+                            <option value="fourth">Fourth Term</option>
+                        </select>
+                    </div>
+                </h2>
+                <div class="list-item">
+                    <span>First Term SY (20**-20**)</span>
+                    <button>View Courses</button>
+                </div>
+                <div class="list-item">
+                    <span>Second Term SY (20**-20**)</span>
+                    <button>View Courses</button>
+                </div>
+                <div class="list-item">
+                    <span>Third Term SY (20**-20**)</span>
+                    <button>View Courses</button>
+                </div>
+                <div class="list-item">
+                    <span>Fourth Term SY (20**-20**)</span>
+                    <button>View Courses</button>
+                </div>
+                <div class="add-course">
+                    <button>Add Course</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
