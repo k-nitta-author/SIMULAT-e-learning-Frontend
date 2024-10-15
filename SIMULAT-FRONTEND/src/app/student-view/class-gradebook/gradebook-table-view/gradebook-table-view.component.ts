@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { grade_info } from '../../interfaces/grade';
-
+import { grade_info } from '../../../general/interfaces/grade';
 @Component({
   selector: 'app-gradebook-table-view',
   standalone: true,

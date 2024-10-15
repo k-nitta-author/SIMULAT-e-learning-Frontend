@@ -1,0 +1,28 @@
+<p>assignments-list works!</p>
+
+<table>
+    <thead>
+      <tr>
+        <th>Assignment ID</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Deadline</th>
+        <th>Max Score</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let assignment of assignments">
+        <td>{{ assignment.assignment_id }}</td>
+        <td>{{ assignment.assignment_title }}</td>
+        <td>{{ assignment.description }}</td>
+        <td>{{ assignment.deadline }}</td>
+        <td>{{ assignment.max_score }}</td>
+        <td>
+          <button (click)="editAssignment(assignment.assignment_id)">Edit</button>
+          <button (click)="deleteAssignment(assignment.assignment_id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  

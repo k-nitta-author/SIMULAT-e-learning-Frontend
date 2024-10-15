@@ -1,1 +1,26 @@
 <p>quizzes-list works!</p>
+
+<table>
+    <thead>
+      <tr>
+        <th>Quiz ID</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Time Limit</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let quiz of quizzes">
+        <td>{{ quiz.quiz_id }}</td>
+        <td>{{ quiz.quiz_title }}</td>
+        <td>{{ quiz.description }}</td>
+        <td>{{ quiz.time_limit }}</td>
+        <td>
+          <button (click)="updateQuiz(quiz.quiz_id)">Update</button>
+          <button (click)="deleteQuiz(quiz.quiz_id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
