@@ -1,39 +1,8 @@
 {
-
-    "routes":[
-    { "src": "/", "dest": "/home"},
-    { "src": "/register", "dest": "/register" },
-    { "src": "/inbox", "dest": "/inbox" },
-    { "src": "/support", "dest": "/support" },
-    { "src": "/account", "dest": "/account" },
-    { "src": "/legal/terms_of_service", "dest": "/legal/terms_of_service" },
-    { "src": "/legal/privacy_policy", "dest": "/legal/privacy_policy" },
-
-    { "src": "/dashboard", "dest": "/legal/privacy_policy" },
-    { "src": "/courses", "dest": "/courses" },
-    { "src": "/dashboard/gradebook", "dest": "/dashboard/gradebook" },
-    { "src": "/dashboard/rankings", "dest": "/dashboard/rankings" },
-    { "src": "/dashboard/community-hall", "dest": "/dashboard/community-hall" },
-    { "src": "/dashboard/activities", "dest": "/dashboard/activities" },
-
-    { "src": "/admin/dashboard", "dest": "/admin/dashboard" },
-
-    { "src": "/admin/students/add", "dest": "/admin/students/add" },
-    { "src": "/admin/students/edit/:id", "dest": "/admin/students/edit/:id" },
-    { "src": "/admin/students/delete/:id", "dest": "/admin/students/delete/:id" },
-    { "src": "/admin/students/list", "dest": "/admin/students/list" }, 
-
-    { "src": "/admin/content", "dest": "/admin/content" },
-
-    { "src": "/admin/assignments", "dest": "/admin/assignments" },
-
-    { "src": "/admin/quizzes", "dest": "/admin/quizzes" },
-
-    { "src": "/admin/instructors/add", "dest": "/admin/instructors/add" },
-    { "src": "/admin/instructors/edit/:id", "dest": "/admin/instructors/edit/:id" },
-    { "src": "/admin/instructors/delete/:id", "dest": "/admin/instructors/delete/:id" },
-
-    { "src": "/instructor/dashboard", "dest": "/instructor/dashboard" }
-
+    "rewrites": [
+      {
+        "source": "/(.*)",
+        "destination": "/browser/index.html"
+      }
     ]
 }
