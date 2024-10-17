@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@weavy/uikit-web": "^21.1.2"
+    "@weavy/uikit-web": "^21.1.2",
+    "simulat-e-learning-frontend": "file:"
   }
 }
