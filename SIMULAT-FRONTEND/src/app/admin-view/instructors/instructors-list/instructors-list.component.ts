@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-instructors-list',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './instructors-list.component.html',
   styleUrl: './instructors-list.component.css'
 })

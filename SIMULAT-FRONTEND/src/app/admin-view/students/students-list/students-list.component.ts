@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../../../services/student.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-students-list',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './students-list.component.html',
 })
 export class StudentsListComponent implements OnInit {

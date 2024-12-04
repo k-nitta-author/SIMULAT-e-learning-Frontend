@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../../../services/quiz.service';
+import { CommonModule } from '@angular/common';
 
 // placeholder model until connected to backend
 interface Quiz {
@@ -15,6 +16,8 @@ interface Quiz {
 
 @Component({
   selector: 'app-quiz-list',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './quizzes-list.component.html',
   styleUrls: ['./quizzes-list.component.css']
 })

@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ContentService, Content } from '../../../services/content.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-content-list',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './content-list.component.html',
   styleUrls: ['./content-list.component.css']
 })
@@ -18,6 +22,8 @@ export class ContentListComponent implements OnInit {
     content_url: '', 
     created_at: new Date() 
   }; // Object to store new content
+
+  isModalOpen: boolean = false;
 
   constructor(private contentService: ContentService) {}
 
@@ -37,9 +43,21 @@ export class ContentListComponent implements OnInit {
     );
   }
 
+  // Handle opening the modal
+  openModal(): void {
+    this.selectedContent = null; // Clear selection if any
+    this.isModalOpen = true; // Open the modal
+  }
+
+  // Handle closing the modal
+  closeModal(): void {
+    this.isModalOpen = false; // Close the modal
+  }
+
   // Handle the selection of content for editing
   selectContent(content: Content): void {
     this.selectedContent = content;
+    this.isModalOpen = true; // Open modal for editing
   }
 
   // Handle adding new content
@@ -56,6 +74,7 @@ export class ContentListComponent implements OnInit {
           content_url: '', 
           created_at: new Date() 
         }; // Reset new content object
+        this.closeModal(); // Close the modal after adding
       },
       (error) => {
         console.error('Error adding content', error);
@@ -67,10 +86,17 @@ export class ContentListComponent implements OnInit {
   updateContent(): void {
     if (!this.selectedContent) return; // Ensure selected content is valid
     this.contentService.updateContent(this.selectedContent.content_id, this.selectedContent).subscribe(
-      (data: Content) => {
-        const index = this.contentList.findIndex(item => item.content_id === data.content_id);
-        this.contentList[index] = data; // Update the content in the list
-        this.selectedContent = null; // Clear selection after updating
+      (data: Content | undefined) => {
+        if (data) {
+          const index = this.contentList.findIndex(item => item.content_id === data.content_id);
+          if (index !== -1) {
+            this.contentList[index] = data; // Update the content in the list
+            this.closeModal(); // Close the modal after updating
+          }
+          this.selectedContent = null; // Clear selection after updating
+        } else {
+          console.error('Received undefined data');
+        }
       },
       (error) => {
         console.error('Error updating content', error);

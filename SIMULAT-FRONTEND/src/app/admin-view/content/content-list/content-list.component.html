@@ -1,48 +1,64 @@
 <div class="content-container">
-    <h2>Content List</h2>
-  
-    <table>
+  <h2>Content List</h2>
+
+  <!-- Add New Content Button -->
+  <button (click)="openModal()">Add New Content</button>
+
+  <table>
       <thead>
-        <tr>
-          <th>Content ID</th>
-          <th>Course ID</th>
-          <th>Content Type</th>
-          <th>Content Title</th>
-          <th>Content Description</th>
-          <th>Content URL</th>
-          <th>Created At</th>
-          <th>Actions</th>
-        </tr>
+          <tr>
+              <th>Content ID</th>
+              <th>Course ID</th>
+              <th>Content Type</th>
+              <th>Content Title</th>
+              <th>Content Description</th>
+              <th>Content URL</th>
+              <th>Created At</th>
+              <th>Actions</th>
+          </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let content of contentList">
-          <td>{{ content.content_id }}</td>
-          <td>{{ content.course_id }}</td>
-          <td>{{ content.content_type }}</td>
-          <td>{{ content.content_title }}</td>
-          <td>{{ content.content_description }}</td>
-          <td>{{ content.content_url }}</td>
-          <!-- <td>{{ content.created_at | date:'short' }}</td> -->
-          <td>
-            <button (click)="selectContent(content)">Edit</button>
-            <button (click)="deleteContent(content.content_id)">Delete</button>
-          </td>
-        </tr>
+          <tr *ngFor="let content of contentList">
+              <td>{{ content.content_id }}</td>
+              <td>{{ content.course_id }}</td>
+              <td>{{ content.content_type }}</td>
+              <td>{{ content.content_title }}</td>
+              <td>{{ content.content_description }}</td>
+              <td>{{ content.content_url }}</td>
+              <td>{{ content.created_at | date: 'short' }}</td>
+              <td>
+                  <button (click)="selectContent(content)">Edit</button>
+                  <button (click)="deleteContent(content.content_id)">Delete</button>
+              </td>
+          </tr>
       </tbody>
-    </table>
-  
-    <h3 *ngIf="selectedContent">Edit Content</h3>
-    <h3 *ngIf="!selectedContent">Add New Content</h3>
-  
-    <!-- <form (ngSubmit)="selectedContent ? updateContent() : addContent()">
-      <input type="text" [(ngModel)]="selectedContent?.content_id || newContent.content_id" name="contentId" placeholder="Content ID" required />
-      <input type="text" [(ngModel)]="selectedContent?.course_id || newContent.course_id" name="courseId" placeholder="Course ID" required />
-      <input type="text" [(ngModel)]="selectedContent?.content_type || newContent.content_type" name="contentType" placeholder="Content Type" required />
-      <input type="text" [(ngModel)]="selectedContent?.content_title || newContent.content_title" name="contentTitle" placeholder="Content Title" required />
-      <textarea [(ngModel)]="selectedContent?.content_description || newContent.content_description" name="contentDescription" placeholder="Content Description" required></textarea>
-      <input type="text" [(ngModel)]="selectedContent?.content_url || newContent.content_url" name="contentUrl" placeholder="Content URL" required />
+  </table>
+</div>
+
+<!-- Modal for Adding/Editing Content -->
+<div class="modal" *ngIf="isModalOpen">
+  <div class="modal-content">
+    <h3>{{ selectedContent ? 'Edit Content' : 'Add New Content' }}</h3>
+
+    <form (ngSubmit)="selectedContent ? updateContent() : addContent()">
+      <div *ngIf="selectedContent; else addNewContent">
+        <input type="text" [(ngModel)]="selectedContent.content_id" name="contentId" placeholder="Content ID" required />
+        <input type="text" [(ngModel)]="selectedContent.course_id" name="courseId" placeholder="Course ID" required />
+        <input type="text" [(ngModel)]="selectedContent.content_type" name="contentType" placeholder="Content Type" required />
+        <input type="text" [(ngModel)]="selectedContent.content_title" name="contentTitle" placeholder="Content Title" required />
+        <textarea [(ngModel)]="selectedContent.content_description" name="contentDescription" placeholder="Content Description" required></textarea>
+        <input type="text" [(ngModel)]="selectedContent.content_url" name="contentUrl" placeholder="Content URL" required />
+      </div>
+      <ng-template #addNewContent>
+        <input type="text" [(ngModel)]="newContent.content_id" name="contentId" placeholder="Content ID" required />
+        <input type="text" [(ngModel)]="newContent.course_id" name="courseId" placeholder="Course ID" required />
+        <input type="text" [(ngModel)]="newContent.content_type" name="contentType" placeholder="Content Type" required />
+        <input type="text" [(ngModel)]="newContent.content_title" name="contentTitle" placeholder="Content Title" required />
+        <textarea [(ngModel)]="newContent.content_description" name="contentDescription" placeholder="Content Description" required></textarea>
+        <input type="text" [(ngModel)]="newContent.content_url" name="contentUrl" placeholder="Content URL" required />
+      </ng-template>
       <button type="submit">{{ selectedContent ? 'Update' : 'Add' }}</button>
       <button type="button" (click)="selectedContent = null" *ngIf="selectedContent">Cancel</button>
-    </form> -->
+    </form>
   </div>
-  
+</div>

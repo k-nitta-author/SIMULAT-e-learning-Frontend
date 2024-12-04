@@ -29,10 +29,10 @@ import { ContentListComponent } from './admin-view/content/content-list/content-
     AccountPageComponent,
     CoursesPageComponent,
     ClassDashboardPageComponent,
+
+    // Admin view components
     InstructorsListComponent,
     AssignmentsListComponent,
-  ],
-  declarations: [
     StudentsListComponent,
     QuizListComponent, 
     ContentListComponent,
