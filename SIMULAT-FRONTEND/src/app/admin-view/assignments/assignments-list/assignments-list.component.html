@@ -1,28 +1,33 @@
-<p>assignments-list works!</p>
+<div *ngIf="assignments.length > 0">
+    <p>Assignments found: {{ assignments.length }}</p>
+  </div>
+  <div *ngIf="assignments.length === 0">
+    <p>No assignments found</p>
+  </div>
+  
 
 <table>
-    <thead>
+  <thead>
       <tr>
-        <th>Assignment ID</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Deadline</th>
-        <th>Max Score</th>
-        <th>Actions</th>
+          <th>Assignment ID</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Deadline</th>
+          <th>Max Score</th>
+          <th>Actions</th>
       </tr>
-    </thead>
-    <tbody>
+  </thead>
+  <tbody>
       <tr *ngFor="let assignment of assignments">
-        <td>{{ assignment.assignment_id }}</td>
-        <td>{{ assignment.assignment_title }}</td>
-        <td>{{ assignment.description }}</td>
-        <td>{{ assignment.deadline }}</td>
-        <td>{{ assignment.max_score }}</td>
-        <td>
-          <button (click)="editAssignment(assignment.assignment_id)">Edit</button>
-          <button (click)="deleteAssignment(assignment.assignment_id)">Delete</button>
-        </td>
+          <td>{{ assignment.assignment_id }}</td>
+          <td>{{ assignment.assignment_title }}</td>
+          <td>{{ assignment.description }}</td>
+          <td>{{ assignment.deadline ? (assignment.deadline | date: 'yyyy-MM-dd') : 'No deadline set' }}</td>
+          <td>{{ assignment.max_score }}</td>
+          <td>
+              <button type="button" (click)="editAssignment(assignment.assignment_id)">Edit</button>
+              <button type="button" (click)="deleteAssignment(assignment.assignment_id)">Delete</button>
+          </td>
       </tr>
-    </tbody>
-  </table>
-  
+  </tbody>
+</table>

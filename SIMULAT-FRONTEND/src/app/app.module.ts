@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 import { HomePageComponent } from './general/home-page/home-page.component';
@@ -30,21 +30,19 @@ import { ContentListComponent } from './admin-view/content/content-list/content-
     CoursesPageComponent,
     ClassDashboardPageComponent,
     InstructorsListComponent,
+    AssignmentsListComponent,
   ],
   declarations: [
-    AssignmentsListComponent,
     StudentsListComponent,
     QuizListComponent, 
     ContentListComponent,
   ],
   exports:[
-    RouterModule
+    RouterModule,
+    AssignmentsListComponent,
+  ],
+  providers: [
+    AssignmentService
   ]
 })
 export class AppModule { }
-
-bootstrapApplication(AppComponent, {
-  providers: [
-    { provide: 'routes', useValue: routes }
-  ]
-});
