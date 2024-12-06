@@ -1,33 +1,67 @@
+<!-- Add Assignment Button -->
+<div>
+  <button type="button" (click)="toggleModal()">Add New Assignment</button>
+</div>
+
+<!-- Modal for Adding New Assignment -->
+<div *ngIf="isModalOpen" class="modal">
+  <div class="modal-content">
+    <h3>Add New Assignment</h3>
+    <form (ngSubmit)="onSubmit()">
+      <div>
+        <label for="assignmentTitle">Title:</label>
+        <input id="assignmentTitle" type="text" [(ngModel)]="newAssignment.assignment_title" name="assignmentTitle" required>
+      </div>
+      <div>
+        <label for="assignmentDescription">Description:</label>
+        <textarea id="assignmentDescription" [(ngModel)]="newAssignment.description" name="assignmentDescription" required></textarea>
+      </div>
+      <div>
+        <label for="deadline">Deadline:</label>
+        <input id="deadline" type="date" [(ngModel)]="newAssignment.deadline" name="deadline">
+      </div>
+      <div>
+        <label for="maxScore">Max Score:</label>
+        <input id="maxScore" type="number" [(ngModel)]="newAssignment.max_score" name="maxScore" required>
+      </div>
+      <div>
+        <button type="submit">Add Assignment</button>
+        <button type="button" (click)="toggleModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Assignment List -->
 <div *ngIf="assignments.length > 0">
-    <p>Assignments found: {{ assignments.length }}</p>
-  </div>
-  <div *ngIf="assignments.length === 0">
-    <p>No assignments found</p>
-  </div>
-  
+  <p>Assignments found: {{ assignments.length }}</p>
+</div>
+<div *ngIf="assignments.length === 0">
+  <p>No assignments found</p>
+</div>
 
 <table>
   <thead>
-      <tr>
-          <th>Assignment ID</th>
-          <th>Title</th>
-          <th>Description</th>
-          <th>Deadline</th>
-          <th>Max Score</th>
-          <th>Actions</th>
-      </tr>
+    <tr>
+      <th>Assignment ID</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Deadline</th>
+      <th>Max Score</th>
+      <th>Actions</th>
+    </tr>
   </thead>
   <tbody>
-      <tr *ngFor="let assignment of assignments">
-          <td>{{ assignment.assignment_id }}</td>
-          <td>{{ assignment.assignment_title }}</td>
-          <td>{{ assignment.description }}</td>
-          <td>{{ assignment.deadline ? (assignment.deadline | date: 'yyyy-MM-dd') : 'No deadline set' }}</td>
-          <td>{{ assignment.max_score }}</td>
-          <td>
-              <button type="button" (click)="editAssignment(assignment.assignment_id)">Edit</button>
-              <button type="button" (click)="deleteAssignment(assignment.assignment_id)">Delete</button>
-          </td>
-      </tr>
+    <tr *ngFor="let assignment of assignments">
+      <td>{{ assignment.assignment_id }}</td>
+      <td>{{ assignment.assignment_title }}</td>
+      <td>{{ assignment.description }}</td>
+      <td>{{ assignment.deadline ? (assignment.deadline | date: 'yyyy-MM-dd') : 'No deadline set' }}</td>
+      <td>{{ assignment.max_score }}</td>
+      <td>
+        <button type="button" (click)="editAssignment(assignment.assignment_id)">Edit</button>
+        <button type="button" (click)="deleteAssignment(assignment.assignment_id)">Delete</button>
+      </td>
+    </tr>
   </tbody>
 </table>
