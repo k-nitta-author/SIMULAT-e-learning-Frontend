@@ -13,6 +13,7 @@
     "@angular/common": "^19.0.1",
     "@angular/core": "^19.0.1",
     "@angular/platform-browser": "^19.0.1",
-    "@weavy/uikit-web": "^25.1.0"
+    "@weavy/uikit-web": "^25.1.0",
+    "simulat-e-learning-frontend": "file:"
   }
 }
