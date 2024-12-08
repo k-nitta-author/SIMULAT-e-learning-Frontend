@@ -1,26 +1,78 @@
 <p>quizzes-list works!</p>
 
+<!-- Button to open modal for adding a new quiz -->
+<button type="button" (click)="openModal()">Add New Quiz</button>
+
+<!-- Quiz List Table -->
 <table>
-    <thead>
-      <tr>
-        <th>Quiz ID</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Time Limit</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let quiz of quizzes">
-        <td>{{ quiz.quiz_id }}</td>
-        <td>{{ quiz.quiz_title }}</td>
-        <td>{{ quiz.description }}</td>
-        <td>{{ quiz.time_limit }}</td>
-        <td>
-          <button (click)="updateQuiz(quiz.quiz_id)">Update</button>
-          <button (click)="deleteQuiz(quiz.quiz_id)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  
+  <thead>
+    <tr>
+      <th>Quiz ID</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Time Limit</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let quiz of quizzes">
+      <td>{{ quiz.quiz_id }}</td>
+      <td>{{ quiz.quiz_title }}</td>
+      <td>{{ quiz.description }}</td>
+      <td>{{ quiz.time_limit }}</td>
+      <td>
+        <button type="button" (click)="openModal(quiz)">Edit</button>
+        <button type="button" (click)="deleteQuiz(quiz.quiz_id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal for Adding/Editing Quiz -->
+<div class="modal" *ngIf="isModalOpen">
+  <div class="modal-content">
+    <h2>{{ isEditing ? 'Edit Quiz' : 'Add New Quiz' }}</h2>
+    <form (ngSubmit)="saveQuiz()">
+      <label for="quizTitle">Title</label>
+      <input
+        type="text"
+        id="quizTitle"
+        [(ngModel)]="modalQuiz.quiz_title"
+        name="quizTitle"
+        required
+      />
+
+      <label for="description">Description</label>
+      <input
+        type="text"
+        id="description"
+        [(ngModel)]="modalQuiz.description"
+        name="description"
+        required
+      />
+
+      <label for="timeLimit">Time Limit (minutes)</label>
+      <input
+        type="number"
+        id="timeLimit"
+        [(ngModel)]="modalQuiz.time_limit"
+        name="timeLimit"
+        required
+      />
+
+      <label>
+        <input
+          type="checkbox"
+          [(ngModel)]="modalQuiz.is_published"
+          name="isPublished"
+        />
+        Published
+      </label>
+
+      <div class="modal-buttons">
+        <button type="submit" class="save-button">Save</button>
+        <button type="button" class="cancel-button" (click)="closeModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

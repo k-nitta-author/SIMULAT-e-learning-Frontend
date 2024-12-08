@@ -1,49 +1,86 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class QuizService {
-  private apiUrl = 'your-api-endpoint/quiz';  // Replace with your actual API endpoint
-
-  constructor(private http: HttpClient) {}
-
-  // Get all quizzes
-  getAllQuizzes(): Observable<Quiz[]> {
-    return this.http.get<Quiz[]>(this.apiUrl);
-  }
-
-  // Get a specific quiz by ID
-  getQuizById(id: string): Observable<Quiz> {
-    return this.http.get<Quiz>(`${this.apiUrl}/${id}`);
-  }
-
-  // Add a new quiz
-  addQuiz(quiz: Quiz): Observable<Quiz> {
-    return this.http.post<Quiz>(this.apiUrl, quiz);
-  }
-
-  // Update an existing quiz
-  updateQuiz(id: string, quiz: Quiz): Observable<Quiz> {
-    return this.http.put<Quiz>(`${this.apiUrl}/${id}`, quiz);
-  }
-
-  // Delete a quiz
-  deleteQuiz(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
+export interface Quiz {
+  quiz_id: string;
+  content_id: string;
+  quiz_title: string;
+  description: string;
+  time_limit: number;
+  is_published: boolean;
+  created_at: Date;
+  updated_at: Date;
 }
 
-// placeholder model until connected to backend
-export interface Quiz {
-  quiz_id: string;         // Unique ID for the quiz
-  content_id: string;      // Reference to the related content
-  quiz_title: string;      // Title of the quiz
-  description: string;     // Description of the quiz
-  time_limit: number;      // Time limit for completing the quiz
-  is_published: boolean;   // Indicates if the quiz is published or draft
-  created_at: Date;        // Date the quiz was created
-  updated_at: Date;        // Date the quiz was last updated
+@Injectable({
+  providedIn: 'root',
+})
+export class QuizService {
+  private placeholderQuizzes: Quiz[] = [
+    {
+      quiz_id: '1',
+      content_id: 'content1',
+      quiz_title: 'Sample Quiz 1',
+      description: 'Description for Sample Quiz 1',
+      time_limit: 30,
+      is_published: true,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+    {
+      quiz_id: '2',
+      content_id: 'content2',
+      quiz_title: 'Sample Quiz 2',
+      description: 'Description for Sample Quiz 2',
+      time_limit: 20,
+      is_published: false,
+      created_at: new Date(),
+      updated_at: new Date(),
+    },
+  ];
+
+  constructor() {}
+
+  // Placeholder implementation to simulate fetching all quizzes
+  getAllQuizzes(): Observable<Quiz[]> {
+    // Replace this with an HTTP GET request to your API
+    // Example: return this.http.get<Quiz[]>(this.apiUrl);
+    return of(this.placeholderQuizzes);
+  }
+
+  // Placeholder for fetching a single quiz by ID
+  getQuizById(id: string): Observable<Quiz | undefined> {
+    // Replace this with an HTTP GET request to your API
+    // Example: return this.http.get<Quiz>(`${this.apiUrl}/${id}`);
+    return of(this.placeholderQuizzes.find((quiz) => quiz.quiz_id === id));
+  }
+
+  // Placeholder for adding a new quiz
+  addQuiz(quiz: Quiz): Observable<Quiz> {
+    // Replace this with an HTTP POST request to your API
+    // Example: return this.http.post<Quiz>(this.apiUrl, quiz);
+    this.placeholderQuizzes.push(quiz);
+    return of(quiz);
+  }
+
+  // Placeholder for updating an existing quiz
+  updateQuiz(id: string, quiz: Quiz): Observable<Quiz> {
+    // Replace this with an HTTP PUT request to your API
+    // Example: return this.http.put<Quiz>(`${this.apiUrl}/${id}`, quiz);
+    const index = this.placeholderQuizzes.findIndex((q) => q.quiz_id === id);
+    if (index !== -1) {
+      this.placeholderQuizzes[index] = quiz;
+    }
+    return of(quiz);
+  }
+
+  // Placeholder for deleting a quiz
+  deleteQuiz(id: string): Observable<void> {
+    // Replace this with an HTTP DELETE request to your API
+    // Example: return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    this.placeholderQuizzes = this.placeholderQuizzes.filter(
+      (quiz) => quiz.quiz_id !== id
+    );
+    return of();
+  }
 }
