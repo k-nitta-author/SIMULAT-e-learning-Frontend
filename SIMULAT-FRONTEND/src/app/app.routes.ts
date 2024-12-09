@@ -21,16 +21,12 @@ import { ActivitiesPageComponent } from './student-view/activities-page/activiti
 import { AdminDashboardComponent } from './admin-view/admin-dashboard/admin-dashboard.component';
 import { InstructorDashboardComponent } from './instructor-view/instructor-dashboard/instructor-dashboard.component';
 
-import { StudentAddComponent } from './admin-view/students/student-add/student-add.component';
-import { StudentEditComponent } from './admin-view/students/student-edit/student-edit.component';
-import { InstructorAddComponent } from './admin-view/instructors/instructor-add/instructor-add.component';
-import { InstructorDeleteComponent } from './admin-view/instructors/instructor-delete/instructor-delete.component';
-import { InstructorEditComponent } from './admin-view/instructors/instructor-edit/instructor-edit.component';
-import { StudentDeleteComponent } from './admin-view/students/student-delete/student-delete.component';
+// Admin data management pages
 import { StudentsListComponent } from './admin-view/students/students-list/students-list.component';
 import { ContentListComponent } from './admin-view/content/content-list/content-list.component';
 import { AssignmentsListComponent } from './admin-view/assignments/assignments-list/assignments-list.component';
 import { QuizListComponent } from './admin-view/quizzes/quizzes-list/quizzes-list.component';
+import { InstructorsListComponent } from './admin-view/instructors/instructors-list/instructors-list.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -53,25 +49,20 @@ export const routes: Routes = [
     // Admin dashboard route
     { path: 'admin/dashboard', component: AdminDashboardComponent },
 
-    // Admin student management routes
-    { path: 'admin/students/add', component: StudentAddComponent },
-    { path: 'admin/students/edit/:id', component: StudentEditComponent },
-    { path: 'admin/students/delete/:id', component: StudentDeleteComponent },
-    { path: 'admin/students/list', component: StudentsListComponent }, 
+    // Admin student management route
+    { path: 'admin/students', component: StudentsListComponent }, 
 
-    // Admin content management routes
+    // Admin content management route
     { path: 'admin/content', component: ContentListComponent },
 
-    // Admin assignment management routes
+    // Admin assignment management route
     { path: 'admin/assignments', component: AssignmentsListComponent },
 
-    // Admin quiz management routes
+    // Admin quiz management route
     { path: 'admin/quizzes', component: QuizListComponent },
 
-    // Admin instructor management routes
-    { path: 'admin/instructors/add', component: InstructorAddComponent },
-    { path: 'admin/instructors/edit/:id', component: InstructorEditComponent },
-    { path: 'admin/instructors/delete/:id', component: InstructorDeleteComponent },
+    // Admin instructor management route
+    { path: 'admin/instructors', component: InstructorsListComponent },
 
     // Instructor dashboard route
     { path: 'instructor/dashboard', component: InstructorDashboardComponent }

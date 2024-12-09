@@ -1,35 +1,84 @@
 <p>students-list works!</p>
 
+<!-- Button to Add a New Student -->
+<button type="button" (click)="openModal()">Add New Student</button>
+
+<!-- Students Table -->
 <table>
-    <thead>
-      <tr>
-        <th>Student ID</th>
-        <th>Given Name</th>
-        <th>Middle Name</th>
-        <th>Surname</th>
-        <th>Date of Birth</th>
-        <th>Email</th>
-        <th>Gender</th>
-        <th>Enrollment Date</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let student of students">
-        <td>{{ student.student_id }}</td>
-        <td>{{ student.given_name }}</td>
-        <td>{{ student.middle_name }}</td>
-        <td>{{ student.surname }}</td>
-        <td>{{ student.date_of_birth }}</td>
-        <td>{{ student.email }}</td>
-        <td>{{ student.gender }}</td>
-        <td>{{ student.enrollment_date }}</td>
-        <td>
-          <!-- Actions for Edit, Delete -->
-          <button (click)="editStudent(student.student_id)">Edit</button>
-          <button (click)="deleteStudent(student.student_id)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  
+  <thead>
+    <tr>
+      <th>Student ID</th>
+      <th>Given Name</th>
+      <th>Middle Name</th>
+      <th>Surname</th>
+      <th>Date of Birth</th>
+      <th>Email</th>
+      <th>Gender</th>
+      <th>Enrollment Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let student of students">
+      <td>{{ student.student_id }}</td>
+      <td>{{ student.given_name }}</td>
+      <td>{{ student.middle_name }}</td>
+      <td>{{ student.surname }}</td>
+      <td>{{ student.date_of_birth }}</td>
+      <td>{{ student.email }}</td>
+      <td>{{ student.gender }}</td>
+      <td>{{ student.enrollment_date }}</td>
+      <td>
+        <button type="button" (click)="openModal(student)">Edit</button>
+        <button type="button" (click)="deleteStudent(student.student_id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal" *ngIf="isModalOpen">
+  <div class="modal-content">
+    <h2>{{ isEditing ? 'Edit Student' : 'Add New Student' }}</h2>
+    <form (ngSubmit)="saveStudent()">
+      <label>Student ID</label>
+      <input type="text" [(ngModel)]="modalStudent.student_id" name="studentId" title="Student ID" placeholder="Enter Student ID" required />
+
+      <label>Given Name</label>
+      <input type="text" [(ngModel)]="modalStudent.given_name" name="givenName" title="Given Name" placeholder="Enter Given Name" required />
+
+      <label>Middle Name</label>
+      <input type="text" [(ngModel)]="modalStudent.middle_name" name="middleName" title="Middle Name" placeholder="Enter Middle Name" />
+
+      <label>Surname</label>
+      <input type="text" [(ngModel)]="modalStudent.surname" name="surname" title="Surname" placeholder="Enter Surname" required />
+
+      <label>Date of Birth</label>
+      <input type="date" [(ngModel)]="modalStudent.date_of_birth" name="dob" title="Date of Birth" placeholder="Enter Date of Birth" required />
+
+      <label>Gender</label>
+      <select [(ngModel)]="modalStudent.gender" name="gender" title="Gender" required>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+
+      <label>Email</label>
+      <input type="email" [(ngModel)]="modalStudent.email" name="email" title="Email" placeholder="Enter Email" required />
+
+      <label>Enrollment Date</label>
+      <input type="date" [(ngModel)]="modalStudent.enrollment_date" name="enrollmentDate" title="Enrollment Date" placeholder="Enter Enrollment Date" required />
+
+      <label>Username</label>
+      <input type="text" [(ngModel)]="modalStudent.username" name="username" title="Username" placeholder="Enter Username" required />
+
+      <label>Password</label>
+      <input type="password" [(ngModel)]="modalStudent.password" name="password" title="Password" placeholder="Enter Password" required />
+
+      <label>Progress Score</label>
+      <input type="number" [(ngModel)]="modalStudent.progress_score" name="progressScore" title="Progress Score" placeholder="Enter Progress Score" min="0" max="100" />
+
+      <button type="submit">{{ isEditing ? 'Update' : 'Add' }}</button>
+      <button type="button" (click)="closeModal()">Cancel</button>
+    </form>
+  </div>
+</div>
