@@ -1,5 +1,5 @@
+import { Content, ContentService } from '../../../services/content.service';
 import { Component, OnInit } from '@angular/core';
-import { ContentService, Content } from '../../../services/content.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -10,109 +10,60 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './content-list.component.html',
   styleUrls: ['./content-list.component.css']
 })
-export class ContentListComponent implements OnInit {
-  contentList: Content[] = []; // Array to store the list of content
-  selectedContent: Content | null = null; // Store the selected content for editing
-  newContent: Content = { 
-    content_id: '', 
-    course_id: '', 
-    content_type: '', 
-    content_title: '', 
-    content_description: '', 
-    content_url: '', 
-    created_at: new Date() 
-  }; // Object to store new content
 
-  isModalOpen: boolean = false;
+export class ContentListComponent implements OnInit {
+  contentList: Content[] = []; // Store the list of content
+  isModalOpen: boolean = false; // Track modal visibility
+
+  newContent: Partial<Content> = {}; // Store new content temporarily for form
 
   constructor(private contentService: ContentService) {}
 
   ngOnInit(): void {
-    this.getContent();
+    this.loadContent(); // Load content on initialization
   }
 
-  // Fetch all content from the service
-  getContent(): void {
-    this.contentService.getAllContent().subscribe(
-      (data: Content[]) => {
-        this.contentList = data;
-      },
-      (error) => {
-        console.error('Error fetching content', error);
-      }
-    );
+  // Load all content
+  loadContent(): void {
+    this.contentService.getAllContent().subscribe((contents: Content[]) => {
+      this.contentList = contents;
+    });
   }
 
-  // Handle opening the modal
-  openModal(): void {
-    this.selectedContent = null; // Clear selection if any
-    this.isModalOpen = true; // Open the modal
+  // Toggle modal for adding content
+  toggleModal(): void {
+    this.isModalOpen = !this.isModalOpen;
+    if (!this.isModalOpen) {
+      this.newContent = {}; // Reset the form on modal close
+    }
   }
 
-  // Handle closing the modal
-  closeModal(): void {
-    this.isModalOpen = false; // Close the modal
+  // Submit new content
+  onSubmit(): void {
+    if (!this.newContent.content_title || !this.newContent.content_description) {
+      alert('Please fill out all required fields.');
+      return;
+    }
+
+    this.contentService.addContent(this.newContent as Content).subscribe((addedContent) => {
+      this.contentList.push(addedContent); // Add to list
+      this.toggleModal(); // Close modal
+    });
   }
 
-  // Handle the selection of content for editing
-  selectContent(content: Content): void {
-    this.selectedContent = content;
-    this.isModalOpen = true; // Open modal for editing
+  // Edit content
+  editContent(id: string): void {
+    const contentToEdit = this.contentList.find(content => content.content_id === id);
+    if (contentToEdit) {
+      this.newContent = { ...contentToEdit }; // Load into form
+      this.isModalOpen = true;
+    }
   }
 
-  // Handle adding new content
-  addContent(): void {
-    this.contentService.addContent(this.newContent).subscribe(
-      (data: Content) => {
-        this.contentList.push(data); // Add the newly created content to the list
-        this.newContent = { 
-          content_id: '', 
-          course_id: '', 
-          content_type: '', 
-          content_title: '', 
-          content_description: '', 
-          content_url: '', 
-          created_at: new Date() 
-        }; // Reset new content object
-        this.closeModal(); // Close the modal after adding
-      },
-      (error) => {
-        console.error('Error adding content', error);
-      }
-    );
-  }
-
-  // Handle updating existing content
-  updateContent(): void {
-    if (!this.selectedContent) return; // Ensure selected content is valid
-    this.contentService.updateContent(this.selectedContent.content_id, this.selectedContent).subscribe(
-      (data: Content | undefined) => {
-        if (data) {
-          const index = this.contentList.findIndex(item => item.content_id === data.content_id);
-          if (index !== -1) {
-            this.contentList[index] = data; // Update the content in the list
-            this.closeModal(); // Close the modal after updating
-          }
-          this.selectedContent = null; // Clear selection after updating
-        } else {
-          console.error('Received undefined data');
-        }
-      },
-      (error) => {
-        console.error('Error updating content', error);
-      }
-    );
-  }
-
-  // Handle deleting content
-  deleteContent(contentId: string): void {
-    this.contentService.deleteContent(contentId).subscribe(
-      () => {
-        this.contentList = this.contentList.filter(item => item.content_id !== contentId); // Remove deleted content from the list
-      },
-      (error) => {
-        console.error('Error deleting content', error);
-      }
-    );
+  // Delete content
+  deleteContent(id: string): void {
+    this.contentService.deleteContent(id).subscribe(() => {
+      this.contentList = this.contentList.filter(content => content.content_id !== id);
+    });
   }
 }
