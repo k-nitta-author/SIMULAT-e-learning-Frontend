@@ -1,38 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { QuizService } from '../../../services/quiz.service';
+import { QuizService, Quiz } from '../../../services/quiz.service';
 import { CommonModule } from '@angular/common';
-
-// placeholder model until connected to backend
-interface Quiz {
-  quiz_id: string;
-  content_id: string;
-  quiz_title: string;
-  description: string;
-  time_limit: number;
-  is_published: boolean;
-  created_at: Date;
-  updated_at: Date;
-}
+import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
 
 @Component({
   selector: 'app-quiz-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './quizzes-list.component.html',
-  styleUrls: ['./quizzes-list.component.css']
+  styleUrls: ['./quizzes-list.component.css'],
 })
 export class QuizListComponent implements OnInit {
+  quizzes: Quiz[] = [];
+  selectedQuiz: Quiz | null = null;
 
-  quizzes: Quiz[] = [];   // Array to store the list of quizzes
-  selectedQuiz: Quiz | null = null;  // Store the selected quiz for editing
+  // Modal state and data
+  isModalOpen = false;
+  isEditing = false;
+  modalQuiz: Quiz = this.getEmptyQuiz(); // Initialize with an empty quiz object
 
   constructor(private quizService: QuizService) {}
 
   ngOnInit(): void {
-    this.getQuizzes();  // Fetch quizzes when the component initializes
+    this.getQuizzes();
   }
 
-  // Fetch all quizzes from the service
+  // Fetch all quizzes
   getQuizzes(): void {
     this.quizService.getAllQuizzes().subscribe(
       (data: Quiz[]) => {
@@ -44,49 +37,79 @@ export class QuizListComponent implements OnInit {
     );
   }
 
-  // Handle the selection of a quiz for editing
-  selectQuiz(quiz: Quiz): void {
-    this.selectedQuiz = quiz;
+  // Open the modal for adding/editing
+  openModal(quiz?: Quiz): void {
+    this.isModalOpen = true;
+    if (quiz) {
+      this.isEditing = true;
+      this.modalQuiz = { ...quiz }; // Clone the quiz to avoid direct editing
+    } else {
+      this.isEditing = false;
+      this.modalQuiz = this.getEmptyQuiz();
+    }
   }
 
-  // Handle adding a new quiz
-  addQuiz(newQuiz: Quiz): void {
-    this.quizService.addQuiz(newQuiz).subscribe(
-      (data: Quiz) => {
-        this.quizzes.push(data);  // Add the newly created quiz to the list
-      },
-      (error) => {
-        console.error('Error adding quiz', error);
-      }
-    );
+  // Close the modal
+  closeModal(): void {
+    this.isModalOpen = false;
+    this.modalQuiz = this.getEmptyQuiz();
   }
 
-  // Handle updating an existing quiz
-  updateQuiz(updatedQuiz: Quiz): void {
-    if (!this.selectedQuiz) return;  // Ensure a quiz is selected for updating
-
-    this.quizService.updateQuiz(this.selectedQuiz.quiz_id, updatedQuiz).subscribe(
-      (data: Quiz) => {
-        const index = this.quizzes.findIndex(quiz => quiz.quiz_id === data.quiz_id);
-        if (index !== -1) {
-          this.quizzes[index] = data;  // Update the quiz in the list
+  // Save the quiz (add or edit)
+  saveQuiz(): void {
+    if (this.isEditing) {
+      // Update existing quiz
+      this.quizService.updateQuiz(this.modalQuiz.quiz_id, this.modalQuiz).subscribe(
+        (data: Quiz) => {
+          const index = this.quizzes.findIndex(
+            (quiz) => quiz.quiz_id === data.quiz_id
+          );
+          if (index !== -1) {
+            this.quizzes[index] = data;
+          }
+          this.closeModal();
+        },
+        (error) => {
+          console.error('Error updating quiz', error);
         }
-      },
-      (error) => {
-        console.error('Error updating quiz', error);
-      }
-    );
+      );
+    } else {
+      // Add new quiz
+      this.quizService.addQuiz(this.modalQuiz).subscribe(
+        (data: Quiz) => {
+          this.quizzes.push(data);
+          this.closeModal();
+        },
+        (error) => {
+          console.error('Error adding quiz', error);
+        }
+      );
+    }
   }
 
-  // Handle deleting a quiz
+  // Delete a quiz
   deleteQuiz(quizId: string): void {
     this.quizService.deleteQuiz(quizId).subscribe(
       () => {
-        this.quizzes = this.quizzes.filter(quiz => quiz.quiz_id !== quizId);  // Remove the deleted quiz from the list
+        this.quizzes = this.quizzes.filter((quiz) => quiz.quiz_id !== quizId);
       },
       (error) => {
         console.error('Error deleting quiz', error);
       }
     );
+  }
+
+  // Utility to get an empty quiz object
+  private getEmptyQuiz(): Quiz {
+    return {
+      quiz_id: '', // Should be generated dynamically or assigned by the backend
+      content_id: '',
+      quiz_title: '',
+      description: '',
+      time_limit: 0,
+      is_published: false,
+      created_at: new Date(),
+      updated_at: new Date(),
+    };
   }
 }

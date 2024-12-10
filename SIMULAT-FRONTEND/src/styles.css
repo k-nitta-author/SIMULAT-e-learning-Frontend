@@ -22,5 +22,51 @@ input[type=submit], button{
     font-family: Poppins-Light
 }
 
+/* Modal Overlay */
+.modal {
+  position: fixed; /* Makes it stay in the same position regardless of scroll */
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  display: flex; /* Center the modal content */
+  align-items: center; /* Vertically center */
+  justify-content: center; /* Horizontally center */
+  z-index: 1000; /* Ensures it appears above other elements */
+}
+
+/* Modal Content Box */
+.modal-content {
+  background-color: white; /* Background for the modal */
+  padding: 20px; /* Padding inside the modal */
+  border-radius: 10px; /* Rounded corners for a modern look */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Shadow for a pop-up effect */
+  max-width: 400px; /* Responsive width */
+  width: 90%; /* Ensures it fits small screens */
+  text-align: left;
+  animation: modalShow 0.3s ease-out; /* Animation when the modal appears */
+}
+
+/* Optional Animation for Modal */
+@keyframes modalShow {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Close Button (Optional) */
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+
 
 

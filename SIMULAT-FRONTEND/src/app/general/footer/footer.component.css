@@ -1,25 +1,29 @@
-footer{
-    @apply bg-marian-blue text-white flex justify-between px-40
+footer {
+    @apply bg-marian-blue 
+    text-white 
+    flex 
+    justify-between 
+    px-40
+    fixed bottom-0 
+    w-full
 }
 
-.section_copyright_statement{
+.section_copyright_statement {
     @apply flex
 }
 
-h5{
+h5 {
     @apply font-bold
 }
 
-ul{
+ul {
     @apply list-none list-outside
 }
 
-li:hover{
+li:hover {
     @apply to-red-300 
 }
 
 section a {
     @apply text-white no-underline hover:text-amber-200
 }
-
-
