@@ -5,14 +5,6 @@ body{
   padding: 0;
 }
 
-.button-1-style{
-  @apply text-white bg-marian-blue max-w-32 border-none px-4 py-2 mt-3 
-}
-
-input[type=submit], button{
-  @apply button-1-style 
-}
-
 @font-face {
   font-family: Poppins-Light;
   src: url(assets/Poppins/Poppins-Light.ttf) format("truetype");
@@ -22,33 +14,81 @@ input[type=submit], button{
     font-family: Poppins-Light
 }
 
+/* Button styles */
+button {
+  background-color: #0163FD;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+button:hover {
+  background-color: #0142A1;
+}
+.button-1-style{
+  @apply text-white bg-marian-blue max-w-32 border-none px-4 py-2 mt-3 
+}
+input[type=submit], button{
+  @apply button-1-style 
+}
+.load-more-button {
+  background-color: #0163FD;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
+  border-radius: 8px; /* Add rounded corners */
+}
+.load-more-button:hover {
+  background-color: #0142A1;
+}
+
+.add-button {
+  background-color: #0163FD;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  float: right;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.add-button:hover {
+  background-color: #0142A1;
+}
+
 /* Modal Overlay */
 .modal {
-  position: fixed; /* Makes it stay in the same position regardless of scroll */
-  top: 0;
-  left: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
-  display: flex; /* Center the modal content */
-  align-items: center; /* Vertically center */
-  justify-content: center; /* Horizontally center */
-  z-index: 1000; /* Ensures it appears above other elements */
+  position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  z-index: 1000;
 }
 
 /* Modal Content Box */
 .modal-content {
-  background-color: white; /* Background for the modal */
-  padding: 20px; /* Padding inside the modal */
-  border-radius: 10px; /* Rounded corners for a modern look */
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Shadow for a pop-up effect */
-  max-width: 400px; /* Responsive width */
-  width: 90%; /* Ensures it fits small screens */
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 90%;
   text-align: left;
-  animation: modalShow 0.3s ease-out; /* Animation when the modal appears */
+  animation: modalShow 0.3s ease-out;
 }
 
-/* Optional Animation for Modal */
+/* Animation for Modal */
 @keyframes modalShow {
   from {
     transform: scale(0.9);
@@ -60,13 +100,73 @@ input[type=submit], button{
   }
 }
 
-/* Close Button (Optional) */
+/* Close Button */
 .modal-buttons {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
 }
 
+/* Modal Actions */
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
 
+.modal-actions button {
+  background-color: #0163FD;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-left: 10px;
+}
 
+.modal-actions button:hover {
+  background-color: #0142A1;
+}
 
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 20px;
+  background-color: white;
+  color: black;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  border: none;
+  padding: 8px;
+  text-align: left;
+  color: black;
+}
+
+th {
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ddd;
+}
+
+td {
+  border-bottom: 1px solid #ddd;
+}
+
+/* Container styles */
+.main-container {
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+.content-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  border-radius: 8px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
