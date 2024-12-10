@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './assignments-list.component.html',
+  styleUrls: ['./assignments-list.component.css']
 })
 export class AssignmentsListComponent implements OnInit {
   assignments: Assignment[] = [];

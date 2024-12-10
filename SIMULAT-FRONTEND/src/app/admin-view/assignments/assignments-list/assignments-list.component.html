@@ -1,15 +1,13 @@
-<div class="main-container" style="background-color: #f8f9fa; padding: 20px;">
+<div class="main-container">
   <!-- Header with Add Assignment Button -->
-  <div class="header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-    <h2 style="margin: 0; color: black;">Activities</h2>
-    <br>
-    
-    <button type="button" class="add-button" (click)="toggleModal()" style="background-color: #0163FD; color: white; border: none; padding: 10px 20px; cursor: pointer; white-space: nowrap; border-radius: 8px;">Add New Assignment</button>
+  <div class="header">
+    <h2>Activities</h2>
+    <button type="button" class="add-button" (click)="toggleModal()">Add New Assignment</button>
   </div>
 
   <!-- Modal for Adding New Assignment -->
-  <div *ngIf="isModalOpen" class="modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center;">
-    <div class="modal-content" style="background-color: white; padding: 20px; border-radius: 8px; width: 80%; max-width: 500px; color: black;">
+  <div *ngIf="isModalOpen" class="modal">
+    <div class="modal-content">
       <h3>Add New Assignment</h3>
       <form (ngSubmit)="onSubmit()">
         <div>
@@ -28,9 +26,9 @@
           <label for="maxScore">Max Score:</label>
           <input id="maxScore" type="number" [(ngModel)]="newAssignment.max_score" name="maxScore" required>
         </div>
-        <div class="modal-actions" style="margin-top: 20px; display: flex; justify-content: flex-end;">
-          <button type="submit" style="background-color: #0163FD; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 8px; margin-left: 10px;">Add Assignment</button>
-          <button type="button" (click)="toggleModal()" style="background-color: #0163FD; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 8px; margin-left: 10px;">Cancel</button>
+        <div class="modal-actions">
+          <button type="submit" class="modal-button">Add Assignment</button>
+          <button type="button" (click)="toggleModal()" class="modal-button">Cancel</button>
         </div>
       </form>
     </div>
@@ -44,30 +42,29 @@
     <p>No assignments found</p>
   </div>
 
-  <table style="width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 20px; background-color: white; color: black; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+  <table class="assignments-table">
     <thead>
       <tr>
-        <th style="background-color: #f2f2f2; border-bottom: 1px solid #ddd;">Assignment ID</th>
-        <th style="background-color: #f2f2f2; border-bottom: 1px solid #ddd;">Title</th>
-        <th style="background-color: #f2f2f2; border-bottom: 1px solid #ddd;">Description</th>
-        <th style="background-color: #f2f2f2; border-bottom: 1px solid #ddd;">Deadline</th>
-        <th style="background-color: #f2f2f2; border-bottom: 1px solid #ddd;">Max Score</th>
-        <th style="background-color: #f2f2f2; border-bottom: 1px solid #ddd;">Actions</th>
+        <th>Assignment ID</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Deadline</th>
+        <th>Max Score</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let assignment of assignments">
-        <td style="border-bottom: 1px solid #ddd;">{{ assignment.assignment_id }}</td>
-        <td style="border-bottom: 1px solid #ddd;">{{ assignment.assignment_title }}</td>
-        <td style="border-bottom: 1px solid #ddd;">{{ assignment.description }}</td>
-        <td style="border-bottom: 1px solid #ddd;">{{ assignment.deadline ? (assignment.deadline | date: 'yyyy-MM-dd') : 'No deadline set' }}</td>
-        <td style="border-bottom: 1px solid #ddd;">{{ assignment.max_score }}</td>
-        <td style="border-bottom: 1px solid #ddd;">
-          <button type="button" (click)="editAssignment(assignment.assignment_id)" style="background-color: #0163FD; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 8px;">Edit</button>
-          <button type="button" (click)="deleteAssignment(assignment.assignment_id)" style="background-color: #0163FD; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 8px;">Delete</button>
+        <td>{{ assignment.assignment_id }}</td>
+        <td>{{ assignment.assignment_title }}</td>
+        <td>{{ assignment.description }}</td>
+        <td>{{ assignment.deadline ? (assignment.deadline | date: 'yyyy-MM-dd') : 'No deadline set' }}</td>
+        <td>{{ assignment.max_score }}</td>
+        <td>
+          <button type="button" (click)="editAssignment(assignment.assignment_id)" class="table-button">Edit</button>
+          <button type="button" (click)="deleteAssignment(assignment.assignment_id)" class="table-button">Delete</button>
         </td>
       </tr>
     </tbody>
   </table>
-
-
+</div>
