@@ -6,39 +6,42 @@
 <!-- Modal for Adding or Editing Content -->
 <div *ngIf="isModalOpen" class="modal">
   <div class="modal-content">
-    <h3>{{ newContent.content_id ? 'Edit Content' : 'Add New Content' }}</h3>
+    <h3 class="modal-header">{{ newContent.content_id ? 'Edit Content' : 'Add New Content' }}</h3>
     <form (ngSubmit)="onSubmit()">
-      <div>
+      <div class="form-group">
         <label for="contentTitle">Title:</label>
         <input
           id="contentTitle"
           type="text"
           [(ngModel)]="newContent.content_title"
           name="contentTitle"
+          class="form-control"
           required
         />
       </div>
-      <div>
+      <div class="form-group">
         <label for="contentDescription">Description:</label>
         <textarea
           id="contentDescription"
           [(ngModel)]="newContent.content_description"
           name="contentDescription"
+          class="form-control"
           required
         ></textarea>
       </div>
-      <div>
+      <div class="form-group">
         <label for="contentUrl">URL:</label>
         <input
           id="contentUrl"
           type="text"
           [(ngModel)]="newContent.content_url"
           name="contentUrl"
+          class="form-control"
         />
       </div>
-      <div>
-        <button type="submit">Save</button>
-        <button type="button" (click)="toggleModal()">Cancel</button>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-secondary" (click)="toggleModal()">Cancel</button>
       </div>
     </form>
   </div>
