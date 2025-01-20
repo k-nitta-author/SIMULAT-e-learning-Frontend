@@ -1,1 +1,70 @@
-<p>instructors-list works!</p>
+<div class="main-container">
+  <!-- Header with Add Instructor Button -->
+  <div class="header">
+    <h2>Instructors</h2>
+    <button type="button" class="add-button" (click)="toggleModal()">Add New Instructor</button>
+  </div>
+
+  <!-- Modal for Adding/Editing Instructors -->
+  <div *ngIf="isModalOpen" class="modal">
+    <div class="modal-content">
+      <h3>{{ newInstructor.instructor_id ? 'Edit Instructor' : 'Add New Instructor' }}</h3>
+      <form (ngSubmit)="onSubmit()">
+        <div>
+          <label for="instructorName">Name:</label>
+          <input id="instructorName" type="text" [(ngModel)]="newInstructor.name" name="instructorName" required>
+        </div>
+        <div>
+          <label for="instructorEmail">Email:</label>
+          <input id="instructorEmail" type="email" [(ngModel)]="newInstructor.email" name="instructorEmail" required>
+        </div>
+        <div>
+          <label for="department">Department:</label>
+          <input id="department" type="text" [(ngModel)]="newInstructor.department" name="department">
+        </div>
+        <div>
+          <label for="isActive">Active:</label>
+          <input id="isActive" type="checkbox" [(ngModel)]="newInstructor.is_active" name="isActive">
+        </div>
+        <div class="modal-actions">
+          <button type="submit" class="modal-button">Save</button>
+          <button type="button" (click)="toggleModal()" class="modal-button">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Instructor List -->
+  <div *ngIf="instructors.length > 0">
+    <p>Instructors found: {{ instructors.length }}</p>
+  </div>
+  <div *ngIf="instructors.length === 0">
+    <p>No instructors found</p>
+  </div>
+
+  <table class="instructors-table">
+    <thead>
+      <tr>
+        <th>Instructor ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Department</th>
+        <th>Active</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let instructor of instructors">
+        <td>{{ instructor.instructor_id }}</td>
+        <td>{{ instructor.name }}</td>
+        <td>{{ instructor.email }}</td>
+        <td>{{ instructor.department }}</td>
+        <td>{{ instructor.is_active ? 'Yes' : 'No' }}</td>
+        <td>
+          <button type="button" (click)="editInstructor(instructor.instructor_id)" class="table-button">Edit</button>
+          <button type="button" (click)="deleteInstructor(instructor.instructor_id)" class="table-button">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

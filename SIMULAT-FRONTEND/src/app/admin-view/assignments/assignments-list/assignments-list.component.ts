@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Assignment, AssignmentService } from '../../../services/assignment.service';
+import { Assignment, AssignmentService } from '../../../backend-services/assignment.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -37,6 +37,7 @@ export class AssignmentsListComponent implements OnInit {
     this.getAssignments();
   }
 
+  // Fetch all assignments
   getAssignments(): void {
     this.assignmentService.getAllAssignments().subscribe(assignments => {
       this.assignments = assignments.map(assignment => ({
@@ -46,37 +47,56 @@ export class AssignmentsListComponent implements OnInit {
     });
   }
 
+  // Open modal with assignment data for editing
   editAssignment(id: string): void {
-    // Navigate to edit page/modal(?)
+    const assignmentToEdit = this.assignments.find(assignment => assignment.assignment_id === id);
+    if (assignmentToEdit) {
+      this.newAssignment = { ...assignmentToEdit }; // Clone data to avoid mutations
+      this.isModalOpen = true; // Open modal
+    }
   }
 
+  // Delete an assignment
   deleteAssignment(id: string): void {
     this.assignmentService.deleteAssignment(id).subscribe(() => {
       this.getAssignments(); // Refresh list
     });
   }
 
+  // Toggle modal for adding or editing assignments
   toggleModal(): void {
     this.isModalOpen = !this.isModalOpen;
     if (!this.isModalOpen) {
-      // Reset the form when closing the modal
-      this.resetForm();
+      this.resetForm(); // Reset the form when closing the modal
     }
   }
 
+  // Submit the form (for adding or editing)
   onSubmit(): void {
     if (!this.newAssignment.assignment_title || !this.newAssignment.description) {
       alert('Please fill out all required fields.');
       return;
     }
 
-    // Assign a unique ID (placeholder logic)
-    this.newAssignment.assignment_id = (this.assignments.length + 1).toString();
-
-    this.assignmentService.addAssignment(this.newAssignment).subscribe(addedAssignment => {
-      this.assignments.push(addedAssignment);
-      this.toggleModal(); // Close modal
-    });
+    if (this.newAssignment.assignment_id) {
+      // If editing an existing assignment
+      this.assignmentService.updateAssignment(this.newAssignment.assignment_id, this.newAssignment).subscribe(updatedAssignment => {
+        if (updatedAssignment) {
+          const index = this.assignments.findIndex(a => a.assignment_id === updatedAssignment.assignment_id);
+          if (index !== -1) {
+            this.assignments[index] = updatedAssignment; // Update list
+          }
+        }
+        this.toggleModal(); // Close modal
+      });
+    } else {
+      // If adding a new assignment
+      this.newAssignment.assignment_id = (this.assignments.length + 1).toString(); // Assign ID
+      this.assignmentService.addAssignment(this.newAssignment).subscribe(addedAssignment => {
+        this.assignments.push(addedAssignment);
+        this.toggleModal(); // Close modal
+      });
+    }
   }
 
   resetForm(): void {

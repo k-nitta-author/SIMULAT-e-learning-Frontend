@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA ,Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WeavyService } from '../../services/weavy.service';
+import { WeavyService } from '../../backend-services/weavy.service';
 import '@weavy/uikit-web';
 
 @Component({

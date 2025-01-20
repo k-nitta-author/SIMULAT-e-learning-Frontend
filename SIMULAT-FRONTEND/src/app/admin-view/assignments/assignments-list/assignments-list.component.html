@@ -1,14 +1,15 @@
 <div class="main-container">
   <!-- Header with Add Assignment Button -->
   <div class="header">
-    <h2>Activities</h2>
+    <h2>Assignments</h2>
     <button type="button" class="add-button" (click)="toggleModal()">Add New Assignment</button>
   </div>
 
-  <!-- Modal for Adding New Assignment -->
+  <!-- Modal for Adding/Editing Assignment -->
   <div *ngIf="isModalOpen" class="modal">
     <div class="modal-content">
-      <h3>Add New Assignment</h3>
+      <h3 *ngIf="!newAssignment.assignment_id">Add New Assignment</h3>
+      <h3 *ngIf="newAssignment.assignment_id">Edit Assignment</h3>
       <form (ngSubmit)="onSubmit()">
         <div>
           <label for="assignmentTitle">Title:</label>
@@ -27,7 +28,7 @@
           <input id="maxScore" type="number" [(ngModel)]="newAssignment.max_score" name="maxScore" required>
         </div>
         <div class="modal-actions">
-          <button type="submit" class="modal-button">Add Assignment</button>
+          <button type="submit" class="modal-button">{{ newAssignment.assignment_id ? 'Save Changes' : 'Add Assignment' }}</button>
           <button type="button" (click)="toggleModal()" class="modal-button">Cancel</button>
         </div>
       </form>

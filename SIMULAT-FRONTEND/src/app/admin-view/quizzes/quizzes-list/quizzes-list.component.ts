@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QuizService, Quiz } from '../../../services/quiz.service';
+import { QuizService, Quiz } from '../../../backend-services/quiz.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
 

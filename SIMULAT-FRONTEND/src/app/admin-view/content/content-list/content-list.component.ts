@@ -1,4 +1,4 @@
-import { Content, ContentService } from '../../../services/content.service';
+import { Content, ContentService } from '../../../backend-services/content.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';

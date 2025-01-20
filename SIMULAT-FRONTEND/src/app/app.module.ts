@@ -12,7 +12,7 @@ import { ClassDashboardPageComponent } from './student-view/class-dashboard-page
 
 import { routes } from './app.routes';
 import { AssignmentsListComponent } from './admin-view/assignments/assignments-list/assignments-list.component';
-import { AssignmentService } from './services/assignment.service';
+import { AssignmentService } from './backend-services/assignment.service';
 import { StudentsListComponent } from './admin-view/students/students-list/students-list.component';
 import { QuizListComponent } from './admin-view/quizzes/quizzes-list/quizzes-list.component';
 import { InstructorsListComponent } from './admin-view/instructors/instructors-list/instructors-list.component';
