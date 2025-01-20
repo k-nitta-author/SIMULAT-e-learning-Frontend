@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './students-list.component.html',
+  styleUrls: ['./students-list.component.css']
 })
 export class StudentsListComponent implements OnInit {
   students: any[] = []; // List of students

@@ -41,44 +41,68 @@
   <div class="modal-content">
     <h2>{{ isEditing ? 'Edit Student' : 'Add New Student' }}</h2>
     <form (ngSubmit)="saveStudent()">
-      <label>Student ID</label>
-      <input type="text" [(ngModel)]="modalStudent.student_id" name="studentId" title="Student ID" placeholder="Enter Student ID" required />
+      <div class="form-group">
+        <label for="studentId">Student ID</label>
+        <input id="studentId" type="text" [(ngModel)]="modalStudent.student_id" name="studentId" placeholder="Enter Student ID" required />
+      </div>
+      
+      <div class="form-group">
+        <label for="givenName">Given Name</label>
+        <input id="givenName" type="text" [(ngModel)]="modalStudent.given_name" name="givenName" placeholder="Enter Given Name" required />
+      </div>
 
-      <label>Given Name</label>
-      <input type="text" [(ngModel)]="modalStudent.given_name" name="givenName" title="Given Name" placeholder="Enter Given Name" required />
+      <div class="form-group">
+        <label for="middleName">Middle Name</label>
+        <input id="middleName" type="text" [(ngModel)]="modalStudent.middle_name" name="middleName" placeholder="Enter Middle Name" />
+      </div>
 
-      <label>Middle Name</label>
-      <input type="text" [(ngModel)]="modalStudent.middle_name" name="middleName" title="Middle Name" placeholder="Enter Middle Name" />
+      <div class="form-group">
+        <label for="surname">Surname</label>
+        <input id="surname" type="text" [(ngModel)]="modalStudent.surname" name="surname" placeholder="Enter Surname" required />
+      </div>
 
-      <label>Surname</label>
-      <input type="text" [(ngModel)]="modalStudent.surname" name="surname" title="Surname" placeholder="Enter Surname" required />
+      <div class="form-group">
+        <label for="dob">Date of Birth</label>
+        <input id="dob" type="date" [(ngModel)]="modalStudent.date_of_birth" name="dob" required />
+      </div>
 
-      <label>Date of Birth</label>
-      <input type="date" [(ngModel)]="modalStudent.date_of_birth" name="dob" title="Date of Birth" placeholder="Enter Date of Birth" required />
+      <div class="form-group">
+        <label for="gender">Gender</label>
+        <select id="gender" [(ngModel)]="modalStudent.gender" name="gender" required>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
 
-      <label>Gender</label>
-      <select [(ngModel)]="modalStudent.gender" name="gender" title="Gender" required>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-      </select>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" [(ngModel)]="modalStudent.email" name="email" placeholder="Enter Email" required />
+      </div>
 
-      <label>Email</label>
-      <input type="email" [(ngModel)]="modalStudent.email" name="email" title="Email" placeholder="Enter Email" required />
+      <div class="form-group">
+        <label for="enrollmentDate">Enrollment Date</label>
+        <input id="enrollmentDate" type="date" [(ngModel)]="modalStudent.enrollment_date" name="enrollmentDate" required />
+      </div>
 
-      <label>Enrollment Date</label>
-      <input type="date" [(ngModel)]="modalStudent.enrollment_date" name="enrollmentDate" title="Enrollment Date" placeholder="Enter Enrollment Date" required />
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input id="username" type="text" [(ngModel)]="modalStudent.username" name="username" placeholder="Enter Username" required />
+      </div>
 
-      <label>Username</label>
-      <input type="text" [(ngModel)]="modalStudent.username" name="username" title="Username" placeholder="Enter Username" required />
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" type="password" [(ngModel)]="modalStudent.password" name="password" placeholder="Enter Password" required />
+      </div>
 
-      <label>Password</label>
-      <input type="password" [(ngModel)]="modalStudent.password" name="password" title="Password" placeholder="Enter Password" required />
+      <div class="form-group">
+        <label for="progressScore">Progress Score</label>
+        <input id="progressScore" type="number" [(ngModel)]="modalStudent.progress_score" name="progressScore" placeholder="Enter Progress Score" min="0" max="100" />
+      </div>
 
-      <label>Progress Score</label>
-      <input type="number" [(ngModel)]="modalStudent.progress_score" name="progressScore" title="Progress Score" placeholder="Enter Progress Score" min="0" max="100" />
-
-      <button type="submit">{{ isEditing ? 'Update' : 'Add' }}</button>
-      <button type="button" (click)="closeModal()">Cancel</button>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">{{ isEditing ? 'Update' : 'Add' }}</button>
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+      </div>
     </form>
   </div>
 </div>
