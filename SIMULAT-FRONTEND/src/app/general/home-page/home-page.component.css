@@ -1,7 +1,27 @@
-main{
-    @apply p-8
+main {
+    @apply p-8;
 }
 
-.login-section{
-    @apply max-w-lg
+.landing_section {
+    @apply 
+    flex 
+    flex-col
+    gap-5
+    max-w-screen-xl
+    mx-auto; 
+}
+
+.login-section,
+.announcement-section {
+    @apply 
+    flex-1 
+    max-w-lg
+    mx-10;
+}
+
+@media (max-width: 640px) {
+    .login-section,
+    .announcement-section {
+        @apply w-full;
+    }
 }

@@ -1,7 +1,9 @@
-form{
-    @apply flex flex-col gap-y-2
-}
-
-label{
-    
+.login-form {
+    @apply 
+    bg-white 
+    p-5 
+    rounded-lg 
+    shadow-lg 
+    max-w-md 
+    ;
 }

@@ -16,50 +16,66 @@ body{
 
 /* Button styles */
 button {
-  background-color: #0163FD;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 8px;
+  @apply 
+  bg-marian-blue
+  text-white 
+  px-2.5 
+  py-1.5
+  max-w-32
+  border-solid
+  border-2
+  border-marian-blue
+  cursor-pointer 
+  rounded-lg
+  ;
 }
 
 button:hover {
-  background-color: #0142A1;
+  @apply 
+  text-marian-blue 
+  bg-transparent;
 }
-.button-1-style{
-  @apply text-white bg-marian-blue max-w-32 border-none px-4 py-2 mt-3 
+
+.button-outline {
+  @apply 
+  text-marian-blue 
+  bg-transparent
+  ;
 }
-input[type=submit], button{
-  @apply button-1-style 
+
+.button-outline:hover {
+  @apply 
+  bg-marian-blue
+  text-white;
 }
+
 .load-more-button {
-  background-color: #0163FD;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  margin-top: 20px;
-  width: 100%;
-  border-radius: 8px; /* Add rounded corners */
+  @apply 
+  bg-transparent
+  text-marian-blue
+  border-none
+  ;
 }
 .load-more-button:hover {
-  background-color: #0142A1;
+  @apply 
+  font-bold
 }
 
 .add-button {
-  background-color: #0163FD;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  float: right;
-  margin-bottom: 20px;
-  border-radius: 8px;
+  @apply 
+  bg-marian-blue 
+  text-white 
+  border-none 
+  py-2.5 
+  px-5 
+  cursor-pointer 
+  float-right 
+  mb-5 
+  rounded-lg;
 }
 
 .add-button:hover {
-  background-color: #0142A1;
+  @apply bg-marian-blue;
 }
 
 /* Modal Overlay */
@@ -169,4 +185,51 @@ td {
   background-color: #ffffff;
   border-radius: 8px; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.columns {
+  @apply flex flex-row justify-between gap-5;
+}
+
+@media (max-width: 640px) { 
+  .columns {
+      @apply flex-col;
+  }
+}
+
+/* Font styles */
+a {
+  @apply 
+  text-marian-blue
+  no-underline;
+}
+
+a:hover {
+  @apply 
+  underline;
+}
+
+/* Form styles */
+form {
+  @apply 
+  flex 
+  flex-col 
+  gap-y-3
+  ;
+}
+
+label {
+  @apply 
+  font-semibold
+  ;
+}
+
+input {
+  @apply 
+  p-2 
+  border-solid 
+  border-2 
+  border-gray-200 
+  rounded-lg 
+  ;
 }

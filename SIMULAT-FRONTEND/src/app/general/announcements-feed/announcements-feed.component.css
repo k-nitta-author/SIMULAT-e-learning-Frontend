@@ -1,0 +1,23 @@
+.announcements-feed {
+    @apply 
+    bg-gray-100 
+    rounded-lg
+    shadow-lg ;
+}
+
+.announcement {
+    @apply 
+    p-5
+    border-solid
+    border-0
+    border-b-2
+    border-gray-200
+    rounded-lg
+    ;
+}
+
+.announcement:hover {
+    @apply 
+    
+    bg-gray-200;
+}
