@@ -12,6 +12,11 @@
     shadow-md;
 }
 
+.nav-bar > header {
+    @apply
+    px-5
+}
+
 .nav-links {
     @apply 
     list-none 
