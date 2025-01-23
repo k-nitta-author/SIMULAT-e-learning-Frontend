@@ -1,34 +1,74 @@
-nav{
-    @apply bg-marian-blue h-full fixed top-0 transition-[width] ease-in-out duration-500 overflow-x-hidden
+nav {
+    @apply 
+    bg-marian-blue 
+    h-full 
+    fixed 
+    top-0 
+    transition-[width] 
+    ease-in-out 
+    duration-500 
+    overflow-x-hidden;
 }
 
-.show-sidebar{
-    @apply w-1/4
+.show-sidebar {
+    @apply w-1/4;
 }
 
-.hide-sidebar{
-    @apply w-16
+.hide-sidebar {
+    @apply w-20;
 }
 
-ul{
-    @apply list-none sticky top-0
+ul {
+    @apply 
+    list-none 
+    sticky 
+    top-0 
+    flex 
+    flex-col;
 }
 
-li{
-    @apply flex justify-start items-center p-5
-
+li {
+    @apply 
+    flex 
+    justify-start 
+    items-center 
+    p-5 
+    gap-4;
 }
 
-li:hover{
-    @apply bg-blue-600 fill-marian-blue
+li:hover {
+    @apply 
+    bg-blue-600 
+    fill-marian-blue;
 }
 
-li a{
-    @apply
-
-    no-underline
+li a {
+    @apply 
+    flex 
+    items-center 
+    gap-2 
+    no-underline;
 }
 
-.nav-icon{
-    @apply w-8 h-8 outline-red-900
+.logo-icon {
+    @apply 
+    w-10 
+    h-10;
+}
+
+.nav-icon {
+    @apply 
+    w-8 
+    h-8;
+}
+
+span {
+    @apply 
+    text-white 
+    font-medium
+    px-5;
+}
+
+.hide-sidebar span {
+    @apply hidden;
 }

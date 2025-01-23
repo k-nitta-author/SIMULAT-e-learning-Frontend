@@ -6,27 +6,44 @@
         </li>
 
         <li>
-            <a routerLink="#" (click)="toggleSidebar()"><img src="./assets/icons/hamburger.svg" title="Expand" class="nav-icon"></a>
+            <a routerLink="#" (click)="toggleSidebar()">
+                <img src="./assets/icons/hamburger.svg" title="Expand" class="nav-icon">
+            </a>
         </li>
 
         <li>
-            <a routerLink="/dashboard"><img src="./assets/icons/class-dashboard.svg" title="Class Dashboard" class="nav-icon"><span>TEST</span></a>
+            <a routerLink="/dashboard">
+                <img src="./assets/icons/class-dashboard.svg" title="Class Dashboard" class="nav-icon">
+                <span *ngIf="isSidebarOpen">Class Dashboard</span>
+            </a>
         </li>
 
         <li>
-            <a routerLink="/dashboard/activities"><img src="./assets/icons/activities.svg" title="Student Activities" class="nav-icon"></a>
+            <a routerLink="/dashboard/activities">
+                <img src="./assets/icons/activities.svg" title="Student Activities" class="nav-icon">
+                <span *ngIf="isSidebarOpen">Activities</span>
+            </a>
         </li>
 
         <li>
-            <a routerLink="/dashboard/gradebook"><img src="./assets/icons/gradebook.svg" title="Gradebook" class="nav-icon"></a>
+            <a routerLink="/dashboard/gradebook">
+                <img src="./assets/icons/gradebook.svg" title="Gradebook" class="nav-icon">
+                <span *ngIf="isSidebarOpen">Gradebook</span>
+            </a>
         </li>
 
         <li>
-            <a routerLink="/dashboard/rankings"><img src="./assets/icons/rankings.svg" title="Class Rankings" class="nav-icon"></a>
+            <a routerLink="/dashboard/rankings">
+                <img src="./assets/icons/rankings.svg" title="Class Rankings" class="nav-icon">
+                <span *ngIf="isSidebarOpen">Rankings</span>
+            </a>
         </li>
 
         <li>
-            <a routerLink="/dashboard/community-hall"><img src="./assets/icons/community-hall.svg" title="Community Hall" class="nav-icon"></a>
+            <a routerLink="/dashboard/community-hall">
+                <img src="./assets/icons/community-hall.svg" title="Community Hall" class="nav-icon">
+                <span *ngIf="isSidebarOpen">Community Hall</span>
+            </a>
         </li>
 
     </ul>

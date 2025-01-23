@@ -1,26 +1,53 @@
-nav{
-    @apply bg-white w-full flex justify-between  text-marian-blue 
-    px-0
+.nav-bar {
+    @apply 
+    bg-white 
+    w-full 
+    flex 
+    flex-row
+    justify-between  
+    items-center
+    text-marian-blue
     py-2
-    filter drop-shadow-xl
+    relative
+    shadow-md;
 }
 
-ul{
-    @apply list-outside list-none flex items-end
+.nav-links {
+    @apply 
+    list-none 
+    flex 
+    flex-row
+    items-center
+    gap-5
+    px-5;
 }
 
-li{
-    @apply text-center w-24
+.nav-links > li {
+    @apply 
+    text-center 
+    flex 
+    items-center
+    justify-center
+    w-auto;
 }
 
-li:hover{
-
-    @apply bg-marian-blue
-
+li a {
+    @apply 
+    block 
+    py-2;
 }
 
-li a{
-    @apply block w-4 h-8;
-    text-decoration: none;
+li:hover {
+    @apply font-semibold;
+}
 
+.account-icon {
+    @apply 
+    h-10 
+    w-10;
+}
+
+.account-icon:hover {
+    @apply 
+    shadow-xl;
 }
