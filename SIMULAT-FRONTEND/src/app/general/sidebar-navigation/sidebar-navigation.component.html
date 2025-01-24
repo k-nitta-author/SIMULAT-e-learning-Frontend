@@ -1,8 +1,13 @@
-<nav [ngClass]="{'show-sidebar': isSidebarOpen,  'hide-sidebar':!isSidebarOpen}">
+<nav [ngClass]="{'show-sidebar': isSidebarOpen, 'hide-sidebar': !isSidebarOpen}">
     <ul>
-
         <li>
-            <a routerLink="/"><img src="./assets/icons/logo-wh.svg" title="Home" class="logo-icon"></a>
+            <a routerLink="/">
+                <!-- Dynamically switch between the logos -->
+                <img 
+                    [src]="isSidebarOpen ? './assets/icons/logo-full-wh.svg' : './assets/icons/logo-wh.svg'" 
+                    title="Home" 
+                    class="logo-icon">
+            </a>
         </li>
 
         <li>
@@ -45,6 +50,5 @@
                 <span *ngIf="isSidebarOpen">Community Hall</span>
             </a>
         </li>
-
     </ul>
 </nav>

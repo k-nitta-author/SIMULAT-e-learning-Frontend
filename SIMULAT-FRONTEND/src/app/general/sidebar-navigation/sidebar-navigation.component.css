@@ -28,6 +28,7 @@ ul {
 }
 
 li {
+    transition: all 0.3s ease-in-out;
     @apply 
     flex 
     justify-start 
@@ -51,8 +52,10 @@ li a {
 }
 
 .logo-icon {
+    transition: all 0.3s ease-in-out;
+
     @apply 
-    w-10 
+    w-auto 
     h-10;
 }
 

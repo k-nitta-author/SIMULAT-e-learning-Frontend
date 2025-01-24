@@ -7,14 +7,20 @@
     justify-between  
     items-center
     text-marian-blue
-    py-2
+    pt-4
     relative
     shadow-md;
 }
 
 .nav-bar > header {
     @apply
-    px-5
+    px-10
+}
+
+.main-logo {
+    @apply
+    h-10
+    w-auto;
 }
 
 .nav-links {
