@@ -6,6 +6,18 @@
     @apply rounded-full bg-marian-blue w-36 h-36 flex flex-wrap justify-center items-center 
 }
 
+@media (max-width: 1024px) { /* Tablet view */
+    .circle_background {
+        @apply w-28 h-28;
+    }
+}
+
+@media (max-width: 640px) { /* Mobile view */
+    .circle_background {
+        @apply w-20 h-20;
+    }
+}
+
 .less-complete{
     @apply  bg-red-600
 }

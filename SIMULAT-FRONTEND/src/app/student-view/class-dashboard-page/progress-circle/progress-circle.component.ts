@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ProgressCircleComponent {
 
-  progress = 11;
+  progress = 100;
 
   progress_text = "asd";
 

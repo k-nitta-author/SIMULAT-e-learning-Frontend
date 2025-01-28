@@ -1,7 +1,3 @@
-main {
-    @apply p-8;
-}
-
 .landing_section {
     @apply 
     flex 
