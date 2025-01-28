@@ -54,6 +54,8 @@ button:hover {
   bg-transparent
   text-marian-blue
   border-none
+  w-auto
+  transition
   ;
 }
 .load-more-button:hover {
@@ -204,6 +206,10 @@ td {
   background-color: #ffffff;
   border-radius: 8px; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.load-more-button-container {
+  @apply flex justify-end mt-4;
 }
 
 .columns {

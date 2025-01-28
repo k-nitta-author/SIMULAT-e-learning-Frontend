@@ -31,7 +31,7 @@
 }
 
 .student-progress-circle-group {
-  @apply flex flex-wrap gap-9;
+  @apply flex flex-wrap gap-9 mb-4;
 }
 
 .student-viewgroup-section {
