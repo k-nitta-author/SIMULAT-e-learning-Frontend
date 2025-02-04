@@ -27,6 +27,16 @@ import { ContentListComponent } from './admin-view/content/content-list/content-
 import { AssignmentsListComponent } from './admin-view/assignments/assignments-list/assignments-list.component';
 import { QuizListComponent } from './admin-view/quizzes/quizzes-list/quizzes-list.component';
 import { InstructorsListComponent } from './admin-view/instructors/instructors-list/instructors-list.component';
+import { CourseDetailsPageComponent } from './student-view/course-details-page/course-details-page.component';
+import { TermsPageComponent } from './general/terms-page/terms-page.component';
+import { TermsDetailComponent } from './general/terms-detail/terms-detail.component';
+import { ChallengePageComponent } from './general/challenge-page/challenge-page.component';
+import { ChallengeDetailPageComponent } from './general/challenge-detail-page/challenge-detail-page.component';
+import { AssignmentPageComponent } from './student-view/assignment-page/assignment-page.component';
+import { ContentPageComponent } from './general/content-page/content-page.component';
+import { BadgePageComponent } from './sudent-view/badge-page/badge-page.component';
+import { StudyGroupPageComponent } from './sudent-view/study-group-page/study-group-page.component';
+import { StudyGroupDetailComponent } from './sudent-view/study-group-detail/study-group-detail.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -40,7 +50,6 @@ export const routes: Routes = [
 
     // Student view routes
     { path: 'dashboard', component: ClassDashboardPageComponent },
-    { path: 'courses', component: CoursesPageComponent },
     { path: 'dashboard/gradebook', component: ClassGradebookComponent },
     { path: 'dashboard/rankings', component: RankingsPageComponent },
     { path: 'dashboard/community-hall', component: CommunityHallComponent },
@@ -65,5 +74,36 @@ export const routes: Routes = [
     { path: 'admin/instructors', component: InstructorsListComponent },
 
     // Instructor dashboard route
-    { path: 'instructor/dashboard', component: InstructorDashboardComponent }
+    { path: 'instructor/dashboard', component: InstructorDashboardComponent },
+
+    // Course Resource Views
+    { path: 'courses', component: CoursesPageComponent },
+    { path: 'course-detail/:id', component: CourseDetailsPageComponent},
+
+    // Terms Component
+    { path: 'terms', component: TermsPageComponent},
+    { path: 'terms/:id', component: TermsDetailComponent},
+
+    // Challenge Views
+    { path: 'challenge', component: ChallengePageComponent},
+    { path: 'challenge-detail/:id', component: ChallengeDetailPageComponent},
+
+    // Assignment Views
+
+    { path: 'assignment', component: AssignmentPageComponent},
+    
+    // Content Views
+
+    {path: 'content', component: ContentPageComponent},
+
+    // Badge Views
+
+    {path: 'badge', component: BadgePageComponent},
+
+    // Study Group Views
+
+    {path: 'study-group', component: StudyGroupPageComponent}
+    {path: 'study-group/:id', component: StudyGroupDetailComponent}
+
+
 ];
