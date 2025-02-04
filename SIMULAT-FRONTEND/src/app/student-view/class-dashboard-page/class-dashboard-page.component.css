@@ -1,27 +1,49 @@
 .dashboard{
-    @apply p-2
+    @apply p-2;
 }
 
 .dashboard-main{
-    @apply flex flex-row gap-10
+    @apply flex flex-col gap-6;
 }
 
-.dashboard-view{
-    @apply bg-gray-100 rounded-md p-5 mb-6 w-1/2 min-h-48
+.dashboard-columns {
+  @apply flex flex-col gap-6;
 }
 
-.student-progress-view{
+@media (min-width: 768px) {
+  .dashboard-columns {
+    @apply flex-row;
+    gap: 10px;
+  }
 
-    @apply w-auto min-h-60
-
+  .dashboard-view {
+    @apply w-1/2;
+  }
 }
 
-.student-progress-circle-group{
-    @apply flex flex-wrap gap-9
+/* Individual dashboard view styles */
+.dashboard-view {
+  @apply bg-gray-100 rounded-md p-5 mb-6 min-h-48;
 }
 
+.student-progress-view {
+  @apply w-full min-h-60;
+}
 
+.student-progress-circle-group {
+  @apply flex flex-wrap gap-9 mb-4;
+}
 
-.student-viewgroup-section{
-    @apply flex gap-4 justify-between
+.student-viewgroup-section {
+  @apply flex gap-4 justify-between;
+}
+
+@media (max-width: 640px) {
+  .dashboard-view {
+    @apply w-full;
+  }
+
+  .student-progress-circle-group {
+    @apply gap-4;
+  }
 }

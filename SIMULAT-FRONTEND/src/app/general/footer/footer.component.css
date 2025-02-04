@@ -13,7 +13,23 @@ footer {
     border-t-2 
     border-gray-700 
     overflow-hidden;
+
+    height: 6rem;
 }
+
+@media (max-width: 640px) {
+    footer {
+      @apply 
+      flex-col 
+      items-center 
+      text-center 
+      px-4 
+      py-6 
+      gap-4; 
+  
+      height: 4rem;
+    }
+  }
 
 .footer-copyright {
     @apply 

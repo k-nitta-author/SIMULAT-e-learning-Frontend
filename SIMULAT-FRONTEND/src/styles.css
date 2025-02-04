@@ -54,6 +54,8 @@ button:hover {
   bg-transparent
   text-marian-blue
   border-none
+  w-auto
+  transition
   ;
 }
 .load-more-button:hover {
@@ -174,6 +176,25 @@ td {
 }
 
 /* Container styles */
+.page-container {
+  @apply py-8 px-8;
+  padding-bottom: 8rem;
+}
+
+@media (max-width: 1024px) { /* Tablet */
+  .page-container {
+    @apply py-8 pl-8 pr-0;
+    padding-bottom: 6rem;
+  }
+}
+
+@media (max-width: 640px) { /* Mobile */
+  .page-container {
+    @apply py-8 pl-8 pr-0;
+    padding-bottom: 6rem;
+  }
+}
+
 .main-container {
   background-color: #f8f9fa;
   padding: 20px;
@@ -185,6 +206,10 @@ td {
   background-color: #ffffff;
   border-radius: 8px; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.load-more-button-container {
+  @apply flex justify-end mt-4;
 }
 
 .columns {
