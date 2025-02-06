@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { TermCardComponent } from './term-card/term-card.component';
 
 @Component({
   selector: 'app-terms-page',
   standalone: true,
-  imports: [TermCardComponent],
+  imports: [],
   templateUrl: './terms-page.component.html',
   styleUrl: './terms-page.component.css'
 })

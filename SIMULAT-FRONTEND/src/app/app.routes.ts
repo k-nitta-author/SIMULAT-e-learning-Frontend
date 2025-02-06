@@ -102,7 +102,7 @@ export const routes: Routes = [
 
     // Study Group Views
 
-    {path: 'study-group', component: StudyGroupPageComponent}
+    {path: 'study-group', component: StudyGroupPageComponent},
     {path: 'study-group/:id', component: StudyGroupDetailComponent}
 
 
