@@ -1,7 +1,16 @@
 <table>
-
-    <!--this is the first table row-->
+  <thead>
     <tr>
-        
+      <th *ngFor="let header of headers">
+        {{ headerDisplayNames[header] || header }}
+      </th>
     </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of rows">
+      <td *ngFor="let column of headers" [ngClass]="getCellClass(column)">
+        {{ getValue(row, column) }}
+      </td>
+    </tr>
+  </tbody>
 </table>

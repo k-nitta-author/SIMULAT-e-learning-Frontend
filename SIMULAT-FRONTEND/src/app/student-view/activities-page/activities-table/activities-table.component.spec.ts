@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ActivitiesTableComponent } from './activities-table.component';
+import { CommonModule } from '@angular/common';
 
 describe('ActivitiesTableComponent', () => {
   let component: ActivitiesTableComponent;
@@ -8,12 +9,12 @@ describe('ActivitiesTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ActivitiesTableComponent]
-    })
-    .compileComponents();
-    
+      imports: [CommonModule, ActivitiesTableComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ActivitiesTableComponent);
     component = fixture.componentInstance;
+
     fixture.detectChanges();
   });
 
