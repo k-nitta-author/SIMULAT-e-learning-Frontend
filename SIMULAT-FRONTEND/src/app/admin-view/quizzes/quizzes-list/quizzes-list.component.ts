@@ -1,115 +1,133 @@
 import { Component, OnInit } from '@angular/core';
-import { QuizService, Quiz } from '../../../backend-services/quiz.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
+import { FormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
+export interface Quiz {
+  id: string;
+  content_id: string;
+  quiz_title: string;
+  term_id: string;
+  description: string;
+  time_limit: number;
+  is_published: boolean;
+}
+
 
 @Component({
   selector: 'app-quiz-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './quizzes-list.component.html',
-  styleUrls: ['./quizzes-list.component.css'],
+  styleUrls: ['./quizzes-list.component.css']
 })
 export class QuizListComponent implements OnInit {
   quizzes: Quiz[] = [];
-  selectedQuiz: Quiz | null = null;
 
-  // Modal state and data
   isModalOpen = false;
   isEditing = false;
-  modalQuiz: Quiz = this.getEmptyQuiz(); // Initialize with an empty quiz object
+  modalQuiz: Quiz = this.getEmptyQuiz();
 
-  constructor(private quizService: QuizService) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.getQuizzes();
   }
 
-  // Fetch all quizzes
+  // GET all quizzes
   getQuizzes(): void {
-    this.quizService.getAllQuizzes().subscribe(
-      (data: Quiz[]) => {
-        this.quizzes = data;
+    const url = 'https://simulat-e-learning-backend.onrender.com/quiz';
+    this.http.get<Quiz[]>(url).subscribe(
+      res => {
+        console.log('Quizzes loaded', res);
+        this.quizzes = res;
       },
-      (error) => {
-        console.error('Error fetching quizzes', error);
-      }
+      err => console.error('Error loading quizzes', err)
     );
   }
 
-  // Open the modal for adding/editing
+  // Open modal for add or edit
   openModal(quiz?: Quiz): void {
     this.isModalOpen = true;
     if (quiz) {
       this.isEditing = true;
-      this.modalQuiz = { ...quiz }; // Clone the quiz to avoid direct editing
+      this.modalQuiz = { ...quiz };
     } else {
       this.isEditing = false;
       this.modalQuiz = this.getEmptyQuiz();
     }
   }
 
-  // Close the modal
+  // Close modal and reset modalQuiz
   closeModal(): void {
     this.isModalOpen = false;
-    this.modalQuiz = this.getEmptyQuiz();
+
+    // reflect edits in the quiz list
+    if (this.isEditing) {
+      const index = this.quizzes.findIndex(q => q.id === this.modalQuiz.id);
+      if (index !== -1) {
+        this.quizzes[index] = this.modalQuiz;
+      }
+    }
+    
+    // add quiz to list if it's a new quiz
+    if (!this.isEditing) {
+      this.quizzes.push(this.modalQuiz);
+    }
+
   }
 
-  // Save the quiz (add or edit)
+  // Save quiz via POST (add) or PUT (edit)
   saveQuiz(): void {
     if (this.isEditing) {
-      // Update existing quiz
-      this.quizService.updateQuiz(this.modalQuiz.quiz_id, this.modalQuiz).subscribe(
-        (data: Quiz) => {
-          const index = this.quizzes.findIndex(
-            (quiz) => quiz.quiz_id === data.quiz_id
-          );
+      const url = `https://simulat-e-learning-backend.onrender.com/quiz/${this.modalQuiz.id}`;
+      this.http.put<Quiz>(url, this.modalQuiz).subscribe(
+        res => {
+          console.log('Quiz updated', res);
+          const index = this.quizzes.findIndex(q => q.id === res.id);
           if (index !== -1) {
-            this.quizzes[index] = data;
+            this.quizzes[index] = res;
           }
           this.closeModal();
         },
-        (error) => {
-          console.error('Error updating quiz', error);
-        }
+        err => console.error('Error updating quiz', err)
       );
     } else {
-      // Add new quiz
-      this.quizService.addQuiz(this.modalQuiz).subscribe(
-        (data: Quiz) => {
-          this.quizzes.push(data);
+      const url = 'https://simulat-e-learning-backend.onrender.com/quiz';
+      console.log('Sending quiz data:', this.modalQuiz);
+      this.http.post<Quiz>(url, this.modalQuiz).subscribe(
+        res => {
+          console.log('Quiz saved', res);
+          this.quizzes.push(res);
           this.closeModal();
         },
-        (error) => {
-          console.error('Error adding quiz', error);
-        }
+        err => console.error('Error saving quiz', err)
       );
     }
   }
 
-  // Delete a quiz
+  // DELETE a quiz
   deleteQuiz(quizId: string): void {
-    this.quizService.deleteQuiz(quizId).subscribe(
+    const url = `https://simulat-e-learning-backend.onrender.com/quiz/${quizId}`;
+    this.http.delete(url).subscribe(
       () => {
-        this.quizzes = this.quizzes.filter((quiz) => quiz.quiz_id !== quizId);
+        console.log('Quiz deleted successfully');
+        this.quizzes = this.quizzes.filter(quiz => quiz.id !== quizId);
       },
-      (error) => {
-        console.error('Error deleting quiz', error);
-      }
+      err => console.error('Error deleting quiz', err)
     );
   }
 
   // Utility to get an empty quiz object
   private getEmptyQuiz(): Quiz {
     return {
-      quiz_id: '', // Should be generated dynamically or assigned by the backend
-      content_id: '',
+      id: '',  // backend will assign an ID for new quizzes
+      content_id: '1',
+      term_id: '1',
       quiz_title: '',
       description: '',
       time_limit: 0,
       is_published: false,
-      created_at: new Date(),
-      updated_at: new Date(),
     };
   }
 }

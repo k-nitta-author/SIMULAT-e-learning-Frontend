@@ -1,5 +1,3 @@
-<p>quizzes-list works!</p>
-
 <!-- Button to open modal for adding a new quiz -->
 <button type="button" (click)="openModal()">Add New Quiz</button>
 
@@ -12,18 +10,22 @@
       <th>Description</th>
       <th>Time Limit</th>
       <th>Actions</th>
+      <th>Term</th>
+      <th>Content Id</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let quiz of quizzes">
-      <td>{{ quiz.quiz_id }}</td>
-      <td>{{ quiz.quiz_title }}</td>
+      <td>{{ quiz.id }}</td>
+      <td><a href="">{{ quiz.quiz_title }}</a></td>
       <td>{{ quiz.description }}</td>
       <td>{{ quiz.time_limit }}</td>
       <td>
         <button type="button" (click)="openModal(quiz)">Edit</button>
-        <button type="button" (click)="deleteQuiz(quiz.quiz_id)">Delete</button>
+        <button type="button" (click)="deleteQuiz(quiz.id)">Delete</button>
       </td>
+      <td>{{ quiz.term_id }}</td>
+      <td>{{ quiz.content_id }}</td>
     </tr>
   </tbody>
 </table>
@@ -33,45 +35,38 @@
   <div class="modal-content">
     <h2>{{ isEditing ? 'Edit Quiz' : 'Add New Quiz' }}</h2>
     <form (ngSubmit)="saveQuiz()">
-      <label for="quizTitle">Title</label>
-      <input
-        type="text"
-        id="quizTitle"
-        [(ngModel)]="modalQuiz.quiz_title"
-        name="quizTitle"
-        required
-      />
+      <div class="form-group">
+        <label for="quizTitle">Title</label>
+        <input type="text" id="quizTitle" [(ngModel)]="modalQuiz.quiz_title" name="quizTitle" required />
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" id="description" [(ngModel)]="modalQuiz.description" name="description" required />
+      </div>
+      <div class="form-group">
+        <label for="timeLimit">Time Limit (minutes)</label>
+        <input type="number" id="timeLimit" [(ngModel)]="modalQuiz.time_limit" name="timeLimit" required />
+      </div>
 
-      <label for="description">Description</label>
-      <input
-        type="text"
-        id="description"
-        [(ngModel)]="modalQuiz.description"
-        name="description"
-        required
-      />
+      <div class="form-group">
+        <label for="termId">Term ID</label>
+        <input type="number" id="termId" [(ngModel)]="modalQuiz.term_id" name="term_id" required />
+      </div>
 
-      <label for="timeLimit">Time Limit (minutes)</label>
-      <input
-        type="number"
-        id="timeLimit"
-        [(ngModel)]="modalQuiz.time_limit"
-        name="timeLimit"
-        required
-      />
-
-      <label>
-        <input
-          type="checkbox"
-          [(ngModel)]="modalQuiz.is_published"
-          name="isPublished"
-        />
-        Published
-      </label>
-
+      <div class="form-group">
+        <label for="termId">Content ID</label>
+        <input type="number" id="contentId" [(ngModel)]="modalQuiz.content_id" name="content_id" required />
+      </div>
+  
+      <div class="form-group">
+        <label>
+          <input type="checkbox" [(ngModel)]="modalQuiz.is_published" name="isPublished" />
+          Published
+        </label>
+      </div>
       <div class="modal-buttons">
-        <button type="submit" class="save-button">Save</button>
-        <button type="button" class="cancel-button" (click)="closeModal()">Cancel</button>
+        <button type="submit" class="btn btn-primary">{{ isEditing ? 'Update' : 'Add' }}</button>
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
       </div>
     </form>
   </div>
