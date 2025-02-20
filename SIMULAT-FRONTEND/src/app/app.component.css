@@ -9,7 +9,7 @@
 }
 
 .main-content{
-    @apply bg-white ml-16
+    @apply bg-white ml-16 px-20 pt-8
     
 }
 
