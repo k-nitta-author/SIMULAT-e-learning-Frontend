@@ -1,52 +1,38 @@
 <section class="container">
     <main>
         <h1>Student Registration</h1>
-        <form>
+        <form (ngSubmit)="onSubmit()">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" [(ngModel)]="formData.username" required>
 
-            <label for="given-name">Given Name</label>
-            <input type="text" name="given-name" id="given-name" placeholder="ex. Juan">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" [(ngModel)]="formData.password" required>
 
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" [(ngModel)]="formData.email" required>
 
-            <label for="middle-name">Middle Name</label>
-            <input type="text" name="middle-name" id="middle-name" placeholder="ex. Ortega">
-            
-            <label for="surame-name">Surname</label>
-            <input type="text" name="surame-name" id="surame-name" placeholder="ex. Clarin">
+            <label for="name_given">Given Name</label>
+            <input type="text" name="name_given" id="name_given" [(ngModel)]="formData.name_given" required>
 
-            <label for="date-of-birth">Date of Birth</label>
-            <input type="date" name="date-of-birth" id="date-of-birth" >
+            <label for="name_last">Surname</label>
+            <input type="text" name="name_last" id="name_last" [(ngModel)]="formData.name_last" required>
 
             <label for="gender">Gender</label>
-            <select id="gender" name="gender" id="gender">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-                <option value="prefer-not-to-say">Prefer Not To Say</option>
+            <select id="gender" name="gender" [(ngModel)]="formData.gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+                <option value="Prefer Not To Say">Prefer Not To Say</option>
             </select>
 
             <button type="submit">Submit</button>
-
         </form>
     </main>
-
-
-
-    <aside>
-        <img src=""/>
-    </aside>
-
 </section>
 
-
-
 <section class="registration-success-view">
-
     <main>
         <h2>Student Registration Successful!</h2>
-
-
-
         <p>Always Remember your Token ID to log back into SIMULAt</p>
     </main>
-
 </section>

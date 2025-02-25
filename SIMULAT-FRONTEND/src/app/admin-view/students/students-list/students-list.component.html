@@ -1,5 +1,3 @@
-<p>students-list works!</p>
-
 <!-- Button to Add a New Student -->
 <button type="button" (click)="openModal()">Add New Student</button>
 
@@ -7,30 +5,26 @@
 <table>
   <thead>
     <tr>
-      <th>Student ID</th>
-      <th>Given Name</th>
-      <th>Middle Name</th>
-      <th>Surname</th>
-      <th>Date of Birth</th>
+      <th>ID</th>
+      <th>Username</th>
       <th>Email</th>
+      <th>Given Name</th>
+      <th>Last Name</th>
       <th>Gender</th>
-      <th>Enrollment Date</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let student of students">
-      <td>{{ student.student_id }}</td>
-      <td>{{ student.given_name }}</td>
-      <td>{{ student.middle_name }}</td>
-      <td>{{ student.surname }}</td>
-      <td>{{ student.date_of_birth }}</td>
+      <td>{{ student.id }}</td>
+      <td>{{ student.username }}</td>
       <td>{{ student.email }}</td>
+      <td>{{ student.name_given }}</td>
+      <td>{{ student.name_last }}</td>
       <td>{{ student.gender }}</td>
-      <td>{{ student.enrollment_date }}</td>
       <td>
         <button type="button" (click)="openModal(student)">Edit</button>
-        <button type="button" (click)="deleteStudent(student.student_id)">Delete</button>
+        <button type="button" (click)="deleteStudent(student.id)">Delete</button>
       </td>
     </tr>
   </tbody>
@@ -43,22 +37,17 @@
     <form (ngSubmit)="saveStudent()">
       <div class="form-group">
         <label for="studentId">Student ID</label>
-        <input id="studentId" type="text" [(ngModel)]="modalStudent.student_id" name="studentId" placeholder="Enter Student ID" required />
+        <input id="studentId" type="text" [(ngModel)]="modalStudent.id" name="studentId" placeholder="Enter Student ID" required />
       </div>
       
       <div class="form-group">
         <label for="givenName">Given Name</label>
-        <input id="givenName" type="text" [(ngModel)]="modalStudent.given_name" name="givenName" placeholder="Enter Given Name" required />
-      </div>
-
-      <div class="form-group">
-        <label for="middleName">Middle Name</label>
-        <input id="middleName" type="text" [(ngModel)]="modalStudent.middle_name" name="middleName" placeholder="Enter Middle Name" />
+        <input id="givenName" type="text" [(ngModel)]="modalStudent.name_given" name="givenName" placeholder="Enter Given Name" required />
       </div>
 
       <div class="form-group">
         <label for="surname">Surname</label>
-        <input id="surname" type="text" [(ngModel)]="modalStudent.surname" name="surname" placeholder="Enter Surname" required />
+        <input id="surname" type="text" [(ngModel)]="modalStudent.name_last" name="surname" placeholder="Enter Surname" required />
       </div>
 
       <div class="form-group">
@@ -77,11 +66,6 @@
       <div class="form-group">
         <label for="email">Email</label>
         <input id="email" type="email" [(ngModel)]="modalStudent.email" name="email" placeholder="Enter Email" required />
-      </div>
-
-      <div class="form-group">
-        <label for="enrollmentDate">Enrollment Date</label>
-        <input id="enrollmentDate" type="date" [(ngModel)]="modalStudent.enrollment_date" name="enrollmentDate" required />
       </div>
 
       <div class="form-group">

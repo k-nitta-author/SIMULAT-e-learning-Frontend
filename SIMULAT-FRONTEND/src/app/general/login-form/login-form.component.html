@@ -2,28 +2,28 @@
 
     
     
-    <form class="login-form" action="">
-    <p>
-        Don't have an account? 
-        <a href="/register">Sign up!</a>
-    </p>
+    <form class="login-form" (ngSubmit)="login()" #loginForm="ngForm">
+        <p>
+            Don't have an account? 
+            <a href="/register">Sign up!</a>
+        </p>
 
-    <!--
-        
-        As of Feb 28, no login functionality or existing backend;
-        creating this ahead of time
-    -->
+        <!--
+            
+            As of Feb 28, no login functionality or existing backend;
+            creating this ahead of time
+        -->
 
-    <label for="email">Email</label>
-    <input type="email">
+        <label for="email">Email</label>
+        <input type="email" name="username" [(ngModel)]="username" required>
 
-    <label>Password</label>
-    <input type="password">
+        <label>Password</label>
+        <input type="password" name="password" [(ngModel)]="password" required>
 
-    <!--TODO: create forgot password page; otherwise discuss with group-->
-    <a href="">Forgot password?</a>
+        <!--TODO: create forgot password page; otherwise discuss with group-->
+        <a href="">Forgot password?</a>
 
-    <button>Login</button>
+        <input type="submit" value="Login" [disabled]="!loginForm.form.valid">
     
 
 

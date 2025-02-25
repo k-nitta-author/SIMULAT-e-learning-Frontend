@@ -52,13 +52,6 @@ input{
     border-2
 }
 
-aside{
-    @apply
-
-    w-1/2
-    bg-red-500
-}
-
 .registration-success-view{
     @apply
 
