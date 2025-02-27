@@ -29,7 +29,7 @@ export class ChallengeComponent implements OnInit {
       next: (challenges: Challenge[]) => {
         this.challenges = challenges;
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Error loading challenges:', error);
         this.error = 'Failed to load challenges. Please try again later.';
       }
@@ -52,7 +52,7 @@ export class ChallengeComponent implements OnInit {
     if (this.newChallenge.id) {
       this.challengeService.updateChallenge(this.newChallenge.id, this.newChallenge as Challenge)
         .subscribe({
-          next: (updatedChallenge) => {
+          next: (updatedChallenge: Challenge | undefined) => {
             if (updatedChallenge) {
               const index = this.challenges.findIndex(ch => ch.id === updatedChallenge.id);
               if (index !== -1) {
@@ -61,7 +61,7 @@ export class ChallengeComponent implements OnInit {
               }
             }
           },
-          error: (error) => {
+          error: (error: any) => {
             console.error('Error updating challenge:', error);
             this.error = 'Failed to update challenge. Please try again later.';
           }
@@ -69,11 +69,11 @@ export class ChallengeComponent implements OnInit {
     } else {
       this.challengeService.addChallenge(this.newChallenge as Challenge)
         .subscribe({
-          next: (addedChallenge) => {
+          next: (addedChallenge: Challenge) => {
             this.challenges.push(addedChallenge);
             this.toggleModal();
           },
-          error: (error) => {
+          error: (error: any) => {
             console.error('Error adding challenge:', error);
             this.error = 'Failed to add challenge. Please try again later.';
           }
@@ -94,7 +94,7 @@ export class ChallengeComponent implements OnInit {
       next: () => {
         this.challenges = this.challenges.filter(ch => ch.id !== id);
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Error deleting challenge:', error);
         this.error = 'Failed to delete challenge. Please try again later.';
       }
