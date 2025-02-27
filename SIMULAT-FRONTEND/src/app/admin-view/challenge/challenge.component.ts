@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Challenge } from '../../general/interfaces/challenge'; 
 import { ChallengeService } from '../../backend-services/challenge.service';
-import { NgFor, NgIf, DatePipe, CommonModule} from '@angular/common';
+import { NgFor, NgIf, DatePipe, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
