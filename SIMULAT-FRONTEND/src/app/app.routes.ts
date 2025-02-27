@@ -41,6 +41,7 @@ import { QuizDetailComponent } from './admin-view/quizzes/quiz-detail/quiz-detai
 import { QuizComponent } from './student-view/quiz/quiz.component';
 import { ChallengeComponent } from './admin-view/challenge/challenge.component';
 
+
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomePageComponent },
