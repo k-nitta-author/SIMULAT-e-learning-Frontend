@@ -1,0 +1,95 @@
+<div>
+  <button type="button" (click)="toggleModal()">Add New Challenge</button>
+</div>
+
+<div *ngIf="isModalOpen" class="modal">
+  <div class="modal-content">
+    <h3 class="modal-header">{{ newChallenge.id ? 'Edit Challenge' : 'Add New Challenge' }}</h3>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="contentId">Content ID:</label>
+        <input
+          id="contentId"
+          type="text"
+          [(ngModel)]="newChallenge.content_id"
+          name="contentId"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="createdAt">Created At:</label>
+        <input
+          id="createdAt"
+          type="date"
+          [(ngModel)]="newChallenge.created_at"
+          name="createdAt"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="isPublished">Is Published:</label>
+        <input
+          id="isPublished"
+          type="checkbox"
+          [(ngModel)]="newChallenge.is_published"
+          name="isPublished"
+          class="form-control"
+          [checked]="newChallenge.is_published"
+        />
+      </div>
+      <div class="form-group">
+        <label for="publicationDate">Publication Date:</label>
+        <input
+          id="publicationDate"
+          type="date"
+          [(ngModel)]="newChallenge.publication_date"
+          name="publicationDate"
+          class="form-control"
+        />
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-secondary" (click)="toggleModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="error">
+  <p>Error loading data: {{ error }}</p>
+</div>
+<div *ngIf="challenges.length > 0">
+  <p>Challenges found: {{ challenges.length }}</p>
+</div>
+<div *ngIf="challenges.length === 0 && !error">
+  <p>No challenges found</p>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Content ID</th>
+      <th>Created At</th>
+      <th>Is Published</th>
+      <th>Publication Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let challenge of challenges">
+      <td>{{ challenge.id }}</td>
+      <td>{{ challenge.content_id }}</td>
+      <td>{{ challenge.created_at | date:'short' }}</td>
+      <td>{{ challenge.is_published ? 'Yes' : 'No' }}</td>
+      <td>{{ challenge.publication_date ? (challenge.publication_date | date:'short') : 'Not Available' }}</td>
+      <td>
+        <button type="button" (click)="editChallenge(challenge.id)">Edit</button>
+        <button type="button" (click)="deleteChallenge(challenge.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
