@@ -1,23 +1,12 @@
-<section>
-    
+<section (click)="navigateToCourseDetails()">
     <aside>
         <app-progress-circle></app-progress-circle>
     </aside>
-
     <header>
-
-
-        <h3>Course Title</h3>
-        <h4>Course Code</h4>
-
-        <!--TODO: Add section where a star rating may be added-->
-
-
-
+        <h3>{{ courseTitle }}</h3>
+        <h4>{{ courseCode }}</h4>
     </header>
-
-    <footer>
-
-    </footer>
-
+    <main>
+        {{courseDescription}}
+    </main>
 </section>

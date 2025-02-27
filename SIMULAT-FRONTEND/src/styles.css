@@ -257,3 +257,40 @@ input {
   rounded-lg 
   ;
 }
+
+/* Challenge Page Styles */
+.challenge-section {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.challenge-header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.challenge-card {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.challenge-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.challenge-list li {
+  margin-bottom: 10px;
+}
+
+.challenge-divider {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin-top: 20px;
+}

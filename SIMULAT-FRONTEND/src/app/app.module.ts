@@ -2,6 +2,7 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { HomePageComponent } from './general/home-page/home-page.component';
 import { SupportPageComponent } from './general/support-page/support-page.component';
@@ -15,27 +16,31 @@ import { AssignmentsListComponent } from './admin-view/assignments/assignments-l
 import { AssignmentService } from './backend-services/assignment.service';
 import { StudentsListComponent } from './admin-view/students/students-list/students-list.component';
 import { QuizListComponent } from './admin-view/quizzes/quizzes-list/quizzes-list.component';
-import { InstructorsListComponent } from './admin-view/instructors/instructors-list/instructors-list.component';
+
 import { ContentListComponent } from './admin-view/content/content-list/content-list.component';
+import { ChallengeComponent } from './admin-view/challenge/challenge.component';
+import { InstructorsListComponent } from './admin-view/instructors/instructors-list/instructors-list.component';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    CommonModule,
-    RouterModule.forRoot(routes),
+  declarations: [
+    AppComponent,
     HomePageComponent,
     SupportPageComponent,
-    AppComponent,
     AccountPageComponent,
     CoursesPageComponent,
     ClassDashboardPageComponent,
-
-    // Admin view components
     InstructorsListComponent,
     AssignmentsListComponent,
     StudentsListComponent,
     QuizListComponent, 
     ContentListComponent,
+    ChallengeComponent,
+  ],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    RouterModule.forRoot(routes),
+    HttpClientModule,
   ],
   exports:[
     RouterModule,
@@ -43,6 +48,7 @@ import { ContentListComponent } from './admin-view/content/content-list/content-
   ],
   providers: [
     AssignmentService
-  ]
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

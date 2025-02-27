@@ -37,6 +37,9 @@ import { ContentPageComponent } from './general/content-page/content-page.compon
 import { BadgePageComponent } from './sudent-view/badge-page/badge-page.component';
 import { StudyGroupPageComponent } from './sudent-view/study-group-page/study-group-page.component';
 import { StudyGroupDetailComponent } from './sudent-view/study-group-detail/study-group-detail.component';
+import { QuizDetailComponent } from './admin-view/quizzes/quiz-detail/quiz-detail.component';
+import { QuizComponent } from './student-view/quiz/quiz.component';
+import { ChallengeComponent } from './admin-view/challenge/challenge.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -44,7 +47,7 @@ export const routes: Routes = [
     { path: 'register', component: RegistrationPageComponent },
     { path: 'inbox', component: InboxPageComponent },
     { path: 'support', component: SupportPageComponent },
-    { path: 'account', component: AccountPageComponent },
+    { path: 'account/:id', component: AccountPageComponent },
     { path: 'legal/terms_of_service', component: TermsOfServiceComponent },
     { path: 'legal/privacy_policy', component: PrivacyPolicyComponent },
 
@@ -58,6 +61,9 @@ export const routes: Routes = [
     // Admin dashboard route
     { path: 'admin/dashboard', component: AdminDashboardComponent },
 
+    // Admin challenge management route
+    { path: 'admin/challenges', component: ChallengeComponent },
+
     // Admin student management route
     { path: 'admin/students', component: StudentsListComponent }, 
 
@@ -69,6 +75,10 @@ export const routes: Routes = [
 
     // Admin quiz management route
     { path: 'admin/quizzes', component: QuizListComponent },
+    { path: 'admin/quiz/:id', component:  QuizDetailComponent},
+
+    // Student View Quiz Page Routes
+    { path: 'quiz/:id', component: QuizComponent },
 
     // Admin instructor management route
     { path: 'admin/instructors', component: InstructorsListComponent },
