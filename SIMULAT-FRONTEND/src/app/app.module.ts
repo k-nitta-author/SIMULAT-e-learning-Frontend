@@ -47,7 +47,7 @@ import { InstructorsListComponent } from './admin-view/instructors/instructors-l
     AssignmentsListComponent,
   ],
   providers: [
-    AssignmentService
+    
   ],
   bootstrap: [AppComponent]
 })

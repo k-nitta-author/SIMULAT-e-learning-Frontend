@@ -8,8 +8,8 @@
   <!-- Modal for Adding/Editing Assignment -->
   <div *ngIf="isModalOpen" class="modal">
     <div class="modal-content">
-      <h3 *ngIf="!newAssignment.assignment_id">Add New Assignment</h3>
-      <h3 *ngIf="newAssignment.assignment_id">Edit Assignment</h3>
+      <h3 *ngIf="!newAssignment.id">Add New Assignment</h3>
+      <h3 *ngIf="newAssignment.id">Edit Assignment</h3>
       <form (ngSubmit)="onSubmit()">
         <div>
           <label for="assignmentTitle">Title:</label>
@@ -28,7 +28,7 @@
           <input id="maxScore" type="number" [(ngModel)]="newAssignment.max_score" name="maxScore" required>
         </div>
         <div class="modal-actions">
-          <button type="submit" class="modal-button">{{ newAssignment.assignment_id ? 'Save Changes' : 'Add Assignment' }}</button>
+          <button type="submit" class="modal-button">{{ newAssignment.id ? 'Save Changes' : 'Add Assignment' }}</button>
           <button type="button" (click)="toggleModal()" class="modal-button">Cancel</button>
         </div>
       </form>
@@ -56,14 +56,14 @@
     </thead>
     <tbody>
       <tr *ngFor="let assignment of assignments">
-        <td>{{ assignment.assignment_id }}</td>
+        <td>{{ assignment.id }}</td>
         <td>{{ assignment.assignment_title }}</td>
         <td>{{ assignment.description }}</td>
         <td>{{ assignment.deadline ? (assignment.deadline | date: 'yyyy-MM-dd') : 'No deadline set' }}</td>
         <td>{{ assignment.max_score }}</td>
         <td>
-          <button type="button" (click)="editAssignment(assignment.assignment_id)" class="table-button">Edit</button>
-          <button type="button" (click)="deleteAssignment(assignment.assignment_id)" class="table-button">Delete</button>
+          <button type="button" (click)="editAssignment(assignment.id)" class="table-button">Edit</button>
+          <button type="button" (click)="deleteAssignment(assignment.id)" class="table-button">Delete</button>
         </td>
       </tr>
     </tbody>
