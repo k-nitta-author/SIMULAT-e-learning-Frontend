@@ -1,1 +1,10 @@
-<p>content-page works!</p>
+<div *ngIf="contents && contents.length > 0; else noContent">
+  <div *ngFor="let content of contents">
+    <h2>{{ content.content_title }}</h2>
+    <p>{{ content.content_description }}</p>
+    <a [href]="content.content_url" target="_blank">{{ content.content_url }}</a>
+  </div>
+</div>
+<ng-template #noContent>
+  <p>No content available.</p>
+</ng-template>
