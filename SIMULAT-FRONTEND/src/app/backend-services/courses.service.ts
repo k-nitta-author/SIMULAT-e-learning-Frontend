@@ -23,7 +23,7 @@ export class CoursesService {
     );
   }
 
-  getCourseById(id: number): Observable<Course | undefined> {
+  getCourseById(id: number): Observable<Course> {
     return this.http.get<Course>(`${this.apiUrl}/${id}`).pipe(
       catchError(this.handleError)
     );
@@ -35,7 +35,7 @@ export class CoursesService {
     );
   }
 
-  updateCourse(id: number, updatedCourse: Course): Observable<Course | undefined> {
+  updateCourse(id: number, updatedCourse: Course): Observable<Course> {
     return this.http.put<Course>(`${this.apiUrl}/${id}`, updatedCourse).pipe(
       catchError(this.handleError)
     );
@@ -47,3 +47,4 @@ export class CoursesService {
     );
   }
 }
+

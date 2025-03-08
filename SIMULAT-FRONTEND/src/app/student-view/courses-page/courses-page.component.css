@@ -1,18 +1,10 @@
-main{
-    @apply 
-    flex
-    flex-row
-
-    p-9
-
-    gap-6
-}
-
 section{
     @apply 
     
     flex
     flex-col
+
+    p-8
 
     grow
 

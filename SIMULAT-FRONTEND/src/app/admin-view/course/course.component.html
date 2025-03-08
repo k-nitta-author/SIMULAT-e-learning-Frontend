@@ -1,0 +1,77 @@
+<div>
+  <button type="button" (click)="toggleModal()">Add New Course</button>
+</div>
+
+<div *ngIf="isModalOpen" class="modal">
+  <div class="modal-content">
+    <h3 class="modal-header">{{ newCourse.id ? 'Edit Course' : 'Add New Course' }}</h3>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="courseName">Course Name:</label>
+        <input
+          id="courseName"
+          type="text"
+          [(ngModel)]="newCourse.course_name"
+          name="courseName"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea
+          id="description"
+          [(ngModel)]="newCourse.description"
+          name="description"
+          class="form-control"
+          required
+        ></textarea>
+      </div>
+      <div class="form-group">
+        <label for="instructor">Instructor:</label>
+        <input
+          id="instructor"
+          type="text"
+          [(ngModel)]="newCourse.instructor"
+          name="instructor"
+          class="form-control"
+        />
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-secondary" (click)="toggleModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="courses.length > 0">
+  <p>Courses found: {{ courses.length }}</p>
+</div>
+<div *ngIf="courses.length === 0">
+  <p>No courses found</p>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Course Name</th>
+      <th>Description</th>
+      <th>Instructor</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let course of courses">
+      <td>{{ course.id }}</td>
+      <td>{{ course.course_name }}</td>
+      <td>{{ course.description }}</td>
+      <td>{{ course.instructor }}</td>
+      <td>
+        <button type="button" (click)="editCourse(course.id)">Edit</button>
+        <button type="button" (click)="deleteCourse(course.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

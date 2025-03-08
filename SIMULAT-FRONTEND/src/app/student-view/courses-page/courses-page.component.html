@@ -1,18 +1,21 @@
-<main>
-    
-    <section>
-        <h2>Courses</h2>
+<section>
+  <div class="courses-container">
+    <h2>Courses</h2>
+    <div *ngIf="courses.length > 0">
+      <p>Courses found: {{ courses.length }}</p>
+      <ul>
+        <li *ngFor="let course of courses">
+          <h3><a [routerLink]="['/student/course-detail', course.id]">{{ course.course_code }} - {{ course.course_name }}</a></h3>
+          <p>{{ course.description }}</p>
+          <p><strong>Instructor:</strong> {{ course.instructor }}</p>
+          <p><strong>Term:</strong> {{ course.term }}</p>
+          <p><strong>Status:</strong> {{ course.is_published ? 'Published' : 'Unpublished' }}</p>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="courses.length === 0">
+      <p>No courses found</p>
+    </div>
+  </div>
+</section>
 
-        <app-dash-item></app-dash-item>
-
-        <app-dash-item></app-dash-item>
-
-        <app-dash-item></app-dash-item>
-    </section>
-
-    <section>
-        <h3>Notifications</h3>
-        <app-notifications-view></app-notifications-view>
-    </section>
-
-</main>
