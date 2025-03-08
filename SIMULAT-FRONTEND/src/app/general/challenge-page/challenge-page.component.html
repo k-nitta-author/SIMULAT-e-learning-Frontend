@@ -1,1 +1,15 @@
-<p>challenge-page works!</p>
+<section *ngIf="challenges && challenges.length" class="challenge-section">
+  <h2 class="challenge-header">Challenge Details</h2>
+  <div *ngFor="let challenge of challenges" class="challenge-card">
+    <ul class="challenge-list">
+      <li><strong>Content ID:</strong> {{ challenge.content_id }}</li>
+      <li><strong>Created At:</strong> {{ challenge.created_at | date:'short' }}</li>
+      <li><strong>ID:</strong> {{ challenge.id }}</li>
+      <li><strong>Is Published:</strong> {{ challenge.is_published ? 'Yes' : 'No' }}</li>
+      <li><strong>Publication Date:</strong> {{ challenge.publication_date ? (challenge.publication_date | date:'short') : 'Not Available' }}</li>
+      <li><strong>Updated At:</strong> {{ challenge.updated_at | date:'short' }}</li>
+    </ul>
+    <hr class="challenge-divider">
+  </div>
+</section>
+
