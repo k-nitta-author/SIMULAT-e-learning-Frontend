@@ -1,0 +1,26 @@
+<div *ngIf="badges.length === 0">
+  <p>No badges available.</p>
+</div>
+<div *ngIf="badges.length > 0">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Points required</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let badge of badges">
+        <td>{{ badge.name }}</td>
+        <td>{{ badge.description }}</td>
+        <td>{{ badge.pts_required }}</td>
+        <td>
+          <button (click)="deleteBadge(badge.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
