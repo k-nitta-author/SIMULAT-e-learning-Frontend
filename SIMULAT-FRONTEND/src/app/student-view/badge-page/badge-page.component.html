@@ -1,0 +1,20 @@
+<div class="container mx-auto p-4">
+  <h1 class="text-3xl">Badges</h1>
+  <table class="table-auto w-full">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Points Required</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let badge of badges">
+        <td>{{ badge.name }}</td>
+        <td>{{ badge.description }}</td>
+        <td>{{ badge.pts_required }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
