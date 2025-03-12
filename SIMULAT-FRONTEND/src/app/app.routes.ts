@@ -34,14 +34,15 @@ import { ChallengePageComponent } from './general/challenge-page/challenge-page.
 import { ChallengeDetailPageComponent } from './general/challenge-detail-page/challenge-detail-page.component';
 import { AssignmentPageComponent } from './student-view/assignment-page/assignment-page.component';
 import { ContentPageComponent } from './general/content-page/content-page.component';
-import { BadgePageComponent } from './sudent-view/badge-page/badge-page.component';
-import { StudyGroupPageComponent } from './sudent-view/study-group-page/study-group-page.component';
-import { StudyGroupDetailComponent } from './sudent-view/study-group-detail/study-group-detail.component';
+import { BadgePageComponent } from './student-view/badge-page/badge-page.component';
+import { StudyGroupPageComponent } from './student-view/study-group-page/study-group-page.component';
+import { StudyGroupDetailComponent } from './student-view/study-group-detail/study-group-detail.component';
 import { QuizDetailComponent } from './admin-view/quizzes/quiz-detail/quiz-detail.component';
 import { QuizComponent } from './student-view/quiz/quiz.component';
 import { ChallengeComponent } from './admin-view/challenge/challenge.component';
 
 
+import { BadgeListComponent } from './admin-view/badge-list/badge-list.component';
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomePageComponent },
@@ -81,6 +82,8 @@ export const routes: Routes = [
     // Student View Quiz Page Routes
     { path: 'quiz/:id', component: QuizComponent },
 
+    // Admin badge management route
+    { path: 'admin/badges', component: BadgeListComponent },
     // Admin instructor management route
     { path: 'admin/instructors', component: InstructorsListComponent },
 

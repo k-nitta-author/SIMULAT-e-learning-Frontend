@@ -1,7 +1,10 @@
-<div *ngIf="badges.length === 0">
+<button (click)="createNewBadge()">Add New Badge</button>
+
+<div *ngIf="badges.length === 0 && !isEditing">
   <p>No badges available.</p>
 </div>
-<div *ngIf="badges.length > 0">
+
+<div *ngIf="badges.length > 0 || isEditing">
   <table>
     <thead>
       <tr>
@@ -12,13 +15,33 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let badge of badges">
-        <td>{{ badge.name }}</td>
-        <td>{{ badge.description }}</td>
-        <td>{{ badge.pts_required }}</td>
+      <tr *ngIf="isEditing && selectedBadgeId === -1">
+        <td><input [(ngModel)]="editingBadge.name" type="text"></td>
+        <td><input [(ngModel)]="editingBadge.description" type="text"></td>
+        <td><input [(ngModel)]="editingBadge.pts_required" type="number"></td>
         <td>
-          <button (click)="deleteBadge(badge.id)">Delete</button>
+          <button (click)="saveBadge()">Save</button>
+          <button (click)="cancelEdit()">Cancel</button>
         </td>
+      </tr>
+      <tr *ngFor="let badge of badges">
+        <ng-container *ngIf="isEditing && selectedBadgeId === badge.id; else displayRow">
+          <td><input [(ngModel)]="editingBadge.name" type="text"></td>
+          <td><input [(ngModel)]="editingBadge.description" type="text"></td>
+          <td><input [(ngModel)]="editingBadge.pts_required" type="number"></td>
+          <td>
+            <button (click)="saveBadge()">Save</button>
+            <button (click)="cancelEdit()">Cancel</button>
+          </td>
+        </ng-container>
+        <ng-template #displayRow>
+          <td (click)="startEdit(badge)">{{ badge.name }}</td>
+          <td (click)="startEdit(badge)">{{ badge.description }}</td>
+          <td (click)="startEdit(badge)">{{ badge.pts_required }}</td>
+          <td>
+            <button (click)="deleteBadge(badge.id)">Delete</button>
+          </td>
+        </ng-template>
       </tr>
     </tbody>
   </table>
