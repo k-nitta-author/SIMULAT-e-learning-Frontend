@@ -1,1 +1,49 @@
-<p>study-group-page works!</p>
+<div class="container">
+  <div class="header">
+    <h2>Study Groups</h2>
+    <button (click)="showCreateForm = !showCreateForm" class="create-btn">
+      {{ showCreateForm ? 'Cancel' : 'Create New Group' }}
+    </button>
+  </div>
+
+  <div *ngIf="showCreateForm" class="create-form">
+    <h3>Create New Study Group</h3>
+    <form (submit)="createNewGroup()">
+      <div>
+        <label>Name:</label>
+        <input type="text" [(ngModel)]="newGroup.name" name="name" required>
+      </div>
+      <div>
+        <label>Course ID:</label>
+        <input type="number" [(ngModel)]="newGroup.course_id" name="course_id" required>
+      </div>
+      <div>
+        <label>Max Members:</label>
+        <input type="number" [(ngModel)]="newGroup.max_members" name="max_members" required>
+      </div>
+      <button type="submit">Create</button>
+    </form>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Course</th>
+        <th>Members</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let group of studyGroups">
+        <td>{{group.name}}</td>
+        <td>{{group.course_id}}</td>
+        <td>{{group.memberships.length}}/{{group.max_members}}</td>
+        <td>
+          <button (click)="viewDetails(group.id)">View</button>
+          <button (click)="deleteGroup(group.id)" class="delete-btn">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
