@@ -4,13 +4,14 @@ import { HttpClient } from '@angular/common/http';
 
 // Placeholder model for content
 export interface Content {
-  content_id: string;           // Unique ID for the content
   course_id: string;            // Reference to the related course
-  content_type: string;         // Type of content (e.g., lecture, video, etc.)
-  content_title: string;        // Title of the content
-  content_description: string;  // Description of the content
-  content_url: string;          // URL to the content file or resource
+  title: string;                // Title of the content
+  description: string;          // Description of the content
+  url: string;                  // URL to the content file or resource
   created_at: Date;             // Date the content was created
+  term_id: string;              // Reference to the related term
+  type: string;                 // Type of content (e.g., lecture, video, etc.)
+  id: string;                   // Unique identifier for the content
 }
 
 @Injectable({
