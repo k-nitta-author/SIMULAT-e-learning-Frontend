@@ -14,6 +14,18 @@ export interface Assignment {
   instructions: string;
   max_score: number;
   submission_format: string;
+  term?: {
+    id: number;
+    school_year_end: string;
+    school_year_start: string;
+  };
+  scores?: {
+    score: number;
+    student_id: number;
+    student_name: string;
+    submission_date: string;
+  }[];
+  term_id: number;
   updated_at: string;
 }
 
@@ -60,3 +72,4 @@ export class AssignmentService {
     );
   }
 }
+

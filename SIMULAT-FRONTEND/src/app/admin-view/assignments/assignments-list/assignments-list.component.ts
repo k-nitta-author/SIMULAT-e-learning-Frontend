@@ -17,16 +17,23 @@ export class AssignmentsListComponent implements OnInit {
 
   // Model for new assignment
   newAssignment: Assignment = {
-    id: 0,
-    content_id: 1, // Default or placeholder content ID
     assignment_title: '',
-    description: '',
-    deadline: new Date().toISOString(),
-    max_score: 0,
-    grading_criteria: '',
-    instructions: '',
-    submission_format: '',
+    content_id: 1, // Default or placeholder content ID
     created_at: new Date().toISOString(),
+    deadline: new Date().toISOString(),
+    description: '',
+    grading_criteria: '',
+    id: 0,
+    instructions: '',
+    max_score: 0,
+    submission_format: '',
+    term: {
+      id: 0,
+      school_year_end: '',
+      school_year_start: ''
+    },
+    scores: [],
+    term_id: 0,
     updated_at: new Date().toISOString(),
   };
 
@@ -111,6 +118,13 @@ export class AssignmentsListComponent implements OnInit {
       submission_format: '',
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
+      term: {
+        id: 0,
+        school_year_end: '',
+        school_year_start: ''
+      },
+      scores: [],
+      term_id: 0
     };
   }
 }

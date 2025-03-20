@@ -1,1 +1,15 @@
-<p>assignment-page works!</p>
+<section>
+<div *ngFor="let assignment of assignments" class="assignment-details">
+  <h1>{{ assignment.assignment_title }}</h1>
+  <p><strong>Content ID:</strong> {{ assignment.content_id }}</p>
+  <p><strong>Created At:</strong> {{ assignment.created_at | date:'dd/MM/yyyy' }}</p>
+  <p><strong>Deadline:</strong> {{ assignment.deadline | date:'dd/MM/yyyy' }}</p>
+  <p><strong>Description:</strong> {{ assignment.description }}</p>
+  <p><strong>Grading Criteria:</strong> {{ assignment.grading_criteria }}</p>
+  <p><strong>Instructions:</strong> {{ assignment.instructions }}</p>
+  <p><strong>Max Score:</strong> {{ assignment.max_score }}</p>
+  <p><strong>Submission Format:</strong> {{ assignment.submission_format }}</p>
+  <p><strong>Term:</strong> {{ assignment.term?.school_year_start | date:'dd/MM/yyyy' }} - {{ assignment.term?.school_year_end | date:'dd/MM/yyyy' }}</p>
+
+</div>
+</section>

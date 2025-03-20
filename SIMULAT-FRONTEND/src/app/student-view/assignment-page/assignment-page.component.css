@@ -1,0 +1,23 @@
+section{
+  display: flex;
+  flex-direction: row;
+}
+
+.assignment-details {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.assignment-details h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.assignment-details p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.assignment-details p strong {
+  font-weight: bold;
+}
