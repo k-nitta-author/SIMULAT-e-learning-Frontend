@@ -1,13 +1,13 @@
 table{
     @apply 
     
-    bg-gray-300
-
     w-full
 
     p-8
 
-    rounded-lg
+    rounded-lg;
+
+    
 
 }
 

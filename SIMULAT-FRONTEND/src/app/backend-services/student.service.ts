@@ -1,67 +1,116 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+import { HttpClient } from '@angular/common/http';
+
+
+export interface Student {
+  id: number;
+  name_given: string;
+  name_last: string;
+  email: string;
+  username: string;
+  password: string;
+  is_admin: boolean;
+  is_super_admin: boolean;
+  is_student: boolean;
+  is_instructor: boolean;
+  progress_score: number;
+  gender: string;
+}
+
+
 @Injectable({
   providedIn: 'root',
 })
 export class StudentService {
-  private placeholderStudents = [
-    {
-      student_id: 'S001',
-      given_name: 'Juan',
-      middle_name: 'D.',
-      surname: 'De la Cruz',
-      date_of_birth: '2005-08-01',
-      gender: 'Male',
-      email: 'juand.delacruz@example.com',
-      enrollment_date: '2023-09-01',
-      username: 'juanddelacruz',
-      password: 'password123',
-      progress_score: 85,
-    },
-    {
-      student_id: 'S002',
-      given_name: 'Maria',
-      middle_name: 'C.',
-      surname: 'Reyes',
-      date_of_birth: '2006-05-15',
-      gender: 'Female',
-      email: 'mariac.reyes@example.com',
-      enrollment_date: '2023-09-01',
-      username: 'mariacreyes',
-      password: 'password123',
-      progress_score: 90,
-    },
-  ];
+  private apiUrl = 'https://simulat-e-learning-backend.onrender.com';
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  // Mock method to fetch all students
-  getAllStudents(): Observable<any[]> {
-    return of(this.placeholderStudents); // change to api endpoint
+  // Gets all students
+  getAllStudents(): Observable<Student[]> {
+    return this.http.get<Student[]>(`${this.apiUrl}/user`);
   }
 
-  // Mock method for delete (updates local array only)
+  // Gets individual students
+  getStudent(id: string): Observable<Student> {
+    return this.http.get<Student>(`${this.apiUrl}/user/${id}`);
+  }
+
+  // Gets student by ID
+  getStudentById(id: string): Observable<Student> {
+    return this.http.get<Student>(`${this.apiUrl}/user/${id}`);
+  }
+
+  // Gets all instructors
+  getAllInstructors(): Observable<Student[]> {
+    return this.http.get<Student[]>(`${this.apiUrl}/user/instructors`);
+  }
+
+  // Gets detailed list of students
+  getAllStudentsDetailed(): Observable<Student[]> {
+    return this.http.get<Student[]>(`${this.apiUrl}/user/students`);
+  }
+
+  // Gets the student and returns a list of the badges they have earned
+  getStudentBadges(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user/${id}/badges`);
+  }
+
+  // Gets all admin-level users
+  getAllAdmins(): Observable<Student[]> {
+    return this.http.get<Student[]>(`${this.apiUrl}/user/admin`);
+  }
+
+  // Creates a new user
+  createStudent(student: Student): Observable<Student> {
+    return this.http.post<Student>(`${this.apiUrl}/user`, student);
+  }
+
+  // Deletes a user
   deleteStudent(id: string): Observable<void> {
-    this.placeholderStudents = this.placeholderStudents.filter(
-      (student) => student.student_id !== id
-    );
-    return of(); // Return an empty observable to simulate delete
+    return this.http.delete<void>(`${this.apiUrl}/user/${id}`);
   }
 
-  addStudent(student: any): Observable<any> {
-    this.placeholderStudents.push(student);
-    return of(student); // Return the added student as an observable
+  // Updates user data
+  updateStudent(id: string, student: Student): Observable<Student> {
+    return this.http.put<Student>(`${this.apiUrl}/user/${id}`, student);
   }
 
-  // Mock method for updating a student
-  updateStudent(id: string, student: any): Observable<any> {
-    const index = this.placeholderStudents.findIndex(
-      (s) => s.student_id === id
-    );
-    if (index !== -1) {
-      this.placeholderStudents[index] = { ...student };
-    }
-    return of(student); // Return the updated student as an observable
+  // Grants or takes away user priveliges to users
+  grantPrivileges(id: string, privileges: any): Observable<Student> {
+    return this.http.put<Student>(`${this.apiUrl}/user/${id}/grant`, privileges);
+  }
+
+  // Gets the user's quiz scores if they have any
+  getStudentQuizScores(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user/${id}/q/scores`);
+  }
+
+  // Gets the user's scores for the challenges
+  getStudentChallengeScores(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user/${id}/c/scores`);
+  }
+
+  // Gets the study groups that a user is enrolled into
+  getStudentStudyGroups(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user/${id}/studygroups/`);
+  }
+
+  // Gets the user's assignment scores
+  getStudentAssignmentScores(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user/${id}/a/scores`);
+  }
+
+  // Gets the user's courses
+  getStudentCourses(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user/${id}/courses`);
+  }
+
+  // Gets the user's all scores
+  getStudentAllScores(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user/${id}/all-scores`);
   }
 }
+

@@ -1,5 +1,11 @@
-main{
-    @apply
+main {
+    @apply p-8 bg-white rounded-lg shadow-sm mb-72;
+}
 
-    p-8
+.gradebook-header {
+    @apply border-b pb-4 mb-6;
+}
+
+.loading-state {
+    @apply text-center py-8 text-gray-500;
 }

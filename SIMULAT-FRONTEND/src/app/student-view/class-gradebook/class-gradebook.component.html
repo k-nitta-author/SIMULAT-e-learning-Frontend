@@ -1,7 +1,14 @@
 <main>
+    <div class="gradebook-header">
+        <h3 class="text-2xl font-bold mb-4">Gradebook</h3>
+    </div>
 
-    <h3>Gradebook</h3>
+    <app-gradebook-table-view 
+        [gradebookEntries]="gradebookEntries"
+        *ngIf="gradebookEntries.length > 0">
+    </app-gradebook-table-view>
 
-<app-gradebook-table-view></app-gradebook-table-view>
-
+    <div *ngIf="gradebookEntries.length === 0" class="loading-state">
+        <p>Loading gradebook data...</p>
+    </div>
 </main>
