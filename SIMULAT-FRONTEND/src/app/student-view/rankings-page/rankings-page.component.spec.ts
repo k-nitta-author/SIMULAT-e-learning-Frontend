@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RankingsPageComponent } from './rankings-page.component';
+import { RankingsService } from '../../backend-services/rankings.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('RankingsPageComponent', () => {
   let component: RankingsPageComponent;
@@ -8,7 +9,8 @@ describe('RankingsPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RankingsPageComponent]
+      imports: [RankingsPageComponent, HttpClientTestingModule],
+      providers: [RankingsService]
     })
     .compileComponents();
     

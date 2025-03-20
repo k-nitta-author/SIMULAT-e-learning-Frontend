@@ -1,21 +1,32 @@
 <main>
-
     <header>
         <h3>Rankings</h3>
     </header>
 
     <main>
-
         <section>
-            <h3>Progress</h3>
-
+            <h3>Top Students</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Name</th>
+                        <th>Progress Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let student of topStudents; let i = index">
+                        <td>{{i + 1}}</td>
+                        <td>{{student.name_given}} {{student.name_last}}</td>
+                        <td>{{student.progress_score}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
 
         <section>
             <h3>Leader Board</h3>
-
             <app-leaderboard-table></app-leaderboard-table>
         </section>
     </main>
-
 </main>

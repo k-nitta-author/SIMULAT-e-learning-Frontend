@@ -1,34 +1,52 @@
-main{
-    
-
-
-
+main {
+    @apply p-6;
 }
 
-main main{
-
-
+main main {
     @apply
     flex
     flex-row    
-
-
-    gap-8
-
+    gap-8;
 }
 
-header{
+header {
     @apply
-
     flex-none
+    mb-6;
 }
 
-main main section{
-
+main main section {
     @apply
     bg-gray-300
-
-
     w-full
-     
+    p-4
+    rounded-lg;
+}
+
+table {
+    @apply
+    w-full
+    bg-white
+    rounded-lg
+    overflow-hidden
+    mt-4;
+}
+
+th, td {
+    @apply
+    p-3
+    text-left
+    border-b
+    border-gray-200;
+}
+
+th {
+    @apply
+    bg-gray-100
+    font-semibold;
+}
+
+tr:hover {
+    @apply
+    bg-gray-50;
 }
