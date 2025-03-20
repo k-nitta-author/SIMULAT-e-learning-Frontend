@@ -1,5 +1,28 @@
 main{
-    @apply flex flex-col p-8
+    @apply flex flex-col p-8;
 }
 
+.contact-section{
+    @apply flex flex-col gap-4;
+}
+
+.contact-section h2{
+    @apply text-2xl font-bold;
+}
+
+.contact-section p{
+    @apply text-lg;
+}
+
+.contact-section ul{
+    @apply list-disc pl-6;
+}
+
+.contact-section li{
+    @apply flex items-center gap-2;
+}
+
+.contact-section a{
+    @apply text-blue-500 underline;
+}
 

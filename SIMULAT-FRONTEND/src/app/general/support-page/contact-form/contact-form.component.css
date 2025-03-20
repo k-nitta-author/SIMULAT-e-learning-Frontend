@@ -1,4 +1,12 @@
-form{
-    @apply flex flex-col gap-2 bg-gray-300 px-8 py-6 rounded-lg 
+section{
+    @apply flex flex-col items-center justify-center text-center
+}
+
+p{
+    @apply text-lg
+}
+
+a{
+    @apply text-blue-500 underline
 }
 
