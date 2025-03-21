@@ -40,6 +40,8 @@ import { StudyGroupDetailComponent } from './student-view/study-group-detail/stu
 import { QuizDetailComponent } from './admin-view/quizzes/quiz-detail/quiz-detail.component';
 import { QuizComponent } from './student-view/quiz/quiz.component';
 import { ChallengeComponent } from './admin-view/challenge/challenge.component';
+import { StudyGroupPageComponent } from './sudent-view/study-group-page/study-group-page.component';
+import { StudyGroupDetailComponent } from './sudent-view/study-group-detail/study-group-detail.component';
 
 
 import { BadgeListComponent } from './admin-view/badge-list/badge-list.component';
@@ -117,6 +119,7 @@ export const routes: Routes = [
     // Study Group Views
 
     {path: 'study-group', component: StudyGroupPageComponent},
+    {path: 'study-group', component: StudyGroupPageComponent}
     {path: 'study-group/:id', component: StudyGroupDetailComponent}
 
 
