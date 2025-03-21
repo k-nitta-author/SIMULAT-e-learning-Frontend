@@ -1,54 +1,28 @@
-<<<<<<< Updated upstream
-<section *ngIf="course">
-  <header>
-    <section>
-      <h1>{{ course.course_name }} ({{ course.course_code }})</h1>
-      <p><strong>Instructor:</strong> {{ course.instructor }}</p>
-      <p><strong>Status:</strong> {{ course.is_published ? 'Published' : 'Unpublished' }}</p>
-      <p><strong>Created At:</strong> {{ course.created_at | date:'short' }}</p>
-      <p><strong>Updated At:</strong> {{ course?.updated_at | date:'short' }}</p>
-      <p><strong>Term:</strong> {{ course.term }}</p>
-      <p *ngIf="course.description">{{ course.description }}</p>
-    </section>
-  </header>
-
-  <main>
-    <h2>Materials</h2>
-    <ul>
-      <li *ngFor="let content of course.content_list">
-        <a [href]="content.url" target="_blank">{{ content.title }}</a>
-      </li>
-    </ul>
-  </main>
-=======
-<section>
-
+<ng-container *ngIf="course; else loading">
+  <section *ngIf="course">
     <header>
-        
-        <section>
-            <h1>Course Name: Course Code</h1>
-
-            <strong>Instructor</strong>
-
-            <strong>is_published</strong>
-
-            <strong>created_at</strong>
-
-            <strong>updated_at</strong>
-
-            <strong>term_id</strong>
-
-            <p>
-                Description
-            </p>
-
-        </section>
-
+      <section>
+        <h1>{{ course.course_name }} ({{ course.course_code }})</h1>
+        <p><strong>Instructor:</strong> {{ course.instructor }}</p>
+        <p><strong>Status:</strong> {{ course.is_published ? 'Published' : 'Unpublished' }}</p>
+        <p><strong>Created At:</strong> {{ course.created_at | date:'short' }}</p>
+        <p><strong>Updated At:</strong> {{ course?.updated_at | date:'short' }}</p>
+        <p><strong>Term:</strong> {{ course.term }}</p>
+        <p *ngIf="course.description">{{ course.description }}</p>
+      </section>
     </header>
 
     <main>
-        Materials
+      <h2>Materials</h2>
+      <ul>
+        <li *ngFor="let content of course.content_list">
+          <a [href]="content.url" target="_blank">{{ content.title }}</a>
+        </li>
+      </ul>
     </main>
+  </section>
+</ng-container>
 
->>>>>>> Stashed changes
-</section>
+<ng-template #loading>
+  <p>Loading course details...</p>
+</ng-template>
