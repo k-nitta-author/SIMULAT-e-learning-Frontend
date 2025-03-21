@@ -1,12 +1,12 @@
 <ng-container *ngIf="course; else loading">
-  <section *ngIf="course">
+  <section>
     <header>
       <section>
         <h1>{{ course.course_name }} ({{ course.course_code }})</h1>
         <p><strong>Instructor:</strong> {{ course.instructor }}</p>
         <p><strong>Status:</strong> {{ course.is_published ? 'Published' : 'Unpublished' }}</p>
         <p><strong>Created At:</strong> {{ course.created_at | date:'short' }}</p>
-        <p><strong>Updated At:</strong> {{ course?.updated_at | date:'short' }}</p>
+        <p><strong>Updated At:</strong> {{ course.updated_at | date:'short' }}</p>
         <p><strong>Term:</strong> {{ course.term }}</p>
         <p *ngIf="course.description">{{ course.description }}</p>
       </section>

@@ -3,8 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../../backend-services/courses.service';
 import { Course } from '../../general/interfaces/course';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
->>>>>>> Stashed changes
 
 @Component({
   selector: 'app-course-details-page',
@@ -14,25 +12,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./course-details-page.component.css']
 })
 export class CourseDetailsPageComponent implements OnInit {
-  course: Course = {
-    content_list: [
-      { id: 1, title: 'asd aksdj sadh', url: 'asdkasjd kajsd' }
-    ],
-    course_code: 'AAA',
-    course_name: 'EWQ WRE',
-    created_at: 'Tue, 04 Mar 2025 00:00:00 GMT',
-    description: 'sadasd skajhd kajshdkj asdh',
-    enrollments: [
-      { course_id: 1, enroll_date: 'Tue, 04 Mar 2025 00:00:00 GMT', user_id: 3 }
-    ],
-    id: 1,
-    instructor: 'John teacherman',
-    instructor_id: 2,
-    is_published: false,
-    study_groups: [],
-    term: 1,
-    updated_at: 'Tue, 04 Mar 2025 00:00:00 GMT'
-  };
+  course?: Course;
 
   constructor(
     private coursesService: CoursesService,
@@ -64,12 +44,3 @@ export class CourseDetailsPageComponent implements OnInit {
   }
 }
 
-  imports: [],
-  templateUrl: './course-details-page.component.html',
-  styleUrl: './course-details-page.component.css'
-})
-export class CourseDetailsPageComponent {
-
-  
-
-}
