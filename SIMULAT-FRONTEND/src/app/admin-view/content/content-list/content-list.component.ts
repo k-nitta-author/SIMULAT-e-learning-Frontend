@@ -45,19 +45,19 @@ export class ContentListComponent implements OnInit {
 
   // Submit new content
   onSubmit(): void {
-    if (!this.newContent.content_title || !this.newContent.content_description) {
+    if (!this.newContent.title || !this.newContent.description || !this.newContent.course_id) {
       alert('Please fill out all required fields.');
       return;
     }
     
-    if (this.newContent.content_id) {
+    if (this.newContent.id) {
       // Update existing content
-      this.contentService.updateContent(this.newContent.content_id, this.newContent as Content)
+      this.contentService.updateContent(this.newContent.id, this.newContent as Content)
         .subscribe({
           next: (updatedContent) => {
             if (updatedContent) {
               const index = this.contentList.findIndex(
-                content => content.content_id === updatedContent.content_id);
+                content => content.id === updatedContent.id);
               if (index !== -1) {
                 this.contentList[index] = updatedContent;
                 this.toggleModal();
@@ -86,7 +86,7 @@ export class ContentListComponent implements OnInit {
 
   // Edit content
   editContent(id: string): void {
-    const contentToEdit = this.contentList.find(content => content.content_id === id);
+    const contentToEdit = this.contentList.find(content => content.id === id);
     if (contentToEdit) {
       this.newContent = { ...contentToEdit }; // Load into form
       this.isModalOpen = true;
@@ -97,7 +97,7 @@ export class ContentListComponent implements OnInit {
   deleteContent(id: string): void {
     this.contentService.deleteContent(id).subscribe({
       next: () => {
-        this.contentList = this.contentList.filter(content => content.content_id !== id);
+        this.contentList = this.contentList.filter(content => content.id !== id);
       },
       error: (error) => {
         console.error('Error deleting content:', error);

@@ -6,37 +6,48 @@
 <!-- Modal for Adding or Editing Content -->
 <div *ngIf="isModalOpen" class="modal">
   <div class="modal-content">
-    <h3 class="modal-header">{{ newContent.content_id ? 'Edit Content' : 'Add New Content' }}</h3>
+    <h3 class="modal-header">{{ newContent.id ? 'Edit Content' : 'Add New Content' }}</h3>
     <form (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <label for="contentTitle">Title:</label>
+        <label for="title">Title:</label>
         <input
-          id="contentTitle"
+          id="title"
           type="text"
-          [(ngModel)]="newContent.content_title"
-          name="contentTitle"
+          [(ngModel)]="newContent.title"
+          name="title"
           class="form-control"
           required
         />
       </div>
       <div class="form-group">
-        <label for="contentDescription">Description:</label>
+        <label for="description">Description:</label>
         <textarea
-          id="contentDescription"
-          [(ngModel)]="newContent.content_description"
-          name="contentDescription"
+          id="description"
+          [(ngModel)]="newContent.description"
+          name="description"
           class="form-control"
           required
         ></textarea>
       </div>
       <div class="form-group">
-        <label for="contentUrl">URL:</label>
+        <label for="url">URL:</label>
         <input
-          id="contentUrl"
+          id="url"
           type="text"
-          [(ngModel)]="newContent.content_url"
-          name="contentUrl"
+          [(ngModel)]="newContent.url"
+          name="url"
           class="form-control"
+        />
+      </div>
+      <div class="form-group">
+        <label for="courseId">Course ID:</label>
+        <input
+          id="courseId"
+          type="text"
+          [(ngModel)]="newContent.course_id"
+          name="courseId"
+          class="form-control"
+          required
         />
       </div>
       <div class="form-actions">
@@ -62,23 +73,26 @@
       <th>Title</th>
       <th>Description</th>
       <th>URL</th>
+      <th>Course ID</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let content of contentList">
-      <td>{{ content.content_id }}</td>
-      <td>{{ content.content_title }}</td>
-      <td>{{ content.content_description }}</td>
+      <td>{{ content.id }}</td>
+      <td>{{ content.title }}</td>
+      <td>{{ content.description }}</td>
       <td>
-        <a [href]="content.content_url" target="_blank" rel="noopener noreferrer">
-          {{ content.content_url }}
+        <a [href]="content.url" target="_blank" rel="noopener noreferrer">
+          {{ content.url }}
         </a>
       </td>
+      <td>{{ content.course_id }}</td>
       <td>
-        <button type="button" (click)="editContent(content.content_id)">Edit</button>
-        <button type="button" (click)="deleteContent(content.content_id)">Delete</button>
+        <button type="button" (click)="editContent(content.id)">Edit</button>
+        <button type="button" (click)="deleteContent(content.id)">Delete</button>
       </td>
     </tr>
   </tbody>
 </table>
+
