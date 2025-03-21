@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../../backend-services/courses.service';
 import { Course } from '../../general/interfaces/course';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+>>>>>>> Stashed changes
 
 @Component({
   selector: 'app-course-details-page',
@@ -62,3 +64,12 @@ export class CourseDetailsPageComponent implements OnInit {
   }
 }
 
+  imports: [],
+  templateUrl: './course-details-page.component.html',
+  styleUrl: './course-details-page.component.css'
+})
+export class CourseDetailsPageComponent {
+
+  
+
+}
