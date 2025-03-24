@@ -46,5 +46,23 @@ export class CoursesService {
       catchError(this.handleError)
     );
   }
+
+  getEnrolledCourses(userId: number): Observable<Course[]> {
+    return this.http.get<Course[]>(`${this.apiUrl.replace('/course', '')}/user/${userId}/enrolled-courses`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getNotEnrolledCourses(userId: number): Observable<Course[]> {
+    return this.http.get<Course[]>(`${this.apiUrl.replace('/course', '')}/user/${userId}/not-enrolled-courses`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  enrollInCourse(userId: number, courseId: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl.replace('/course', '')}/user/${userId}/enroll/${courseId}`, {}).pipe(
+      catchError(this.handleError)
+    );
+  }
 }
 
