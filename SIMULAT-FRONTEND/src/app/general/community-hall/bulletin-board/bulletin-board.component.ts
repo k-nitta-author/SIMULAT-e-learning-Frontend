@@ -11,7 +11,12 @@ import { WeavyService } from '../../../backend-services/weavy.service';
 })
 export class BulletinBoardComponent {
 
-  constructor(private weavyService: WeavyService) { }
+  token: string | null = null;
+
+  constructor(private weavyService: WeavyService) {
+
+    
+  }
 
 }
 
@@ -22,3 +27,5 @@ export class BulletinBoardComponent {
   exports: [BulletinBoardComponent]
 })
 export class BulletinBoardModule { }
+
+
