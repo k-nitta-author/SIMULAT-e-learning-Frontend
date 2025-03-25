@@ -10,3 +10,23 @@ section{
 
     gap-y-4 
 }
+
+.courses-table {
+    @apply w-full border-collapse bg-white shadow-sm rounded-lg overflow-hidden;
+}
+
+.courses-table th {
+    @apply bg-gray-100 text-left p-4 font-semibold text-gray-600;
+}
+
+.courses-table td {
+    @apply p-4 border-t border-gray-200;
+}
+
+.courses-table tr:hover {
+    @apply bg-gray-50;
+}
+
+.publish-btn {
+    @apply bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors;
+}

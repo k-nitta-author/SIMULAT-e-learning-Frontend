@@ -3,15 +3,36 @@
     <h2>Courses</h2>
     <div *ngIf="courses.length > 0">
       <p>Courses found: {{ courses.length }}</p>
-      <ul>
-        <li *ngFor="let course of courses">
-          <h3><a [routerLink]="['/student/course-detail', course.id]">{{ course.course_code }} - {{ course.course_name }}</a></h3>
-          <p>{{ course.description }}</p>
-          <p><strong>Instructor:</strong> {{ course.instructor }}</p>
-          <p><strong>Term:</strong> {{ course.term }}</p>
-          <p><strong>Status:</strong> {{ course.is_published ? 'Published' : 'Unpublished' }}</p>
-        </li>
-      </ul>
+      <table class="courses-table">
+        <thead>
+          <tr>
+            <th>Course Code</th>
+            <th>Course Name</th>
+            <th>Description</th>
+            <th>Instructor</th>
+            <th>Term</th>
+            <th>Status</th>
+            <th *ngIf="isInstructor">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let course of courses">
+            <td><a [routerLink]="['/course-detail', course.id]">{{ course.course_code }}</a></td>
+            <td>{{ course.course_name }}</td>
+            <td>{{ course.description }}</td>
+            <td>{{ course.instructor }}</td>
+            <td>{{ course.term }}</td>
+            <td>{{ course.is_published ? 'Published' : 'Unpublished' }}</td>
+            <td *ngIf="isInstructor">
+              <button *ngIf="!course.is_published" 
+                      class="publish-btn"
+                      (click)="publishCourse(course.id)">
+                Publish
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <div *ngIf="courses.length === 0">
       <p>No courses found</p>

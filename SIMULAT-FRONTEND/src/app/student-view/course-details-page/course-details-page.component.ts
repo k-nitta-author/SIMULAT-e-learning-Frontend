@@ -13,12 +13,15 @@ import { CommonModule } from '@angular/common';
 })
 export class CourseDetailsPageComponent implements OnInit {
   course?: Course;
+  isInstructor: boolean = false;
 
   constructor(
     private coursesService: CoursesService,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+    this.isInstructor = localStorage.getItem('is_instructor') === 'true';
+  }
 
   ngOnInit(): void {
     const courseId = this.activatedRoute.snapshot.paramMap.get('id');
@@ -40,6 +43,19 @@ export class CourseDetailsPageComponent implements OnInit {
       });
     } else {
       console.error('Course is not available');
+    }
+  }
+
+  onPublishCourse(): void {
+    if (this.course) {
+      this.coursesService.publishCourse(this.course.id).subscribe({
+        next: () => {
+          if (this.course) {
+            this.course.is_published = true;
+          }
+        },
+        error: (error) => console.error('Error publishing course', error)
+      });
     }
   }
 }

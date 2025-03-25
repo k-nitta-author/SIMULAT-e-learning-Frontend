@@ -17,8 +17,11 @@ import { RouterLink } from '@angular/router';
 })
 export class CoursesPageComponent implements OnInit {
   courses: Course[] = [];
+  isInstructor: boolean = false;
 
-  constructor(private coursesService: CoursesService) { }
+  constructor(private coursesService: CoursesService) {
+    this.isInstructor = localStorage.getItem('is_instructor') === 'true';
+  }
 
   ngOnInit(): void {
     this.fetchCourses();
@@ -27,10 +30,25 @@ export class CoursesPageComponent implements OnInit {
   fetchCourses(): void {
     this.coursesService.getAllCourses().subscribe({
       next: (courses: Course[]) => {
-        this.courses = courses;
+        if (!this.isInstructor) {
+          this.courses = courses.filter(course => course.is_published);
+        } else {
+          this.courses = courses;
+        }
       },
       error: (error) => {
         console.error('Error fetching courses', error);
+      }
+    });
+  }
+
+  publishCourse(courseId: number): void {
+    this.coursesService.publishCourse(courseId).subscribe({
+      next: () => {
+        this.fetchCourses(); // Refresh the courses list after publishing
+      },
+      error: (error) => {
+        console.error('Error publishing course', error);
       }
     });
   }
