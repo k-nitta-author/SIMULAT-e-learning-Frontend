@@ -7,6 +7,9 @@
             <li>
                 <a routerLink="/home">Home</a>
             </li>
+            <li>
+                <a [routerLink]="isInstructor ? '/admin/dashboard' : '/dashboard'">Dashboard</a>
+            </li>
             <li class="dropdown">
                 <a>Studies</a>
                 <ul class="dropdown-content">
