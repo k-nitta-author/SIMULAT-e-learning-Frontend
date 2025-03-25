@@ -1,5 +1,60 @@
-main{
-    @apply
+main {
+    @apply p-8
+}
 
-    p-8
+table {
+    @apply w-full border-collapse;
+}
+
+th, td {
+    @apply border p-2 text-left;
+}
+
+th {
+    @apply bg-gray-100;
+}
+
+.badge {
+    @apply px-2 py-1 rounded-full text-sm font-semibold text-white;
+}
+
+.badge.quiz {
+    @apply bg-blue-500;
+}
+
+.badge.challenge {
+    @apply bg-purple-500;
+}
+
+.badge.assignment {
+    @apply bg-green-500;
+}
+
+.complete-btn {
+    @apply bg-blue-500 text-white px-4 py-2 rounded
+    hover:bg-blue-600 transition-colors;
+}
+
+.error-message {
+    @apply bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4;
+}
+
+.status-badge {
+    @apply px-2 py-1 rounded-full text-sm font-semibold text-white;
+}
+
+.status-badge.completed {
+    @apply bg-green-500;
+}
+
+.status-badge.pending {
+    @apply bg-yellow-500;
+}
+
+.completion-check {
+    @apply text-green-600 flex items-center gap-2;
+}
+
+.fa-check-circle {
+    @apply text-lg;
 }

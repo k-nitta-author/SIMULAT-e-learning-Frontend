@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ActivitiesPageComponent } from './activities-page.component';
+import { ActivitiesService } from '../../general/services/activities.service';
 
 describe('ActivitiesPageComponent', () => {
   let component: ActivitiesPageComponent;
@@ -8,7 +9,8 @@ describe('ActivitiesPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ActivitiesPageComponent]
+      imports: [ActivitiesPageComponent, HttpClientTestingModule],
+      providers: [ActivitiesService]
     })
     .compileComponents();
     

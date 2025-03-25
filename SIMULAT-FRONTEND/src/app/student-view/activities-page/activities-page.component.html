@@ -1,5 +1,48 @@
 <section class="page-container">
-    <h3>Activities - Course Code</h3>
-    <app-activities-table></app-activities-table>
-  </section>
+  <h3>Activities - Course Code</h3>
   
+  <div *ngIf="error" class="error-message">
+    {{error}}
+  </div>
+  
+  <div *ngIf="combinedActivities.length > 0">
+    <table class="min-w-full">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Type</th>
+          <th>Score</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let activity of combinedActivities">
+          <td>{{activity.title}}</td>
+          <td>
+            <span [class]="'badge ' + activity.type">
+              {{activity.type}}
+            </span>
+          </td>
+          <td>{{activity.status === 'completed' ? activity.score : '-'}}</td>
+          <td>
+            <span [class]="'status-badge ' + activity.status">
+              {{activity.status}}
+            </span>
+          </td>
+          <td>
+            <span *ngIf="activity.status === 'completed'" class="completion-check">
+              <i class="fas fa-check-circle"></i> Completed
+            </span>
+            <button 
+              *ngIf="activity.status === 'pending'"
+              (click)="completeActivity(activity)"
+              class="complete-btn">
+              Mark as Complete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
