@@ -1,18 +1,61 @@
 <div class="page-container">
     <section class="dashboard">
         <header>
-            <h2>Course Title</h2>
-            <h3>Course Code</h3>
+            <h2>My Courses Dashboard</h2>
         </header>
         <main class="dashboard-main">
-            <div class="dashboard-columns">
-                <section class="student-progress-view dashboard-view">
-                    <h3>Your Progress</h3>
-                    <div class="load-more-button-container">
-                        <button class="load-more-button">View All Activities</button>
-                    </div>
-                </section>
-            </div>
+            <section class="enrolled-courses">
+                <h3>Enrolled Courses</h3>
+                <table class="courses-table">
+                    <thead>
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Course Code</th>
+                            <th>Instructor</th>
+                            <th>Progress</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let course of enrolledCourses">
+                            <td>{{course.course_name}}</td>
+                            <td>{{course.course_code}}</td>
+                            <td>{{course.instructor}}</td>
+                            <td>
+                                <app-progress-circle 
+                                    [progress]="calculateProgress(course)" 
+                                    [courseName]="course.course_name">
+                                </app-progress-circle>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="unenrolled-courses">
+                <h3>Available Courses</h3>
+                <table class="courses-table">
+                    <thead>
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Course Code</th>
+                            <th>Instructor</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let course of unenrolledCourses">
+                            <td>{{course.course_name}}</td>
+                            <td>{{course.course_code}}</td>
+                            <td>{{course.instructor}}</td>
+                            <td>
+                                <button (click)="enrollInCourse(course.id)" class="enroll-button">
+                                    Enroll
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
         </main>
     </section>
 </div>

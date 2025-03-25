@@ -1,23 +1,63 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ProgressCircleComponent } from './progress-circle/progress-circle.component';
 import { DailyChallengeComponent } from './daily-challenge/daily-challenge.component';
-
-
+import { CoursesService } from '../../backend-services/courses.service';
+import { Course } from '../../general/interfaces/course';
 
 @Component({
   selector: 'app-class-dashboard-page',
   standalone: true,
-  imports: [ProgressCircleComponent, DailyChallengeComponent],
+  imports: [CommonModule, ProgressCircleComponent, DailyChallengeComponent],
   templateUrl: './class-dashboard-page.component.html',
   styleUrl: './class-dashboard-page.component.css'
 })
-export class ClassDashboardPageComponent {
+export class ClassDashboardPageComponent implements OnInit {
+  enrolledCourses: Course[] = [];
+  unenrolledCourses: Course[] = [];
+  userId: number;
 
-  // testing data below; delete when complete with json testing
+  constructor(private coursesService: CoursesService) {
+    const storedUserId = localStorage.getItem('user_id');
+    this.userId = storedUserId ? parseInt(storedUserId) : 1; // fallback to 1 if not found
+    
+    if (!storedUserId) {
+      console.warn('User ID not found in local storage, using default value');
+    }
+  }
 
-  //courses_list: Object[]=
+  ngOnInit() {
+    this.loadEnrolledCourses();
+    this.loadUnenrolledCourses();
+  }
 
+  loadEnrolledCourses() {
+    this.coursesService.getEnrolledCourses(this.userId).subscribe({
+      next: (courses) => this.enrolledCourses = courses,
+      error: (error) => console.error('Error loading enrolled courses:', error)
+    });
+  }
 
+  loadUnenrolledCourses() {
+    this.coursesService.getNotEnrolledCourses(this.userId).subscribe({
+      next: (courses) => this.unenrolledCourses = courses,
+      error: (error) => console.error('Error loading unenrolled courses:', error)
+    });
+  }
 
+  enrollInCourse(courseId: number) {
+    this.coursesService.enrollInCourse(this.userId, courseId).subscribe({
+      next: () => {
+        this.loadEnrolledCourses();
+        this.loadUnenrolledCourses();
+      },
+      error: (error) => console.error('Error enrolling in course:', error)
+    });
+  }
+
+  calculateProgress(course: Course): number {
+    // This is a placeholder implementation
+    // You should implement actual progress calculation based on your requirements
+    return Math.floor(Math.random() * 100); // Replace with actual progress calculation
+  }
 }

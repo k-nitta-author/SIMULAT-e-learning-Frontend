@@ -47,3 +47,27 @@
     @apply gap-4;
   }
 }
+
+.enrolled-courses, .unenrolled-courses {
+    @apply mb-8;
+}
+
+.courses-table {
+    @apply w-full border-collapse bg-white rounded-lg shadow-sm mt-4;
+}
+
+.courses-table th, .courses-table td {
+    @apply p-4 text-left border-b border-gray-200;
+}
+
+.courses-table th {
+    @apply bg-gray-50 font-semibold text-gray-600;
+}
+
+.courses-table tr:hover {
+    @apply bg-gray-50;
+}
+
+.enroll-button {
+    @apply bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors;
+}
