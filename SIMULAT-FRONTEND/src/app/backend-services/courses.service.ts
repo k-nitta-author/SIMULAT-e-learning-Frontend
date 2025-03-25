@@ -64,5 +64,13 @@ export class CoursesService {
       catchError(this.handleError)
     );
   }
+
+publishCourse(id: number): Observable<any> {
+  return this.http.post<any>(`${this.apiUrl}/${id}/publish`, {}).pipe(
+    catchError(this.handleError)
+  );
 }
+
+}
+
 
