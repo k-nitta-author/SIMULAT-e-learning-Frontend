@@ -1,0 +1,61 @@
+.content-page {
+  @apply max-w-7xl mx-auto p-6;
+}
+
+header {
+  @apply mb-8;
+}
+
+header h1 {
+  @apply text-3xl font-bold text-gray-800;
+}
+
+.loading-state {
+  @apply flex justify-center items-center p-8 text-gray-600;
+}
+
+.error-state {
+  @apply bg-red-50 text-red-600 p-4 rounded-md mb-4;
+}
+
+.empty-state {
+  @apply text-gray-500 text-center p-8;
+}
+
+.content-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+}
+
+.content-card {
+  @apply bg-white rounded-lg shadow-sm p-6 flex flex-col;
+}
+
+.content-type {
+  @apply text-sm font-medium text-blue-600 mb-2 uppercase;
+}
+
+.content-card h2 {
+  @apply text-xl font-semibold text-gray-800 mb-3;
+}
+
+.description {
+  @apply text-gray-600 mb-4 flex-grow;
+}
+
+.content-footer {
+  @apply flex justify-between items-center mt-4 pt-4 border-t border-gray-100;
+}
+
+.course-link {
+  @apply text-blue-600 hover:text-blue-800 hover:underline text-sm font-medium;
+}
+
+.date {
+  @apply text-sm text-gray-500;
+}
+
+.resource-link {
+  @apply mt-4 inline-block bg-blue-50 text-blue-600 hover:bg-blue-100 
+         px-4 py-2 rounded-md text-sm font-medium text-center 
+         transition-colors duration-200;
+}

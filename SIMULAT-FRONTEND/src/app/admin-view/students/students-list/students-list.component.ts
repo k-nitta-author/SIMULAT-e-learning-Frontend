@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../../../backend-services/student.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import Student from '../../../general/interfaces/student';
 
 @Component({
   selector: 'app-students-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, RouterModule],
   templateUrl: './students-list.component.html',
   styleUrls: ['./students-list.component.css']
 })
@@ -17,22 +18,17 @@ export class StudentsListComponent implements OnInit {
   isModalOpen = false; // Modal visibility
   isEditing = false; // Editing mode flag
   modalStudent: any = this.getEmptyStudent(); // Data for the modal
+  sortColumn: string = 'name_last';
+  sortDirection: 'asc' | 'desc' = 'asc';
 
-  constructor(private studentService: StudentService, private http: HttpClient) {}
+  constructor(private studentService: StudentService) {}
 
   ngOnInit(): void {
-    this.getStudents();
     this.loadStudents();
   }
 
-  // Placeholder data
-  getStudents(): void {
-
-  }
-
   loadStudents() {
-    const url = 'https://simulat-e-learning-backend.onrender.com/user';
-    this.http.get<Student[]>(url).subscribe(
+    this.studentService.getAllStudents().subscribe(
       res => {
         console.log('Students loaded', res);
         this.students = res;
@@ -56,9 +52,7 @@ export class StudentsListComponent implements OnInit {
   // Saves the student (Add or Edit) by sending a POST or PUT request as appropriate
   saveStudent(): void {
     if (this.isEditing) {
-      // PUT request for updating an existing student
-      const url = `https://simulat-e-learning-backend.onrender.com/user/${this.modalStudent.id}`;
-      this.http.put<Student>(url, this.modalStudent).subscribe(
+      this.studentService.updateStudent(this.modalStudent.id.toString(), this.modalStudent).subscribe(
         res => {
           console.log('Student updated', res);
           const index = this.students.findIndex(s => s.id === res.id);
@@ -70,24 +64,20 @@ export class StudentsListComponent implements OnInit {
         err => console.error('Error updating student', err)
       );
     } else {
-      // POST request for adding a new student
-      console.log('Sending student data:', this.modalStudent);
-      this.http.post<Student>('https://simulat-e-learning-backend.onrender.com/user', this.modalStudent)
-        .subscribe(
-          res => {
-            console.log('Student saved', res);
-            this.students.push(res);
-            this.closeModal();
-          },
-          err => console.error('Error saving student', err)
-        );
+      this.studentService.createStudent(this.modalStudent).subscribe(
+        res => {
+          console.log('Student saved', res);
+          this.students.push(res);
+          this.closeModal();
+        },
+        err => console.error('Error saving student', err)
+      );
     }
   }
 
   // Deletes a student by sending a DELETE request
   deleteStudent(id: number): void {
-    const url = `https://simulat-e-learning-backend.onrender.com/user/${id}`;
-    this.http.delete(url).subscribe(
+    this.studentService.deleteStudent(id.toString()).subscribe(
       () => {
         console.log('Student deleted successfully');
         this.students = this.students.filter(student => student.id !== id);
@@ -96,20 +86,51 @@ export class StudentsListComponent implements OnInit {
     );
   }
 
+  // Sort function for the table
+  sortStudents(column: string): void {
+    if (this.sortColumn === column) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortColumn = column;
+      this.sortDirection = 'asc';
+    }
+
+    this.students.sort((a: any, b: any) => {
+      const compareValue = String(a[column]).localeCompare(String(b[column]));
+      return this.sortDirection === 'asc' ? compareValue : -compareValue;
+    });
+  }
+
+  // Get formatted date
+  formatDate(date: string): string {
+    return date ? new Date(date).toLocaleDateString() : 'N/A';
+  }
+
+  // Calculate age from date of birth
+  calculateAge(dateOfBirth: string): number {
+    if (!dateOfBirth) return 0;
+    const today = new Date();
+    const birthDate = new Date(dateOfBirth);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
+
   // Returns an empty student object for Add
-  private getEmptyStudent(){
+  private getEmptyStudent() {
     return {
-      id: '',
+      id: 0,
       name_given: '',
       name_last: '',
-      date_of_birth: '',
       gender: '',
       email: '',
-      enrollment_date: '',
       username: '',
       password: '',
       progress_score: 0,
-      is_admin: true,
+      is_admin: false,
       is_instructor: false,
       is_student: false,
       is_super_admin: false

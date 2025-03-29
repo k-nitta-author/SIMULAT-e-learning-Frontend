@@ -1,30 +1,45 @@
 <!-- Button to Add a New Student -->
-<button type="button" (click)="openModal()">Add New Student</button>
+<button type="button" class="btn btn-primary mb-3" (click)="openModal()">Add New Student</button>
 
 <!-- Students Table -->
-<table>
+<table class="student-table">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Username</th>
-      <th>Email</th>
-      <th>Given Name</th>
-      <th>Last Name</th>
-      <th>Gender</th>
+      <th (click)="sortStudents('id')">ID</th>
+      <th (click)="sortStudents('name_last')">Full Name</th>
+      <th (click)="sortStudents('username')">Username</th>
+      <th (click)="sortStudents('email')">Email</th>
+      <th (click)="sortStudents('gender')">Gender</th>
+      <th (click)="sortStudents('progress_score')">Progress</th>
+      <th>Role</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let student of students">
       <td>{{ student.id }}</td>
+      <td>
+        <a [routerLink]="['/account', student.id]" class="student-link">
+          {{ student.name_given }} {{ student.name_last }}
+        </a>
+      </td>
       <td>{{ student.username }}</td>
       <td>{{ student.email }}</td>
-      <td>{{ student.name_given }}</td>
-      <td>{{ student.name_last }}</td>
       <td>{{ student.gender }}</td>
       <td>
-        <button type="button" (click)="openModal(student)">Edit</button>
-        <button type="button" (click)="deleteStudent(student.id)">Delete</button>
+        <div class="progress-bar">
+          <div class="progress" [style.width.%]="student.progress_score"></div>
+          <span>{{ student.progress_score }}%</span>
+        </div>
+      </td>
+      <td>
+        <span *ngIf="student.is_admin" class="badge admin">Admin</span>
+        <span *ngIf="student.is_instructor" class="badge instructor">Instructor</span>
+        <span *ngIf="student.is_student" class="badge student">Student</span>
+      </td>
+      <td>
+        <button class="btn btn-sm btn-edit" (click)="openModal(student)">Edit</button>
+        <button class="btn btn-sm btn-delete" (click)="deleteStudent(student.id)">Delete</button>
       </td>
     </tr>
   </tbody>
@@ -35,52 +50,74 @@
   <div class="modal-content">
     <h2>{{ isEditing ? 'Edit Student' : 'Add New Student' }}</h2>
     <form (ngSubmit)="saveStudent()">
-      <div class="form-group">
-        <label for="studentId">Student ID</label>
-        <input id="studentId" type="text" [(ngModel)]="modalStudent.id" name="studentId" placeholder="Enter Student ID" required />
-      </div>
-      
-      <div class="form-group">
-        <label for="givenName">Given Name</label>
-        <input id="givenName" type="text" [(ngModel)]="modalStudent.name_given" name="givenName" placeholder="Enter Given Name" required />
+      <!-- Basic Information -->
+      <div class="form-section">
+        <h3>Basic Information</h3>
+        <div class="form-group">
+          <label for="givenName">Given Name</label>
+          <input id="givenName" type="text" [(ngModel)]="modalStudent.name_given" name="givenName" required />
+        </div>
+
+        <div class="form-group">
+          <label for="surname">Surname</label>
+          <input id="surname" type="text" [(ngModel)]="modalStudent.name_last" name="surname" required />
+        </div>
+
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select id="gender" [(ngModel)]="modalStudent.gender" name="gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="surname">Surname</label>
-        <input id="surname" type="text" [(ngModel)]="modalStudent.name_last" name="surname" placeholder="Enter Surname" required />
+      <!-- Account Information -->
+      <div class="form-section">
+        <h3>Account Information</h3>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" type="email" [(ngModel)]="modalStudent.email" name="email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input id="username" type="text" [(ngModel)]="modalStudent.username" name="username" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" type="password" [(ngModel)]="modalStudent.password" name="password" 
+                 [required]="!isEditing" [placeholder]="isEditing ? 'Leave blank to keep current password' : 'Enter password'" />
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="dob">Date of Birth</label>
-        <input id="dob" type="date" [(ngModel)]="modalStudent.date_of_birth" name="dob" required />
+      <!-- Roles -->
+      <div class="form-section roles-section">
+        <h3>Roles</h3>
+        <div class="checkbox-group">
+          <label>
+            <input type="checkbox" [(ngModel)]="modalStudent.is_admin" name="is_admin">
+            Administrator
+          </label>
+          <label>
+            <input type="checkbox" [(ngModel)]="modalStudent.is_instructor" name="is_instructor">
+            Instructor
+          </label>
+          <label>
+            <input type="checkbox" [(ngModel)]="modalStudent.is_student" name="is_student">
+            Student
+          </label>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="gender">Gender</label>
-        <select id="gender" [(ngModel)]="modalStudent.gender" name="gender" required>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input id="email" type="email" [(ngModel)]="modalStudent.email" name="email" placeholder="Enter Email" required />
-      </div>
-
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input id="username" type="text" [(ngModel)]="modalStudent.username" name="username" placeholder="Enter Username" required />
-      </div>
-
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input id="password" type="password" [(ngModel)]="modalStudent.password" name="password" placeholder="Enter Password" required />
-      </div>
-
-      <div class="form-group">
-        <label for="progressScore">Progress Score</label>
-        <input id="progressScore" type="number" [(ngModel)]="modalStudent.progress_score" name="progressScore" placeholder="Enter Progress Score" min="0" max="100" />
+      <!-- Progress Score (Read Only) -->
+      <div class="form-section">
+        <div class="form-group">
+          <label for="progressScore">Progress Score</label>
+          <input id="progressScore" type="number" [ngModel]="modalStudent.progress_score" name="progressScore" 
+                 readonly disabled class="readonly-input" />
+        </div>
       </div>
 
       <div class="form-actions">

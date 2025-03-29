@@ -49,6 +49,7 @@ export const routes: Routes = [
     { path: 'register', component: RegistrationPageComponent },
     { path: 'inbox', component: InboxPageComponent },
     { path: 'support', component: SupportPageComponent },
+    { path: 'account', component: AccountPageComponent },
     { path: 'account/:id', component: AccountPageComponent },
     { path: 'legal/terms_of_service', component: TermsOfServiceComponent },
     { path: 'legal/privacy_policy', component: PrivacyPolicyComponent },

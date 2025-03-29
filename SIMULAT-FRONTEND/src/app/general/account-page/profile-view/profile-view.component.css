@@ -13,3 +13,47 @@ img{
 
     size-40
 }
+
+.profile-container {
+    @apply flex flex-col gap-4;
+}
+
+h3 {
+    @apply text-xl font-semibold mb-4;
+}
+
+.info-section {
+    @apply flex flex-col gap-4;
+}
+
+.info-group {
+    @apply flex flex-col gap-1;
+}
+
+.info-group label {
+    @apply text-sm text-gray-500 font-medium;
+}
+
+.info-group span {
+    @apply text-gray-800;
+}
+
+.roles-section {
+    @apply mt-4;
+}
+
+.role-tags {
+    @apply flex flex-wrap gap-2 mt-2;
+}
+
+.role-tag {
+    @apply px-3 py-1 text-sm rounded-full bg-blue-100 text-blue-800;
+}
+
+.header {
+    @apply flex justify-between items-center mb-4;
+}
+
+.header button {
+    @apply px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors;
+}

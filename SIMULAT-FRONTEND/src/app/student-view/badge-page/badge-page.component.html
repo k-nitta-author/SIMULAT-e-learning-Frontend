@@ -1,20 +1,40 @@
-<div class="container mx-auto p-4">
-  <h1 class="text-3xl">Badges</h1>
-  <table class="table-auto w-full">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Points Required</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let badge of badges">
-        <td>{{ badge.name }}</td>
-        <td>{{ badge.description }}</td>
-        <td>{{ badge.pts_required }}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="container mx-auto p-6">
+  <h1 class="text-3xl font-bold mb-4">My Badges</h1>
+  <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg shadow-md p-6 mb-6">
+    <div class="flex items-center justify-between">
+      <div>
+        <h2 class="text-sm uppercase text-gray-600 tracking-wide">Current Progress</h2>
+        <p class="text-3xl font-bold text-indigo-600">{{ userProgressScore }} pts</p>
+      </div>
+      <div class="text-right">
+        <span class="text-sm text-gray-500">Next badge at:</span>
+        <p class="font-medium text-gray-700">{{ getNextBadgeThreshold() }} pts</p>
+      </div>
+    </div>
+  </div>
+  <div class="overflow-x-auto rounded-lg shadow">
+    <table class="table-auto w-full">
+      <thead>
+        <tr class="bg-gray-50">
+          <th class="px-6 py-3">Badge</th>
+          <th class="px-6 py-3">Description</th>
+          <th class="px-6 py-3">Required Points</th>
+          <th class="px-6 py-3">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let badge of badges" [class.earned]="isBadgeEarned(badge)" class="border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium">{{ badge.name }}</td>
+          <td class="px-6 py-4">{{ badge.description }}</td>
+          <td class="px-6 py-4">{{ badge.pts_required }}</td>
+          <td class="px-6 py-4">
+            <span [class]="isBadgeEarned(badge) ? 'badge-earned' : 'badge-locked'">
+              {{ isBadgeEarned(badge) ? '🏆 Earned' : '🔒 Locked' }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 

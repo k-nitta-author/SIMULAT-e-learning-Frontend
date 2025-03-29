@@ -19,6 +19,7 @@ export class BadgeService {
 
   constructor(private http: HttpClient) { }
 
+  
   /**
    * Retrieves all badges from the backend
    * @returns Observable<Badge[]> - Array of all badges

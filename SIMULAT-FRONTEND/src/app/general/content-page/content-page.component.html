@@ -1,11 +1,40 @@
-<div *ngIf="contents && contents.length > 0; else noContent">
-  <div *ngFor="let content of contents">
-    <h2>{{ content.title }}</h2>
-    <p>{{ content.description }}</p>
-    <a [href]="content.url" target="_blank">{{ content.url }}</a>
+<div class="content-page">
+  <header>
+    <h1>Learning Content</h1>
+  </header>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    Loading content...
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error-state">
+    {{ error }}
+  </div>
+
+  <!-- Content List -->
+  <div class="content-list" *ngIf="!isLoading && !error">
+    <div *ngIf="contents.length === 0" class="empty-state">
+      No content available.
+    </div>
+
+    <div class="content-grid">
+      <div *ngFor="let content of contents" class="content-card">
+        <div class="content-type">{{ content.content_type }}</div>
+        <h2>{{ content.content_title }}</h2>
+        <p class="description">{{ content.content_description }}</p>
+        <div class="content-footer">
+          <a [routerLink]="['/course-detail', content.course_id]" class="course-link">
+            View Course
+          </a>
+          <span class="date">{{ content.created_at | date }}</span>
+        </div>
+        <a *ngIf="content.content_url" [href]="content.content_url" target="_blank" class="resource-link">
+          View Resource
+        </a>
+      </div>
+    </div>
   </div>
 </div>
-<ng-template #noContent>
-  <p>No content available.</p>
-</ng-template>
 

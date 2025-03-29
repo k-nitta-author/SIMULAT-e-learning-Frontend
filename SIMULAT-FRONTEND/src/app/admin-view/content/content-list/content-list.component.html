@@ -1,98 +1,107 @@
-<!-- Add Content Button -->
-<div>
-  <button type="button" (click)="toggleModal()">Add New Content</button>
-</div>
+<div class="content-container">
+  <div class="header">
+    <h2>Content Management</h2>
+    <button class="add-button" type="button" (click)="toggleModal()">
+      Add New Content
+    </button>
+  </div>
 
-<!-- Modal for Adding or Editing Content -->
-<div *ngIf="isModalOpen" class="modal">
-  <div class="modal-content">
-    <h3 class="modal-header">{{ newContent.id ? 'Edit Content' : 'Add New Content' }}</h3>
-    <form (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="title">Title:</label>
-        <input
-          id="title"
-          type="text"
-          [(ngModel)]="newContent.title"
-          name="title"
-          class="form-control"
-          required
-        />
-      </div>
-      <div class="form-group">
-        <label for="description">Description:</label>
-        <textarea
-          id="description"
-          [(ngModel)]="newContent.description"
-          name="description"
-          class="form-control"
-          required
-        ></textarea>
-      </div>
-      <div class="form-group">
-        <label for="url">URL:</label>
-        <input
-          id="url"
-          type="text"
-          [(ngModel)]="newContent.url"
-          name="url"
-          class="form-control"
-        />
-      </div>
-      <div class="form-group">
-        <label for="courseId">Course ID:</label>
-        <input
-          id="courseId"
-          type="text"
-          [(ngModel)]="newContent.course_id"
-          name="courseId"
-          class="form-control"
-          required
-        />
-      </div>
-      <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Save</button>
-        <button type="button" class="btn btn-secondary" (click)="toggleModal()">Cancel</button>
-      </div>
-    </form>
+  <!-- Modal -->
+  <div *ngIf="isModalOpen" class="modal-overlay">
+    <div class="modal-content">
+      <h3 class="modal-header">{{ isEditing ? 'Edit Content' : 'Add New Content' }}</h3>
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="title">Title *</label>
+          <input id="title" type="text" [(ngModel)]="newContent.content_title" name="content_title" required />
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description *</label>
+          <textarea id="description" [(ngModel)]="newContent.content_description" name="content_description" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="type">Content Type *</label>
+          <select id="type" [(ngModel)]="newContent.content_type" name="content_type" required>
+            <option value="lecture">Lecture</option>
+            <option value="video">Video</option>
+            <option value="document">Document</option>
+            <option value="exercise">Exercise</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="url">Resource URL</label>
+          <input id="url" type="url" [(ngModel)]="newContent.content_url" name="content_url" />
+        </div>
+
+        <div class="form-group">
+          <label for="courseId">Course ID *</label>
+          <input id="courseId" type="number" [(ngModel)]="newContent.course_id" name="course_id" required />
+        </div>
+
+        <div class="modal-actions">
+          <button type="submit" class="primary-button">Save</button>
+          <button type="button" class="secondary-button" (click)="toggleModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    Loading content...
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error-state">
+    {{ error }}
+  </div>
+
+  <!-- Content List -->
+  <div class="content-list" *ngIf="!isLoading && !error">
+    <div *ngIf="contentList.length === 0" class="empty-state">
+      No content available. Add some content to get started.
+    </div>
+
+    <table *ngIf="contentList.length > 0">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Type</th>
+          <th>URL</th>
+          <th>Course ID</th>
+          <th>Created</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let content of contentList">
+          <td>{{ content.content_title }}</td>
+          <td>{{ content.content_description }}</td>
+          <td>{{ content.content_type }}</td>
+          <td>
+            <a *ngIf="content.content_url" 
+               [href]="ensureHttps(content.content_url)"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="course-link"
+               title="{{ content.content_url }}">
+              {{ formatDisplayUrl(content.content_url) }}
+            </a>
+            <span *ngIf="!content.content_url">-</span>
+          </td>
+          <td>{{ content.course_id }}</td>
+          <td>{{ content.created_at | date }}</td>
+          <td class="actions">
+            <button class="edit-button" (click)="editContent(content.id)">Edit</button>
+            <button class="delete-button" (click)="deleteContent(content.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
-
-<!-- Content List -->
-<div *ngIf="contentList.length > 0">
-  <p>Contents found: {{ contentList.length }}</p>
-</div>
-<div *ngIf="contentList.length === 0">
-  <p>No contents found</p>
-</div>
-
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Title</th>
-      <th>Description</th>
-      <th>URL</th>
-      <th>Course ID</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let content of contentList">
-      <td>{{ content.id }}</td>
-      <td>{{ content.title }}</td>
-      <td>{{ content.description }}</td>
-      <td>
-        <a [href]="content.url" target="_blank" rel="noopener noreferrer">
-          {{ content.url }}
-        </a>
-      </td>
-      <td>{{ content.course_id }}</td>
-      <td>
-        <button type="button" (click)="editContent(content.id)">Edit</button>
-        <button type="button" (click)="deleteContent(content.id)">Delete</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
 

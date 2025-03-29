@@ -1,14 +1,52 @@
 <section>
-
     <aside>
         <img src="" alt="Profile image"/>
     </aside>
     <main>
         <h3>{{ givenName }} {{ middleName }} {{ surname }}</h3>
-        <h4>Email: {{ email }}</h4>
-        <h4>Username: {{ username }}</h4>
-        <h4>Gender: {{ Gender }}</h4>
-
-        <button>EDIT</button>
     </main>
 </section>
+
+<div class="profile-container">
+    <div class="header">
+        <h3>Profile Information</h3>
+        <button>EDIT</button>
+    </div>
+    
+    <div class="info-section">
+        <div class="info-group">
+            <label>Username:</label>
+            <span>{{username}}</span>
+        </div>
+        
+        <div class="info-group">
+            <label>Name:</label>
+            <span>{{givenName}} {{surname}}</span>
+        </div>
+
+        <div class="info-group">
+            <label>Email:</label>
+            <span>{{email}}</span>
+        </div>
+
+        <div class="info-group">
+            <label>Gender:</label>
+            <span>{{gender}}</span>
+        </div>
+
+        <div class="info-group">
+            <label>Progress Score:</label>
+            <span>{{progressScore}}%</span>
+        </div>
+
+        <div class="roles-section">
+            <label>Roles:</label>
+            <div class="role-tags">
+                <span *ngIf="isStudent" class="role-tag">Student</span>
+                <span *ngIf="isInstructor" class="role-tag">Instructor</span>
+                <span *ngIf="isAdmin" class="role-tag">Admin</span>
+                <span *ngIf="isSuperAdmin" class="role-tag">Super Admin</span>
+            </div>
+        </div>
+    </div>
+</div>

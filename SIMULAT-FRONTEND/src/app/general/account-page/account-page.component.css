@@ -1,29 +1,34 @@
-main{
+main {
     @apply p-9
-
+    min-h-screen
+    bg-gray-50
     flex
     flex-col
-
-    gap-6
+    gap-8
 }
 
-.section-1, .section-2{
+h2 {
+    @apply text-2xl
+    font-bold
+    text-gray-800
+    mb-4
+}
+
+.section-1, .section-2 {
     @apply
-    
     flex
     flex-row
-
-    gap-6
-    
+    gap-8
+    w-full
 }
 
-.section-1 *, .section-2 *{
+.section-1 *, .section-2 * {
     @apply
-
     grow
-    bg-gray-300
-    
-    p-6
-
-    rounded-lg
+    bg-white
+    shadow-sm
+    p-8
+    rounded-xl
+    border
+    border-gray-100
 }
