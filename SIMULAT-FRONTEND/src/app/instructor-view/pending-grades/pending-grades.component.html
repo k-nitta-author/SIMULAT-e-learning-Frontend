@@ -1,0 +1,82 @@
+<div class="pending-grades">
+  <h2>Pending Grades</h2>
+  
+  <div class="tabs">
+    <button [class.active]="activeTab === 'assignments'" (click)="activeTab = 'assignments'">Assignments</button>
+    <button [class.active]="activeTab === 'quizzes'" (click)="activeTab = 'quizzes'">Quizzes</button>
+    <button [class.active]="activeTab === 'challenges'" (click)="activeTab = 'challenges'">Challenges</button>
+  </div>
+
+  <div class="tab-content" [ngSwitch]="activeTab">
+    <div *ngSwitchCase="'assignments'">
+      <table *ngIf="pendingScores.pending_assignments.length">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Deadline</th>
+            <th>Score</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of pendingScores.pending_assignments">
+            <td>{{item.title}}</td>
+            <td>{{item.deadline}}</td>
+            <td>
+              <input type="number" [(ngModel)]="gradeInputs['assignment-' + item.id]">
+            </td>
+            <td>
+              <button (click)="submitAssignmentGrade(item.id)">Submit Grade</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngSwitchCase="'quizzes'">
+      <table *ngIf="pendingScores.pending_quizzes.length">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Score</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of pendingScores.pending_quizzes">
+            <td>{{item.title}}</td>
+            <td>
+              <input type="number" [(ngModel)]="gradeInputs['quiz-' + item.id]">
+            </td>
+            <td>
+              <button (click)="submitQuizGrade(item.id)">Submit Grade</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngSwitchCase="'challenges'">
+      <table *ngIf="pendingScores.pending_challenges.length">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Score</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of pendingScores.pending_challenges">
+            <td>{{item.title}}</td>
+            <td>
+              <input type="number" [(ngModel)]="gradeInputs['challenge-' + item.id]">
+            </td>
+            <td>
+              <button (click)="submitChallengeGrade(item.id)">Submit Grade</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

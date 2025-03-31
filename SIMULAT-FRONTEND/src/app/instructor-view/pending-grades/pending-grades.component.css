@@ -1,0 +1,77 @@
+mat-card {
+  margin: 20px;
+}
+
+.grade-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+mat-form-field {
+  width: 100px;
+}
+
+mat-list-item {
+  margin-bottom: 10px;
+}
+
+mat-tab-group {
+  margin-top: 20px;
+}
+
+.pending-grades {
+  padding: 20px;
+}
+
+.tabs {
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  margin-right: 5px;
+  border: 1px solid #ddd;
+  background: none;
+  cursor: pointer;
+}
+
+.tabs button.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+input[type="number"] {
+  width: 80px;
+  padding: 5px;
+}
+
+button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
