@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForOf,NgIf, formatDate } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CommonModule, formatDate } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TermsService } from '../../backend-services/terms.service';
+import { TermCardComponent } from './term-card/term-card.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 interface Term {
   id: number;
@@ -12,7 +15,14 @@ interface Term {
 @Component({
   selector: 'app-terms-page',
   standalone: true,
-  imports: [HttpClientModule, NgForOf,NgIf, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    TermCardComponent,
+    HttpClientModule,
+    RouterModule
+  ],
+  providers: [TermsService],
   templateUrl: './terms-page.component.html',
   styleUrls: ['./terms-page.component.css']
 })
@@ -21,56 +31,67 @@ export class TermsPageComponent implements OnInit {
   isModalOpen: boolean = false;
   isEditMode: boolean = false;
   currentTerm: Term = this.getEmptyTerm();
+  dateError: string = '';
+  minStartDate = new Date().toISOString().split('T')[0]; // Today's date in YYYY-MM-DD
 
-  constructor(private http: HttpClient) {}
+  constructor(private termsService: TermsService) {}
 
   ngOnInit(): void {
     this.getTerms();
   }
 
+  getTerms(): void {
+    this.termsService.getAllTerms().subscribe({
+      next: res => {
+        this.terms = res.map(term => ({
+          ...term,
+          school_year_end: formatDate(new Date(term.school_year_end), 'dd/MM/yyyy', 'en-US'),
+          school_year_start: formatDate(new Date(term.school_year_start), 'dd/MM/yyyy', 'en-US')
+        }));
+      },
+      error: err => console.error('Error loading terms', err)
+    });
+  }
 
-  // Deletes a term by sending a DELETE request
   deleteTerm(id: number): void {
-    const url = `https://simulat-e-learning-backend.onrender.com/term/${id}`;
-    this.http.delete(url).subscribe({
+    this.termsService.deleteTerm(id).subscribe({
       next: () => {
-        console.log('Term deleted successfully');
         this.terms = this.terms.filter(term => term.id !== id);
       },
       error: err => console.error('Error deleting term', err)
     });
   }
 
+  validateDates(): boolean {
+    const start = new Date(this.currentTerm.school_year_start);
+    const end = new Date(this.currentTerm.school_year_end);
+    
+    if (end <= start) {
+      this.dateError = 'End date must be after start date';
+      return false;
+    }
+    
+    this.dateError = '';
+    return true;
+  }
 
-  addTerm(): void
-  {
-    if (!this.isEditMode){
-      // POST request for adding a new term
-      console.log('Sending student data:', this.currentTerm);
-      this.http.post<Term>('https://simulat-e-learning-backend.onrender.com/term', this.currentTerm)
-        .subscribe({
-          next: res => {
-            console.log('Student saved', res);
-            this.terms.push(this.currentTerm);
-            this.closeModal();
-          },
-          error: err => console.error('Error saving student', err)
-        });
+  addTerm(): void {
+    if (!this.isEditMode && this.validateDates()) {
+      this.termsService.createTerm(this.currentTerm).subscribe({
+        next: () => {
+          this.getTerms(); // Refresh the list
+          this.closeModal();
+        },
+        error: err => console.error('Error saving term', err)
+      });
     }
   }
 
-  updateTerm(): void
-  {
-    if (this.isEditMode) {
-      // PUT request for updating an existing student
-      const url = `https://simulat-e-learning-backend.onrender.com/term/${this.currentTerm.id}`;
-      this.http.put<Term>(url, this.currentTerm).subscribe({
-        next: res => {
-          console.log('user updated', res);
-          const index = this.terms.findIndex(s => s.id === res.id);
-          if (index !== -1) {
-            this.terms[index] = res;
-          }
+  updateTerm(): void {
+    if (this.isEditMode && this.validateDates()) {
+      this.termsService.updateTerm(this.currentTerm.id, this.currentTerm).subscribe({
+        next: () => {
+          this.getTerms(); // Refresh the list
           this.closeModal();
         },
         error: err => console.error('Error updating term', err)
@@ -78,47 +99,30 @@ export class TermsPageComponent implements OnInit {
     }
   }
 
-  openModal(): void
-  {
+  openModal(): void {
     this.isEditMode = false;
     this.currentTerm = this.getEmptyTerm();
     this.isModalOpen = true;
   }
 
-
-  editTerm(term?: any): void
-  {
-    this.isEditMode = true; // If student exists, it's Edit mode
+  editTerm(term?: any): void {
+    this.isEditMode = true; // If term exists, it's Edit mode
     this.currentTerm = term ? { ...term } : this.getEmptyTerm();
     this.isModalOpen = true;
   }
 
-
-  closeModal(): void
-  {
+  closeModal(): void {
     this.isModalOpen = false;
   }
 
-  getEmptyTerm(): Term
-  {
-    return { id: -1, school_year_end: "11/05/2024", school_year_start: "11/05/2024" }
-  }
-
-  getTerms(): void {
-    const url = 'https://simulat-e-learning-backend.onrender.com/term';
-    this.http.get<Term[]>(url).subscribe({
-      next: res => {
-
-        for (let index = 0; index < res.length; index++) {
-          const term = res[index];
-
-          term.school_year_end = formatDate(term.school_year_end, 'dd/MM/yyyy', "en_PH");
-          term.school_year_start = formatDate(term.school_year_start, 'dd/MM/yyyy', "en_PH");
-        }
-
-        this.terms = res;
-      },
-      error: err => console.error('Error loading terms', err)
-    });
+  getEmptyTerm(): Term {
+    const today = new Date();
+    const nextYear = new Date(today.setFullYear(today.getFullYear() + 1));
+    
+    return {
+      id: -1,
+      school_year_start: new Date().toISOString().split('T')[0],
+      school_year_end: nextYear.toISOString().split('T')[0]
+    };
   }
 }

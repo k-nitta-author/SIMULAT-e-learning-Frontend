@@ -1,1 +1,95 @@
-<p>terms-detail works!</p>
+<div class="term-detail-container">
+  <div *ngIf="loading" class="loading">
+    Loading...
+  </div>
+
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
+
+  <div *ngIf="termData && !loading" class="term-card">
+    <div class="term-header">
+      <h2>School Year Details</h2>
+      <div class="action-buttons" *ngIf="isInstructor">
+        <button class="edit-btn" (click)="onEdit()">Edit</button>
+        <button class="delete-btn" (click)="onDelete()">Delete</button>
+      </div>
+    </div>
+
+    <div class="term-info">
+      <div class="info-row">
+        <span class="label">Start Date:</span>
+        <span class="value">{{ termData.term.school_year_start | date:'mediumDate' }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">End Date:</span>
+        <span class="value">{{ termData.term.school_year_end | date:'mediumDate' }}</span>
+      </div>
+    </div>
+
+    <div class="courses-section" *ngIf="termData.courses.length > 0">
+      <h3>Courses</h3>
+      <div class="course-list">
+        <div *ngFor="let course of termData.courses" 
+             class="course-item clickable" 
+             (click)="navigateToCourse(course.id)">
+          <h4>{{ course.course_code }} - {{ course.course_name }}</h4>
+          <p>{{ course.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="quizzes-section" *ngIf="termData.quizzes.length > 0">
+      <h3>Quizzes</h3>
+      <div class="quiz-list">
+        <div *ngFor="let quiz of termData.quizzes" 
+             class="quiz-item clickable" 
+             (click)="navigateToQuiz(quiz.id)">
+          <h4>{{ quiz.quiz_title }}</h4>
+          <p>{{ quiz.description }}</p>
+          <span class="time-limit">Time limit: {{ quiz.time_limit }} minutes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="assignments-section" *ngIf="termData.assignments.length > 0">
+      <h3>Assignments</h3>
+      <div class="assignment-list">
+        <div *ngFor="let assignment of termData.assignments" 
+             class="assignment-item clickable" 
+             (click)="navigateToAssignment(assignment.id)">
+          <h4>{{ assignment.assignment_title }}</h4>
+          <p>{{ assignment.description }}</p>
+          <div class="assignment-details">
+            <span>Deadline: {{ assignment.deadline | date:'medium' }}</span>
+            <span>Max Score: {{ assignment.max_score }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" *ngIf="showEditModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Edit School Year</h3>
+      <button class="close-btn" (click)="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Start Date:</label>
+        <input type="date" [(ngModel)]="editingTerm.school_year_start">
+      </div>
+      <div class="form-group">
+        <label>End Date:</label>
+        <input type="date" [(ngModel)]="editingTerm.school_year_end">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="cancel-btn" (click)="closeModal()">Cancel</button>
+      <button class="save-btn" (click)="saveChanges()">Save Changes</button>
+    </div>
+  </div>
+</div>

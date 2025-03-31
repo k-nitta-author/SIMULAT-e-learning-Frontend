@@ -1,9 +1,9 @@
-.whole_section{
-    @apply text-center
+.whole_section {
+    @apply text-center inline-block;
 }
 
-.circle_background{
-    @apply rounded-full bg-marian-blue w-36 h-36 flex flex-wrap justify-center items-center 
+.circle_background {
+    @apply rounded-full w-16 h-16 flex justify-center items-center;
 }
 
 @media (max-width: 1024px) { /* Tablet view */
@@ -38,6 +38,6 @@
     @apply bg-lime-400
 }
 
-.item-score{
-    @apply text-white text-xl
+.item-score {
+    @apply text-white text-sm font-medium;
 }

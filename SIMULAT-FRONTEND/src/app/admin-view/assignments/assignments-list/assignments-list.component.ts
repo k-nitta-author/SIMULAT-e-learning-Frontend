@@ -13,29 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class AssignmentsListComponent implements OnInit {
   assignments: Assignment[] = [];
-  isModalOpen: boolean = false; // Track modal visibility
-
-  // Model for new assignment
-  newAssignment: Assignment = {
-    assignment_title: '',
-    content_id: 1, // Default or placeholder content ID
-    created_at: new Date().toISOString(),
-    deadline: new Date().toISOString(),
-    description: '',
-    grading_criteria: '',
-    id: 0,
-    instructions: '',
-    max_score: 0,
-    submission_format: '',
-    term: {
-      id: 0,
-      school_year_end: '',
-      school_year_start: ''
-    },
-    scores: [],
-    term_id: 0,
-    updated_at: new Date().toISOString(),
-  };
+  editingId: number | null = null;
+  editingAssignment: Assignment | null = null;
 
   constructor(private assignmentService: AssignmentService) {}
 
@@ -43,88 +22,121 @@ export class AssignmentsListComponent implements OnInit {
     this.getAssignments();
   }
 
+  private formatDateForBackend(date: string): string {
+    const d = new Date(date);
+    return d.toUTCString();
+  }
+
+  private formatDateForDisplay(date: string): string {
+    try {
+      const d = new Date(date);
+      return d.toISOString().split('T')[0];
+    } catch {
+      return new Date().toISOString().split('T')[0];
+    }
+  }
+
   // Fetch all assignments
   getAssignments(): void {
     this.assignmentService.getAllAssignments().subscribe(assignments => {
       this.assignments = assignments.map(assignment => ({
         ...assignment,
-        deadline: assignment.deadline ? new Date(assignment.deadline).toISOString() : new Date().toISOString()
+        deadline: this.formatDateForDisplay(assignment.deadline)
       }));
     });
   }
 
-  // Open modal with assignment data for editing
-  editAssignment(id: number): void {
-    const assignmentToEdit = this.assignments.find(assignment => assignment.id === id);
-    if (assignmentToEdit) {
-      this.newAssignment = { ...assignmentToEdit }; // Clone data to avoid mutations
-      this.isModalOpen = true; // Open modal
-    }
+  // Start editing an assignment inline
+  startEditing(assignment: Assignment): void {
+    this.editingId = assignment.id;
+    this.editingAssignment = { ...assignment };
   }
 
-  // Delete an assignment
-  deleteAssignment(id: number): void {
-    this.assignmentService.deleteAssignment(id).subscribe(() => {
-      this.getAssignments(); // Refresh list
-    });
+  // Cancel inline editing
+  cancelEditing(): void {
+    this.editingId = null;
+    this.editingAssignment = null;
   }
 
-  // Toggle modal for adding or editing assignments
-  toggleModal(): void {
-    this.isModalOpen = !this.isModalOpen;
-    if (!this.isModalOpen) {
-      this.resetForm(); // Reset the form when closing the modal
-    }
-  }
-
-  // Submit the form (for adding or editing)
-  onSubmit(): void {
-    if (!this.newAssignment.assignment_title || !this.newAssignment.description) {
+  // Save changes made during inline editing
+  saveEditing(assignment: Assignment): void {
+    if (!this.editingAssignment) return;
+    
+    if (!this.editingAssignment.assignment_title || !this.editingAssignment.description) {
       alert('Please fill out all required fields.');
       return;
     }
 
-    if (this.newAssignment.id) {
-      // If editing an existing assignment
-      this.assignmentService.updateAssignment(this.newAssignment.id, this.newAssignment).subscribe(updatedAssignment => {
+    // Format the date before sending to backend
+    const assignmentToSend = {
+      ...this.editingAssignment,
+      deadline: this.formatDateForBackend(this.editingAssignment.deadline)
+    };
+
+    this.assignmentService.updateAssignment(assignment.id, assignmentToSend).subscribe({
+      next: (updatedAssignment) => {
         if (updatedAssignment) {
           const index = this.assignments.findIndex(a => a.id === updatedAssignment.id);
           if (index !== -1) {
-            this.assignments[index] = updatedAssignment; // Update list
+            this.assignments[index] = {
+              ...updatedAssignment,
+              deadline: this.formatDateForDisplay(updatedAssignment.deadline)
+            };
           }
         }
-        this.toggleModal(); // Close modal
-      });
-    } else {
-      // If adding a new assignment
-      this.newAssignment.id = this.assignments.length + 1; // Assign ID
-      this.assignmentService.addAssignment(this.newAssignment).subscribe(addedAssignment => {
-        this.assignments.push(addedAssignment);
-        this.toggleModal(); // Close modal
+        this.cancelEditing();
+      },
+      error: (error) => {
+        console.error('Error updating assignment:', error);
+        alert('Failed to update assignment');
+      }
+    });
+  }
+
+  // Delete an assignment
+  deleteAssignment(id: number): void {
+    if (confirm('Are you sure you want to delete this assignment?')) {
+      this.assignmentService.deleteAssignment(id).subscribe({
+        next: () => {
+          this.assignments = this.assignments.filter(a => a.id !== id);
+        },
+        error: (error) => {
+          console.error('Error deleting assignment:', error);
+          alert('Failed to delete assignment');
+        }
       });
     }
   }
 
-  resetForm(): void {
-    this.newAssignment = {
-      id: 0,
-      content_id: 1, // Reset to default or placeholder content ID
-      assignment_title: '',
-      description: '',
-      deadline: new Date().toISOString(),
-      max_score: 0,
-      grading_criteria: '',
-      instructions: '',
-      submission_format: '',
+  // Add a new assignment and start editing it inline
+  addNewAssignment(): void {
+    const newAssignment: Assignment = {
+      assignment_title: 'New Assignment',
+      content_id: 1,
       created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
-      term: {
-        id: 0,
-        school_year_end: '',
-        school_year_start: ''
-      },
-      scores: [],
-      term_id: 0
+      deadline: this.formatDateForBackend(new Date().toISOString()),
+      description: '',
+      grading_criteria: '',
+      id: 0, // Let the backend assign the ID
+      instructions: '',
+      max_score: 0,
+      submission_format: '',
+      term_id: 0,
+      updated_at: new Date().toISOString()
     };
+    
+    this.assignmentService.addAssignment(newAssignment).subscribe({
+      next: (addedAssignment) => {
+        this.assignments.unshift({
+          ...addedAssignment,
+          deadline: this.formatDateForDisplay(addedAssignment.deadline)
+        });
+        this.startEditing(addedAssignment);
+      },
+      error: (error) => {
+        console.error('Error adding assignment:', error);
+        alert('Failed to add new assignment');
+      }
+    });
   }
 }

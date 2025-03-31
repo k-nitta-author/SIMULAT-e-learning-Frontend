@@ -1,77 +1,56 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export interface Instructor {
-  instructor_id: string;
-  name: string;
+  id: string;
+  name_given: string;
+  name_last: string;
   email: string;
-  department: string;
-  is_active: boolean;
-  created_at: Date;
-  updated_at: Date;
+  username: string;
+  is_admin: boolean;
+  is_super_admin: boolean;
+  is_student: boolean;
+  is_instructor: boolean;
+  progress_score: number;
+  gender: string;
+  password?: string;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class InstructorService {
-  private instructors: Instructor[] = [
-    {
-      instructor_id: '1',
-      name: 'John Doe',
-      email: 'john.doe@example.com',
-      department: 'Computer Science',
-      is_active: true,
-      created_at: new Date(),
-      updated_at: new Date(),
-    },
-    {
-      instructor_id: '2',
-      name: 'Jane Smith',
-      email: 'jane.smith@example.com',
-      department: 'Mathematics',
-      is_active: true,
-      created_at: new Date(),
-      updated_at: new Date(),
-    },
-  ];
+  private apiUrl = 'https://simulat-e-learning-backend.onrender.com';
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   // Fetch all instructors
   getAllInstructors(): Observable<Instructor[]> {
-    return of(this.instructors);
+    return this.http.get<Instructor[]>(`${this.apiUrl}/user/instructors`);
   }
 
   // Add a new instructor
-  addInstructor(instructor: Instructor): Observable<Instructor> {
-    this.instructors.push(instructor);
-    return of(instructor);
-  }
-
-  // Update an instructor
-  updateInstructor(updatedInstructor: Instructor): Observable<Instructor> {
-    const index = this.instructors.findIndex(
-      (instructor) => instructor.instructor_id === updatedInstructor.instructor_id
+  addInstructor(instructor: Partial<Instructor>): Observable<Instructor> {
+    return this.http.post<{message: string}>(`${this.apiUrl}/user`, {
+      ...instructor,
+      is_instructor: true,
+      is_student: false,
+      is_admin: false,
+      is_super_admin: false
+    }).pipe(
+      map(response => instructor as Instructor)
     );
-
-    if (index > -1) {
-      this.instructors[index] = updatedInstructor;
-      return of(updatedInstructor);
-    }
-
-    throw new Error('Instructor not found');
   }
 
   // Delete an instructor
   deleteInstructor(id: string): Observable<void> {
-    const index = this.instructors.findIndex((instructor) => instructor.instructor_id === id);
+    return this.http.delete<void>(`${this.apiUrl}/user/${id}`);
+  }
 
-    if (index > -1) {
-      this.instructors.splice(index, 1);
-      return of(undefined);
-    }
-
-    throw new Error('Instructor not found');
+  // Get instructor by ID
+  getInstructor(id: string): Observable<Instructor> {
+    return this.http.get<Instructor>(`${this.apiUrl}/user/${id}`);
   }
 }

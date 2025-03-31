@@ -11,47 +11,74 @@
         <h1>Admin Dashboard</h1>
         <div class="dashboard-content">
             <div class="section">
-                <h2>Users</h2>
+                <h2 title="Manage user accounts and permissions">Users Management</h2>
+                <p class="section-desc">Control access and manage user accounts</p>
                 <div class="list-item">
                     <span>Students List</span>
-                    <button>View Students</button>
+                    <a [routerLink]="['/admin/students']" class="dashboard-button">View Students</a>
                 </div>
                 <div class="list-item">
                     <span>Instructors List</span>
-                    <button>View Instructors</button>
+                    <a [routerLink]="['/admin/instructors']" class="dashboard-button">View Instructors</a>
                 </div>
             </div>
+
             <div class="section">
-                <h2>
-                    Courses
-                    <div class="course-filter">
-                        <select class="course-dropdown">
-                            <option value="all">All Terms</option>
-                            <option value="first">First Term</option>
-                            <option value="second">Second Term</option>
-                            <option value="third">Third Term</option>
-                            <option value="fourth">Fourth Term</option>
-                        </select>
+                <h2 title="Organize academic terms and course offerings">Academic Setup</h2>
+                <p class="section-desc">Manage terms and course schedules</p>
+                <div class="course-filter">
+                    <select [(ngModel)]="selectedTerm" class="course-dropdown">
+                        <option value="all">All Terms</option>
+                        <option *ngFor="let term of terms" [value]="term.id">
+                            {{formatSchoolYear(term.school_year_start)}}-{{formatSchoolYear(term.school_year_end)}}
+                        </option>
+                    </select>
+                </div>
+                <div class="list-item" *ngFor="let term of terms">
+                    <span>Term {{term.id}}: SY {{formatSchoolYear(term.school_year_start)}}-{{formatSchoolYear(term.school_year_end)}}</span>
+                    <a [routerLink]="['/terms', term.id]" class="dashboard-button">View Courses</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-management">
+            <h2 title="Manage learning materials and activities">Content Management</h2>
+            <p class="section-desc">Setup and organize learning materials</p>
+            <div class="content-grid">
+                <div class="list-item">
+                    <div class="item-info">
+                        <span>Learning Content</span>
+                        <small>Course materials and resources</small>
                     </div>
-                </h2>
-                <div class="list-item">
-                    <span>First Term SY (20**-20**)</span>
-                    <button>View Courses</button>
+                    <a [routerLink]="['/admin/content']" class="dashboard-button">Manage Content</a>
                 </div>
                 <div class="list-item">
-                    <span>Second Term SY (20**-20**)</span>
-                    <button>View Courses</button>
+                    <div class="item-info">
+                        <span>Quizzes</span>
+                        <small>Assessment activities</small>
+                    </div>
+                    <a [routerLink]="['/admin/quizzes']" class="dashboard-button">Manage Quizzes</a>
                 </div>
                 <div class="list-item">
-                    <span>Third Term SY (20**-20**)</span>
-                    <button>View Courses</button>
+                    <div class="item-info">
+                        <span>Challenges</span>
+                        <small>Practice exercises</small>
+                    </div>
+                    <a [routerLink]="['/admin/challenges']" class="dashboard-button">Manage Challenges</a>
                 </div>
                 <div class="list-item">
-                    <span>Fourth Term SY (20**-20**)</span>
-                    <button>View Courses</button>
+                    <div class="item-info">
+                        <span>Badges</span>
+                        <small>Achievement rewards</small>
+                    </div>
+                    <a [routerLink]="['/admin/badges']" class="dashboard-button">Manage Badges</a>
                 </div>
-                <div class="add-course">
-                    <button>Add Course</button>
+                <div class="list-item">
+                    <div class="item-info">
+                        <span>Study Groups</span>
+                        <small>Collaborative learning spaces</small>
+                    </div>
+                    <a [routerLink]="['/study-group']" class="dashboard-button">Manage Groups</a>
                 </div>
             </div>
         </div>

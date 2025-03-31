@@ -88,3 +88,7 @@ input{
 
 
 }
+
+.visible {
+    visibility: visible;
+}

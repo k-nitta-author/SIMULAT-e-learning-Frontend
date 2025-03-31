@@ -1,29 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { StudyGroupService, StudyGroup } from '../../backend-services/study-group.service';
-
-interface NewStudyGroup {
-  course_id: number;
-  max_members: number;
-  name: string;
-}
 
 @Component({
   selector: 'app-study-group-page',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './study-group-page.component.html',
   styleUrl: './study-group-page.component.css'
 })
 export class StudyGroupPageComponent implements OnInit {
   studyGroups: StudyGroup[] = [];
   showCreateForm = false;
-  newGroup: NewStudyGroup = {
+  newGroup: StudyGroup = {
+    name: '',
     course_id: 1,
     max_members: 10,
-    name: ''
+    courses: [],
+    memberships: [],
+    id: 0
   };
 
   constructor(
@@ -59,9 +56,12 @@ export class StudyGroupPageComponent implements OnInit {
         this.loadStudyGroups();
         this.showCreateForm = false;
         this.newGroup = {
+          name: '',
+          id: 0,
           course_id: 1,
           max_members: 10,
-          name: ''
+          courses: [],
+          memberships: []
         };
       },
       error: (error) => {

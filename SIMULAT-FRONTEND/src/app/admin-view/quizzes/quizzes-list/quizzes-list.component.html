@@ -1,31 +1,47 @@
 <!-- Button to open modal for adding a new quiz -->
-<button type="button" (click)="openModal()">Add New Quiz</button>
+<button type="button" class="btn btn-primary" (click)="openModal()">Add New Quiz</button>
 
 <!-- Quiz List Table -->
-<table>
+<table class="quiz-table">
   <thead>
     <tr>
-      <th>Quiz ID</th>
-      <th>Title</th>
+      <th>Quiz Title</th>
       <th>Description</th>
       <th>Time Limit</th>
-      <th>Actions</th>
       <th>Term</th>
-      <th>Content Id</th>
+      <th>Content</th>
+      <th>Status</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let quiz of quizzes">
-      <td>{{ quiz.id }}</td>
-      <td><a href="">{{ quiz.quiz_title }}</a></td>
-      <td>{{ quiz.description }}</td>
-      <td>{{ quiz.time_limit }}</td>
       <td>
-        <button type="button" (click)="openModal(quiz)">Edit</button>
-        <button type="button" (click)="deleteQuiz(quiz.id)">Delete</button>
+        <a [routerLink]="['/admin/quiz', quiz.id]" class="resource-link">
+          {{ quiz.quiz_title }}
+        </a>
       </td>
-      <td>{{ quiz.term_id }}</td>
-      <td>{{ quiz.content_id }}</td>
+      <td>{{ quiz.description }}</td>
+      <td>{{ quiz.time_limit }} minutes</td>
+      <td>
+        <a [routerLink]="['/terms', quiz.term_id]" class="resource-link">
+          View Term
+        </a>
+      </td>
+      <td>
+        <a [routerLink]="['/content', quiz.content_id]" class="resource-link">
+          View Content
+        </a>
+      </td>
+      <td>
+        <span [ngClass]="{'status-published': quiz.is_published, 'status-draft': !quiz.is_published}">
+          {{ quiz.is_published ? 'Published' : 'Draft' }}
+        </span>
+      </td>
+      <td class="action-buttons">
+        <button type="button" class="btn btn-secondary" (click)="openModal(quiz)">Edit</button>
+        <button type="button" class="btn btn-danger" (click)="deleteQuiz(quiz.id)">Delete</button>
+      </td>
     </tr>
   </tbody>
 </table>

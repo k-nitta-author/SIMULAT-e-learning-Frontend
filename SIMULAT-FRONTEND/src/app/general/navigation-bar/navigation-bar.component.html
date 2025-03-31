@@ -4,36 +4,50 @@
     </header>
     <main>
         <ul class="nav-links">
-            <li>
+            <!-- Show login/register when not authenticated -->
+            <li *ngIf="!isAuthenticated">
+                <a routerLink="/home">Login</a>
+            </li>
+            <li *ngIf="!isAuthenticated">
+                <a routerLink="/register">Register</a>
+            </li>
+
+            <!-- Show navigation items when authenticated -->
+            <li *ngIf="isAuthenticated">
                 <a routerLink="/home">Home</a>
             </li>
-            <li>
+            <li *ngIf="isAuthenticated">
                 <a [routerLink]="isInstructor ? '/admin/dashboard' : '/dashboard'">Dashboard</a>
             </li>
-            <li class="dropdown">
+            <li class="dropdown" *ngIf="isAuthenticated">
                 <a>Studies</a>
                 <ul class="dropdown-content">
                     <li><a routerLink="/courses">Courses</a></li>
                     <li><a routerLink="/terms">Terms</a></li>
                     <li><a routerLink="/content">Content</a></li>
-                    <li><a routerLink="/assignment">Assignment</a></li>
+                    <li><a routerLink="/quiz">Quizzes</a></li>
+                    <li><a routerLink="/assignment">Assignments</a></li>
                     <li><a routerLink="/challenge">Challenges</a></li>
                     <li><a routerLink="/study-group">Study Groups</a></li>
                 </ul>
             </li>
-            <li>
+            <li *ngIf="isAuthenticated">
                 <a routerLink="/badge">Badges</a>
             </li>
-            <li>
+            <li *ngIf="isAuthenticated">
                 <a routerLink="/inbox">Inbox</a>
             </li>
-            <li>
+            <li *ngIf="isAuthenticated">
                 <a routerLink="/support">Support</a>
             </li>
-            <li>
-                <a routerLink="/account">
+            <li class="account-dropdown" *ngIf="isAuthenticated">
+                <a>
                     <img src="./assets/icons/account.svg" alt="Account Icon" class="account-icon" />
                 </a>
+                <div class="account-dropdown-content">
+                    <a routerLink="/account">My Account</a>
+                    <a (click)="logout()" class="logout-btn">Logout</a>
+                </div>
             </li>
         </ul>
     </main>

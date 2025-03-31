@@ -1,12 +1,46 @@
 <div class="quiz-detail">
-    <h1>Quiz Details</h1>
-    <div class="quiz-info">
-        <p><strong>Quiz Title:</strong> kjhkjhj hj</p>
-        <p><strong>Description:</strong> item.description</p>
-        <p><strong>Content ID:</strong> 1</p>
-        <p><strong>Quiz ID:</strong> 10</p>s
-        <p><strong>Term ID:</strong> 1</p>
-        <p><strong>Time Limit:</strong> 20.0 minutes</p>
-        <p><strong>Published:</strong> No</p>
+    <div *ngIf="loading" class="loading">
+        Loading quiz details...
+    </div>
+    
+    <div *ngIf="error" class="error-message">
+        {{ error }}
+    </div>
+
+    <div *ngIf="!loading && !error">
+        <div class="quiz-header">
+            <h1>Quiz Details</h1>
+            <button class="publish-button" [class.published]="quiz.is_published" (click)="togglePublish()">
+                {{ quiz.is_published ? 'Unpublish' : 'Publish' }}
+            </button>
+        </div>
+        <div class="quiz-info">
+            <div class="info-row">
+                <span class="label">Quiz Title:</span>
+                <span class="value">{{ quiz.quiz_title }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Description:</span>
+                <span class="value">{{ quiz.description }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Content ID:</span>
+                <span class="value">{{ quiz.content_id }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Quiz ID:</span>
+                <span class="value">{{ quiz.id }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Time Limit:</span>
+                <span class="value">{{ quiz.time_limit }} minutes</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Status:</span>
+                <span class="value status" [class.published]="quiz.is_published">
+                    {{ quiz.is_published ? 'Published' : 'Not Published' }}
+                </span>
+            </div>
+        </div>
     </div>
 </div>

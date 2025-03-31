@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { ProgressCircleComponent } from './progress-circle/progress-circle.component';
 import { DailyChallengeComponent } from './daily-challenge/daily-challenge.component';
 import { CoursesService } from '../../backend-services/courses.service';
@@ -8,7 +9,7 @@ import { Course } from '../../general/interfaces/course';
 @Component({
   selector: 'app-class-dashboard-page',
   standalone: true,
-  imports: [CommonModule, ProgressCircleComponent, DailyChallengeComponent],
+  imports: [CommonModule, RouterModule, ProgressCircleComponent, DailyChallengeComponent],
   templateUrl: './class-dashboard-page.component.html',
   styleUrl: './class-dashboard-page.component.css'
 })

@@ -65,12 +65,44 @@ export class CoursesService {
     );
   }
 
-publishCourse(id: number): Observable<any> {
-  return this.http.post<any>(`${this.apiUrl}/${id}/publish`, {}).pipe(
-    catchError(this.handleError)
-  );
-}
+  publishCourse(id: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/${id}/publish`, {}).pipe(
+      catchError(this.handleError)
+    );
+  }
 
+  getPendingScores(courseId: number, userId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${courseId}/user/${userId}/pending-scores`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  gradeQuiz(courseId: number, quizId: number, userId: number, score: number): Observable<any> {
+    return this.http.post<any>(
+      `${this.apiUrl}/${courseId}/quiz/${quizId}/grade/${userId}`,
+      { score }
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  gradeAssignment(courseId: number, assignmentId: number, userId: number, score: number): Observable<any> {
+    return this.http.post<any>(
+      `${this.apiUrl}/${courseId}/assignment/${assignmentId}/grade/${userId}`,
+      { score }
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  gradeChallenge(courseId: number, challengeId: number, userId: number, score: number): Observable<any> {
+    return this.http.post<any>(
+      `${this.apiUrl}/${courseId}/challenge/${challengeId}/grade/${userId}`,
+      { score }
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
 }
 
 

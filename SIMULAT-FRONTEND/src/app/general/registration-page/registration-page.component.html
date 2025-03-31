@@ -30,7 +30,7 @@
     </main>
 </section>
 
-<section class="registration-success-view">
+<section class="registration-success-view" [class.visible]="registrationSuccess" (click)="handleModalClick()">
     <main>
         <h2>Student Registration Successful!</h2>
         <p>Always Remember your Token ID to log back into SIMULAt</p>

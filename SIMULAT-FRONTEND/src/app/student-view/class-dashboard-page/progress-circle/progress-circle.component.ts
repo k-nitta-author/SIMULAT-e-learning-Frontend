@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,14 +10,11 @@ import { CommonModule } from '@angular/common';
 
 })
 export class ProgressCircleComponent {
+  @Input() progress = 0;
+  @Input() courseName = '';
 
-  progress = 100;
-
-  progress_text = "asd";
-
-
-  getProgressText(): string{
-    return this.progress.toString() + " %";
+  getProgressText(): string {
+    return `${this.progress}%`;
   }
 
   getColorClass(): string{

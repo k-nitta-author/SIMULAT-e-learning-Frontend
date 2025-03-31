@@ -40,9 +40,11 @@ import { StudyGroupDetailComponent } from './student-view/study-group-detail/stu
 import { QuizDetailComponent } from './admin-view/quizzes/quiz-detail/quiz-detail.component';
 import { QuizComponent } from './student-view/quiz/quiz.component';
 import { ChallengeComponent } from './admin-view/challenge/challenge.component';
+import { PendingGradesComponent } from './instructor-view/pending-grades/pending-grades.component';
 
 
 import { BadgeListComponent } from './admin-view/badge-list/badge-list.component';
+
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomePageComponent },
@@ -72,12 +74,14 @@ export const routes: Routes = [
 
     // Admin content management route
     { path: 'admin/content', component: ContentListComponent },
+    //{ path: 'admin/content/:id', component: ContentPageComponent },
+    {path: 'admin/pending-grades', component: PendingGradesComponent},
 
     // Admin assignment management route
     { path: 'admin/assignments', component: AssignmentsListComponent },
 
     // Admin quiz management route
-    { path: 'admin/quizzes', component: QuizListComponent },
+    { path: 'quiz', component: QuizListComponent },
     { path: 'admin/quiz/:id', component:  QuizDetailComponent},
 
     // Student View Quiz Page Routes

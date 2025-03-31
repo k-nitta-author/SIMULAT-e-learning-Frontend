@@ -3,12 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ExternalLinkDirective } from '../../../shared/directives/external-link.directive';
 
 @Component({
   selector: 'app-content-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, ExternalLinkDirective],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './content-list.component.html',
   styleUrls: ['./content-list.component.css']
 })
@@ -25,7 +24,8 @@ export class ContentListComponent implements OnInit {
     content_description: '',
     content_url: '',
     content_type: '',
-    course_id: 0
+    course_id: 0,
+    term_id: 0
   }; // Store new content temporarily for form
 
   constructor(private contentService: ContentService) {}
@@ -68,7 +68,8 @@ export class ContentListComponent implements OnInit {
       content_description: '',
       content_url: '',
       content_type: '',
-      course_id: 0
+      course_id: 0,
+      term_id: 0
     };
     this.isEditing = false;
     this.editingId = null;
@@ -76,7 +77,7 @@ export class ContentListComponent implements OnInit {
 
   // Submit new content
   onSubmit(): void {
-    if (!this.newContent.content_title || !this.newContent.content_description || !this.newContent.course_id) {
+    if (!this.newContent.content_title || !this.newContent.content_description || !this.newContent.course_id || !this.newContent.term_id) {
       alert('Please fill out all required fields.');
       return;
     }
@@ -90,6 +91,7 @@ export class ContentListComponent implements OnInit {
               this.contentList[index] = updatedContent;
             }
             this.toggleModal();
+            this.loadContent(); // Refresh the list
           },
           error: (error) => console.error('Error updating content:', error)
         });
@@ -99,6 +101,7 @@ export class ContentListComponent implements OnInit {
           next: (addedContent) => {
             this.contentList.push(addedContent);
             this.toggleModal();
+            this.loadContent(); // Refresh the list
           },
           error: (error) => console.error('Error adding content:', error)
         });
@@ -114,7 +117,8 @@ export class ContentListComponent implements OnInit {
         content_description: contentToEdit.content_description,
         content_url: contentToEdit.content_url,
         content_type: contentToEdit.content_type,
-        course_id: contentToEdit.course_id
+        course_id: contentToEdit.course_id,
+        term_id: contentToEdit.term_id
       };
       this.isEditing = true;
       this.editingId = id;

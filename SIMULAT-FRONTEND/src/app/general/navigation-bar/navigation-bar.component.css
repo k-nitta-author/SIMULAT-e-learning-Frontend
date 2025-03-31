@@ -110,3 +110,40 @@ li:hover {
     ml-1 
     inline-block;
 }
+
+.account-dropdown {
+    @apply relative;
+}
+
+.account-dropdown-content {
+    @apply 
+    hidden 
+    absolute 
+    bg-white 
+    min-w-[150px]
+    shadow-lg 
+    z-50
+    top-full
+    right-0
+    rounded-md;
+}
+
+.account-dropdown:hover .account-dropdown-content {
+    @apply block;
+}
+
+.account-dropdown-content a {
+    @apply 
+    py-3 
+    px-4 
+    hover:bg-gray-100 
+    w-full 
+    block
+    text-left;
+}
+
+.logout-btn {
+    @apply 
+    cursor-pointer 
+    text-red-600;
+}

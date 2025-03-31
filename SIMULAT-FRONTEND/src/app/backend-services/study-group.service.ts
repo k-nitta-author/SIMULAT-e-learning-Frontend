@@ -20,12 +20,17 @@ export interface StudyGroup {
 }
 
 export interface JoinGroupRequest {
-  student_id: number;
-  is_leader: boolean;
+  current_user_id: number;
 }
 
 export interface JoinGroupResponse {
   message: string;
+}
+
+export interface StudyGroupMember {
+  student_id: string;
+  name: string;
+  is_leader: boolean;
 }
 
 @Injectable({
@@ -59,6 +64,10 @@ export class StudyGroupService {
 
   joinStudyGroup(id: number, data: JoinGroupRequest): Observable<JoinGroupResponse> {
     return this.http.post<JoinGroupResponse>(`${this.apiUrl}/${id}/join`, data);
+  }
+
+  getStudyGroupMembers(id: number): Observable<StudyGroupMember[]> {
+    return this.http.get<StudyGroupMember[]>(`${this.apiUrl}/${id}/members`);
   }
 
 }

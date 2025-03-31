@@ -1,17 +1,17 @@
-<section>
+<section class="terms-page">
   <header>
     <h1>School Terms</h1>
     <button (click)="openModal()">Add Term</button>
   </header>
-  <main>
-    <section *ngFor="let term of terms">
-      <h2>Term ID: {{ term.id }}</h2>
-      <p>School Year Start: {{ term.school_year_start }}</p>
-      <p>School Year End: {{ term.school_year_end }}</p>
-      <button (click)="editTerm(term)">Edit</button>
-      <button (click)="deleteTerm(term.id)">Delete</button>
-      <hr />
-    </section>
+  <main class="terms-grid">
+    <div *ngFor="let term of terms" class="term-link">
+      <app-term-card 
+        [term]="term"
+        (edit)="editTerm($event)"
+        (delete)="deleteTerm($event)">
+      </app-term-card>
+      <a [routerLink]="['/terms', term.id]" class="details-link">View Details</a>
+    </div>
   </main>
 
   <!-- Modal -->
@@ -21,10 +21,30 @@
       <h2>{{ isEditMode ? 'Edit Term' : 'Add Term' }}</h2>
       <form (submit)="isEditMode ? updateTerm() : addTerm()">
         <label for="school_year_start">School Year Start:</label>
-        <input type="text" id="school_year_start" [(ngModel)]="currentTerm.school_year_start" name="school_year_start" required>
+        <input 
+          type="date" 
+          id="school_year_start" 
+          [(ngModel)]="currentTerm.school_year_start" 
+          name="school_year_start"
+          [min]="minStartDate"
+          required>
+
         <label for="school_year_end">School Year End:</label>
-        <input type="text" id="school_year_end" [(ngModel)]="currentTerm.school_year_end" name="school_year_end" required>
-        <button type="submit">{{ isEditMode ? 'Update' : 'Add' }}</button>
+        <input 
+          type="date" 
+          id="school_year_end" 
+          [(ngModel)]="currentTerm.school_year_end" 
+          name="school_year_end"
+          [min]="currentTerm.school_year_start"
+          required>
+
+        <div *ngIf="dateError" class="error-message">
+          {{ dateError }}
+        </div>
+
+        <button type="submit" [disabled]="!!dateError">
+          {{ isEditMode ? 'Update' : 'Add' }}
+        </button>
       </form>
     </div>
   </div>

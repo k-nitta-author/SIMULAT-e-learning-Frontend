@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 export interface Quiz {
   id: string;
@@ -17,7 +18,7 @@ export interface Quiz {
 @Component({
   selector: 'app-quiz-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, RouterModule],
   templateUrl: './quizzes-list.component.html',
   styleUrls: ['./quizzes-list.component.css']
 })

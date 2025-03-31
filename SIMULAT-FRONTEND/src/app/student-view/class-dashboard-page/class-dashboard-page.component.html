@@ -17,7 +17,11 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let course of enrolledCourses">
-                            <td>{{course.course_name}}</td>
+                            <td>
+                                <a [routerLink]="['/course-detail', course.id]" class="course-link">
+                                    {{course.course_name}}
+                                </a>
+                            </td>
                             <td>{{course.course_code}}</td>
                             <td>{{course.instructor}}</td>
                             <td>
@@ -44,7 +48,11 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let course of unenrolledCourses">
-                            <td>{{course.course_name}}</td>
+                            <td>
+                                <a [routerLink]="['/course-detail', course.id]" class="course-link">
+                                    {{course.course_name}}
+                                </a>
+                            </td>
                             <td>{{course.course_code}}</td>
                             <td>{{course.instructor}}</td>
                             <td>

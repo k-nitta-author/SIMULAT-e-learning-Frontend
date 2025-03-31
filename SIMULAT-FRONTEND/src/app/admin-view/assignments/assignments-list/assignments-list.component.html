@@ -1,71 +1,54 @@
 <div class="main-container">
-  <!-- Header with Add Assignment Button -->
   <div class="header">
     <h2>Assignments</h2>
-    <button type="button" class="add-button" (click)="toggleModal()">Add New Assignment</button>
+    <button type="button" class="add-button" (click)="addNewAssignment()">Add New Assignment</button>
   </div>
 
-  <!-- Modal for Adding/Editing Assignment -->
-  <div *ngIf="isModalOpen" class="modal">
-    <div class="modal-content">
-      <h3 *ngIf="!newAssignment.id">Add New Assignment</h3>
-      <h3 *ngIf="newAssignment.id">Edit Assignment</h3>
-      <form (ngSubmit)="onSubmit()">
-        <div>
-          <label for="assignmentTitle">Title:</label>
-          <input id="assignmentTitle" type="text" [(ngModel)]="newAssignment.assignment_title" name="assignmentTitle" required>
-        </div>
-        <div>
-          <label for="assignmentDescription">Description:</label>
-          <textarea id="assignmentDescription" [(ngModel)]="newAssignment.description" name="assignmentDescription" required></textarea>
-        </div>
-        <div>
-          <label for="deadline">Deadline:</label>
-          <input id="deadline" type="date" [(ngModel)]="newAssignment.deadline" name="deadline">
-        </div>
-        <div>
-          <label for="maxScore">Max Score:</label>
-          <input id="maxScore" type="number" [(ngModel)]="newAssignment.max_score" name="maxScore" required>
-        </div>
-        <div class="modal-actions">
-          <button type="submit" class="modal-button">{{ newAssignment.id ? 'Save Changes' : 'Add Assignment' }}</button>
-          <button type="button" (click)="toggleModal()" class="modal-button">Cancel</button>
-        </div>
-      </form>
-    </div>
+  <div class="table-container">
+    <table class="assignments-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Deadline</th>
+          <th>Max Score</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let assignment of assignments" [class.editing]="editingId === assignment.id">
+          <ng-container *ngIf="editingId === assignment.id && editingAssignment; else displayRow">
+            <td>
+              <input type="text" [(ngModel)]="editingAssignment.assignment_title" required class="edit-input">
+            </td>
+            <td>
+              <textarea [(ngModel)]="editingAssignment.description" required class="edit-input"></textarea>
+            </td>
+            <td>
+              <input type="date" [value]="editingAssignment.deadline.split('T')[0]" 
+                     (input)="editingAssignment.deadline = $any($event.target).value"
+                     class="edit-input">
+            </td>
+            <td>
+              <input type="number" [(ngModel)]="editingAssignment.max_score" required class="edit-input">
+            </td>
+            <td class="actions">
+              <button (click)="saveEditing(assignment)" class="save-btn">Save</button>
+              <button (click)="cancelEditing()" class="cancel-btn">Cancel</button>
+            </td>
+          </ng-container>
+          <ng-template #displayRow>
+            <td>{{assignment.assignment_title}}</td>
+            <td>{{assignment.description}}</td>
+            <td>{{assignment.deadline | date:'yyyy-MM-dd'}}</td>
+            <td>{{assignment.max_score}}</td>
+            <td class="actions">
+              <button (click)="startEditing(assignment)" class="edit-btn">Edit</button>
+              <button (click)="deleteAssignment(assignment.id)" class="delete-btn">Delete</button>
+            </td>
+          </ng-template>
+        </tr>
+      </tbody>
+    </table>
   </div>
-
-  <!-- Assignment List -->
-  <div *ngIf="assignments.length > 0">
-    <p>Assignments found: {{ assignments.length }}</p>
-  </div>
-  <div *ngIf="assignments.length === 0">
-    <p>No assignments found</p>
-  </div>
-
-  <table class="assignments-table">
-    <thead>
-      <tr>
-        <th>Assignment ID</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Deadline</th>
-        <th>Max Score</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let assignment of assignments">
-        <td>{{ assignment.id }}</td>
-        <td>{{ assignment.assignment_title }}</td>
-        <td>{{ assignment.description }}</td>
-        <td>{{ assignment.deadline ? (assignment.deadline | date: 'yyyy-MM-dd') : 'No deadline set' }}</td>
-        <td>{{ assignment.max_score }}</td>
-        <td>
-          <button type="button" (click)="editAssignment(assignment.id)" class="table-button">Edit</button>
-          <button type="button" (click)="deleteAssignment(assignment.id)" class="table-button">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
 </div>

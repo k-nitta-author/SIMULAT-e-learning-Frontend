@@ -1,27 +1,27 @@
 <div class="container">
   <div class="header">
     <h2>Study Groups</h2>
-    <button (click)="showCreateForm = !showCreateForm" class="create-btn">
-      {{ showCreateForm ? 'Cancel' : 'Create New Group' }}
-    </button>
   </div>
 
   <div *ngIf="showCreateForm" class="create-form">
     <h3>Create New Study Group</h3>
     <form (submit)="createNewGroup()">
-      <div>
+      <div class="form-group">
         <label>Name:</label>
-        <input type="text" [(ngModel)]="newGroup.name" name="name" required>
+        <input type="text" [(ngModel)]="newGroup.name" name="name" required placeholder="Enter group name">
       </div>
-      <div>
+      <div class="form-group">
         <label>Course ID:</label>
-        <input type="number" [(ngModel)]="newGroup.course_id" name="course_id" required>
+        <input type="number" [(ngModel)]="newGroup.course_id" name="course_id" required placeholder="Enter course ID">
       </div>
-      <div>
+      <div class="form-group">
         <label>Max Members:</label>
-        <input type="number" [(ngModel)]="newGroup.max_members" name="max_members" required>
+        <input type="number" [(ngModel)]="newGroup.max_members" name="max_members" required placeholder="Enter maximum members">
       </div>
-      <button type="submit">Create</button>
+      <div class="form-actions">
+        <button type="button" (click)="showCreateForm = false" class="btn btn-secondary">Cancel</button>
+        <button type="submit" class="btn btn-primary">Create</button>
+      </div>
     </form>
   </div>
 
@@ -36,14 +36,24 @@
     </thead>
     <tbody>
       <tr *ngFor="let group of studyGroups">
-        <td>{{group.name}}</td>
-        <td>{{group.course_id}}</td>
+        <td><a [routerLink]="['/study-group', group.id]" class="group-name-link">{{group.name}}</a></td>
+        <td><a [routerLink]="['/course-detail', 1]" class="course-link">{{group.course_id}}</a></td>
         <td>{{group.memberships.length}}/{{group.max_members}}</td>
         <td>
-          <button (click)="viewDetails(group.id)">View</button>
-          <button (click)="deleteGroup(group.id)" class="delete-btn">Delete</button>
+          <div class="action-buttons">
+            <button (click)="deleteGroup(group.id)" class="delete-btn">Delete</button>
+          </div>
         </td>
       </tr>
     </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4">
+          <button (click)="showCreateForm = !showCreateForm" class="create-btn">
+            {{ showCreateForm ? 'Cancel' : 'Create New Group' }}
+          </button>
+        </td>
+      </tr>
+    </tfoot>
   </table>
 </div>

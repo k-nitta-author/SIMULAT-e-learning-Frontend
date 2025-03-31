@@ -10,6 +10,7 @@ export interface Content {
   content_url: string;
   content_type: string;
   course_id: number;
+  term_id: number;
   created_at: string;
 }
 
@@ -47,11 +48,12 @@ export class ContentService {
 
   createContent(content: Omit<Content, 'id' | 'created_at'>): Observable<Content> {
     const payload = {
-      content_title: content.content_title,
-      content_description: content.content_description,
-      content_url: content.content_url,
-      content_type: content.content_type,
-      course_id: content.course_id
+      title: content.content_title,
+      description: content.content_description,
+      url: content.content_url,
+      type: content.content_type,
+      course_id: content.course_id,
+      term_id: content.term_id
     };
     
     return this.http.post<Content>(this.apiEndpoint, payload)

@@ -10,25 +10,87 @@
             <th>Course Name</th>
             <th>Description</th>
             <th>Instructor</th>
+            <th>Instructor ID</th>
             <th>Term</th>
+            <th>Created</th>
+            <th>Updated</th>
             <th>Status</th>
             <th *ngIf="isInstructor">Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let course of courses">
-            <td><a [routerLink]="['/course-detail', course.id]">{{ course.course_code }}</a></td>
-            <td>{{ course.course_name }}</td>
-            <td>{{ course.description }}</td>
-            <td>{{ course.instructor }}</td>
-            <td>{{ course.term }}</td>
+            <td>
+              <ng-container *ngIf="editingCourse !== course.id; else editCode">
+                <a [routerLink]="['/course-detail', course.id]">{{ course.course_code }}</a>
+              </ng-container>
+              <ng-template #editCode>
+                <input type="text" [(ngModel)]="editForm.course_code" class="edit-input">
+              </ng-template>
+            </td>
+            <td>
+              <ng-container *ngIf="editingCourse !== course.id; else editName">
+                {{ course.course_name }}
+              </ng-container>
+              <ng-template #editName>
+                <input type="text" [(ngModel)]="editForm.course_name" class="edit-input">
+              </ng-template>
+            </td>
+            <td>
+              <ng-container *ngIf="editingCourse !== course.id; else editDesc">
+                {{ course.description }}
+              </ng-container>
+              <ng-template #editDesc>
+                <input type="text" [(ngModel)]="editForm.description" class="edit-input">
+              </ng-template>
+            </td>
+            <td>
+              <ng-container *ngIf="editingCourse !== course.id; else editInstructor">
+                {{ course.instructor }}
+              </ng-container>
+              <ng-template #editInstructor>
+                <input type="text" [(ngModel)]="editForm.instructor" class="edit-input">
+              </ng-template>
+            </td>
+            <td>
+              <ng-container *ngIf="editingCourse !== course.id; else editInstructorId">
+                {{ course.instructor_id }}
+              </ng-container>
+              <ng-template #editInstructorId>
+                <input type="number" [(ngModel)]="editForm.instructor_id" class="edit-input">
+              </ng-template>
+            </td>
+            <td>
+              <ng-container *ngIf="editingCourse !== course.id; else editTerm">
+                {{ course.term }}
+              </ng-container>
+              <ng-template #editTerm>
+                <input type="number" [(ngModel)]="editForm.term" class="edit-input">
+              </ng-template>
+            </td>
+            <td>{{ formatDate(course.created_at) }}</td>
+            <td>{{ formatDate(course.updated_at) }}</td>
             <td>{{ course.is_published ? 'Published' : 'Unpublished' }}</td>
             <td *ngIf="isInstructor">
-              <button *ngIf="!course.is_published" 
-                      class="publish-btn"
-                      (click)="publishCourse(course.id)">
-                Publish
-              </button>
+              <ng-container *ngIf="editingCourse !== course.id; else editButtons">
+                <button *ngIf="!course.is_published" 
+                        class="publish-btn"
+                        (click)="publishCourse(course.id)">
+                  Publish
+                </button>
+                <button class="edit-btn"
+                        (click)="startEditing(course)">
+                  Edit
+                </button>
+                <button class="delete-btn"
+                        (click)="deleteCourse(course.id)">
+                  Delete
+                </button>
+              </ng-container>
+              <ng-template #editButtons>
+                <button class="save-btn" (click)="saveEditing(course.id)">Save</button>
+                <button class="cancel-btn" (click)="cancelEditing()">Cancel</button>
+              </ng-template>
             </td>
           </tr>
         </tbody>

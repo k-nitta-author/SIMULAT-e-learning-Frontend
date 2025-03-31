@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { StudyGroupService, StudyGroup, JoinGroupResponse } from '../../backend-services/study-group.service';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { StudyGroupService, StudyGroup, JoinGroupResponse, StudyGroupMember } from '../../backend-services/study-group.service';
 
 @Component({
   selector: 'app-study-group-detail',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './study-group-detail.component.html',
   styleUrl: './study-group-detail.component.css'
 })
@@ -21,6 +21,7 @@ export class StudyGroupDetailComponent implements OnInit {
     name: '',
     max_members: 0
   };
+  members: StudyGroupMember[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -35,14 +36,20 @@ export class StudyGroupDetailComponent implements OnInit {
   loadStudyGroup(id: number) {
     this.studyGroupService.getStudyGroupById(id).subscribe(group => {
       this.studyGroup = group;
+      this.loadMembers(id);
+    });
+  }
+
+  loadMembers(id: number) {
+    this.studyGroupService.getStudyGroupMembers(id).subscribe(members => {
+      this.members = members;
     });
   }
 
   joinGroup() {
     if (this.studyGroup) {
       const joinData = {
-        student_id: this.currentStudentId,
-        is_leader: false // Set to true if needed for leader joining
+        current_user_id: this.currentStudentId
       };
 
       this.studyGroupService.joinStudyGroup(this.studyGroup.id, joinData).subscribe({

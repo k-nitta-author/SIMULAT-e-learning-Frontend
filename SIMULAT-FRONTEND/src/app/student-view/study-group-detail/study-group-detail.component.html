@@ -1,25 +1,20 @@
 <div class="container" *ngIf="studyGroup">
-  <div class="header">
-    <button (click)="toggleEdit()" class="edit-btn">
-      {{ isEditing ? 'Cancel' : 'Edit' }}
-    </button>
-  </div>
-
-  <div *ngIf="!isEditing">
-    <h2>{{studyGroup?.name}}</h2>
-    <div class="group-info">
-      <p><strong>Course ID:</strong> {{studyGroup?.course_id}}</p>
-      <p><strong>Members:</strong> {{getMemberCount()}}/{{studyGroup?.max_members}}</p>
+  <section class="header-section">
+    <div class="title-container">
+      <h2 *ngIf="!isEditing" class="group-name">{{studyGroup?.name}}</h2>
+      <button (click)="toggleEdit()" class="edit-btn">
+        {{ isEditing ? 'Cancel' : 'Edit' }}
+      </button>
     </div>
-  </div>
+  </section>
 
-  <div *ngIf="isEditing" class="edit-form">
-    <form (submit)="saveChanges()">
-      <div>
+  <section class="edit-section" *ngIf="isEditing">
+    <form (submit)="saveChanges()" class="edit-form">
+      <div class="form-group">
         <label>Name:</label>
         <input type="text" [(ngModel)]="editForm.name" name="name" required>
       </div>
-      <div>
+      <div class="form-group">
         <label>Max Members:</label>
         <input type="number" 
                [(ngModel)]="editForm.max_members" 
@@ -28,26 +23,45 @@
                required>
         <small>Minimum allowed: {{getMemberCount()}}</small>
       </div>
-      <button type="submit">Save Changes</button>
+      <button type="submit" class="save-btn">Save Changes</button>
     </form>
-  </div>
+  </section>
 
-  <div class="members-list">
-    <h3>Members</h3>
-    <ul>
-      <li *ngFor="let member of studyGroup?.memberships || []">
-        Student ID: {{member?.student_id}}
-        <span *ngIf="member?.is_leader">(Leader)</span>
-      </li>
-    </ul>
-  </div>
+  <section class="info-section" *ngIf="!isEditing">
+    <div class="info-card">
+      <div class="info-item">
+        <span class="label">Course ID:</span>
+        <span class="value highlight">{{studyGroup?.course_id}}</span>
+      </div>
+      <div class="info-item">
+        <span class="label">Members:</span>
+        <span class="value highlight">{{getMemberCount()}}/{{studyGroup?.max_members}}</span>
+      </div>
+    </div>
+  </section>
 
-  <div class="messages">
-    <p class="success" *ngIf="joinMessage">{{ joinMessage }}</p>
-    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
-  </div>
+  <section class="members-section">
+    <h3>Group Members</h3>
+    <div class="members-grid">
+      <div class="member-card" *ngFor="let member of members">
+        <div class="member-info">
+          <span class="member-name">{{member.name}}</span>
+          <span class="member-id highlight">ID: {{member.student_id}}</span>
+          <span *ngIf="member.is_leader" class="leader-badge">Leader</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <button (click)="joinGroup()" [disabled]="isGroupFull()">
-    Join Group
-  </button>
+  <section class="action-section">
+    <div class="messages">
+      <p class="success" *ngIf="joinMessage">{{ joinMessage }}</p>
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+    </div>
+    <button (click)="joinGroup()" 
+            [disabled]="isGroupFull()"
+            class="join-btn">
+      Join Group
+    </button>
+  </section>
 </div>
