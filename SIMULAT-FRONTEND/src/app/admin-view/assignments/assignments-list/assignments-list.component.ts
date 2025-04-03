@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Assignment, AssignmentService } from '../../../backend-services/assignment.service';
+import { Assignment, AssignmentService, AssignmentResponse } from '../../../backend-services/assignment.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -67,20 +67,19 @@ export class AssignmentsListComponent implements OnInit {
       return;
     }
 
-    // Format the date before sending to backend
     const assignmentToSend = {
       ...this.editingAssignment,
       deadline: this.formatDateForBackend(this.editingAssignment.deadline)
     };
 
     this.assignmentService.updateAssignment(assignment.id, assignmentToSend).subscribe({
-      next: (updatedAssignment) => {
-        if (updatedAssignment) {
-          const index = this.assignments.findIndex(a => a.id === updatedAssignment.id);
+      next: (response: AssignmentResponse) => {
+        if (response.message === 'assignment updated' && response.assignment) {
+          const index = this.assignments.findIndex(a => a.id === response.assignment!.id);
           if (index !== -1) {
             this.assignments[index] = {
-              ...updatedAssignment,
-              deadline: this.formatDateForDisplay(updatedAssignment.deadline)
+              ...response.assignment,
+              deadline: this.formatDateForDisplay(response.assignment.deadline)
             };
           }
         }
@@ -117,7 +116,7 @@ export class AssignmentsListComponent implements OnInit {
       deadline: this.formatDateForBackend(new Date().toISOString()),
       description: '',
       grading_criteria: '',
-      id: 0, // Let the backend assign the ID
+      id: 0,
       instructions: '',
       max_score: 0,
       submission_format: '',
@@ -126,12 +125,17 @@ export class AssignmentsListComponent implements OnInit {
     };
     
     this.assignmentService.addAssignment(newAssignment).subscribe({
-      next: (addedAssignment) => {
-        this.assignments.unshift({
-          ...addedAssignment,
-          deadline: this.formatDateForDisplay(addedAssignment.deadline)
-        });
-        this.startEditing(addedAssignment);
+      next: (response: AssignmentResponse) => {
+        if (response.message === 'assignment created' && response.assignment) {
+          const newAssignmentWithFormattedDate: Assignment = {
+            ...response.assignment,
+            deadline: this.formatDateForDisplay(response.assignment.deadline)
+          };
+          this.assignments.unshift(newAssignmentWithFormattedDate);
+          this.startEditing(newAssignmentWithFormattedDate);
+        } else {
+          alert('Failed to add assignment: ' + (response.error || 'Unknown error'));
+        }
       },
       error: (error) => {
         console.error('Error adding assignment:', error);

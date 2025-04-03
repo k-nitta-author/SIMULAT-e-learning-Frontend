@@ -1,0 +1,68 @@
+.content-detail {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.section {
+  margin-bottom: 30px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+h3 {
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.materials-list {
+  display: grid;
+  gap: 20px;
+}
+
+.material-item {
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.material-date {
+  color: #666;
+  font-size: 0.9em;
+}
+
+strong {
+  color: #444;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
+
+.error-message {
+  color: #dc3545;
+  padding: 20px;
+  text-align: center;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  margin: 20px auto;
+  max-width: 800px;
+}

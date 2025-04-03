@@ -1,0 +1,44 @@
+<div class="content-detail" *ngIf="content">
+  <h2>Content Details</h2>
+  
+  <div class="section">
+    <h3>Basic Information</h3>
+    <p><strong>Title:</strong> {{content.title}}</p>
+    <p><strong>Description:</strong> {{content.description}}</p>
+    <p><strong>Type:</strong> {{content.type}}</p>
+    <p><strong>URL:</strong> <a [href]="content.url" target="_blank">{{content.url}}</a></p>
+    <p><strong>Created At:</strong> {{content.created_at | date}}</p>
+  </div>
+
+  <div class="section" *ngIf="content.course">
+    <h3>Course Information</h3>
+    <p><strong>Course Code:</strong> {{content.course.course_code}}</p>
+    <p><strong>Course Name:</strong> {{content.course.course_name}}</p>
+    <p><strong>Course Description:</strong> {{content.course.description}}</p>
+  </div>
+
+  <div class="section" *ngIf="content.term">
+    <h3>Term Information</h3>
+    <p><strong>School Year:</strong> {{content.term.school_year_start | date}} - {{content.term.school_year_end | date}}</p>
+  </div>
+
+  <div class="section" *ngIf="content.lesson_materials?.length">
+    <h3>Lesson Materials</h3>
+    <div class="materials-list">
+      <div *ngFor="let material of content.lesson_materials" class="material-item">
+        <h4>{{material.material_title}}</h4>
+        <p>{{material.description}}</p>
+        <p><a [href]="material.material_url" target="_blank">View Material</a></p>
+        <p class="material-date">Added: {{material.created_at | date}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="error-message" *ngIf="error">
+  {{ error }}
+</div>
+
+<div class="loading" *ngIf="loading">
+  Loading content...
+</div>

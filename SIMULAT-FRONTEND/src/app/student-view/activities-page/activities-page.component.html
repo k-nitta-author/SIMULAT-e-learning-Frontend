@@ -18,13 +18,17 @@
       </thead>
       <tbody>
         <tr *ngFor="let activity of combinedActivities">
-          <td>{{activity.title}}</td>
+          <td>
+            <a [routerLink]="" (click)="navigateToDetail(activity)" class="activity-link">
+              {{activity.title}}
+            </a>
+          </td>
           <td>
             <span [class]="'badge ' + activity.type">
               {{activity.type}}
             </span>
           </td>
-          <td>{{activity.status === 'completed' ? activity.score : '-'}}</td>
+          <td>{{activity.score === -1 ? 'Pending' : activity.score}}</td>
           <td>
             <span [class]="'status-badge ' + activity.status">
               {{activity.status}}
@@ -32,7 +36,7 @@
           </td>
           <td>
             <span *ngIf="activity.status === 'completed'" class="completion-check">
-              <i class="fas fa-check-circle"></i> Completed
+              <i class="fas fa-check-circle"></i> {{activity.score === -1 ? 'Pending Score' : 'Completed'}}
             </span>
             <button 
               *ngIf="activity.status === 'pending'"

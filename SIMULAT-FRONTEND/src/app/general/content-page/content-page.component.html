@@ -21,17 +21,23 @@
 
     <div class="content-grid">
       <div *ngFor="let content of contents" class="content-card">
-        <div class="content-type">{{ content.content_type }}</div>
-        <h2>{{ content.content_title }}</h2>
-        <p class="description">{{ content.content_description }}</p>
+        <div class="content-type">{{ content.type }}</div>
+        <a [routerLink]="['/content', content.id]" class="content-title-link">
+          <h2>{{ content.title }}</h2>
+        </a>
+        <p class="description">{{ content.description }}</p>
         <div class="content-footer">
           <a [routerLink]="['/course-detail', content.course_id]" class="course-link">
             View Course
           </a>
           <span class="date">{{ content.created_at | date }}</span>
         </div>
-        <a *ngIf="content.content_url" [href]="content.content_url" target="_blank" class="resource-link">
-          View Resource
+        <a *ngIf="content.url" 
+           [href]="ensureHttps(content.url)" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="resource-link">
+          View Resource <i class="external-icon">↗</i>
         </a>
       </div>
     </div>

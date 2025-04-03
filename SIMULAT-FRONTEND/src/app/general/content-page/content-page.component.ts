@@ -37,4 +37,19 @@ export class ContentPageComponent implements OnInit {
             }
         });
     }
+
+    ensureHttps(url: string): string {
+        if (!url) return '';
+        try {
+            const urlObj = new URL(url);
+            return urlObj.toString();
+        } catch {
+            try {
+                const urlObj = new URL(`https://${url}`);
+                return urlObj.toString();
+            } catch {
+                return '';
+            }
+        }
+    }
 }

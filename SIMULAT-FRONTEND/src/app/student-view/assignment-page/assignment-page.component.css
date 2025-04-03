@@ -1,23 +1,159 @@
-section{
+/* Remove existing styles as we'll use global styles */
+h1 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.header-actions {
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
-.assignment-details {
-  font-family: Arial, sans-serif;
-  margin: 20px;
+.actions {
+  display: flex;
+  gap: 8px;
 }
 
-.assignment-details h1 {
-  font-size: 24px;
+.delete {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.delete:hover {
+  color: #dc3545;
+  background-color: transparent;
+}
+
+textarea {
+  width: 100%;
+  min-height: 60px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  resize: vertical;
+  font-size: 13px;
+}
+
+input[type="number"] {
+  width: 100%;
   margin-bottom: 10px;
 }
 
-.assignment-details p {
-  font-size: 16px;
-  margin: 5px 0;
+input, textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
 }
 
-.assignment-details p strong {
-  font-weight: bold;
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0,123,255,.25);
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 500;
+  color: #333;
+  font-size: 14px;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-group.half {
+  flex: 1;
+}
+
+.date-time-inputs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.date-time-inputs input {
+  flex: 1;
+}
+
+.modal-content {
+  max-width: 800px;
+  width: 95%;
+  padding: 25px;
+  margin: 20px auto;
+}
+
+table {
+  min-width: 100%;
+  width: max-content;
+  max-width: none;
+  display: block;
+  border-collapse: collapse;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+td, th {
+  min-width: 120px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #dee2e6;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+td:first-child, 
+th:first-child {
+  position: sticky;
+  left: 0;
+  background: white;
+  z-index: 1;
+}
+
+th:first-child {
+  background: #f8f9fa;
+}
+
+td:hover {
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.modal-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.modal-buttons button {
+  min-width: 100px;
+  padding: 6px 12px;
+}
+
+.content-container {
+  max-width: 100%;
+  margin: 0 auto;
+  overflow-x: auto;
+  padding: 15px;
+  background: white;
 }

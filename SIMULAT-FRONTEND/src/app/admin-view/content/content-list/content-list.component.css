@@ -189,3 +189,15 @@ td {
   cursor: pointer;
   text-align: left;
 }
+
+.external-link {
+  @apply inline-flex items-center gap-1 text-blue-600 hover:text-blue-800;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.external-icon {
+  @apply text-xs opacity-70;
+}

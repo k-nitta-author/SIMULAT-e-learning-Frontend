@@ -8,6 +8,7 @@ export interface Assignment {
   content_id: number;
   created_at: string;
   deadline: string;
+  deadlineTime?: string;
   description: string;
   grading_criteria: string;
   id: number;
@@ -27,6 +28,21 @@ export interface Assignment {
   }[];
   term_id: number;
   updated_at: string;
+}
+
+export interface AssignmentScore {
+  score: number;
+  submission_date: string;
+  student_id: number;
+  student_name: string;
+  assignment_name: string;
+  completed_on_time: boolean;
+}
+
+export interface AssignmentResponse {
+  message: string;
+  assignment?: Assignment;
+  error?: string;
 }
 
 @Injectable({
@@ -54,20 +70,26 @@ export class AssignmentService {
     );
   }
 
-  addAssignment(assignment: Assignment): Observable<Assignment> {
-    return this.http.post<Assignment>(this.apiUrl, assignment).pipe(
+  getAssignmentScores(id: number): Observable<AssignmentScore[]> {
+    return this.http.get<AssignmentScore[]>(`${this.apiUrl}/${id}/scores`).pipe(
       catchError(this.handleError)
     );
   }
 
-  updateAssignment(id: number, updatedAssignment: Assignment): Observable<Assignment | undefined> {
-    return this.http.put<Assignment>(`${this.apiUrl}/${id}`, updatedAssignment).pipe(
+  addAssignment(assignment: Assignment): Observable<AssignmentResponse> {
+    return this.http.post<AssignmentResponse>(this.apiUrl, assignment).pipe(
       catchError(this.handleError)
     );
   }
 
-  deleteAssignment(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
+  updateAssignment(id: number, updatedAssignment: Assignment): Observable<AssignmentResponse> {
+    return this.http.put<AssignmentResponse>(`${this.apiUrl}/${id}`, updatedAssignment).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteAssignment(id: number): Observable<AssignmentResponse> {
+    return this.http.delete<AssignmentResponse>(`${this.apiUrl}/${id}`).pipe(
       catchError(this.handleError)
     );
   }

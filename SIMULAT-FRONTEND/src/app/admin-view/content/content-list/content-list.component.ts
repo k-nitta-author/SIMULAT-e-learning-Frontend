@@ -19,11 +19,11 @@ export class ContentListComponent implements OnInit {
   isEditing: boolean = false;
   editingId: number | null = null;
 
-  newContent: Omit<Content, 'id' | 'created_at'> = {
-    content_title: '',
-    content_description: '',
-    content_url: '',
-    content_type: '',
+  newContent: Omit<Content, 'id' | 'created_at' | 'course' | 'term' | 'lesson_materials'> = {
+    title: '',
+    description: '',
+    url: '',
+    type: '',
     course_id: 0,
     term_id: 0
   }; // Store new content temporarily for form
@@ -64,10 +64,10 @@ export class ContentListComponent implements OnInit {
 
   resetForm(): void {
     this.newContent = {
-      content_title: '',
-      content_description: '',
-      content_url: '',
-      content_type: '',
+      title: '',
+      description: '',
+      url: '',
+      type: '',
       course_id: 0,
       term_id: 0
     };
@@ -77,7 +77,7 @@ export class ContentListComponent implements OnInit {
 
   // Submit new content
   onSubmit(): void {
-    if (!this.newContent.content_title || !this.newContent.content_description || !this.newContent.course_id || !this.newContent.term_id) {
+    if (!this.newContent.title || !this.newContent.description || !this.newContent.course_id || !this.newContent.term_id) {
       alert('Please fill out all required fields.');
       return;
     }
@@ -113,10 +113,10 @@ export class ContentListComponent implements OnInit {
     const contentToEdit = this.contentList.find(content => content.id === id);
     if (contentToEdit) {
       this.newContent = {
-        content_title: contentToEdit.content_title,
-        content_description: contentToEdit.content_description,
-        content_url: contentToEdit.content_url,
-        content_type: contentToEdit.content_type,
+        title: contentToEdit.title,
+        description: contentToEdit.description,
+        url: contentToEdit.url,
+        type: contentToEdit.type,
         course_id: contentToEdit.course_id,
         term_id: contentToEdit.term_id
       };
@@ -140,18 +140,29 @@ export class ContentListComponent implements OnInit {
 
   ensureHttps(url: string): string {
     if (!url) return '';
-    // Check if URL is already absolute
-    if (url.match(/^https?:\/\//i)) {
-      return url;
+    // Check if valid URL
+    try {
+      const urlObj = new URL(url);
+      return urlObj.toString();
+    } catch {
+      // If not a valid URL, try adding https://
+      try {
+        const urlObj = new URL(`https://${url}`);
+        return urlObj.toString();
+      } catch {
+        return '';
+      }
     }
-    // Add https:// to make it absolute
-    return `https://${url}`;
   }
 
   formatDisplayUrl(url: string): string {
     if (!url) return '';
-    // Remove protocol and trailing slashes
-    return url.replace(/^(https?:\/\/)?(www\.)?/, '').replace(/\/$/, '');
+    try {
+      const urlObj = new URL(url);
+      return urlObj.hostname + urlObj.pathname;
+    } catch {
+      return url;
+    }
   }
 }
 

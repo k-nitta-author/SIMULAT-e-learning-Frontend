@@ -1,0 +1,35 @@
+.challenge-detail {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.detail-card {
+  background: #fff;
+  border-radius: 4px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.detail-item {
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.detail-item strong {
+  display: inline-block;
+  width: 150px;
+  color: #666;
+}
+
+.detail-item.description p {
+  margin-top: 10px;
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #333;
+}

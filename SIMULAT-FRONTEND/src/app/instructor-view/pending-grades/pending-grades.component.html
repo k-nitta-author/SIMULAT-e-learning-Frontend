@@ -1,5 +1,5 @@
 <div class="pending-grades">
-  <h2>Pending Grades</h2>
+  <h2>Course Scores</h2>
   
   <div class="tabs">
     <button [class.active]="activeTab === 'assignments'" (click)="activeTab = 'assignments'">Assignments</button>
@@ -9,72 +9,129 @@
 
   <div class="tab-content" [ngSwitch]="activeTab">
     <div *ngSwitchCase="'assignments'">
-      <table *ngIf="pendingScores.pending_assignments.length">
+      <table *ngIf="allScores.assignments.length">
         <thead>
           <tr>
             <th>Title</th>
             <th>Deadline</th>
+            <th>Student</th>
+            <th>Submission Date</th>
             <th>Score</th>
-            <th>Action</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of pendingScores.pending_assignments">
-            <td>{{item.title}}</td>
-            <td>{{item.deadline}}</td>
-            <td>
-              <input type="number" [(ngModel)]="gradeInputs['assignment-' + item.id]">
-            </td>
-            <td>
-              <button (click)="submitAssignmentGrade(item.id)">Submit Grade</button>
-            </td>
-          </tr>
+          <ng-container *ngFor="let item of allScores.assignments">
+            <tr *ngFor="let score of item.scores" [class.pending]="score.pending">
+              <td>
+                <a [routerLink]="['/assignment', item.id]">{{item.title}}</a>
+              </td>
+              <td>{{item.deadline || 'No deadline'}}</td>
+              <td>
+                <a [routerLink]="['/account', score.student_id]">{{score.student_id}}</a>
+              </td>
+              <td>{{score.submission_date | date}}</td>
+              <td>
+                <input type="number" *ngIf="editMode['assignment-' + item.id + '-' + score.student_id] || score.pending" 
+                       [(ngModel)]="gradeInputs['assignment-' + item.id + '-' + score.student_id]">
+                <span *ngIf="!editMode['assignment-' + item.id + '-' + score.student_id] && !score.pending">{{score.score}}</span>
+              </td>
+              <td>
+                <div class="action-buttons">
+                  <ng-container *ngIf="editMode['assignment-' + item.id + '-' + score.student_id] || score.pending">
+                    <button (click)="submitGrade(item.id, score.student_id, 'assignment')">Submit</button>
+                    <button class="cancel-btn" *ngIf="!score.pending" (click)="cancelEdit(item.id, score.student_id, 'assignment')">Cancel</button>
+                  </ng-container>
+                  <button class="edit-btn" *ngIf="!editMode['assignment-' + item.id + '-' + score.student_id] && !score.pending" 
+                          (click)="editGrade(item.id, score.student_id, 'assignment')">Edit</button>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
         </tbody>
       </table>
     </div>
 
     <div *ngSwitchCase="'quizzes'">
-      <table *ngIf="pendingScores.pending_quizzes.length">
+      <table *ngIf="allScores.quizzes.length">
         <thead>
           <tr>
             <th>Title</th>
+            <th>Student ID</th>
+            <th>Submission Date</th>
             <th>Score</th>
-            <th>Action</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of pendingScores.pending_quizzes">
-            <td>{{item.title}}</td>
-            <td>
-              <input type="number" [(ngModel)]="gradeInputs['quiz-' + item.id]">
-            </td>
-            <td>
-              <button (click)="submitQuizGrade(item.id)">Submit Grade</button>
-            </td>
-          </tr>
+          <ng-container *ngFor="let item of allScores.quizzes">
+            <tr *ngFor="let score of item.scores" [class.pending]="score.pending">
+              <td>
+                <a [routerLink]="['/quiz', item.id]">{{item.title}}</a>
+              </td>
+              <td>
+                <a [routerLink]="['/account', score.student_id]">{{score.student_id}}</a>
+              </td>
+              <td>{{score.submission_date | date}}</td>
+              <td>
+                <input type="number" *ngIf="editMode['quiz-' + item.id + '-' + score.student_id] || score.pending" 
+                       [(ngModel)]="gradeInputs['quiz-' + item.id + '-' + score.student_id]">
+                <span *ngIf="!editMode['quiz-' + item.id + '-' + score.student_id] && !score.pending">{{score.score}}</span>
+              </td>
+              <td>
+                <div class="action-buttons">
+                  <ng-container *ngIf="editMode['quiz-' + item.id + '-' + score.student_id] || score.pending">
+                    <button (click)="submitGrade(item.id, score.student_id, 'quiz')">Submit</button>
+                    <button class="cancel-btn" *ngIf="!score.pending" (click)="cancelEdit(item.id, score.student_id, 'quiz')">Cancel</button>
+                  </ng-container>
+                  <button class="edit-btn" *ngIf="!editMode['quiz-' + item.id + '-' + score.student_id] && !score.pending" 
+                          (click)="editGrade(item.id, score.student_id, 'quiz')">Edit</button>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
         </tbody>
       </table>
     </div>
 
     <div *ngSwitchCase="'challenges'">
-      <table *ngIf="pendingScores.pending_challenges.length">
+      <table *ngIf="allScores.challenges.length">
         <thead>
           <tr>
             <th>Title</th>
+            <th>Student ID</th>
+            <th>Submission Date</th>
             <th>Score</th>
-            <th>Action</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of pendingScores.pending_challenges">
-            <td>{{item.title}}</td>
-            <td>
-              <input type="number" [(ngModel)]="gradeInputs['challenge-' + item.id]">
-            </td>
-            <td>
-              <button (click)="submitChallengeGrade(item.id)">Submit Grade</button>
-            </td>
-          </tr>
+          <ng-container *ngFor="let item of allScores.challenges">
+            <tr *ngFor="let score of item.scores" [class.pending]="score.pending">
+              <td>
+                <a [routerLink]="['/challenge-detail', item.id]">{{item.title}}</a>
+              </td>
+              <td>
+                <a [routerLink]="['/account', score.student_id]">{{score.student_id}}</a>
+              </td>
+              <td>{{score.submission_date | date}}</td>
+              <td>
+                <input type="number" *ngIf="editMode['challenge-' + item.id + '-' + score.student_id] || score.pending" 
+                       [(ngModel)]="gradeInputs['challenge-' + item.id + '-' + score.student_id]">
+                <span *ngIf="!editMode['challenge-' + item.id + '-' + score.student_id] && !score.pending">{{score.score}}</span>
+              </td>
+              <td>
+                <div class="action-buttons">
+                  <ng-container *ngIf="editMode['challenge-' + item.id + '-' + score.student_id] || score.pending">
+                    <button (click)="submitGrade(item.id, score.student_id, 'challenge')">Submit</button>
+                    <button class="cancel-btn" *ngIf="!score.pending" (click)="cancelEdit(item.id, score.student_id, 'challenge')">Cancel</button>
+                  </ng-container>
+                  <button class="edit-btn" *ngIf="!editMode['challenge-' + item.id + '-' + score.student_id] && !score.pending" 
+                          (click)="editGrade(item.id, score.student_id, 'challenge')">Edit</button>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
         </tbody>
       </table>
     </div>

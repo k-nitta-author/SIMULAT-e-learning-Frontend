@@ -29,13 +29,13 @@ export class ChallengeService {
     );
   }
 
-  addChallenge(challenge: Challenge): Observable<Challenge> {
+  addChallenge(challenge: Omit<Challenge, 'id' | 'created_at' | 'updated_at'>): Observable<Challenge> {
     return this.http.post<Challenge>(this.apiUrl, challenge).pipe(
       catchError(this.handleError)
     );
   }
 
-  updateChallenge(id: number, updatedChallenge: Challenge): Observable<Challenge | undefined> {
+  updateChallenge(id: number, updatedChallenge: Partial<Challenge>): Observable<Challenge | undefined> {
     return this.http.put<Challenge>(`${this.apiUrl}/${id}`, updatedChallenge).pipe(
       catchError(this.handleError)
     );

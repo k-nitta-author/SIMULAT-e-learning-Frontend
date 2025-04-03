@@ -1,15 +1,130 @@
-<section *ngIf="challenges && challenges.length" class="challenge-section">
-  <h2 class="challenge-header">Challenge Details</h2>
-  <div *ngFor="let challenge of challenges" class="challenge-card">
-    <ul class="challenge-list">
-      <li><strong>Content ID:</strong> {{ challenge.content_id }}</li>
-      <li><strong>Created At:</strong> {{ challenge.created_at | date:'short' }}</li>
-      <li><strong>ID:</strong> {{ challenge.id }}</li>
-      <li><strong>Is Published:</strong> {{ challenge.is_published ? 'Yes' : 'No' }}</li>
-      <li><strong>Publication Date:</strong> {{ challenge.publication_date ? (challenge.publication_date | date:'short') : 'Not Available' }}</li>
-      <li><strong>Updated At:</strong> {{ challenge.updated_at | date:'short' }}</li>
-    </ul>
-    <hr class="challenge-divider">
+<div class="challenges-container">
+  <div class="header-actions">
+    <h2>Challenge Management</h2>
+    <button class="btn primary" (click)="openCreateModal()" [disabled]="isLoading">
+      <i class="fas fa-plus"></i> New Challenge
+    </button>
   </div>
-</section>
+
+  <div *ngIf="showToast" class="toast" [class.toast-success]="toastType === 'success'" [class.toast-error]="toastType === 'error'">
+    {{toastMessage}}
+  </div>
+
+  <div *ngIf="showCreateForm" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Create New Challenge</h3>
+        <button class="close-btn" (click)="toggleCreateForm()">&times;</button>
+      </div>
+      <form [formGroup]="challengeForm" (ngSubmit)="createChallenge()">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" id="title" formControlName="title">
+          <div class="error-message" *ngIf="challengeForm.get('title')?.invalid && challengeForm.get('title')?.touched">
+            Title is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" formControlName="description" rows="3"></textarea>
+          <div class="error-message" *ngIf="challengeForm.get('description')?.invalid && challengeForm.get('description')?.touched">
+            Description is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="content_id">Content ID</label>
+          <input type="number" id="content_id" formControlName="content_id">
+          <div class="error-message" *ngIf="challengeForm.get('content_id')?.invalid && challengeForm.get('content_id')?.touched">
+            Content ID is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" formControlName="is_published">
+            Is Published
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="publication_date">Publication Date</label>
+          <input type="datetime-local" id="publication_date" formControlName="publication_date">
+          <div class="error-message" *ngIf="challengeForm.get('publication_date')?.invalid && challengeForm.get('publication_date')?.touched">
+            Publication Date is required
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn secondary" (click)="toggleCreateForm()" [disabled]="isLoading">Cancel</button>
+          <button type="submit" class="btn primary" [disabled]="challengeForm.invalid || isLoading">
+            <span *ngIf="isLoading" class="spinner"></span>
+            Create Challenge
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-spinner">
+    <div class="spinner"></div>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{errorMessage}}
+  </div>
+
+  <table class="challenges-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Content ID</th>
+        <th>Created At</th>
+        <th>Updated At</th>
+        <th>Published</th>
+        <th>Publication Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let challenge of challenges">
+        <td>
+          <ng-container *ngIf="editingId !== challenge.id; else editTitle">
+            <a [routerLink]="['/challenge-detail', challenge.id]" class="title-link">
+              {{challenge.title}}
+            </a>
+          </ng-container>
+          <ng-template #editTitle>
+            <input type="text" [(ngModel)]="editForm.title" class="edit-input">
+          </ng-template>
+        </td>
+        <td class="description-cell">
+          <ng-container *ngIf="editingId !== challenge.id; else editDescription">
+            {{challenge.description}}
+          </ng-container>
+          <ng-template #editDescription>
+            <textarea [(ngModel)]="editForm.description" class="edit-input"></textarea>
+          </ng-template>
+        </td>
+        <td>{{challenge.content_id}}</td>
+        <td>{{challenge.created_at | date:'short'}}</td>
+        <td>{{challenge.updated_at | date:'short'}}</td>
+        <td>{{challenge.is_published ? 'Yes' : 'No'}}</td>
+        <td>{{challenge.publication_date | date:'short'}}</td>
+        <td>
+          <div class="action-buttons">
+            <ng-container *ngIf="editingId !== challenge.id; else editActions">
+              <button class="btn edit" (click)="startEdit(challenge)">Edit</button>
+              <button class="btn publish" (click)="togglePublish(challenge)">
+                {{ challenge.is_published ? 'Unpublish' : 'Publish' }}
+              </button>
+              <button class="btn delete" (click)="deleteChallenge(challenge.id)">Delete</button>
+            </ng-container>
+            <ng-template #editActions>
+              <button class="btn primary" (click)="saveEdit()">Save</button>
+              <button class="btn secondary" (click)="cancelEdit()">Cancel</button>
+            </ng-template>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 

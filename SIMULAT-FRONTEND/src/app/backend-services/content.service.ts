@@ -3,15 +3,49 @@ import { Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 
+export interface Course {
+  id: number;
+  course_code: string;
+  course_name: string;
+  description: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Term {
+  id: number;
+  school_year_start: string;
+  school_year_end: string;
+}
+
+export interface LessonMaterial {
+  id: number;
+  material_title: string;
+  material_url: string;
+  description: string;
+  created_at: string;
+}
+
 export interface Content {
   id: number;
-  content_title: string;
-  content_description: string;
-  content_url: string;
-  content_type: string;
   course_id: number;
+  title: string;
+  content_title?: string;
+  description: string;
+  content_description?: string;
+  url: string;
+  content_url?: string;
+  type: string;
   term_id: number;
   created_at: string;
+  course?: Course;
+  term?: Term;
+  lesson_materials?: LessonMaterial[];
+}
+
+export interface ServiceResponse<T> {
+  message: string;
+  data?: T;
 }
 
 @Injectable({
@@ -23,9 +57,21 @@ export class ContentService {
   constructor(private http: HttpClient) { }
 
   getAllContent(): Observable<Content[]> {
-    return this.http.get<Content[]>(this.apiEndpoint)
+    return this.http.get<any[]>(this.apiEndpoint)
       .pipe(
-        map(response => response),
+        map(response => response.map(item => ({
+          id: item.id,
+          course_id: item.course_id,
+          title: item.content_title,
+          description: item.content_description,
+          url: item.content_url,
+          type: item.type,
+          term_id: item.term_id,
+          created_at: item.created_at,
+          course: item.course,
+          term: item.term,
+          lesson_materials: item.lesson_materials
+        }))),
         catchError(error => throwError(error))
       );
   }
@@ -46,29 +92,44 @@ export class ContentService {
       );
   }
 
-  createContent(content: Omit<Content, 'id' | 'created_at'>): Observable<Content> {
+  createContent(content: Omit<Content, 'id' | 'created_at' | 'course' | 'term' | 'lesson_materials'>): Observable<Content> {
     const payload = {
-      title: content.content_title,
-      description: content.content_description,
-      url: content.content_url,
-      type: content.content_type,
+      title: content.title,
+      description: content.description,
+      url: content.url,
+      type: content.type,
       course_id: content.course_id,
       term_id: content.term_id
     };
     
-    return this.http.post<Content>(this.apiEndpoint, payload)
-      .pipe(
-        map(response => response),
-        catchError(error => throwError(error))
-      );
+    return this.http.post<ServiceResponse<Content>>(this.apiEndpoint, payload).pipe(
+      map(response => {
+        if (!response.data) {
+          throw new Error('No content data received');
+        }
+        return response.data;
+      })
+    );
   }
 
   updateContent(id: number, content: Partial<Content>): Observable<Content> {
-    return this.http.put<Content>(`${this.apiEndpoint}/${id}`, content)
-      .pipe(
-        map(response => response),
-        catchError(error => throwError(error))
-      );
+    const payload = {
+      title: content.title,
+      description: content.description,
+      url: content.url,
+      course_id: content.course_id,
+      created_at: content.created_at,
+      term_id: content.term_id
+    };
+
+    return this.http.put<ServiceResponse<Content>>(`${this.apiEndpoint}/${id}`, payload).pipe(
+      map(response => {
+        if (!response.data) {
+          throw new Error('No content data received');
+        }
+        return response.data;
+      })
+    );
   }
 
   deleteContent(id: number): Observable<void> {

@@ -1,46 +1,45 @@
-<div class="quiz-detail">
-    <div *ngIf="loading" class="loading">
+<div class="page-container">
+    <div *ngIf="loading" class="content-container">
         Loading quiz details...
     </div>
     
-    <div *ngIf="error" class="error-message">
+    <div *ngIf="error" class="content-container">
         {{ error }}
     </div>
 
-    <div *ngIf="!loading && !error">
-        <div class="quiz-header">
+    <div *ngIf="!loading && !error" class="content-container">
+        <div class="card-header">
             <h1>Quiz Details</h1>
-            <button class="publish-button" [class.published]="quiz.is_published" (click)="togglePublish()">
+            <button (click)="togglePublish()" [class.button-outline]="quiz.is_published">
                 {{ quiz.is_published ? 'Unpublish' : 'Publish' }}
             </button>
         </div>
-        <div class="quiz-info">
-            <div class="info-row">
-                <span class="label">Quiz Title:</span>
-                <span class="value">{{ quiz.quiz_title }}</span>
-            </div>
-            <div class="info-row">
-                <span class="label">Description:</span>
-                <span class="value">{{ quiz.description }}</span>
-            </div>
-            <div class="info-row">
-                <span class="label">Content ID:</span>
-                <span class="value">{{ quiz.content_id }}</span>
-            </div>
-            <div class="info-row">
-                <span class="label">Quiz ID:</span>
-                <span class="value">{{ quiz.id }}</span>
-            </div>
-            <div class="info-row">
-                <span class="label">Time Limit:</span>
-                <span class="value">{{ quiz.time_limit }} minutes</span>
-            </div>
-            <div class="info-row">
-                <span class="label">Status:</span>
-                <span class="value status" [class.published]="quiz.is_published">
-                    {{ quiz.is_published ? 'Published' : 'Not Published' }}
-                </span>
-            </div>
-        </div>
+
+        <table>
+            <tr>
+                <th>Quiz Title</th>
+                <td>{{ quiz.quiz_title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ quiz.description }}</td>
+            </tr>
+            <tr>
+                <th>Content ID</th>
+                <td>{{ quiz.content_id }}</td>
+            </tr>
+            <tr>
+                <th>Quiz ID</th>
+                <td>{{ quiz.id }}</td>
+            </tr>
+            <tr>
+                <th>Time Limit</th>
+                <td>{{ quiz.time_limit }} minutes</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ quiz.is_published ? 'Published' : 'Not Published' }}</td>
+            </tr>
+        </table>
     </div>
 </div>

@@ -1,0 +1,99 @@
+.assignment-detail {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.details {
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 5px;
+  margin: 15px 0;
+}
+
+.content {
+  margin-top: 20px;
+}
+
+.content h3 {
+  color: #333;
+  margin-top: 20px;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+section {
+  margin-bottom: 15px;
+}
+
+h3 {
+  color: #333;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.card-header {
+  background-color: #f5f5f5;
+  padding: 12px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.card-header p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.card-body section:not(:last-child) {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+.error {
+  color: red;
+  padding: 20px;
+  text-align: center;
+  background-color: #fee;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.scores-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.scores-table th,
+.scores-table td {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  font-size: 14px;
+}
+
+.scores-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.on-time {
+  color: #28a745;
+  font-weight: 500;
+}
+
+.late {
+  color: #dc3545;
+  font-weight: 500;
+}

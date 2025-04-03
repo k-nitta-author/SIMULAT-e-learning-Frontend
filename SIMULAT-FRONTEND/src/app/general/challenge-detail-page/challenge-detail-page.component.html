@@ -1,1 +1,39 @@
-<p>challenge-detail-page works!</p>
+<div class="challenge-detail">
+  <button class="btn secondary" (click)="goBack()">← Back</button>
+  
+  <div *ngIf="isLoading" class="loading-spinner">
+    <div class="spinner"></div>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{errorMessage}}
+  </div>
+
+  <div class="challenge-detail" *ngIf="challenge">
+    <h2>{{challenge.title}}</h2>
+    <div class="detail-card">
+      <div class="detail-item description">
+        <strong>Description:</strong>
+        <p>{{challenge.description}}</p>
+      </div>
+      <div class="detail-item">
+        <strong>ID:</strong> {{challenge.id}}
+      </div>
+      <div class="detail-item">
+        <strong>Content ID:</strong> {{challenge.content_id}}
+      </div>
+      <div class="detail-item">
+        <strong>Created:</strong> {{challenge.created_at | date:'medium'}}
+      </div>
+      <div class="detail-item">
+        <strong>Updated:</strong> {{challenge.updated_at | date:'medium'}}
+      </div>
+      <div class="detail-item">
+        <strong>Published:</strong> {{challenge.is_published ? 'Yes' : 'No'}}
+      </div>
+      <div class="detail-item">
+        <strong>Publication Date:</strong> {{challenge.publication_date | date:'medium'}}
+      </div>
+    </div>
+  </div>
+</div>

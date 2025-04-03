@@ -1,0 +1,69 @@
+<div class="page-container">
+  <div class="loading" *ngIf="loading">Loading...</div>
+
+  <div class="content-container" *ngIf="assignment && !loading">
+    <h1>{{assignment.assignment_title}}</h1>
+    
+    <div class="card">
+      <div class="card-header">
+        <p><strong>Deadline:</strong> {{assignment.deadline | date:'medium'}}</p>
+        <p><strong>Maximum Score:</strong> {{assignment.max_score}}</p>
+        <p><strong>Content ID:</strong> {{assignment.content_id}}</p>
+        <p><strong>Term ID:</strong> {{assignment.term_id}}</p>
+      </div>
+
+      <div class="card-body">
+        <section>
+          <h3>Description</h3>
+          <p>{{assignment.description}}</p>
+        </section>
+
+        <section>
+          <h3>Instructions</h3>
+          <p>{{assignment.instructions}}</p>
+        </section>
+
+        <section>
+          <h3>Grading Criteria</h3>
+          <p>{{assignment.grading_criteria}}</p>
+        </section>
+
+        <section *ngIf="assignment.term">
+          <h3>Term Information</h3>
+          <p>School Year: {{assignment.term.school_year_start}} - {{assignment.term.school_year_end}}</p>
+        </section>
+
+        <section *ngIf="scores.length > 0">
+          <h3>Submissions</h3>
+          <table class="scores-table">
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Score</th>
+                <th>Submission Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let score of scores">
+                <td>{{score.student_name}}</td>
+                <td>{{score.score}}</td>
+                <td>{{score.submission_date | date:'medium'}}</td>
+                <td>
+                  <span [class.on-time]="score.completed_on_time" 
+                        [class.late]="!score.completed_on_time">
+                    {{score.completed_on_time ? 'On Time' : 'Late'}}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="error" *ngIf="error">
+    {{error}}
+  </div>
+</div>

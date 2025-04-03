@@ -75,3 +75,41 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+tr.pending {
+  background-color: #fff3cd;
+}
+
+tr.pending:hover {
+  background-color: #ffe69c;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-btn {
+  background-color: #6c757d;
+}
+
+.edit-btn:hover {
+  background-color: #5a6268;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.cancel-btn {
+  background-color: #dc3545;
+}
+
+.cancel-btn:hover {
+  background-color: #c82333;
+}

@@ -13,17 +13,17 @@
       <form (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="title">Title *</label>
-          <input id="title" type="text" [(ngModel)]="newContent.content_title" name="content_title" required />
+          <input id="title" type="text" [(ngModel)]="newContent.title" name="title" required />
         </div>
 
         <div class="form-group">
           <label for="description">Description *</label>
-          <textarea id="description" [(ngModel)]="newContent.content_description" name="content_description" required></textarea>
+          <textarea id="description" [(ngModel)]="newContent.description" name="description" required></textarea>
         </div>
 
         <div class="form-group">
           <label for="type">Content Type *</label>
-          <select id="type" [(ngModel)]="newContent.content_type" name="content_type" required>
+          <select id="type" [(ngModel)]="newContent.type" name="type" required>
             <option value="lecture">Lecture</option>
             <option value="video">Video</option>
             <option value="document">Document</option>
@@ -33,7 +33,7 @@
 
         <div class="form-group">
           <label for="url">Resource URL</label>
-          <input id="url" type="url" [(ngModel)]="newContent.content_url" name="content_url" />
+          <input id="url" type="url" [(ngModel)]="newContent.url" name="url" />
         </div>
 
         <div class="form-group">
@@ -85,19 +85,23 @@
       </thead>
       <tbody>
         <tr *ngFor="let content of contentList">
-          <td>{{ content.content_title }}</td>
-          <td>{{ content.content_description }}</td>
-          <td>{{ content.content_type }}</td>
           <td>
-            <a *ngIf="content.content_url" 
-               [href]="ensureHttps(content.content_url)"
+            <a [routerLink]="['/admin/content', content.id]" class="course-link">
+              {{ content.title }}
+            </a>
+          </td>
+          <td>{{ content.description }}</td>
+          <td>{{ content.type }}</td>
+          <td>
+            <a *ngIf="content.url" 
+               [href]="ensureHttps(content.url)"
                target="_blank"
                rel="noopener noreferrer"
-               class="course-link"
-               title="{{ content.content_url }}">
-              {{ formatDisplayUrl(content.content_url) }}
+               class="external-link">
+              <span>{{ formatDisplayUrl(content.url) }}</span>
+              <i class="external-icon">↗</i>
             </a>
-            <span *ngIf="!content.content_url">-</span>
+            <span *ngIf="!content.url">-</span>
           </td>
           <td>{{ content.course_id }}</td>
           <td>{{ content.term_id }}</td>

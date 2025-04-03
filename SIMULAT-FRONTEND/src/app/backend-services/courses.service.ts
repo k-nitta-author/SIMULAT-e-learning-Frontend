@@ -71,14 +71,14 @@ export class CoursesService {
     );
   }
 
-  getPendingScores(courseId: number, userId: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${courseId}/user/${userId}/pending-scores`).pipe(
+  getAllScores(courseId: number): Observable<CourseScore> {
+    return this.http.get<CourseScore>(`${this.apiUrl}/${courseId}/scores`).pipe(
       catchError(this.handleError)
     );
   }
 
-  gradeQuiz(courseId: number, quizId: number, userId: number, score: number): Observable<any> {
-    return this.http.post<any>(
+  gradeQuiz(courseId: number, quizId: number, userId: number, score: number | null): Observable<any> {
+    return this.http.put<any>(
       `${this.apiUrl}/${courseId}/quiz/${quizId}/grade/${userId}`,
       { score }
     ).pipe(
@@ -86,8 +86,8 @@ export class CoursesService {
     );
   }
 
-  gradeAssignment(courseId: number, assignmentId: number, userId: number, score: number): Observable<any> {
-    return this.http.post<any>(
+  gradeAssignment(courseId: number, assignmentId: number, userId: number, score: number | null): Observable<any> {
+    return this.http.put<any>(
       `${this.apiUrl}/${courseId}/assignment/${assignmentId}/grade/${userId}`,
       { score }
     ).pipe(
@@ -95,14 +95,75 @@ export class CoursesService {
     );
   }
 
-  gradeChallenge(courseId: number, challengeId: number, userId: number, score: number): Observable<any> {
-    return this.http.post<any>(
+  gradeChallenge(courseId: number, challengeId: number, userId: number, score: number | null): Observable<any> {
+    return this.http.put<any>(
       `${this.apiUrl}/${courseId}/challenge/${challengeId}/grade/${userId}`,
       { score }
     ).pipe(
       catchError(this.handleError)
     );
   }
+
+  completeQuiz(courseId: number, quizId: number, userId: number): Observable<any> {
+    return this.http.post<any>(
+      `${this.apiUrl}/${courseId}/quiz/${quizId}/complete/${userId}`,
+      {}
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  completeAssignment(courseId: number, assignmentId: number, userId: number): Observable<any> {
+    return this.http.post<any>(
+      `${this.apiUrl}/${courseId}/assignment/${assignmentId}/complete/${userId}`,
+      {}
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  completeChallenge(courseId: number, challengeId: number, userId: number): Observable<any> {
+    return this.http.post<any>(
+      `${this.apiUrl}/${courseId}/challenge/${challengeId}/complete/${userId}`,
+      {}
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+}
+
+interface CourseScore {
+  assignments: {
+    id: number;
+    title: string;
+    deadline: string | null;
+    scores: {
+      student_id: number;
+      score: number;
+      submission_date: string;
+      pending: boolean;
+    }[];
+  }[];
+  quizzes: {
+    id: number;
+    title: string;
+    scores: {
+      student_id: number;
+      score: number;
+      submission_date: string;
+      pending: boolean;
+    }[];
+  }[];
+  challenges: {
+    id: number;
+    title: string;
+    scores: {
+      student_id: number;
+      score: number;
+      submission_date: string;
+      pending: boolean;
+    }[];
+  }[];
 }
 
 

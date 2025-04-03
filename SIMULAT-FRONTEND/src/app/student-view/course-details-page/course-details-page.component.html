@@ -1,17 +1,22 @@
 <div class="course-details-container">
   <ng-container *ngIf="course; else loading">
     <section class="course-header">
-      <div class="course-title">
-        <h1>{{ course.course_name }}</h1>
-        <span class="course-code">{{ course.course_code }}</span>
-      </div>
-      
-      <div class="action-buttons" *ngIf="isInstructor">
-        <button class="publish-btn" 
-                *ngIf="!course.is_published"
-                (click)="onPublishCourse()">
-          Publish Course
-        </button>
+      <div class="header-top">
+        <div class="course-title">
+          <h1>{{ course.course_name }}</h1>
+          <span class="course-code">{{ course.course_code }}</span>
+        </div>
+        
+        <div class="action-buttons" *ngIf="isInstructor">
+          <button class="publish-btn" 
+                  *ngIf="!course.is_published"
+                  (click)="onPublishCourse()">
+            Publish Course
+          </button>
+          <a [routerLink]="['/course', course.id, 'pending-grades']" class="grades-btn">
+            Manage Course Grades
+          </a>
+        </div>
       </div>
 
       <div class="course-meta">
@@ -21,21 +26,28 @@
         </span></p>
         <p><strong>Term:</strong> {{ course.term }}</p>
       </div>
-
-      <p class="course-description" *ngIf="course.description">{{ course.description }}</p>
     </section>
 
-    <section class="course-materials">
-      <h2>Course Materials</h2>
-      <div class="materials-list">
-        <div class="material-item" *ngFor="let content of course.content_list">
-          <a [href]="content.url" target="_blank">{{ content.title }}</a>
+    <div class="course-content">
+      <section class="course-description" *ngIf="course.description">
+        <h2>Description</h2>
+        <p>{{ course.description }}</p>
+      </section>
+
+      <section class="course-materials">
+        <h2>Course Materials</h2>
+        <div class="materials-grid">
+          <div class="material-item" *ngFor="let content of course.content_list">
+            <a [href]="content.url" target="_blank">
+              <span>{{ content.title }}</span>
+            </a>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </ng-container>
-</div>
 
-<ng-template #loading>
-  <div class="loading">Loading course details...</div>
-</ng-template>
+  <ng-template #loading>
+    <div class="loading">Loading course details...</div>
+  </ng-template>
+</div>

@@ -24,6 +24,7 @@ import { InstructorDashboardComponent } from './instructor-view/instructor-dashb
 // Admin data management pages
 import { StudentsListComponent } from './admin-view/students/students-list/students-list.component';
 import { ContentListComponent } from './admin-view/content/content-list/content-list.component';
+import { ContentDetailComponent } from './instructor-view/content-detail/content-detail.component';
 import { AssignmentsListComponent } from './admin-view/assignments/assignments-list/assignments-list.component';
 import { QuizListComponent } from './admin-view/quizzes/quizzes-list/quizzes-list.component';
 import { InstructorsListComponent } from './admin-view/instructors/instructors-list/instructors-list.component';
@@ -41,7 +42,7 @@ import { QuizDetailComponent } from './admin-view/quizzes/quiz-detail/quiz-detai
 import { QuizComponent } from './student-view/quiz/quiz.component';
 import { ChallengeComponent } from './admin-view/challenge/challenge.component';
 import { PendingGradesComponent } from './instructor-view/pending-grades/pending-grades.component';
-
+import { AssignmentDetailComponent } from './general/assignment-detail/assignment-detail.component';
 
 import { BadgeListComponent } from './admin-view/badge-list/badge-list.component';
 
@@ -74,8 +75,7 @@ export const routes: Routes = [
 
     // Admin content management route
     { path: 'admin/content', component: ContentListComponent },
-    //{ path: 'admin/content/:id', component: ContentPageComponent },
-    {path: 'admin/pending-grades', component: PendingGradesComponent},
+    { path: 'course/:id/pending-grades', component: PendingGradesComponent },
 
     // Admin assignment management route
     { path: 'admin/assignments', component: AssignmentsListComponent },
@@ -110,10 +110,13 @@ export const routes: Routes = [
     // Assignment Views
 
     { path: 'assignment', component: AssignmentPageComponent},
+    { path: 'assignment/:id', component: AssignmentDetailComponent },
     
     // Content Views
 
     {path: 'content', component: ContentPageComponent},
+    { path: 'content/:id', component: ContentDetailComponent },
+
 
     // Badge Views
 
@@ -121,7 +124,6 @@ export const routes: Routes = [
 
     // Study Group Views
 
-    {path: 'study-group', component: StudyGroupPageComponent},
     {path: 'study-group', component: StudyGroupPageComponent},
     {path: 'study-group/:id', component: StudyGroupDetailComponent}
 
