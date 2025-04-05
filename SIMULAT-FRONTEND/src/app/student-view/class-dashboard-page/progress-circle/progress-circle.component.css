@@ -18,24 +18,24 @@
     }
 }
 
-.less-complete{
-    @apply  bg-red-600
+.less-complete {
+    @apply bg-red-600;
 }
 
-.more-complete{
-    @apply  bg-green-500
+.more-complete {
+    @apply bg-green-600;
 }
 
-.med-complete{
-    @apply bg-yellow-500
+.med-complete {
+    @apply bg-yellow-500;
 }
 
-.med-low-complete{
-    @apply bg-orange-400
+.med-low-complete {
+    @apply bg-orange-500;
 }
 
-.med-high-complete{
-    @apply bg-lime-400
+.med-high-complete {
+    @apply bg-lime-500;
 }
 
 .item-score {

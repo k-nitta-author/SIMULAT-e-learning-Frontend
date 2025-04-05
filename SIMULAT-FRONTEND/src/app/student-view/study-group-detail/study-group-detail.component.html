@@ -1,7 +1,7 @@
 <div class="container" *ngIf="studyGroup">
   <section class="header-section">
     <div class="title-container">
-      <h2 *ngIf="!isEditing" class="group-name">{{studyGroup?.name}}</h2>
+      <h2 *ngIf="!isEditing" class="group-name">{{studyGroup.name}}</h2>
       <button (click)="toggleEdit()" class="edit-btn">
         {{ isEditing ? 'Cancel' : 'Edit' }}
       </button>
@@ -31,11 +31,11 @@
     <div class="info-card">
       <div class="info-item">
         <span class="label">Course ID:</span>
-        <span class="value highlight">{{studyGroup?.course_id}}</span>
+        <span class="value highlight">{{studyGroup.course_id}}</span>
       </div>
       <div class="info-item">
         <span class="label">Members:</span>
-        <span class="value highlight">{{getMemberCount()}}/{{studyGroup?.max_members}}</span>
+        <span class="value highlight">{{getMemberCount()}}/{{studyGroup.max_members}}</span>
       </div>
     </div>
   </section>
