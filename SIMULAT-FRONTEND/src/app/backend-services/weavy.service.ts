@@ -1,3 +1,25 @@
+import { Injectable, OnDestroy } from "@angular/core";
+import { Weavy } from "@weavy/uikit-web";
+
+@Injectable({
+  providedIn: "root",
+})
+export class WeavyService implements OnDestroy {
+  weavy = new Weavy();
+
+  constructor() {
+    this.weavy.url = new URL("https://760cd803fbe2455682fdeee465254fc0.weavy.io");
+    this.weavy.tokenFactory = async (refresh) => "wyu_REhF62iymD6tydLWsZyNuk8ruBUaEG35eSEN";
+  }
+
+  ngOnDestroy(): void {
+    this.weavy.destroy();
+  }
+}
+
+// Following comment is the original code for the WeavyService class, which was replaced by the above code, and is kept here for reference.
+
+/* 
 import { Injectable } from '@angular/core';
 import { Weavy } from "@weavy/uikit-web";
 
@@ -34,4 +56,4 @@ export class WeavyService {
       }
     };
   }
-}
+} */

@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA ,Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WeavyService } from '../../backend-services/weavy.service';
 import '@weavy/uikit-web';
@@ -9,12 +9,13 @@ import '@weavy/uikit-web';
   imports: [CommonModule],
   providers: [WeavyService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  template: `
-    <wy-messenger></wy-messenger>
-  `,
   templateUrl: './inbox-page.component.html',
-  styleUrl: './inbox-page.component.css'
+  styleUrls: ['./inbox-page.component.css']
 })
-export class InboxPageComponent {
-  constructor(private weavyService: WeavyService) { }
+export class ChatComponent {
+  @Input() uid!: string;
+
+  constructor(private weavyService: WeavyService) {
+    this.weavyService = weavyService;
+  }
 }
