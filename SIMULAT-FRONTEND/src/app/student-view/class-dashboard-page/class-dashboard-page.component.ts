@@ -5,6 +5,7 @@ import { ProgressCircleComponent } from './progress-circle/progress-circle.compo
 import { DailyChallengeComponent } from './daily-challenge/daily-challenge.component';
 import { CoursesService } from '../../backend-services/courses.service';
 import { Course } from '../../general/interfaces/course';
+import { EnrolledCourse } from '../../backend-services/courses.service';
 
 @Component({
   selector: 'app-class-dashboard-page',
@@ -14,7 +15,7 @@ import { Course } from '../../general/interfaces/course';
   styleUrl: './class-dashboard-page.component.css'
 })
 export class ClassDashboardPageComponent implements OnInit {
-  enrolledCourses: Course[] = [];
+  enrolledCourses: EnrolledCourse[] = [];
   unenrolledCourses: Course[] = [];
   userId: number;
 
@@ -34,7 +35,9 @@ export class ClassDashboardPageComponent implements OnInit {
 
   loadEnrolledCourses() {
     this.coursesService.getEnrolledCourses(this.userId).subscribe({
-      next: (courses) => this.enrolledCourses = courses,
+      next: (courses) => {
+        this.enrolledCourses = courses;
+      },
       error: (error) => console.error('Error loading enrolled courses:', error)
     });
   }
@@ -56,9 +59,7 @@ export class ClassDashboardPageComponent implements OnInit {
     });
   }
 
-  calculateProgress(course: Course): number {
-    // This is a placeholder implementation
-    // You should implement actual progress calculation based on your requirements
-    return Math.floor(Math.random() * 100); // Replace with actual progress calculation
+  calculateProgress(course: EnrolledCourse): number {
+    return course.completion_percentage || 0;
   }
 }

@@ -23,7 +23,11 @@
                                 </a>
                             </td>
                             <td>{{course.course_code}}</td>
-                            <td>{{course.instructor}}</td>
+                            <td>
+                                <a [routerLink]="['/account', course.instructor_id]" class="course-link">
+                                    Instructor {{course.instructor_id}}
+                                </a>
+                            </td>
                             <td>
                                 <app-progress-circle 
                                     [progress]="calculateProgress(course)" 
@@ -54,7 +58,11 @@
                                 </a>
                             </td>
                             <td>{{course.course_code}}</td>
-                            <td>{{course.instructor}}</td>
+                            <td>
+                                <a [routerLink]="['/account', course.instructor_id]" class="course-link">
+                                    Instructor {{course.instructor_id}}
+                                </a>
+                            </td>
                             <td>
                                 <button (click)="enrollInCourse(course.id)" class="enroll-button">
                                     Enroll

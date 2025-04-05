@@ -74,31 +74,46 @@ li:hover {
     hidden 
     absolute 
     bg-white 
-    min-w-[200px]
-    shadow-lg 
+    min-w-[240px]
+    shadow-xl
     z-50
-    top-full
-    left-0
-    rounded-md
-    list-none;
+    top-[120%]
+    left-1/2
+    -translate-x-1/2
+    rounded-lg
+    list-none
+    border
+    border-gray-100
+    transition-all
+    duration-300
+    opacity-0;
 }
 
 .dropdown:hover .dropdown-content {
-    @apply block;
+    @apply 
+    block 
+    opacity-100 
+    top-full;
 }
 
 .dropdown-content li {
     @apply 
     w-full 
     text-left
-    list-none;
+    list-none
+    border-b
+    border-gray-50
+    last:border-b-0;
 }
 
 .dropdown-content li a {
     @apply 
     py-3 
-    px-4 
-    hover:bg-gray-100 
+    px-6
+    hover:bg-blue-50
+    hover:text-blue-600
+    transition-colors
+    duration-200
     w-full 
     block;
 }
@@ -106,9 +121,16 @@ li:hover {
 .dropdown > a::after {
     content: '▼';
     @apply 
-    text-xs 
-    ml-1 
-    inline-block;
+    text-[10px]
+    ml-1.5
+    inline-block
+    transition-transform
+    duration-200;
+}
+
+.dropdown:hover > a::after {
+    @apply 
+    -rotate-180;
 }
 
 .account-dropdown {
