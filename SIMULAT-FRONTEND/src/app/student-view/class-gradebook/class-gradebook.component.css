@@ -1,5 +1,5 @@
 main {
-    @apply p-8 bg-white rounded-lg shadow-sm mb-72;
+    @apply bg-white rounded-lg shadow-sm mb-72;
 }
 
 .gradebook-header {
