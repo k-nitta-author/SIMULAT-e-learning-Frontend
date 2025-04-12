@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import Student from '../../interfaces/student';
@@ -10,8 +10,9 @@ import Student from '../../interfaces/student';
   templateUrl: './profile-view.component.html',
   styleUrl: './profile-view.component.css'
 })
-export class ProfileViewComponent {
+export class ProfileViewComponent implements OnChanges {
   @Input() userId: string = '';
+  @Input() updatedUserData: Student | null = null;
 
   username: string = '';
   givenName: string = '';
@@ -29,6 +30,14 @@ export class ProfileViewComponent {
 
   ngOnInit() {
     this.loadProfile();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['updatedUserData'] && changes['updatedUserData'].currentValue) {
+      this.updateProfileData(changes['updatedUserData'].currentValue);
+    } else if (changes['userId'] && changes['userId'].currentValue) {
+      this.loadProfile();
+    }
   }
 
   loadProfile() {
@@ -51,5 +60,19 @@ export class ProfileViewComponent {
       },
       err => console.error('Profile load error', err)
     );
+  }
+
+  private updateProfileData(data: Student) {
+    this.username = data.username;
+    this.givenName = data.name_given;
+    this.middleName = '';
+    this.gender = data.gender;
+    this.email = data.email;
+    this.surname = data.name_last;
+    this.isAdmin = data.is_admin;
+    this.isInstructor = data.is_instructor;
+    this.isStudent = data.is_student;
+    this.isSuperAdmin = data.is_super_admin;
+    this.progressScore = data.progress_score;
   }
 }

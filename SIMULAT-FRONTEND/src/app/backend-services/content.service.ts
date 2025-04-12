@@ -29,11 +29,11 @@ export interface LessonMaterial {
 export interface Content {
   id: number;
   course_id: number;
-  title: string;
+  title?: string;
   content_title?: string;
-  description: string;
+  description?: string;
   content_description?: string;
-  url: string;
+  url?: string;
   content_url?: string;
   type: string;
   term_id: number;
@@ -65,14 +65,14 @@ export class ContentService {
           title: item.content_title,
           description: item.content_description,
           url: item.content_url,
-          type: item.type,
-          term_id: item.term_id,
+          type: item.type || '',
+          term_id: item.term_id || 0,
           created_at: item.created_at,
           course: item.course,
           term: item.term,
           lesson_materials: item.lesson_materials
         }))),
-        catchError(error => throwError(error))
+        catchError(error => throwError(() => error))
       );
   }
 
@@ -92,44 +92,28 @@ export class ContentService {
       );
   }
 
-  createContent(content: Omit<Content, 'id' | 'created_at' | 'course' | 'term' | 'lesson_materials'>): Observable<Content> {
+  createContent(content: Omit<Content, 'id' | 'created_at' | 'course' | 'term' | 'lesson_materials'>): Observable<ServiceResponse<Content>> {
     const payload = {
+      course_id: content.course_id,
       title: content.title,
       description: content.description,
       url: content.url,
       type: content.type,
-      course_id: content.course_id,
       term_id: content.term_id
     };
-    
-    return this.http.post<ServiceResponse<Content>>(this.apiEndpoint, payload).pipe(
-      map(response => {
-        if (!response.data) {
-          throw new Error('No content data received');
-        }
-        return response.data;
-      })
-    );
+    return this.http.post<ServiceResponse<Content>>(this.apiEndpoint, payload);
   }
 
-  updateContent(id: number, content: Partial<Content>): Observable<Content> {
+  updateContent(id: number, content: Partial<Content>): Observable<ServiceResponse<void>> {
     const payload = {
+      course_id: content.course_id,
       title: content.title,
       description: content.description,
       url: content.url,
-      course_id: content.course_id,
-      created_at: content.created_at,
+      type: content.type,
       term_id: content.term_id
     };
-
-    return this.http.put<ServiceResponse<Content>>(`${this.apiEndpoint}/${id}`, payload).pipe(
-      map(response => {
-        if (!response.data) {
-          throw new Error('No content data received');
-        }
-        return response.data;
-      })
-    );
+    return this.http.put<ServiceResponse<void>>(`${this.apiEndpoint}/${id}`, payload);
   }
 
   deleteContent(id: number): Observable<void> {

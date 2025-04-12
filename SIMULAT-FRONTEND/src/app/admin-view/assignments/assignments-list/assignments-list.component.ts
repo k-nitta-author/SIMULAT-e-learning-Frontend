@@ -74,16 +74,12 @@ export class AssignmentsListComponent implements OnInit {
 
     this.assignmentService.updateAssignment(assignment.id, assignmentToSend).subscribe({
       next: (response: AssignmentResponse) => {
-        if (response.message === 'assignment updated' && response.assignment) {
-          const index = this.assignments.findIndex(a => a.id === response.assignment!.id);
-          if (index !== -1) {
-            this.assignments[index] = {
-              ...response.assignment,
-              deadline: this.formatDateForDisplay(response.assignment.deadline)
-            };
-          }
+        if (response.message === 'assignment updated') {
+          this.getAssignments(); // Refresh the list
+          this.cancelEditing();
+        } else {
+          alert('Failed to update assignment: ' + (response.error || 'Unknown error'));
         }
-        this.cancelEditing();
       },
       error: (error) => {
         console.error('Error updating assignment:', error);
@@ -120,19 +116,14 @@ export class AssignmentsListComponent implements OnInit {
       instructions: '',
       max_score: 0,
       submission_format: '',
-      term_id: 0,
+      term_id: 1,
       updated_at: new Date().toISOString()
     };
     
     this.assignmentService.addAssignment(newAssignment).subscribe({
       next: (response: AssignmentResponse) => {
-        if (response.message === 'assignment created' && response.assignment) {
-          const newAssignmentWithFormattedDate: Assignment = {
-            ...response.assignment,
-            deadline: this.formatDateForDisplay(response.assignment.deadline)
-          };
-          this.assignments.unshift(newAssignmentWithFormattedDate);
-          this.startEditing(newAssignmentWithFormattedDate);
+        if (response.message === 'assignment created') {
+          this.getAssignments(); // Refresh the list
         } else {
           alert('Failed to add assignment: ' + (response.error || 'Unknown error'));
         }

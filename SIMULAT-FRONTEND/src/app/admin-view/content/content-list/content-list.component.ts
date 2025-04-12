@@ -83,27 +83,31 @@ export class ContentListComponent implements OnInit {
     }
     
     if (this.isEditing && this.editingId) {
-      this.contentService.updateContent(this.editingId, this.newContent)
+      this.contentService.updateContent(this.editingId, {
+        ...this.newContent,
+        created_at: new Date().toISOString() // Add created_at as required by the API
+      })
         .subscribe({
-          next: (updatedContent) => {
-            const index = this.contentList.findIndex(c => c.id === this.editingId);
-            if (index !== -1) {
-              this.contentList[index] = updatedContent;
-            }
+          next: () => {
             this.toggleModal();
             this.loadContent(); // Refresh the list
           },
-          error: (error) => console.error('Error updating content:', error)
+          error: (error) => {
+            console.error('Error updating content:', error);
+            alert('Failed to update content. Please try again.');
+          }
         });
     } else {
       this.contentService.createContent(this.newContent)
         .subscribe({
-          next: (addedContent) => {
-            this.contentList.push(addedContent);
+          next: () => {
             this.toggleModal();
             this.loadContent(); // Refresh the list
           },
-          error: (error) => console.error('Error adding content:', error)
+          error: (error) => {
+            console.error('Error adding content:', error);
+            alert('Failed to add content. Please try again.');
+          }
         });
     }
   }
@@ -138,7 +142,7 @@ export class ContentListComponent implements OnInit {
     });
   }
 
-  ensureHttps(url: string): string {
+  ensureHttps(url: string | undefined): string {
     if (!url) return '';
     // Check if valid URL
     try {
@@ -155,7 +159,7 @@ export class ContentListComponent implements OnInit {
     }
   }
 
-  formatDisplayUrl(url: string): string {
+  formatDisplayUrl(url: string | undefined): string {
     if (!url) return '';
     try {
       const urlObj = new URL(url);
@@ -163,6 +167,18 @@ export class ContentListComponent implements OnInit {
     } catch {
       return url;
     }
+  }
+
+  getTitle(content: Content): string {
+    return content.title || content.content_title || '';
+  }
+
+  getDescription(content: Content): string {
+    return content.description || content.content_description || '';
+  }
+
+  getUrl(content: Content): string {
+    return content.url || content.content_url || '';
   }
 }
 

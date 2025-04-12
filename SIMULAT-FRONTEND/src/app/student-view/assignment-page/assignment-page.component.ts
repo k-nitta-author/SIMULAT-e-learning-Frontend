@@ -55,19 +55,11 @@ export class AssignmentPageComponent implements OnInit {
   }
 
   openEditModal(assignment: Assignment): void {
-    let dateStr = '';
-    let timeStr = '00:00';
-    
-    if (assignment.deadline) {
-      const date = new Date(assignment.deadline);
-      dateStr = date.toISOString().split('T')[0];
-      timeStr = date.toTimeString().split(' ')[0].substr(0, 5);
-    }
-
+    const { date, time } = this.parseDateTime(assignment.deadline);
     this.selectedAssignment = { 
       ...assignment,
-      deadline: dateStr,
-      deadlineTime: timeStr
+      deadline: date,
+      deadlineTime: time
     };
     this.showEditModal = true;
   }
@@ -84,16 +76,26 @@ export class AssignmentPageComponent implements OnInit {
     this.selectedAssignment = null;
   }
 
-  addAssignment(): void {
-    const dateStr = this.newAssignment.deadline;
-    const timeStr = this.newAssignment.deadlineTime || '00:00';
-    const combinedDate = new Date(`${dateStr}T${timeStr}`);
+  formatDeadline(date: string, time: string = '00:00'): string {
+    const [year, month, day] = date.split('-');
+    const [hours, minutes] = time.split(':');
+    const d = new Date(Number(year), Number(month) - 1, Number(day), Number(hours), Number(minutes));
+    return d.toUTCString();
+  }
 
+  parseDateTime(utcString: string): { date: string, time: string } {
+    const d = new Date(utcString);
+    return {
+      date: d.toISOString().split('T')[0],
+      time: d.toTimeString().slice(0, 5)
+    };
+  }
+
+  addAssignment(): void {
     const formattedAssignment = {
       ...this.newAssignment,
-      deadline: combinedDate.toUTCString()
+      deadline: this.formatDeadline(this.newAssignment.deadline, this.newAssignment.deadlineTime)
     };
-    delete formattedAssignment.deadlineTime;
 
     this.assignmentService.addAssignment(formattedAssignment).subscribe({
       next: (response: AssignmentResponse) => {
@@ -110,15 +112,10 @@ export class AssignmentPageComponent implements OnInit {
 
   updateAssignment(): void {
     if (this.selectedAssignment) {
-      const dateStr = this.selectedAssignment.deadline;
-      const timeStr = this.selectedAssignment.deadlineTime || '00:00';
-      const combinedDate = new Date(`${dateStr}T${timeStr}`);
-
       const formattedAssignment = {
         ...this.selectedAssignment,
-        deadline: combinedDate.toUTCString()
+        deadline: this.formatDeadline(this.selectedAssignment.deadline, this.selectedAssignment.deadlineTime)
       };
-      delete formattedAssignment.deadlineTime;
 
       this.assignmentService.updateAssignment(formattedAssignment.id, formattedAssignment).subscribe({
         next: (response: AssignmentResponse) => {

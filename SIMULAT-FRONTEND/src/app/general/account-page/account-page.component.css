@@ -32,3 +32,19 @@ h2 {
     border
     border-gray-100
 }
+
+.header-section {
+    @apply flex justify-between items-center mb-4;
+}
+
+.edit-button {
+    @apply px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors;
+}
+
+.button-group {
+    @apply flex gap-4;
+}
+
+.delete-button {
+    @apply px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors;
+}

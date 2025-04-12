@@ -85,27 +85,40 @@
       </thead>
       <tbody>
         <tr *ngFor="let content of contentList">
+          <td>{{ getTitle(content) }}</td>
+          <td>{{ getDescription(content) }}</td>
           <td>
-            <a [routerLink]="['/admin/content', content.id]" class="course-link">
-              {{ content.title }}
-            </a>
+            <span [ngClass]="{
+              'badge-lecture': content.type === 'lecture',
+              'badge-video': content.type === 'video',
+              'badge-document': content.type === 'document',
+              'badge-exercise': content.type === 'exercise'
+            }" class="type-badge">
+              {{ content.type | titlecase }}
+            </span>
           </td>
-          <td>{{ content.description }}</td>
-          <td>{{ content.type }}</td>
           <td>
-            <a *ngIf="content.url" 
-               [href]="ensureHttps(content.url)"
+            <a *ngIf="getUrl(content)" 
+               [href]="ensureHttps(getUrl(content))"
                target="_blank"
                rel="noopener noreferrer"
                class="external-link">
-              <span>{{ formatDisplayUrl(content.url) }}</span>
+              <span>{{ formatDisplayUrl(getUrl(content)) }}</span>
               <i class="external-icon">↗</i>
             </a>
-            <span *ngIf="!content.url">-</span>
+            <span *ngIf="!getUrl(content)">-</span>
           </td>
-          <td>{{ content.course_id }}</td>
-          <td>{{ content.term_id }}</td>
-          <td>{{ content.created_at | date }}</td>
+          <td>
+            <span *ngIf="content.course">{{ content.course.course_code }}</span>
+            <span *ngIf="!content.course">{{ content.course_id }}</span>
+          </td>
+          <td>
+            <span *ngIf="content.term">
+              {{ content.term.school_year_start }} - {{ content.term.school_year_end }}
+            </span>
+            <span *ngIf="!content.term">{{ content.term_id }}</span>
+          </td>
+          <td>{{ content.created_at | date:'medium' }}</td>
           <td class="actions">
             <button class="edit-button" (click)="editContent(content.id)">Edit</button>
             <button class="delete-button" (click)="deleteContent(content.id)">Delete</button>

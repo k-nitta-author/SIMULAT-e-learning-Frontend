@@ -4,30 +4,30 @@ import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 export interface Assignment {
+  id: number;
   assignment_title: string;
   content_id: number;
-  created_at: string;
+  description: string;
   deadline: string;
   deadlineTime?: string;
-  description: string;
-  grading_criteria: string;
-  id: number;
-  instructions: string;
   max_score: number;
+  grading_criteria: string;
+  instructions: string;
+  created_at: string;
   submission_format: string;
+  updated_at: string;
+  term_id: number;
   term?: {
     id: number;
-    school_year_end: string;
     school_year_start: string;
+    school_year_end: string;
   };
   scores?: {
     score: number;
+    submission_date: string;
     student_id: number;
     student_name: string;
-    submission_date: string;
   }[];
-  term_id: number;
-  updated_at: string;
 }
 
 export interface AssignmentScore {
@@ -41,8 +41,8 @@ export interface AssignmentScore {
 
 export interface AssignmentResponse {
   message: string;
-  assignment?: Assignment;
   error?: string;
+  assignment?: any;  // Changed to any since the API returns different formats
 }
 
 @Injectable({
