@@ -10,12 +10,14 @@ interface Score {
   score: number;
   submission_date: string;
   pending: boolean;
+  is_valid: boolean;
 }
 
 interface ScoredItem {
   id: number;
   title: string;
   deadline?: string | null;
+  max_score: number;
   scores: Score[];
 }
 
@@ -160,6 +162,26 @@ export class PendingGradesComponent implements OnInit {
 
   submitGrade(itemId: number, studentId: number, type: 'quiz' | 'assignment' | 'challenge') {
     const key = `${type}-${itemId}-${studentId}`;
+    const score = this.gradeInputs[key];
+    
+    // Find item and check max score
+    let item: ScoredItem | undefined;
+    switch (type) {
+      case 'quiz':
+        item = this.allScores.quizzes.find(q => q.id === itemId);
+        break;
+      case 'assignment':
+        item = this.allScores.assignments.find(a => a.id === itemId);
+        break;
+      case 'challenge':
+        item = this.allScores.challenges.find(c => c.id === itemId);
+        break;
+    }
+
+    if (item && score > item.max_score) {
+      alert(`Score cannot exceed maximum score of ${item.max_score}`);
+      return;
+    }
     
     switch (type) {
       case 'quiz':

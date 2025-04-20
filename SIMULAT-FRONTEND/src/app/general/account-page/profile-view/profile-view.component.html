@@ -1,51 +1,40 @@
-<section>
-    <aside>
-        <img src="" alt="Profile image"/>
-    </aside>
-    <main>
-        <h3>{{ givenName }} {{ middleName }} {{ surname }}</h3>
-    </main>
-</section>
-
 <div class="profile-container">
-    <div class="header">
-        <h3>Profile Information</h3>
-        <button>EDIT</button>
+    <div class="profile-header">
+        <div class="avatar-section">
+            <img src="assets/default-avatar.png" alt="Profile image"/>
+            <h3>{{ givenName }} {{ surname }}</h3>
+            <span class="username">{{'@' + username}}</span>
+        </div>
+        
+        <div class="role-tags">
+            <span *ngFor="let role of roles" class="role-tag">{{ role }}</span>
+        </div>
     </div>
-    
-    <div class="info-section">
+
+    <div class="info-grid">
         <div class="info-group">
-            <label>Username:</label>
-            <span>{{username}}</span>
+            <label>Email</label>
+            <span>{{ email }}</span>
         </div>
         
         <div class="info-group">
-            <label>Name:</label>
-            <span>{{givenName}} {{surname}}</span>
+            <label>Gender</label>
+            <span>{{ gender }}</span>
         </div>
 
         <div class="info-group">
-            <label>Email:</label>
-            <span>{{email}}</span>
+            <label>Overall Progress</label>
+            <div class="progress-bar">
+                <div class="progress-fill" [style.width.%]="overallProgress"></div>
+                <span class="progress-text">{{ overallProgress }}%</span>
+            </div>
         </div>
-
+        
         <div class="info-group">
-            <label>Gender:</label>
-            <span>{{gender}}</span>
-        </div>
-
-        <div class="info-group">
-            <label>Progress Score:</label>
-            <span>{{progressScore}}%</span>
-        </div>
-
-        <div class="roles-section">
-            <label>Roles:</label>
-            <div class="role-tags">
-                <span *ngIf="isStudent" class="role-tag">Student</span>
-                <span *ngIf="isInstructor" class="role-tag">Instructor</span>
-                <span *ngIf="isAdmin" class="role-tag">Admin</span>
-                <span *ngIf="isSuperAdmin" class="role-tag">Super Admin</span>
+            <label>Progress Score</label>
+            <div class="progress-bar">
+                <div class="progress-fill" [style.width.%]="progressScore"></div>
+                <span class="progress-text">{{ progressScore }}%</span>
             </div>
         </div>
     </div>

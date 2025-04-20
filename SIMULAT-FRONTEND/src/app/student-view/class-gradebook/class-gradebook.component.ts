@@ -42,7 +42,7 @@ export class ClassGradebookComponent implements OnInit {
             },
             totalScore: this.calculateTotalScore(scores),
             averageScore: this.calculateAverageScore(scores),
-            progress_score: student.progress_score || 0
+            progress_score: student.overall_progress || 0
           };
           this.gradebookEntries = [entry];
           this.loading = false;

@@ -10,7 +10,7 @@
   <div *ngIf="termData && !loading" class="term-card">
     <div class="term-header">
       <h2>School Year Details</h2>
-      <div class="action-buttons" *ngIf="isInstructor">
+      <div class="action-buttons" *ngIf="isAuthorized">
         <button class="edit-btn" (click)="onEdit()">Edit</button>
         <button class="delete-btn" (click)="onDelete()">Delete</button>
       </div>
@@ -71,7 +71,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal" *ngIf="showEditModal">
+<div class="modal" *ngIf="showEditModal && isAuthorized">
   <div class="modal-content">
     <div class="modal-header">
       <h3>Edit School Year</h3>

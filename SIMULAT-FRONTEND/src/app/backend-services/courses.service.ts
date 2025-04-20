@@ -8,6 +8,7 @@ import { Course } from '../general/interfaces/course';
 interface ActivityScore {
   score: number;
   submission_date: string;
+  is_valid: boolean;
 }
 
 interface AssignmentScore extends ActivityScore {
@@ -175,31 +176,37 @@ interface CourseScore {
     id: number;
     title: string;
     deadline: string | null;
+    max_score: number;
     scores: {
       student_id: number;
       score: number;
       submission_date: string;
       pending: boolean;
+      is_valid: boolean;
     }[];
   }[];
   quizzes: {
     id: number;
     title: string;
+    max_score: number;
     scores: {
       student_id: number;
       score: number;
       submission_date: string;
       pending: boolean;
+      is_valid: boolean;
     }[];
   }[];
   challenges: {
     id: number;
     title: string;
+    max_score: number;
     scores: {
       student_id: number;
       score: number;
       submission_date: string;
       pending: boolean;
+      is_valid: boolean;
     }[];
   }[];
 }

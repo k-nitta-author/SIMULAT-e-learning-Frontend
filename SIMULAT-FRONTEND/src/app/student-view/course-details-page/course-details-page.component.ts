@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 export class CourseDetailsPageComponent implements OnInit {
   course?: Course;
   isInstructor: boolean = false;
+  hasAdminPrivileges: boolean = false;
 
   constructor(
     private coursesService: CoursesService,
@@ -21,6 +22,10 @@ export class CourseDetailsPageComponent implements OnInit {
     private router: Router
   ) {
     this.isInstructor = localStorage.getItem('is_instructor') === 'true';
+    this.hasAdminPrivileges = 
+      localStorage.getItem('is_admin') === 'true' ||
+      localStorage.getItem('is_instructor') === 'true' ||
+      localStorage.getItem('is_super_admin') === 'true';
   }
 
   ngOnInit(): void {

@@ -32,11 +32,20 @@ export class AssignmentPageComponent implements OnInit {
     term_id: 1, // Set default term_id
     updated_at: new Date().toISOString()
   };
+  hasEditPermission: boolean = false;
 
   constructor(private assignmentService: AssignmentService) {}
 
   ngOnInit(): void {
     this.loadAssignments();
+    this.checkUserPermissions();
+  }
+
+  checkUserPermissions(): void {
+    const isAdmin = localStorage.getItem('is_admin') === 'true';
+    const isInstructor = localStorage.getItem('is_instructor') === 'true';
+    const isSuperAdmin = localStorage.getItem('is_super_admin') === 'true';
+    this.hasEditPermission = isAdmin || isInstructor || isSuperAdmin;
   }
 
   loadAssignments(): void {

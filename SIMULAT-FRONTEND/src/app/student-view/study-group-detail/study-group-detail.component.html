@@ -2,7 +2,7 @@
   <section class="header-section">
     <div class="title-container">
       <h2 *ngIf="!isEditing" class="group-name">{{studyGroup.name}}</h2>
-      <button (click)="toggleEdit()" class="edit-btn">
+      <button *ngIf="isAdminOrInstructor" (click)="toggleEdit()" class="edit-btn">
         {{ isEditing ? 'Cancel' : 'Edit' }}
       </button>
     </div>

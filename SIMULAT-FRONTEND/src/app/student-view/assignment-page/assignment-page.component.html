@@ -2,7 +2,7 @@
   <div class="content-container">
     <div class="header-actions">
       <h1>Assignments</h1>
-      <button class="add-button" (click)="openAddModal()">Add Assignment</button>
+      <button class="add-button" *ngIf="hasEditPermission" (click)="openAddModal()">Add Assignment</button>
     </div>
     
     <table>
@@ -28,8 +28,10 @@
           <td>{{ assignment.submission_format }}</td>
           <td>Term {{ assignment.term_id }}</td>
           <td class="actions">
-            <button class="button-outline" (click)="openEditModal(assignment)">Edit</button>
-            <button class="button-outline delete" (click)="openDeleteModal(assignment)">Delete</button>
+            <ng-container *ngIf="hasEditPermission">
+              <button class="button-outline" (click)="openEditModal(assignment)">Edit</button>
+              <button class="button-outline delete" (click)="openDeleteModal(assignment)">Delete</button>
+            </ng-container>
           </td>
         </tr>
       </tbody>
@@ -49,7 +51,6 @@
                placeholder="e.g., Quiz 1: Introduction to Programming" 
                required>
       </div>
-
       <div class="form-group">
         <label>Deadline *</label>
         <div class="date-time-inputs">
@@ -63,7 +64,6 @@
                  required>
         </div>
       </div>
-
       <div class="form-row">
         <div class="form-group half">
           <label>Content ID *</label>
@@ -82,7 +82,6 @@
                  required>
         </div>
       </div>
-
       <div class="form-group">
         <label>Grading Criteria *</label>
         <textarea [(ngModel)]="showAddModal ? newAssignment.grading_criteria : selectedAssignment!.grading_criteria" 
@@ -90,7 +89,6 @@
                   placeholder="e.g., 90-100: Excellent, 80-89: Good..." 
                   required></textarea>
       </div>
-
       <div class="form-group">
         <label>Submission Format *</label>
         <textarea [(ngModel)]="showAddModal ? newAssignment.submission_format : selectedAssignment!.submission_format" 
@@ -98,7 +96,6 @@
                   placeholder="e.g., PDF file containing..." 
                   required></textarea>
       </div>
-
       <div class="form-group">
         <label>Term ID *</label>
         <input [(ngModel)]="showAddModal ? newAssignment.term_id : selectedAssignment!.term_id" 
@@ -107,7 +104,6 @@
                placeholder="e.g., 1" 
                required>
       </div>
-
       <div class="modal-buttons">
         <button type="button" class="button-outline" (click)="closeModals()">Cancel</button>
         <button type="submit">{{ showAddModal ? 'Create' : 'Save Changes' }}</button>

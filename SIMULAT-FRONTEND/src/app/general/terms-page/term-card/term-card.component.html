@@ -7,7 +7,7 @@
     <p><strong>School Year Start:</strong> {{term.school_year_start}}</p>
     <p><strong>School Year End:</strong> {{term.school_year_end}}</p>
   </div>
-  <div class="card-footer">
+  <div *ngIf="showActions" class="card-footer">
     <button (click)="onEdit()">Edit</button>
     <button (click)="onDelete()">Delete</button>
   </div>

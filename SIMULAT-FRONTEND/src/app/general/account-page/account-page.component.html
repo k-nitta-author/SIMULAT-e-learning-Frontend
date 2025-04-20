@@ -2,20 +2,18 @@
     <div class="header-section">
         <h2>My Account</h2>
         <div class="button-group">
-            <button (click)="openEditModal()" class="edit-button" *ngIf="userData">Edit Profile</button>
-            <button (click)="handleDeleteUser()" class="delete-button" *ngIf="userData">Delete Account</button>
+            <button (click)="openEditModal()" class="edit-button" *ngIf="userData?.is_super_admin">Edit Profile</button>
+            <button (click)="handleDeleteUser()" class="delete-button" *ngIf="userData?.is_super_admin">Delete Account</button>
         </div>
     </div>
 
-    <section class="section-1">
+    <section class="content-section">
         <app-profile-view 
             [userId]="userId"
             [updatedUserData]="userData">
         </app-profile-view>
-        <app-admin-info-view></app-admin-info-view>
-    </section>
-
-    <section class="section-2">
+        <app-admin-info-view *ngIf="userData?.is_admin || userData?.is_super_admin">
+        </app-admin-info-view>
     </section>
 
     <app-edit-profile-modal

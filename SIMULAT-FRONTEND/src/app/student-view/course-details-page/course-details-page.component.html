@@ -13,7 +13,9 @@
                   (click)="onPublishCourse()">
             Publish Course
           </button>
-          <a [routerLink]="['/course', course.id, 'pending-grades']" class="grades-btn">
+          <a [routerLink]="['/course', course.id, 'pending-grades']" 
+             class="grades-btn"
+             *ngIf="hasAdminPrivileges">
             Manage Course Grades
           </a>
         </div>

@@ -75,6 +75,7 @@ export class TermsDetailComponent implements OnInit {
     school_year_start: '',
     school_year_end: ''
   };
+  isAuthorized: boolean = false;
 
   constructor(
     private termsService: TermsService,
@@ -83,7 +84,7 @@ export class TermsDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isInstructor = localStorage.getItem('is_instructor') === 'true';
+    this.checkAuthorization();
     const termId = this.route.snapshot.params['id'];
     
     if (termId) {
@@ -100,7 +101,17 @@ export class TermsDetailComponent implements OnInit {
     }
   }
 
+  checkAuthorization(): void {
+    const isAdmin = localStorage.getItem('is_admin') === 'true';
+    const isInstructor = localStorage.getItem('is_instructor') === 'true';
+    this.isAuthorized = isAdmin || isInstructor;
+  }
+
   onEdit(): void {
+    if (!this.isAuthorized) {
+      alert('You are not authorized to edit terms');
+      return;
+    }
     if (this.termData?.term) {
       this.editingTerm = {
         school_year_start: this.termData.term.school_year_start,
@@ -115,6 +126,10 @@ export class TermsDetailComponent implements OnInit {
   }
 
   saveChanges(): void {
+    if (!this.isAuthorized) {
+      alert('You are not authorized to modify terms');
+      return;
+    }
     if (this.termData?.term) {
       this.termsService.updateTerm(this.termData.term.id, this.editingTerm).subscribe({
         next: () => {
@@ -137,6 +152,10 @@ export class TermsDetailComponent implements OnInit {
   }
 
   onDelete(): void {
+    if (!this.isAuthorized) {
+      alert('You are not authorized to delete terms');
+      return;
+    }
     if (this.termData?.term && confirm('Are you sure you want to delete this term?')) {
       this.termsService.deleteTerm(this.termData.term.id).subscribe({
         next: () => {

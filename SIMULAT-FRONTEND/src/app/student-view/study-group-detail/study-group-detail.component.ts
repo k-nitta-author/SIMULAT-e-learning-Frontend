@@ -22,11 +22,17 @@ export class StudyGroupDetailComponent implements OnInit {
     max_members: 0
   };
   members: StudyGroupMember[] = [];
+  isAdminOrInstructor: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private studyGroupService: StudyGroupService
-  ) {}
+  ) {
+    this.isAdminOrInstructor = 
+      localStorage.getItem('is_instructor') === 'true' ||
+      localStorage.getItem('is_admin') === 'true' ||
+      localStorage.getItem('is_super_admin') === 'true';
+  }
 
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));

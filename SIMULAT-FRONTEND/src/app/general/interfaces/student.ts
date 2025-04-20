@@ -10,5 +10,7 @@ export default interface Student {
     name_last: string;
     password: string;
     progress_score: number;
+    overall_progress: number;
     username: string;
+    active: boolean;
 }

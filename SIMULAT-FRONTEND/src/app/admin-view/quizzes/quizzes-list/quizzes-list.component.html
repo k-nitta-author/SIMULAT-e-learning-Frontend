@@ -11,7 +11,7 @@
       <th>Term</th>
       <th>Content</th>
       <th>Status</th>
-      <th>Actions</th>
+      <th *ngIf="hasEditPermission">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -38,9 +38,9 @@
           {{ quiz.is_published ? 'Published' : 'Draft' }}
         </span>
       </td>
-      <td class="action-buttons">
-        <button type="button" class="btn btn-secondary" (click)="openModal(quiz)">Edit</button>
-        <button type="button" class="btn btn-danger" (click)="deleteQuiz(quiz.id)">Delete</button>
+      <td class="action-buttons" *ngIf="hasEditPermission">
+        <button *ngIf="hasEditPermission" type="button" class="btn btn-secondary" (click)="openModal(quiz)">Edit</button>
+        <button *ngIf="hasEditPermission" type="button" class="btn btn-danger" (click)="deleteQuiz(quiz.id)">Delete</button>
       </td>
     </tr>
   </tbody>

@@ -6,6 +6,8 @@ import { TermCardComponent } from './term-card/term-card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
+// Remove AuthService import
+
 interface Term {
   id: number;
   school_year_end: string;
@@ -33,11 +35,22 @@ export class TermsPageComponent implements OnInit {
   currentTerm: Term = this.getEmptyTerm();
   dateError: string = '';
   minStartDate = new Date().toISOString().split('T')[0]; // Today's date in YYYY-MM-DD
+  isAuthorized: boolean = false;
+  maxEndDate: string = new Date(new Date().setFullYear(new Date().getFullYear() + 10)).toISOString().split('T')[0]; // 10 years from now
 
-  constructor(private termsService: TermsService) {}
+  constructor(
+    private termsService: TermsService // Remove AuthService
+  ) {}
 
   ngOnInit(): void {
     this.getTerms();
+    this.checkAuthorization();
+  }
+
+  checkAuthorization(): void {
+    const isAdmin = localStorage.getItem('is_admin') === 'true';
+    const isInstructor = localStorage.getItem('is_instructor') === 'true';
+    this.isAuthorized = isAdmin || isInstructor;
   }
 
   getTerms(): void {
@@ -54,6 +67,11 @@ export class TermsPageComponent implements OnInit {
   }
 
   deleteTerm(id: number): void {
+    this.checkAuthorization();
+    if (!this.isAuthorized) {
+      alert('Unauthorized: Only administrators and instructors can delete terms');
+      return;
+    }
     this.termsService.deleteTerm(id).subscribe({
       next: () => {
         this.terms = this.terms.filter(term => term.id !== id);
@@ -63,11 +81,28 @@ export class TermsPageComponent implements OnInit {
   }
 
   validateDates(): boolean {
+    if (!this.currentTerm.school_year_start || !this.currentTerm.school_year_end) {
+      this.dateError = 'Both start and end dates are required';
+      return false;
+    }
+
     const start = new Date(this.currentTerm.school_year_start);
     const end = new Date(this.currentTerm.school_year_end);
+    const today = new Date();
+    const maxDate = new Date(this.maxEndDate);
     
+    if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+      this.dateError = 'Invalid date format';
+      return false;
+    }
+
     if (end <= start) {
       this.dateError = 'End date must be after start date';
+      return false;
+    }
+
+    if (start > maxDate || end > maxDate) {
+      this.dateError = 'Dates cannot be more than 10 years in the future';
       return false;
     }
     
@@ -75,7 +110,19 @@ export class TermsPageComponent implements OnInit {
     return true;
   }
 
+  onDateChange(): void {
+    this.validateDates();
+  }
+
   addTerm(): void {
+    this.checkAuthorization();
+    if (!this.isAuthorized) {
+      alert('Unauthorized: Only administrators and instructors can add terms');
+      return;
+    }
+    if (!this.validateDates()) {
+      return;
+    }
     if (!this.isEditMode && this.validateDates()) {
       this.termsService.createTerm(this.currentTerm).subscribe({
         next: () => {
@@ -88,6 +135,14 @@ export class TermsPageComponent implements OnInit {
   }
 
   updateTerm(): void {
+    this.checkAuthorization();
+    if (!this.isAuthorized) {
+      alert('Unauthorized: Only administrators and instructors can update terms');
+      return;
+    }
+    if (!this.validateDates()) {
+      return;
+    }
     if (this.isEditMode && this.validateDates()) {
       this.termsService.updateTerm(this.currentTerm.id, this.currentTerm).subscribe({
         next: () => {
@@ -100,6 +155,11 @@ export class TermsPageComponent implements OnInit {
   }
 
   openModal(): void {
+    this.checkAuthorization();
+    if (!this.isAuthorized) {
+      alert('Unauthorized: Only administrators and instructors can modify terms');
+      return;
+    }
     this.isEditMode = false;
     this.currentTerm = this.getEmptyTerm();
     this.isModalOpen = true;

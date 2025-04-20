@@ -113,3 +113,13 @@ a:hover {
 .cancel-btn:hover {
   background-color: #c82333;
 }
+
+.invalid-score {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+input[type="number"].ng-invalid {
+  border-color: #dc3545;
+  background-color: #fff3f3;
+}

@@ -20,8 +20,12 @@ export class StudentsListComponent implements OnInit {
   modalStudent: any = this.getEmptyStudent(); // Data for the modal
   sortColumn: string = 'name_last';
   sortDirection: 'asc' | 'desc' = 'asc';
+  isAdmin: boolean = false;
 
-  constructor(private studentService: StudentService) {}
+  constructor(private studentService: StudentService) {
+    const isAdmin = localStorage.getItem('is_admin');
+    this.isAdmin = isAdmin === 'true';
+  }
 
   ngOnInit(): void {
     this.loadStudents();
@@ -52,16 +56,31 @@ export class StudentsListComponent implements OnInit {
   // Saves the student (Add or Edit) by sending a POST or PUT request as appropriate
   saveStudent(): void {
     if (this.isEditing) {
-      this.studentService.updateStudent(this.modalStudent.id.toString(), this.modalStudent).subscribe(
-        res => {
-          console.log('Student updated', res);
-          const index = this.students.findIndex(s => s.id === res.id);
-          if (index !== -1) {
-            this.students[index] = res;
-          }
-          this.closeModal();
+      // Extract privileges data
+      const privileges = {
+        is_admin: this.modalStudent.is_admin,
+        is_instructor: this.modalStudent.is_instructor,
+        is_student: this.modalStudent.is_student,
+        is_super_admin: this.modalStudent.is_super_admin
+      };
+
+      // First update privileges
+      this.studentService.grantPrivileges(this.modalStudent.id.toString(), privileges).subscribe(
+        () => {
+          // Then update other user data
+          this.studentService.updateStudent(this.modalStudent.id.toString(), this.modalStudent).subscribe(
+            res => {
+              console.log('Student updated', res);
+              const index = this.students.findIndex(s => s.id === res.id);
+              if (index !== -1) {
+                this.students[index] = res;
+              }
+              this.closeModal();
+            },
+            err => console.error('Error updating student', err)
+          );
         },
-        err => console.error('Error updating student', err)
+        err => console.error('Error updating privileges', err)
       );
     } else {
       this.studentService.createStudent(this.modalStudent).subscribe(
@@ -128,7 +147,6 @@ export class StudentsListComponent implements OnInit {
       gender: '',
       email: '',
       username: '',
-      password: '',
       progress_score: 0,
       is_admin: false,
       is_instructor: false,

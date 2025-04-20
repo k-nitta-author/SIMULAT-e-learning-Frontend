@@ -1,5 +1,5 @@
 <!-- Button to Add a New Student -->
-<button type="button" class="btn btn-primary mb-3" (click)="openModal()">Add New Student</button>
+<button type="button" class="btn btn-primary mb-3" (click)="openModal()" *ngIf="isAdmin">Add New Student</button>
 
 <!-- Students Table -->
 <table class="student-table">
@@ -24,7 +24,9 @@
         </a>
       </td>
       <td>{{ student.username }}</td>
-      <td>{{ student.email }}</td>
+      <td>
+        <a href="mailto:{{ student.email }}" class="email-link">{{ student.email }}</a>
+      </td>
       <td>{{ student.gender }}</td>
       <td>
         <div class="progress-bar">
@@ -37,17 +39,18 @@
         <span *ngIf="student.is_instructor" class="badge instructor">Instructor</span>
         <span *ngIf="student.is_student" class="badge student">Student</span>
       </td>
-      <td>
+      <td *ngIf="isAdmin">
         <button class="btn btn-sm btn-edit" (click)="openModal(student)">Edit</button>
         <button class="btn btn-sm btn-delete" (click)="deleteStudent(student.id)">Delete</button>
       </td>
+      <td *ngIf="!isAdmin">-</td>
     </tr>
   </tbody>
 </table>
 
 <!-- Modal -->
 <div class="modal" *ngIf="isModalOpen">
-  <div class="modal-content">
+  <div class="modal-content enhanced-modal">
     <h2>{{ isEditing ? 'Edit Student' : 'Add New Student' }}</h2>
     <form (ngSubmit)="saveStudent()">
       <!-- Basic Information -->
@@ -83,12 +86,6 @@
         <div class="form-group">
           <label for="username">Username</label>
           <input id="username" type="text" [(ngModel)]="modalStudent.username" name="username" required />
-        </div>
-
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input id="password" type="password" [(ngModel)]="modalStudent.password" name="password" 
-                 [required]="!isEditing" [placeholder]="isEditing ? 'Leave blank to keep current password' : 'Enter password'" />
         </div>
       </div>
 

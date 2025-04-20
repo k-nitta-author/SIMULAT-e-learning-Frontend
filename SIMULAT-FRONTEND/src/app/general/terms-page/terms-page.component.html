@@ -1,12 +1,13 @@
 <section class="terms-page">
   <header>
     <h1>School Terms</h1>
-    <button (click)="openModal()">Add Term</button>
+    <button *ngIf="isAuthorized" (click)="openModal()">Add Term</button>
   </header>
   <main class="terms-grid">
     <div *ngFor="let term of terms" class="term-link">
       <app-term-card 
         [term]="term"
+        [showActions]="isAuthorized"
         (edit)="editTerm($event)"
         (delete)="deleteTerm($event)">
       </app-term-card>
@@ -14,8 +15,8 @@
     </div>
   </main>
 
-  <!-- Modal -->
-  <div *ngIf="isModalOpen" class="modal">
+  <!-- Only render modal if user is authorized -->
+  <div *ngIf="isModalOpen && isAuthorized" class="modal">
     <div class="modal-content">
       <span class="close" (click)="closeModal()">&times;</span>
       <h2>{{ isEditMode ? 'Edit Term' : 'Add Term' }}</h2>
@@ -27,6 +28,8 @@
           [(ngModel)]="currentTerm.school_year_start" 
           name="school_year_start"
           [min]="minStartDate"
+          [max]="maxEndDate"
+          (change)="onDateChange()"
           required>
 
         <label for="school_year_end">School Year End:</label>
@@ -36,13 +39,15 @@
           [(ngModel)]="currentTerm.school_year_end" 
           name="school_year_end"
           [min]="currentTerm.school_year_start"
+          [max]="maxEndDate"
+          (change)="onDateChange()"
           required>
 
         <div *ngIf="dateError" class="error-message">
           {{ dateError }}
         </div>
 
-        <button type="submit" [disabled]="!!dateError">
+        <button type="submit" [disabled]="!!dateError || !currentTerm.school_year_start || !currentTerm.school_year_end">
           {{ isEditMode ? 'Update' : 'Add' }}
         </button>
       </form>

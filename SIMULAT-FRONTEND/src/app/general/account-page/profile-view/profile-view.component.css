@@ -15,11 +15,39 @@ img{
 }
 
 .profile-container {
-    @apply flex flex-col gap-4;
+    @apply flex flex-col gap-6;
 }
 
-h3 {
-    @apply text-xl font-semibold mb-4;
+.profile-header {
+    @apply flex flex-col items-center gap-4 mb-6;
+}
+
+.avatar-section {
+    @apply flex flex-col items-center gap-2;
+}
+
+.avatar-section img {
+    @apply w-32 h-32 rounded-full object-cover border-4 border-white shadow-lg;
+}
+
+.avatar-section h3 {
+    @apply text-2xl font-bold text-gray-800 m-0;
+}
+
+.username {
+    @apply text-gray-500 text-sm;
+}
+
+.role-tags {
+    @apply flex flex-wrap justify-center gap-2;
+}
+
+.role-tag {
+    @apply px-3 py-1 text-sm rounded-full bg-blue-100 text-blue-800 font-medium;
+}
+
+.info-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-6;
 }
 
 .info-section {
@@ -31,23 +59,27 @@ h3 {
 }
 
 .info-group label {
-    @apply text-sm text-gray-500 font-medium;
+    @apply text-sm font-medium text-gray-500;
 }
 
 .info-group span {
     @apply text-gray-800;
 }
 
+.progress-bar {
+    @apply relative h-6 bg-gray-100 rounded-full overflow-hidden;
+}
+
+.progress-fill {
+    @apply absolute h-full bg-blue-500 transition-all duration-300;
+}
+
+.progress-text {
+    @apply absolute inset-0 flex items-center justify-center text-sm font-medium text-white;
+}
+
 .roles-section {
     @apply mt-4;
-}
-
-.role-tags {
-    @apply flex flex-wrap gap-2 mt-2;
-}
-
-.role-tag {
-    @apply px-3 py-1 text-sm rounded-full bg-blue-100 text-blue-800;
 }
 
 .header {

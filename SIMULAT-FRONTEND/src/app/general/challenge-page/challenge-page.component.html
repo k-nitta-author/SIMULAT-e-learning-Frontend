@@ -1,7 +1,7 @@
 <div class="challenges-container">
   <div class="header-actions">
     <h2>Challenge Management</h2>
-    <button class="btn primary" (click)="openCreateModal()" [disabled]="isLoading">
+    <button *ngIf="hasEditPermission" class="btn primary" (click)="openCreateModal()" [disabled]="isLoading">
       <i class="fas fa-plus"></i> New Challenge
     </button>
   </div>
@@ -80,7 +80,7 @@
         <th>Updated At</th>
         <th>Published</th>
         <th>Publication Date</th>
-        <th>Actions</th>
+        <th *ngIf="hasEditPermission">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -108,7 +108,7 @@
         <td>{{challenge.updated_at | date:'short'}}</td>
         <td>{{challenge.is_published ? 'Yes' : 'No'}}</td>
         <td>{{challenge.publication_date | date:'short'}}</td>
-        <td>
+        <td *ngIf="hasEditPermission">
           <div class="action-buttons">
             <ng-container *ngIf="editingId !== challenge.id; else editActions">
               <button class="btn edit" (click)="startEdit(challenge)">Edit</button>

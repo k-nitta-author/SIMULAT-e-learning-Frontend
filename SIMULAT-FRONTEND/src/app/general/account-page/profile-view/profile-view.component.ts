@@ -24,7 +24,9 @@ export class ProfileViewComponent implements OnChanges {
   isInstructor: boolean = false;
   isStudent: boolean = false;
   isSuperAdmin: boolean = false;
+  overallProgress: number = 0;  // renamed from progressScore
   progressScore: number = 0;
+  roles: string[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -56,6 +58,7 @@ export class ProfileViewComponent implements OnChanges {
         this.isInstructor = res.is_instructor;
         this.isStudent = res.is_student;
         this.isSuperAdmin = res.is_super_admin;
+        this.overallProgress = res.overall_progress;
         this.progressScore = res.progress_score;
       },
       err => console.error('Profile load error', err)
@@ -73,6 +76,13 @@ export class ProfileViewComponent implements OnChanges {
     this.isInstructor = data.is_instructor;
     this.isStudent = data.is_student;
     this.isSuperAdmin = data.is_super_admin;
+    this.overallProgress = data.overall_progress;
     this.progressScore = data.progress_score;
+    this.roles = [
+      data.is_student ? 'Student' : '',
+      data.is_instructor ? 'Instructor' : '',
+      data.is_admin ? 'Admin' : '',
+      data.is_super_admin ? 'Super Admin' : ''
+    ].filter(role => role !== '');
   }
 }

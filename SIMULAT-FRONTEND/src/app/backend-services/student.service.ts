@@ -16,9 +16,17 @@ export interface Student {
   is_student: boolean;
   is_instructor: boolean;
   progress_score: number;
+  overall_progress: number;  // Changed from progress_score
   gender: string;
+  active: boolean;
 }
 
+export interface UserPrivileges {
+  is_admin: boolean;
+  is_instructor: boolean;
+  is_student: boolean;
+  is_super_admin: boolean;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -65,7 +73,11 @@ export class StudentService {
 
   // Creates a new user
   createStudent(student: Student): Observable<Student> {
-    return this.http.post<Student>(`${this.apiUrl}/user`, student);
+    const studentData = {
+      ...student,
+      active: true  // Set default active status
+    };
+    return this.http.post<Student>(`${this.apiUrl}/user`, studentData);
   }
 
   // Deletes a user
@@ -75,11 +87,15 @@ export class StudentService {
 
   // Updates user data
   updateStudent(id: string, student: Student): Observable<Student> {
-    return this.http.put<Student>(`${this.apiUrl}/user/${id}`, student);
+    const studentData = {
+      ...student,
+      active: student.active ?? true  // Preserve active status or default to true
+    };
+    return this.http.put<Student>(`${this.apiUrl}/user/${id}`, studentData);
   }
 
-  // Grants or takes away user priveliges to users
-  grantPrivileges(id: string, privileges: any): Observable<Student> {
+  // Grants or takes away user privileges
+  grantPrivileges(id: string, privileges: UserPrivileges): Observable<Student> {
     return this.http.put<Student>(`${this.apiUrl}/user/${id}/grant`, privileges);
   }
 
@@ -111,6 +127,11 @@ export class StudentService {
   // Gets the user's all scores
   getStudentAllScores(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/user/${id}/all-scores`);
+  }
+
+  // Add method to toggle active status
+  toggleUserActive(id: string, active: boolean): Observable<Student> {
+    return this.http.put<Student>(`${this.apiUrl}/user/${id}`, { active });
   }
 }
 

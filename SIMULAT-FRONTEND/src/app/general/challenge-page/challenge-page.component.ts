@@ -24,6 +24,7 @@ export class ChallengePageComponent implements OnInit {
   toastType = '';
   editingId: number | null = null;
   editForm: Partial<Challenge> = {};
+  hasEditPermission: boolean = false;
 
   constructor(
     private challengeService: ChallengeService,
@@ -41,6 +42,14 @@ export class ChallengePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadChallenges();
+    this.checkUserPermissions();
+  }
+
+  checkUserPermissions(): void {
+    const isAdmin = localStorage.getItem('is_admin') === 'true';
+    const isInstructor = localStorage.getItem('is_instructor') === 'true';
+    const isSuperAdmin = localStorage.getItem('is_super_admin') === 'true';
+    this.hasEditPermission = isAdmin || isInstructor || isSuperAdmin;
   }
 
   loadChallenges(): void {

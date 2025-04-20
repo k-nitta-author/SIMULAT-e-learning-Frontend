@@ -28,11 +28,20 @@ export class QuizListComponent implements OnInit {
   isModalOpen = false;
   isEditing = false;
   modalQuiz: Quiz = this.getEmptyQuiz();
+  hasEditPermission: boolean = false;
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.getQuizzes();
+    this.checkUserPermissions();
+  }
+
+  checkUserPermissions(): void {
+    const isAdmin = localStorage.getItem('is_admin') === 'true';
+    const isInstructor = localStorage.getItem('is_instructor') === 'true';
+    const isSuperAdmin = localStorage.getItem('is_super_admin') === 'true';
+    this.hasEditPermission = isAdmin || isInstructor || isSuperAdmin;
   }
 
   // GET all quizzes

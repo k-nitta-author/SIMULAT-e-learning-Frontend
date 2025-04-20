@@ -25,7 +25,7 @@ export class BadgePageComponent implements OnInit {
     if (userId) {
       this.studentService.getStudent(userId).subscribe(
         (student: Student) => {
-          this.userProgressScore = student.progress_score;
+          this.userProgressScore = student.overall_progress;
           this.loadBadges();
         }
       );
