@@ -22,91 +22,56 @@
     </div>
   </section>
 
-  <!-- Assignments Section -->
+  <!-- Combined Grades Table -->
   <section>
-    <h2 class="text-xl font-bold mb-4">Assignments</h2>
+    <h2 class="text-xl font-bold mb-4">All Grades</h2>
     <div class="overflow-x-auto">
       <table class="min-w-full divide-y divide-gray-200">
         <thead>
           <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Title</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Score</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Submission Date</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          <ng-container *ngIf="currentEntry.scores.assignments.length > 0; else noAssignments">
-            <tr *ngFor="let item of currentEntry.scores.assignments">
-              <td class="px-6 py-4">{{item.title}}</td>
-              <td class="px-6 py-4 font-medium">{{item.score}}</td>
+          <!-- Assignments -->
+          <ng-container *ngFor="let item of currentEntry.scores.assignments">
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4 text-gray-500">Assignment</td>
+              <td class="px-6 py-4 font-medium">{{item.title}}</td>
+              <td class="px-6 py-4">{{item.score}}</td>
               <td class="px-6 py-4 text-gray-500">{{item.submission_date | date}}</td>
             </tr>
           </ng-container>
-          <ng-template #noAssignments>
-            <tr>
-              <td colspan="3" class="px-6 py-4 text-center text-gray-500">No assignments found</td>
-            </tr>
-          </ng-template>
-        </tbody>
-      </table>
-    </div>
-  </section>
 
-  <!-- Quizzes Section -->
-  <section>
-    <h2 class="text-xl font-bold mb-4">Quizzes</h2>
-    <div class="overflow-x-auto">
-      <table class="min-w-full divide-y divide-gray-200">
-        <thead>
-          <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Title</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Score</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Submission Date</th>
-          </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-          <ng-container *ngIf="currentEntry.scores.quizzes.length > 0; else noQuizzes">
-            <tr *ngFor="let item of currentEntry.scores.quizzes">
-              <td class="px-6 py-4">{{item.title}}</td>
-              <td class="px-6 py-4 font-medium">{{item.score}}</td>
+          <!-- Quizzes -->
+          <ng-container *ngFor="let item of currentEntry.scores.quizzes">
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4 text-gray-500">Quiz</td>
+              <td class="px-6 py-4 font-medium">{{item.title}}</td>
+              <td class="px-6 py-4">{{item.score}}</td>
               <td class="px-6 py-4 text-gray-500">{{item.submission_date | date}}</td>
             </tr>
           </ng-container>
-          <ng-template #noQuizzes>
-            <tr>
-              <td colspan="3" class="px-6 py-4 text-center text-gray-500">No quizzes found</td>
-            </tr>
-          </ng-template>
-        </tbody>
-      </table>
-    </div>
-  </section>
 
-  <!-- Challenges Section -->
-  <section>
-    <h2 class="text-xl font-bold mb-4">Challenges</h2>
-    <div class="overflow-x-auto">
-      <table class="min-w-full divide-y divide-gray-200">
-        <thead>
-          <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Title</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Score</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Submission Date</th>
-          </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-          <ng-container *ngIf="currentEntry.scores.challenges.length > 0; else noChallenges">
-            <tr *ngFor="let item of currentEntry.scores.challenges">
-              <td class="px-6 py-4">{{item.title}}</td>
-              <td class="px-6 py-4 font-medium">{{item.score}}</td>
+          <!-- Challenges -->
+          <ng-container *ngFor="let item of currentEntry.scores.challenges">
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4 text-gray-500">Challenge</td>
+              <td class="px-6 py-4 font-medium">{{item.title}}</td>
+              <td class="px-6 py-4">{{item.score}}</td>
               <td class="px-6 py-4 text-gray-500">{{item.submission_date | date}}</td>
             </tr>
           </ng-container>
-          <ng-template #noChallenges>
-            <tr>
-              <td colspan="3" class="px-6 py-4 text-center text-gray-500">No challenges found</td>
-            </tr>
-          </ng-template>
+
+          <!-- No items message -->
+          <tr *ngIf="!currentEntry.scores.assignments.length && 
+                     !currentEntry.scores.quizzes.length && 
+                     !currentEntry.scores.challenges.length">
+            <td colspan="4" class="px-6 py-4 text-center text-gray-500">No grades found</td>
+          </tr>
         </tbody>
       </table>
     </div>

@@ -173,7 +173,7 @@ export class TermsDetailComponent implements OnInit {
   }
 
   navigateToQuiz(quizId: number): void {
-    this.router.navigate(['/admin/quiz', quizId]);
+    this.router.navigate(['/quiz', quizId]);
   }
 
   navigateToAssignment(assignmentId: number): void {

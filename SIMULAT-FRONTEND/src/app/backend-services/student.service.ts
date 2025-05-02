@@ -2,23 +2,24 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { HttpClient } from '@angular/common/http';
-
+import { CourseProgress } from '../general/interfaces/course-progress';
 
 export interface Student {
   id: number;
+  username: string;
+  password: string;  // Add this line
+  email: string;
   name_given: string;
   name_last: string;
-  email: string;
-  username: string;
-  password: string;
-  is_admin: boolean;
-  is_super_admin: boolean;
-  is_student: boolean;
-  is_instructor: boolean;
-  progress_score: number;
-  overall_progress: number;  // Changed from progress_score
   gender: string;
-  active: boolean;
+  is_admin: boolean;
+  is_instructor: boolean;
+  is_student: boolean;
+  is_super_admin: boolean;
+  overall_progress: number;
+  progress_score: number;
+  course_progress: CourseProgress[];  // Add this line
+  active: boolean;  // Add this line
 }
 
 export interface UserPrivileges {

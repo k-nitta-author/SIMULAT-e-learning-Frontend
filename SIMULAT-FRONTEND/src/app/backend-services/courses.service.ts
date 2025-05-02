@@ -168,6 +168,12 @@ export class CoursesService {
       catchError(this.handleError)
     );
   }
+
+  getInstructorCourses(instructorId: number): Observable<Course[]> {
+    return this.http.get<Course[]>(`${this.apiUrl}/instructor/${instructorId}`).pipe(
+      catchError(this.handleError)
+    );
+  }
 }
 
 // Keep only the CourseScore interface as it's still needed for getAllScores

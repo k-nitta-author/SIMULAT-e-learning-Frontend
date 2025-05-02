@@ -71,7 +71,64 @@ img{
 }
 
 .progress-fill {
-    @apply absolute h-full bg-blue-500 transition-all duration-300;
+    @apply absolute h-full transition-all duration-700;
+    transform-origin: left;
+}
+
+.progress-fill.loading {
+    @apply opacity-0 scale-x-0;
+}
+
+.progress-text.loading {
+    @apply opacity-0;
+}
+
+@keyframes slideIn {
+    from {
+        transform: scaleX(0);
+        opacity: 0;
+    }
+    to {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+.progress-fill:not(.loading) {
+    animation: slideIn 0.7s ease-out forwards;
+}
+
+.progress-text:not(.loading) {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.progress-fill.bg-red-500 {
+    @apply bg-red-500/100;
+}
+
+.progress-fill.bg-orange-500 {
+    @apply bg-orange-500/100;
+}
+
+.progress-fill.bg-yellow-500 {
+    @apply bg-yellow-500/100;
+}
+
+.progress-fill.bg-lime-500 {
+    @apply bg-lime-500/100;
+}
+
+.progress-fill.bg-green-500 {
+    @apply bg-green-500/100;
 }
 
 .progress-text {
@@ -88,4 +145,88 @@ img{
 
 .header button {
     @apply px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors;
+}
+
+.course-progress {
+    @apply mt-8;
+}
+
+.section-title {
+    @apply text-xl font-semibold text-gray-800 mb-4;
+}
+
+.courses-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+}
+
+.course-card {
+    @apply bg-white p-4 rounded-lg shadow border border-gray-100;
+}
+
+.course-header {
+    @apply flex justify-between items-center mb-3;
+}
+
+.course-header h4 {
+    @apply font-semibold text-gray-800;
+}
+
+.course-code {
+    @apply text-sm text-gray-500;
+}
+
+.scores-grid {
+    @apply grid grid-cols-2 gap-3 mt-4;
+}
+
+.score-item {
+    @apply flex flex-col;
+}
+
+.score-item label {
+    @apply text-sm text-gray-500;
+}
+
+.score-item span {
+    @apply font-medium text-gray-800;
+}
+
+.score-item.total {
+    @apply col-span-2 mt-2 pt-2 border-t border-gray-100;
+}
+
+.taught-courses {
+    @apply mt-8;
+}
+
+.course-description {
+    @apply text-sm text-gray-600 mt-2;
+}
+
+.course-footer {
+    @apply flex justify-between items-center mt-4 pt-3 border-t border-gray-100;
+}
+
+.status {
+    @apply text-sm px-2 py-1 rounded-full;
+}
+
+.status.published {
+    @apply bg-green-100 text-green-800;
+}
+
+.status:not(.published) {
+    @apply bg-gray-100 text-gray-800;
+}
+
+.view-course {
+    @apply text-sm text-blue-600 hover:text-blue-800 hover:underline;
+}
+
+.course-listing {
+    @apply mt-8;
+}
+
+.instructor {
+    @apply text-sm text-gray-600;
 }

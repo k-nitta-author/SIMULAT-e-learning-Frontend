@@ -1,159 +1,167 @@
-/* Remove existing styles as we'll use global styles */
-h1 {
-  margin-bottom: 15px;
-  font-size: 20px;
-  font-weight: bold;
+.content-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .header-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 2rem;
 }
 
-.actions {
-  display: flex;
-  gap: 8px;
+h1 {
+  color: #2c3e50;
+  margin: 0;
+  font-size: 2rem;
 }
 
-.delete {
-  background-color: #dc3545;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background: #f8f9fa;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+tr:hover {
+  background-color: #f8f9fa;
+}
+
+.add-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.add-button:hover {
+  background-color: #45a049;
+}
+
+.button-outline {
+  background: transparent;
+  border: 1px solid #4CAF50;
+  color: #4CAF50;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.button-outline:hover {
+  background: #4CAF50;
+  color: white;
+}
+
+.button-outline.delete {
   border-color: #dc3545;
-}
-
-.delete:hover {
   color: #dc3545;
-  background-color: transparent;
 }
 
-textarea {
-  width: 100%;
-  min-height: 60px;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  margin-bottom: 8px;
-  resize: vertical;
-  font-size: 13px;
+.button-outline.delete:hover {
+  background: #dc3545;
+  color: white;
 }
 
-input[type="number"] {
-  width: 100%;
-  margin-bottom: 10px;
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 
-input, textarea {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 13px;
-}
-
-input:focus, textarea:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0,123,255,.25);
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .form-group {
-  margin-bottom: 12px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 4px;
-  font-weight: 500;
-  color: #333;
-  font-size: 14px;
+  margin-bottom: 1.5rem;
 }
 
 .form-row {
   display: flex;
-  gap: 20px;
+  gap: 1rem;
 }
 
 .form-group.half {
   flex: 1;
 }
 
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
 .date-time-inputs {
   display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 1rem;
 }
 
 .date-time-inputs input {
   flex: 1;
 }
 
-.modal-content {
-  max-width: 800px;
-  width: 95%;
-  padding: 25px;
-  margin: 20px auto;
-}
-
-table {
-  min-width: 100%;
-  width: max-content;
-  max-width: none;
-  display: block;
-  border-collapse: collapse;
-  overflow-x: auto;
-  white-space: nowrap;
-}
-
-th {
-  background-color: #f8f9fa;
-  font-weight: 600;
-}
-
-td, th {
-  min-width: 120px;
-  padding: 8px 12px;
-  border-bottom: 1px solid #dee2e6;
-  max-width: 200px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 13px;
-}
-
-td:first-child, 
-th:first-child {
-  position: sticky;
-  left: 0;
-  background: white;
-  z-index: 1;
-}
-
-th:first-child {
-  background: #f8f9fa;
-}
-
-td:hover {
-  white-space: normal;
-  word-wrap: break-word;
-}
-
 .modal-buttons {
-  margin-top: 20px;
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
-.modal-buttons button {
-  min-width: 100px;
-  padding: 6px 12px;
+a {
+  color: #2196F3;
+  text-decoration: none;
 }
 
-.content-container {
-  max-width: 100%;
-  margin: 0 auto;
-  overflow-x: auto;
-  padding: 15px;
-  background: white;
+a:hover {
+  text-decoration: underline;
+}
+
+.actions {
+  white-space: nowrap;
 }

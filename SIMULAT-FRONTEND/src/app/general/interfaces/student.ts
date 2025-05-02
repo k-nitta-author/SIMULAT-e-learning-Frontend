@@ -1,16 +1,19 @@
+import { CourseProgress } from './course-progress';
+
 export default interface Student {
-    email: string;
-    gender: string;
     id: number;
+    username: string;
+    password: string;
+    email: string;
+    name_given: string;
+    name_last: string;
+    gender: string;
     is_admin: boolean;
     is_instructor: boolean;
     is_student: boolean;
     is_super_admin: boolean;
-    name_given: string;
-    name_last: string;
-    password: string;
-    progress_score: number;
     overall_progress: number;
-    username: string;
+    progress_score: number;
+    course_progress: CourseProgress[];
     active: boolean;
 }

@@ -26,7 +26,8 @@ export class RegistrationPageComponent {
     is_super_admin: false,
     progress_score: 0,
     overall_progress: 0,
-    active: true
+    active: true,
+    course_progress: []  // Add this line
   };
 
   registrationSuccess = false;

@@ -15,19 +15,19 @@
           <th>Grading Criteria</th>
           <th>Submission Format</th>
           <th>Term</th>
-          <th>Actions</th>
+          <th *ngIf="hasEditPermission">Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let assignment of assignments">
           <td><a [routerLink]="['/assignment', assignment.id]">{{ assignment.assignment_title }}</a></td>
-          <td>Content #{{ assignment.content_id }}</td>
+          <td><a [routerLink]="['/content', assignment.content_id]">Content #{{ assignment.content_id }}</a></td>
           <td>{{ assignment.deadline | date:'dd/MM/yyyy HH:mm' }}</td>
           <td>{{ assignment.max_score }} points</td>
           <td>{{ assignment.grading_criteria }}</td>
           <td>{{ assignment.submission_format }}</td>
           <td>Term {{ assignment.term_id }}</td>
-          <td class="actions">
+          <td *ngIf="hasEditPermission" class="actions">
             <ng-container *ngIf="hasEditPermission">
               <button class="button-outline" (click)="openEditModal(assignment)">Edit</button>
               <button class="button-outline delete" (click)="openDeleteModal(assignment)">Delete</button>

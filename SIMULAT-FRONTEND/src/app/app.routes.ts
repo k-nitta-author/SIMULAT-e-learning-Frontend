@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 // General pages (home, inbox, support, account, legal) - the same for all users
 import { HomePageComponent } from './general/home-page/home-page.component';
@@ -58,11 +59,17 @@ export const routes: Routes = [
     { path: 'legal/privacy_policy', component: PrivacyPolicyComponent },
 
     // Student view routes
-    { path: 'dashboard', component: ClassDashboardPageComponent },
-    { path: 'dashboard/gradebook', component: ClassGradebookComponent },
-    { path: 'dashboard/rankings', component: RankingsPageComponent },
-    { path: 'dashboard/community-hall', component: CommunityHallComponent },
-    { path: 'dashboard/activities', component: ActivitiesPageComponent },
+    { 
+        path: 'dashboard',
+        canActivate: [AuthGuard],
+        children: [
+            { path: '', component: ClassDashboardPageComponent },
+            { path: 'gradebook', component: ClassGradebookComponent },
+            { path: 'rankings', component: RankingsPageComponent },
+            { path: 'community-hall', component: CommunityHallComponent },
+            { path: 'activities', component: ActivitiesPageComponent }
+        ]
+    },
 
     // Admin dashboard route
     { path: 'admin/dashboard', component: AdminDashboardComponent },

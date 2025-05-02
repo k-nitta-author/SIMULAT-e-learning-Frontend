@@ -2,17 +2,23 @@
     @apply 
     flex 
     flex-col
-    gap-5
+    items-center
+    justify-center
+    min-h-screen
     max-w-screen-xl
-    mx-auto; 
+    mx-auto
+    py-8; 
 }
 
 .login-section,
 .announcement-section {
     @apply 
     flex-1 
-    max-w-lg
-    mx-10;
+    max-w-xl  /* changed from max-w-lg to max-w-xl for wider form */
+    mx-auto
+    flex
+    flex-col
+    items-center;
 }
 
 @media (max-width: 640px) {

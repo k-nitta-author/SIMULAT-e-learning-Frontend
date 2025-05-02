@@ -1,64 +1,64 @@
-table{
+table {
     @apply 
-    
     w-full
-
-    p-8
-
-    rounded-lg;
-
-    
-
+    border-collapse
+    bg-white
+    shadow-sm
+    rounded-lg
+    overflow-hidden;
 }
 
-thead{
-
+thead {
     @apply
-
-
-    border-b-2
-    border-s-blue-50
-    border-2
+    bg-gray-50
+    border-b;
 }
 
-tr{
+th {
     @apply
-
-    
-    border
-    border-black
-
-
+    font-semibold
+    text-gray-600;
 }
 
-.grade_cell{
+tr {
     @apply
+    border-b
+    border-gray-100
+    transition-colors;
+}
 
+td {
+    @apply
+    align-middle;
+}
+
+.space-y-8 > * + * {
+    @apply 
+    mt-8;
+}
+
+.grid-cols-3 > * {
+    @apply
+    bg-gradient-to-br
+    from-gray-50
+    to-gray-100
+    shadow-sm;
+}
+
+.grade_cell {
+    @apply
     border-solid
-    
-    
-    rounded-lg
-    
+    rounded-lg;
 }
 
-.name_cell{
-
+.name_cell {
     @apply
-
-    font-bold
+    font-bold;
 }
 
-.status_cell{
-
-
+.status_cell {
     @apply
-
     bg-red-600
-
     p-3
-
-    rounded-lg
-
-
-
+    rounded-lg;
 }

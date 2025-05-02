@@ -17,38 +17,41 @@
         </li>
 
         <li>
-            <a routerLink="/dashboard">
+            <a href="#" (click)="handleNavigation($event, '/dashboard')">
                 <img src="./assets/icons/class-dashboard.svg" title="Class Dashboard" class="nav-icon">
                 <span *ngIf="isSidebarOpen">Class Dashboard</span>
             </a>
         </li>
 
         <li>
-            <a routerLink="/dashboard/activities">
+            <a href="#" (click)="handleNavigation($event, '/dashboard/activities')">
                 <img src="./assets/icons/activities.svg" title="Student Activities" class="nav-icon">
                 <span *ngIf="isSidebarOpen">Activities</span>
             </a>
         </li>
 
         <li>
-            <a routerLink="/dashboard/gradebook">
+            <a href="#" (click)="handleNavigation($event, '/dashboard/gradebook')">
                 <img src="./assets/icons/gradebook.svg" title="Gradebook" class="nav-icon">
                 <span *ngIf="isSidebarOpen">Gradebook</span>
             </a>
         </li>
 
         <li>
-            <a routerLink="/dashboard/rankings">
+            <a href="#" (click)="handleNavigation($event, '/dashboard/rankings')">
                 <img src="./assets/icons/rankings.svg" title="Class Rankings" class="nav-icon">
                 <span *ngIf="isSidebarOpen">Rankings</span>
             </a>
         </li>
 
+        <!-- perhaps add if you can get the weavy integration working
         <li>
             <a routerLink="/dashboard/community-hall">
                 <img src="./assets/icons/community-hall.svg" title="Community Hall" class="nav-icon">
                 <span *ngIf="isSidebarOpen">Community Hall</span>
             </a>
-        </li>
+        </li>-->
+
+
     </ul>
 </nav>

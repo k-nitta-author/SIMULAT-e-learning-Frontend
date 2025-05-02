@@ -21,20 +21,77 @@
             <label>Gender</label>
             <span>{{ gender }}</span>
         </div>
-
-        <div class="info-group">
-            <label>Overall Progress</label>
-            <div class="progress-bar">
-                <div class="progress-fill" [style.width.%]="overallProgress"></div>
-                <span class="progress-text">{{ overallProgress }}%</span>
+    </div>
+    
+    <!-- Add course listing section -->
+    <div class="course-listing" *ngIf="isInstructor && allCourses.length > 0">
+        <h3 class="section-title">Available Courses</h3>
+        <div class="courses-grid">
+            <div *ngFor="let course of allCourses" class="course-card">
+                <div class="course-header">
+                    <h4>{{course.course_name}}</h4>
+                    <span class="course-code">{{course.course_code}}</span>
+                </div>
+                <p class="course-description">{{course.description}}</p>
+                <div class="course-footer">
+                    <span class="instructor">By: {{course.instructor}}</span>
+                    <a [routerLink]="['/course-detail', course.id]" class="view-course">View Course</a>
+                </div>
             </div>
         </div>
-        
-        <div class="info-group">
-            <label>Progress Score</label>
-            <div class="progress-bar">
-                <div class="progress-fill" [style.width.%]="progressScore"></div>
-                <span class="progress-text">{{ progressScore }}%</span>
+    </div>
+
+    <div class="course-progress" *ngIf="isStudent">
+        <h3 class="section-title">Course Progress</h3>
+        <div class="courses-grid">
+            <div *ngFor="let course of courseProgress" class="course-card">
+                <div class="course-header">
+                    <h4>{{course.course_name}}</h4>
+                    <span class="course-code">{{course.course_code}}</span>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-bar">
+                        <div class="progress-fill" [class.loading]="isLoading" [class]="getProgressColor(course.completion_percentage)" [style.width.%]="course.completion_percentage"></div>
+                        <span class="progress-text" [class.loading]="isLoading">{{course.completion_percentage}}%</span>
+                    </div>
+                </div>
+                <div class="scores-grid">
+                    <div class="score-item">
+                        <label>Assignments</label>
+                        <span>{{course.scores.assignments}}</span>
+                    </div>
+                    <div class="score-item">
+                        <label>Challenges</label>
+                        <span>{{course.scores.challenges}}</span>
+                    </div>
+                    <div class="score-item">
+                        <label>Quizzes</label>
+                        <span>{{course.scores.quizzes}}</span>
+                    </div>
+                    <div class="score-item total">
+                        <label>Total Score</label>
+                        <span>{{course.total_score}} / {{course.max_possible}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="taught-courses" *ngIf="isInstructor">
+        <h3 class="section-title">Courses Teaching</h3>
+        <div class="courses-grid">
+            <div *ngFor="let course of taughtCourses" class="course-card">
+                <div class="course-header">
+                    <h4>{{course.course_name}}</h4>
+                    <span class="course-code">{{course.course_code}}</span>
+                </div>
+                <p class="course-description">{{course.description}}</p>
+                <div class="course-footer">
+                    <span class="status" [class.published]="course.is_published">
+                        {{course.is_published ? 'Published' : 'Draft'}}
+                    </span>
+                    <a [routerLink]="['/course-detail', course.id]" class="view-course">View Course</a>
+                </div>
             </div>
         </div>
     </div>

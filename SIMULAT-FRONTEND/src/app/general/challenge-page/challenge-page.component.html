@@ -103,7 +103,11 @@
             <textarea [(ngModel)]="editForm.description" class="edit-input"></textarea>
           </ng-template>
         </td>
-        <td>{{challenge.content_id}}</td>
+        <td>
+          <a [routerLink]="['/content', challenge.content_id]" class="title-link">
+            {{challenge.content_id}}
+          </a>
+        </td>
         <td>{{challenge.created_at | date:'short'}}</td>
         <td>{{challenge.updated_at | date:'short'}}</td>
         <td>{{challenge.is_published ? 'Yes' : 'No'}}</td>

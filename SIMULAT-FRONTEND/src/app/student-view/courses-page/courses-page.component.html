@@ -11,7 +11,6 @@
             <th>Description</th>
             <th>Instructor</th>
             <th>Instructor ID</th>
-            <th>Term</th>
             <th>Created</th>
             <th>Updated</th>
             <th>Status</th>
@@ -46,7 +45,7 @@
             </td>
             <td>
               <ng-container *ngIf="editingCourse !== course.id; else editInstructor">
-                {{ course.instructor }}
+                <a [routerLink]="['/account', course.instructor_id]">{{ course.instructor }}</a>
               </ng-container>
               <ng-template #editInstructor>
                 <input type="text" [(ngModel)]="editForm.instructor" class="edit-input">
@@ -58,14 +57,6 @@
               </ng-container>
               <ng-template #editInstructorId>
                 <input type="number" [(ngModel)]="editForm.instructor_id" class="edit-input">
-              </ng-template>
-            </td>
-            <td>
-              <ng-container *ngIf="editingCourse !== course.id; else editTerm">
-                {{ course.term }}
-              </ng-container>
-              <ng-template #editTerm>
-                <input type="number" [(ngModel)]="editForm.term" class="edit-input">
               </ng-template>
             </td>
             <td>{{ formatDate(course.created_at) }}</td>
