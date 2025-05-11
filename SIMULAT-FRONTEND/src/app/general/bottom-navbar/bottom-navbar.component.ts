@@ -92,4 +92,15 @@ export class BottomNavbarComponent implements OnInit, OnDestroy {
     this.isStudiesOpen = false;
   }
 
+  isAccountOpen = false;
+
+  toggleAccountMenu(): void {
+    this.isAccountOpen = !this.isAccountOpen;
+  }
+
+  closeAccountMenu(): void {
+    this.isAccountOpen = false;
+  }
+
+
 }

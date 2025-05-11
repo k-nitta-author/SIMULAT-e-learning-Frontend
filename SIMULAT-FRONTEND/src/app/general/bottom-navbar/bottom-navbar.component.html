@@ -52,8 +52,24 @@
     <a routerLink="/support">
       <span class="material-symbols-rounded">support_agent</span>
     </a>
-    <a routerLink="/account">
-      <span class="material-symbols-rounded">account_circle</span>
-    </a>
+   
+    <!-- Account Menu Dropdown -->
+    <div class="dropdown-wrapper">
+      <a (click)="toggleAccountMenu()" class="dropdown-toggle flex flex-col items-center">
+        <span class="material-symbols-rounded">account_circle</span>
+      </a>
+
+      <!-- Overlay -->
+      <div *ngIf="isAccountOpen" class="overlay" (click)="closeAccountMenu()"></div>
+
+      <!-- Animated Dropdown -->
+      <div *ngIf="isAccountOpen" [@dropdownAnimation] class="dropdown-menu">
+        <ul class="dropdown-list">
+          <li><a routerLink="/account" (click)="closeAccountMenu()" class="dropdown-link">My Account</a></li>
+          <li><a (click)="logout(); closeAccountMenu()" class="dropdown-link">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+
   </ng-container>
 </nav>
