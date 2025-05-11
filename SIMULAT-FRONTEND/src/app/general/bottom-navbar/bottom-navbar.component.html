@@ -1,0 +1,59 @@
+<nav class="bottom-navbar" *ngIf="isMobile">
+  <!-- When not authenticated -->
+  <ng-container *ngIf="!isAuthenticated">
+    <a routerLink="/home">
+      <span class="material-symbols-rounded">login</span>
+    </a>
+    <a routerLink="/register">
+      <span class="material-symbols-rounded">person_add</span>
+    </a>
+  </ng-container>
+
+  <!-- When authenticated -->
+  <ng-container *ngIf="isAuthenticated">
+    <a routerLink="/home">
+      <span class="material-symbols-rounded">home</span>
+    </a>
+    <a [routerLink]="isInstructor ? '/admin/dashboard' : '/dashboard'">
+      <span class="material-symbols-rounded">dashboard</span>
+    </a>
+
+    <!-- Studies Menu -->
+    <div class="dropdown-wrapper">
+        <a (click)="toggleStudiesMenu()" class="dropdown-toggle">
+            <span class="material-symbols-rounded">menu_book</span>
+        </a>
+
+        <!-- Overlay -->
+        <div *ngIf="isStudiesOpen"
+            class="overlay"
+            (click)="closeStudiesMenu()">
+        </div>
+
+        <!-- Animated Dropdown -->
+        <div *ngIf="isStudiesOpen"
+            [@dropdownAnimation]
+            class="dropdown-menu">
+            <ul class="dropdown-list">
+            <li><a routerLink="/courses" (click)="closeStudiesMenu()" class="dropdown-link">Courses</a></li>
+            <li><a routerLink="/terms" (click)="closeStudiesMenu()" class="dropdown-link">Terms</a></li>
+            <li><a routerLink="/content" (click)="closeStudiesMenu()" class="dropdown-link">Content</a></li>
+            <li><a routerLink="/quiz" (click)="closeStudiesMenu()" class="dropdown-link">Quizzes</a></li>
+            <li><a routerLink="/assignment" (click)="closeStudiesMenu()" class="dropdown-link">Assignments</a></li>
+            <li><a routerLink="/challenge" (click)="closeStudiesMenu()" class="dropdown-link">Challenges</a></li>
+            <li><a routerLink="/study-group" (click)="closeStudiesMenu()" class="dropdown-link">Study Groups</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <a routerLink="/badge">
+      <span class="material-symbols-rounded">military_tech</span>
+    </a>
+    <a routerLink="/support">
+      <span class="material-symbols-rounded">support_agent</span>
+    </a>
+    <a routerLink="/account">
+      <span class="material-symbols-rounded">account_circle</span>
+    </a>
+  </ng-container>
+</nav>

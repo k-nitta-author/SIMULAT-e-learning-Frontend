@@ -22,7 +22,12 @@ import { ChallengeComponent } from './admin-view/challenge/challenge.component';
 import { InstructorsListComponent } from './admin-view/instructors/instructors-list/instructors-list.component';
 
 @NgModule({
-  declarations: [
+  declarations: [],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    RouterModule.forRoot(routes),
+    HttpClientModule,
     AppComponent,
     HomePageComponent,
     SupportPageComponent,
@@ -36,12 +41,6 @@ import { InstructorsListComponent } from './admin-view/instructors/instructors-l
     ContentListComponent,
     ChallengeComponent,
   ],
-  imports: [
-    BrowserModule,
-    CommonModule,
-    RouterModule.forRoot(routes),
-    HttpClientModule,
-  ],
   exports:[
     RouterModule,
     AssignmentsListComponent,
@@ -49,6 +48,5 @@ import { InstructorsListComponent } from './admin-view/instructors/instructors-l
   providers: [
     
   ],
-  bootstrap: [AppComponent]
 })
 export class AppModule { }

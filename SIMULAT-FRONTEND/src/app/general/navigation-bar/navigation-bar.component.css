@@ -146,3 +146,9 @@ li:hover {
     cursor-pointer 
     text-red-600;
 }
+
+@media (max-width: 767px) {
+  .nav-links {
+    display: none;
+  }
+}

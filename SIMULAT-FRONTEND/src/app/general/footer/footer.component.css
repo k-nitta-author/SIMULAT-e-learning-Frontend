@@ -17,19 +17,11 @@ footer {
     height: 6rem;
 }
 
-@media (max-width: 640px) {
-    footer {
-      @apply 
-      flex-col 
-      items-center 
-      text-center 
-      px-4 
-      py-6 
-      gap-4; 
-  
-      height: 4rem;
-    }
+@media (max-width: 767px) {
+  footer {
+    display: none;
   }
+}
 
 .footer-copyright {
     @apply 

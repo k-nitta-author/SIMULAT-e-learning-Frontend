@@ -1,13 +1,22 @@
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+
 <main class="landing-view">
+  <!-- Desktop Navigation Bar -->
   <header class="main-body">
     <app-navigation-bar></app-navigation-bar>
   </header>
 
+  <!-- Mobile Bottom Navigation Bar (Fixed) -->
+  <div class="scroll-container">
+    <app-bottom-navigation></app-bottom-navigation>
+  </div>
+
   <app-sidebar-navigation></app-sidebar-navigation>
 
-  <main class="main-content page-container">
+  <main class="main-content page-container pb-16 md:pb-0">
     <router-outlet></router-outlet>
   </main>
 </main>
 
+<!-- Footer shown only on desktop -->
 <app-footer></app-footer>

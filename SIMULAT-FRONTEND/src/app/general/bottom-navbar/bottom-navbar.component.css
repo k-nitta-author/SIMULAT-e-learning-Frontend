@@ -1,0 +1,77 @@
+.bottom-navbar {
+  @apply
+    fixed 
+    bottom-0 
+    left-0 right-0
+    w-full h-16
+    flex justify-around 
+    items-center
+    text-white 
+    bg-marian-blue 
+    shadow-inner 
+    z-50;
+}
+
+.bottom-navbar .relative ul a {
+  @apply block px-4 py-2 text-white hover:bg-gray-100 rounded;
+}
+
+.bottom-navbar a {
+  @apply flex flex-col items-center no-underline text-white text-xl;
+}
+
+.bottom-navbar a.active span {
+  @apply text-blue-300;
+}
+
+/* Hide on tablet and desktop */
+@media (min-width: 768px) {
+  .bottom-navbar {
+    display: none;
+  }
+}
+
+.studies-menu {
+  @apply
+    flex 
+    items-center 
+    justify-center 
+    gap-2
+    bg-marian-blue;
+}
+
+.dropdown-wrapper {
+  @apply relative;
+}
+
+.dropdown-toggle {
+  @apply relative z-10;
+}
+
+.overlay {
+  @apply fixed inset-0 z-10;
+}
+
+.dropdown-menu {
+  @apply absolute bottom-20 left-1/2 -translate-x-1/2
+         bg-marian-blue text-white rounded-xl shadow-lg
+         w-56 z-20 py-3 px-2 transform-origin-bottom;
+}
+
+.dropdown-list {
+  @apply list-none space-y-2 block px-3 py-2 rounded text-white transition-colors duration-200;
+}
+
+.dropdown-link:hover,
+.dropdown-link:active {
+  @apply bg-blue-800 text-white;
+}
+
+.dropdown-link.router-link-active {
+  @apply bg-blue-900 text-white font-semibold;
+}
+
+.transform-origin-bottom {
+  transform-origin: bottom center;
+}
+

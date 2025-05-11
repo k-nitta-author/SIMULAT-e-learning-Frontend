@@ -1,5 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
+html, body {
+  @apply overflow-x-scroll;
+}
+
 
 body{
   padding: 0;
@@ -177,7 +181,7 @@ td {
 /* Container styles */
 .page-container {
   @apply py-8 px-8;
-  padding-bottom: 8rem;
+  padding-bottom: 10rem;
 }
 
 @media (max-width: 1024px) { /* Tablet */
