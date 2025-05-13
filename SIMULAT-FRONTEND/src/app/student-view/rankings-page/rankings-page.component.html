@@ -3,30 +3,32 @@
         <h3>Rankings</h3>
     </header>
 
-    <main>
+    <div class="content-layout">
         <section>
             <h3>Top Students</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Name</th>
-                        <th>Progress Score</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let student of topStudents; let i = index">
-                        <td>{{i + 1}}</td>
-                        <td>{{student.name_given}} {{student.name_last}}</td>
-                        <td>{{student.progress_score}}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Progress Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let student of topStudents; let i = index">
+                            <td>{{i + 1}}</td>
+                            <td>{{student.name_given}} {{student.name_last}}</td>
+                            <td>{{student.progress_score}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
 
         <section>
             <h3>Leader Board</h3>
             <app-leaderboard-table></app-leaderboard-table>
         </section>
-    </main>
+    </div>
 </main>

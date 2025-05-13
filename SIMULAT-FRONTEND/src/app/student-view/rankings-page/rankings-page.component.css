@@ -1,12 +1,7 @@
 main {
-    @apply p-6;
-}
-
-main main {
-    @apply
-    flex
-    flex-row    
-    gap-8;
+    @apply 
+    p-0
+    md:p-6;
 }
 
 header {
@@ -15,21 +10,47 @@ header {
     mb-6;
 }
 
-main main section {
+.content-layout {
+    @apply
+    w-full
+    flex
+    flex-col md:flex-row
+    gap-8;
+}
+
+.content-layout section {
     @apply
     bg-gray-300
     w-full
+    flex-1
     p-4
     rounded-lg;
+    min-width: 300px;
+}
+
+section {
+    @apply
+    bg-gray-300
+    w-full
+    flex-1
+    p-4
+    m-4
+    rounded-lg;
+    min-width: 300px;
+}
+
+.table-wrapper {
+    @apply 
+    overflow-x-auto
+    mt-4;
 }
 
 table {
     @apply
     w-full
+    min-w-[400px]
     bg-white
-    rounded-lg
-    overflow-hidden
-    mt-4;
+    rounded-lg;
 }
 
 th, td {

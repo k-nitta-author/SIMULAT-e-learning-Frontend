@@ -178,24 +178,18 @@ td {
   border-bottom: 1px solid #ddd;
 }
 
+.table-wrapper {
+    @apply 
+    overflow-x-auto
+    mt-4;
+}
+
 /* Container styles */
 .page-container {
-  @apply py-8 px-8;
+  @apply 
+  p-0
+  md:p-8;
   padding-bottom: 10rem;
-}
-
-@media (max-width: 1024px) { /* Tablet */
-  .page-container {
-    @apply py-8 pl-8 pr-0;
-    padding-bottom: 6rem;
-  }
-}
-
-@media (max-width: 640px) { /* Mobile */
-  .page-container {
-    @apply py-8 pl-8 pr-0;
-    padding-bottom: 6rem;
-  }
 }
 
 .main-container {
