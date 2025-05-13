@@ -21,7 +21,10 @@ nav {
 }
 
 .hide-sidebar {
-    @apply w-20;
+    @apply 
+    w-auto
+    
+    md:w-20;
 }
 
 ul {
@@ -59,16 +62,15 @@ li a {
 
 .logo-icon {
     transition: all 0.3s ease-in-out;
-
-    @apply 
-    w-auto 
-    h-10;
+    @apply
+    w-auto h-7 
+    md:h-10;
 }
 
 .nav-icon {
     @apply 
-    w-8 
-    h-8;
+    w-5 h-5 
+    md:w-8 md:h-8;
 }
 
 span {

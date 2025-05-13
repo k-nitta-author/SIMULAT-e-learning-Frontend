@@ -19,8 +19,9 @@
 
 .main-logo {
     @apply
-    h-10
-    w-auto;
+    w-auto
+    h-7
+    md:h-10;
 }
 
 .nav-links {
