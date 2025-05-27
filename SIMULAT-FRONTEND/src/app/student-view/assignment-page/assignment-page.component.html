@@ -1,8 +1,8 @@
 <div>
   <div class="content-container">
     <div class="header-actions">
-      <h1>Assignments</h1>
-      <button class="add-button" *ngIf="hasEditPermission" (click)="openAddModal()">Add Assignment</button>
+      <h2>Assignments</h2>
+      <button class="add-button" *ngIf="hasEditPermission" (click)="openAddModal()">Add New Assignment</button>
     </div>
     
     <table>
@@ -29,8 +29,8 @@
           <td>Term {{ assignment.term_id }}</td>
           <td *ngIf="hasEditPermission" class="actions">
             <ng-container *ngIf="hasEditPermission">
-              <button class="button-outline" (click)="openEditModal(assignment)">Edit</button>
-              <button class="button-outline delete" (click)="openDeleteModal(assignment)">Delete</button>
+              <button class="edit-button" (click)="openEditModal(assignment)">Edit</button>
+              <button class="delete-button" (click)="openDeleteModal(assignment)">Delete</button>
             </ng-container>
           </td>
         </tr>
