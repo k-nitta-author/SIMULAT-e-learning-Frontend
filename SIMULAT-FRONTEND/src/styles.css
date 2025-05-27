@@ -31,12 +31,34 @@ button {
   border-marian-blue
   cursor-pointer 
   rounded-lg
+  mr-3
   ;
 }
 
 button:hover {
   @apply 
   text-marian-blue 
+  bg-transparent;
+}
+
+.delete-button {
+  @apply 
+  bg-red-600
+  text-white 
+  px-2.5 
+  py-1.5
+  max-w-32
+  border-solid
+  border-2
+  border-red-600
+  cursor-pointer 
+  rounded-lg
+  ;
+}
+
+.delete-button:hover {
+  @apply 
+  text-red-600
   bg-transparent;
 }
 
@@ -69,11 +91,11 @@ button:hover {
 
 .add-button {
   @apply 
-  bg-marian-blue 
-  text-white 
-  border-none 
-  py-2.5 
-  px-5 
+  bg-transparent
+  border-blue-500
+  border-2
+  border-solid
+  text-blue-500
   cursor-pointer 
   float-right 
   mb-5 
@@ -81,7 +103,7 @@ button:hover {
 }
 
 .add-button:hover {
-  @apply bg-marian-blue;
+  @apply bg-blue-500 text-white;
 }
 
 /* Modal Overlay */
@@ -153,21 +175,20 @@ button:hover {
 /* Table styles */
 table {
   width: 100%;
-  border-collapse: separate;
+  border-collapse: collapse;
   border-spacing: 0;
   margin-top: 20px;
+  font-size: 0.9em;
   background-color: white;
-  color: black;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 th, td {
   border: none;
-  padding: 8px;
+  padding: 12px 15px;
   text-align: left;
-  color: black;
 }
 
 th {
@@ -176,6 +197,22 @@ th {
 
 td {
   border-bottom: 1px solid #ddd;
+}
+
+tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+tbody tr:nth-child(odd) {
+  @apply bg-gray-50;
+}
+
+tbody tr:nth-child(even) {
+  @apply bg-white;
+}
+
+tbody tr:hover {
+  @apply bg-gray-100;
 }
 
 .table-wrapper {
@@ -205,6 +242,24 @@ td {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
+.content-layout {
+    @apply
+    w-full
+    flex
+    flex-col md:flex-row
+    gap-8;
+}
+
+.content-layout section {
+    @apply
+    bg-gray-300
+    w-full
+    flex-1
+    p-4
+    rounded-lg;
+    min-width: 300px;
+}
+
 .load-more-button-container {
   @apply flex justify-end mt-4;
 }
@@ -217,6 +272,15 @@ td {
   .columns {
       @apply flex-col;
   }
+}
+
+/* Header styles */
+.header {
+  @apply flex justify-between items-center mb-6;
+}
+
+.header h2 {
+  @apply text-2xl font-bold;
 }
 
 /* Font styles */

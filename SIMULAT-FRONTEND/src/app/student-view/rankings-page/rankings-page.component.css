@@ -10,35 +10,6 @@ header {
     mb-6;
 }
 
-.content-layout {
-    @apply
-    w-full
-    flex
-    flex-col md:flex-row
-    gap-8;
-}
-
-.content-layout section {
-    @apply
-    bg-gray-300
-    w-full
-    flex-1
-    p-4
-    rounded-lg;
-    min-width: 300px;
-}
-
-section {
-    @apply
-    bg-gray-300
-    w-full
-    flex-1
-    p-4
-    m-4
-    rounded-lg;
-    min-width: 300px;
-}
-
 .table-wrapper {
     @apply 
     overflow-x-auto

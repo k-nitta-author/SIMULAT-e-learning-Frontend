@@ -1,6 +1,8 @@
-<div>
-  <button type="button" (click)="toggleModal()">Add New Challenge</button>
-</div>
+<div class="content-container">
+  <div class="header">
+    <h2>Challenges</h2>
+    <button class="add-button" type="button" (click)="toggleModal()">Add New Challenge</button>
+  </div>
 
 <div *ngIf="isModalOpen" class="modal">
   <div class="modal-content">
@@ -87,7 +89,7 @@
       <td>{{ challenge.publication_date ? (challenge.publication_date | date:'short') : 'Not Available' }}</td>
       <td>
         <button type="button" (click)="editChallenge(challenge.id)">Edit</button>
-        <button type="button" (click)="deleteChallenge(challenge.id)">Delete</button>
+        <button class="delete-button" type="button" (click)="deleteChallenge(challenge.id)">Delete</button>
       </td>
     </tr>
   </tbody>

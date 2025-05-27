@@ -1,6 +1,6 @@
 <div class="content-container">
   <div class="header">
-    <h2>Content Management</h2>
+    <h2>Learning Content</h2>
     <button class="add-button" type="button" (click)="toggleModal()">
       Add New Content
     </button>
@@ -120,7 +120,7 @@
           </td>
           <td>{{ content.created_at | date:'medium' }}</td>
           <td class="actions">
-            <button class="edit-button" (click)="editContent(content.id)">Edit</button>
+            <button (click)="editContent(content.id)">Edit</button>
             <button class="delete-button" (click)="deleteContent(content.id)">Delete</button>
           </td>
         </tr>

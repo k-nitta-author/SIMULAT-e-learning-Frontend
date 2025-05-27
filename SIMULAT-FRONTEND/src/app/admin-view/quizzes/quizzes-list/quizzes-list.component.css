@@ -1,30 +1,3 @@
-.quiz-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
-
-.quiz-table thead tr {
-    background-color: #009879;
-    color: #ffffff;
-    text-align: left;
-}
-
-.quiz-table th,
-.quiz-table td {
-    padding: 12px 15px;
-}
-
-.quiz-table tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
-
-.quiz-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-
 .action-buttons {
     display: flex;
     gap: 8px;

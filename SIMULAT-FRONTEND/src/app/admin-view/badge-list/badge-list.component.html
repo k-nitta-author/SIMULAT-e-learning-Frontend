@@ -1,4 +1,9 @@
-<button (click)="createNewBadge()">Add New Badge</button>
+<div class="content-container">
+  <div class="header">
+    <h2>Badges</h2>
+    <button class="add-button" (click)="createNewBadge()">Add New Badge</button>
+  </div>
+
 
 <div *ngIf="badges.length === 0 && !isEditing">
   <p>No badges available.</p>
@@ -39,7 +44,7 @@
           <td (click)="startEdit(badge)">{{ badge.description }}</td>
           <td (click)="startEdit(badge)">{{ badge.pts_required }}</td>
           <td>
-            <button (click)="deleteBadge(badge.id)">Delete</button>
+            <button class="delete-button" (click)="deleteBadge(badge.id)">Delete</button>
           </td>
         </ng-template>
       </tr>

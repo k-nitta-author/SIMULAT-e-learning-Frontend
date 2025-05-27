@@ -1,6 +1,9 @@
-<div class="container">
+<div class="content-container">
   <div class="header">
     <h2>Study Groups</h2>
+    <button class="add-button" (click)="showCreateForm = !showCreateForm">
+            {{ showCreateForm ? 'Cancel' : 'Create New Group' }}
+          </button>
   </div>
 
   <div *ngIf="showCreateForm" class="create-form">
@@ -41,19 +44,12 @@
         <td>{{group.memberships.length}}/{{group.max_members}}</td>
         <td>
           <div class="action-buttons">
-            <button (click)="deleteGroup(group.id)" class="delete-btn">Delete</button>
+            <button (click)="deleteGroup(group.id)" class="delete-button">Delete</button>
           </div>
         </td>
       </tr>
     </tbody>
     <tfoot>
-      <tr>
-        <td colspan="4">
-          <button (click)="showCreateForm = !showCreateForm" class="create-btn">
-            {{ showCreateForm ? 'Cancel' : 'Create New Group' }}
-          </button>
-        </td>
-      </tr>
     </tfoot>
   </table>
 </div>
