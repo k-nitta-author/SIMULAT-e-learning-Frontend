@@ -43,9 +43,9 @@
                 <div class="action-buttons">
                   <ng-container *ngIf="editMode['assignment-' + item.id + '-' + score.student_id] || score.pending">
                     <button (click)="submitGrade(item.id, score.student_id, 'assignment')">Submit</button>
-                    <button class="cancel-btn" *ngIf="!score.pending" (click)="cancelEdit(item.id, score.student_id, 'assignment')">Cancel</button>
+                    <button class="cancel-button" *ngIf="!score.pending" (click)="cancelEdit(item.id, score.student_id, 'assignment')">Cancel</button>
                   </ng-container>
-                  <button class="edit-btn" *ngIf="!editMode['assignment-' + item.id + '-' + score.student_id] && !score.pending" 
+                  <button class="edit-button" *ngIf="!editMode['assignment-' + item.id + '-' + score.student_id] && !score.pending" 
                           (click)="editGrade(item.id, score.student_id, 'assignment')">Edit</button>
                 </div>
               </td>
@@ -88,9 +88,9 @@
                 <div class="action-buttons">
                   <ng-container *ngIf="editMode['quiz-' + item.id + '-' + score.student_id] || score.pending">
                     <button (click)="submitGrade(item.id, score.student_id, 'quiz')">Submit</button>
-                    <button class="cancel-btn" *ngIf="!score.pending" (click)="cancelEdit(item.id, score.student_id, 'quiz')">Cancel</button>
+                    <button class="cancel-button" *ngIf="!score.pending" (click)="cancelEdit(item.id, score.student_id, 'quiz')">Cancel</button>
                   </ng-container>
-                  <button class="edit-btn" *ngIf="!editMode['quiz-' + item.id + '-' + score.student_id] && !score.pending" 
+                  <button class="edit-button" *ngIf="!editMode['quiz-' + item.id + '-' + score.student_id] && !score.pending" 
                           (click)="editGrade(item.id, score.student_id, 'quiz')">Edit</button>
                 </div>
               </td>
@@ -133,9 +133,9 @@
                 <div class="action-buttons">
                   <ng-container *ngIf="editMode['challenge-' + item.id + '-' + score.student_id] || score.pending">
                     <button (click)="submitGrade(item.id, score.student_id, 'challenge')">Submit</button>
-                    <button class="cancel-btn" *ngIf="!score.pending" (click)="cancelEdit(item.id, score.student_id, 'challenge')">Cancel</button>
+                    <button class="cancel-button" *ngIf="!score.pending" (click)="cancelEdit(item.id, score.student_id, 'challenge')">Cancel</button>
                   </ng-container>
-                  <button class="edit-btn" *ngIf="!editMode['challenge-' + item.id + '-' + score.student_id] && !score.pending" 
+                  <button class="edit-button" *ngIf="!editMode['challenge-' + item.id + '-' + score.student_id] && !score.pending" 
                           (click)="editGrade(item.id, score.student_id, 'challenge')">Edit</button>
                 </div>
               </td>

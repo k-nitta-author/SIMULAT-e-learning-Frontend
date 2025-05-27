@@ -60,42 +60,6 @@ textarea.edit-input {
   gap: 8px;
 }
 
-.edit-btn, .delete-btn, .save-btn, .cancel-btn, .add-button {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.2s;
-}
-
-.edit-btn {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.delete-btn {
-  background-color: #f44336;
-  color: white;
-}
-
-.save-btn {
-  background-color: #2196F3;
-  color: white;
-}
-
-.cancel-btn {
-  background-color: #607D8B;
-  color: white;
-}
-
-.add-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 8px 16px;
-  font-size: 16px;
-}
-
 tr.editing {
   background-color: #f0f7ff;
 }

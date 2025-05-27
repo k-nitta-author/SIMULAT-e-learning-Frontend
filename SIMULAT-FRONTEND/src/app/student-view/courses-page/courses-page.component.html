@@ -65,22 +65,22 @@
             <td *ngIf="isInstructor">
               <ng-container *ngIf="editingCourse !== course.id; else editButtons">
                 <button *ngIf="!course.is_published" 
-                        class="publish-btn"
+                        class="publish-button"
                         (click)="publishCourse(course.id)">
                   Publish
                 </button>
-                <button class="edit-btn"
+                <button class="edit-button"
                         (click)="startEditing(course)">
                   Edit
                 </button>
-                <button class="delete-btn"
+                <button class="delete-button"
                         (click)="deleteCourse(course.id)">
                   Delete
                 </button>
               </ng-container>
               <ng-template #editButtons>
-                <button class="save-btn" (click)="saveEditing(course.id)">Save</button>
-                <button class="cancel-btn" (click)="cancelEditing()">Cancel</button>
+                <button class="save-button" (click)="saveEditing(course.id)">Save</button>
+                <button class="cancel-button" (click)="cancelEditing()">Cancel</button>
               </ng-template>
             </td>
           </tr>

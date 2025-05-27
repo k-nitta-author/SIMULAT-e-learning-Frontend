@@ -242,25 +242,9 @@ th.mat-header-cell {
   margin-bottom: 1rem;
 }
 
-.close-btn {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 0.5rem;
-}
-
 .edit-input {
   width: 100%;
   padding: 0.5rem;
   border: 1px solid #ddd;
   border-radius: 4px;
-}
-
-.btn.edit {
-  background-color: #17a2b8;
-}
-
-.btn.edit:hover {
-  background-color: #138496;
 }

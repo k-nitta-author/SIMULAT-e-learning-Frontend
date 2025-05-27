@@ -96,23 +96,13 @@ button {
   cursor: pointer;
 }
 
-.edit-btn {
-  background: #6c757d;
-  color: white;
-}
-
-.save-btn {
-  background: #28a745;
-  color: white;
-}
-
-.join-btn {
+.join-button {
   background: #007bff;
   color: white;
   width: fit-content;
 }
 
-.join-btn:disabled {
+.join-button:disabled {
   background: #cccccc;
   cursor: not-allowed;
 }

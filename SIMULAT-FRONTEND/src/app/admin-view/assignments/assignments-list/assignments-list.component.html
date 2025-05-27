@@ -33,8 +33,8 @@
               <input type="number" [(ngModel)]="editingAssignment.max_score" required class="edit-input">
             </td>
             <td class="actions">
-              <button (click)="saveEditing(assignment)" class="save-btn">Save</button>
-              <button (click)="cancelEditing()" class="cancel-btn">Cancel</button>
+              <button (click)="saveEditing(assignment)" class="edit-button">Save</button>
+              <button (click)="cancelEditing()" class="cancel-button">Cancel</button>
             </td>
           </ng-container>
           <ng-template #displayRow>
@@ -43,8 +43,8 @@
             <td>{{assignment.deadline | date:'yyyy-MM-dd'}}</td>
             <td>{{assignment.max_score}}</td>
             <td class="actions">
-              <button (click)="startEditing(assignment)" class="edit-btn">Edit</button>
-              <button (click)="deleteAssignment(assignment.id)" class="delete-btn">Delete</button>
+              <button (click)="startEditing(assignment)" class="edit-button">Edit</button>
+              <button (click)="deleteAssignment(assignment.id)" class="delete-button">Delete</button>
             </td>
           </ng-template>
         </tr>

@@ -142,7 +142,7 @@ li:hover {
     text-left;
 }
 
-.logout-btn {
+.logout-button {
     @apply 
     cursor-pointer 
     text-red-600;

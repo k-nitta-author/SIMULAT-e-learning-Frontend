@@ -8,13 +8,12 @@
         </div>
         
         <div class="action-buttons" *ngIf="isInstructor">
-          <button class="publish-btn" 
+          <button class="publish-button" 
                   *ngIf="!course.is_published"
                   (click)="onPublishCourse()">
             Publish Course
           </button>
-          <a [routerLink]="['/course', course.id, 'pending-grades']" 
-             class="grades-btn"
+          <a [routerLink]="['/course', course.id, 'pending-grades']"
              *ngIf="hasAdminPrivileges">
             Manage Course Grades
           </a>

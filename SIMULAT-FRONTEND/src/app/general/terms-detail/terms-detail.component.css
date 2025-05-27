@@ -32,24 +32,6 @@ d.term-detail-container {
   transition: background-color 0.3s;
 }
 
-.edit-btn {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.delete-btn {
-  background-color: #f44336;
-  color: white;
-}
-
-.edit-btn:hover {
-  background-color: #45a049;
-}
-
-.delete-btn:hover {
-  background-color: #da190b;
-}
-
 .term-info {
   background-color: #f5f5f5;
   border-radius: 4px;
@@ -169,14 +151,6 @@ d.term-detail-container {
   margin-bottom: 20px;
 }
 
-.close-btn {
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: #666;
-}
-
 .form-group {
   margin-bottom: 15px;
 }
@@ -199,25 +173,4 @@ d.term-detail-container {
   justify-content: flex-end;
   gap: 10px;
   margin-top: 20px;
-}
-
-.cancel-btn {
-  padding: 8px 16px;
-  border: 1px solid #ddd;
-  background-color: white;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.save-btn {
-  padding: 8px 16px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.save-btn:hover {
-  background-color: #45a049;
 }

@@ -11,8 +11,8 @@
     <div class="term-header">
       <h2>School Year Details</h2>
       <div class="action-buttons" *ngIf="isAuthorized">
-        <button class="edit-btn" (click)="onEdit()">Edit</button>
-        <button class="delete-btn" (click)="onDelete()">Delete</button>
+        <button class="edit-button" (click)="onEdit()">Edit</button>
+        <button class="delete-button" (click)="onDelete()">Delete</button>
       </div>
     </div>
 
@@ -75,7 +75,7 @@
   <div class="modal-content">
     <div class="modal-header">
       <h3>Edit School Year</h3>
-      <button class="close-btn" (click)="closeModal()">&times;</button>
+      <button class="close-button" (click)="closeModal()">&times;</button>
     </div>
     <div class="modal-body">
       <div class="form-group">
@@ -88,8 +88,8 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="cancel-btn" (click)="closeModal()">Cancel</button>
-      <button class="save-btn" (click)="saveChanges()">Save Changes</button>
+      <button class="cancel-button" (click)="closeModal()">Cancel</button>
+      <button class="save-button" (click)="saveChanges()">Save Changes</button>
     </div>
   </div>
 </div>

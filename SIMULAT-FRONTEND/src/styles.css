@@ -20,6 +20,11 @@ body{
 
 /* Button styles */
 button {
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+
   @apply 
   bg-marian-blue
   text-white 
@@ -31,8 +36,7 @@ button {
   border-marian-blue
   cursor-pointer 
   rounded-lg
-  mr-3
-  ;
+  mr-3;
 }
 
 button:hover {
@@ -45,13 +49,12 @@ button:hover {
   @apply 
   bg-red-600
   text-white 
-  px-2.5 
-  py-1.5
-  max-w-32
   border-solid
   border-2
   border-red-600
   cursor-pointer 
+  float-right 
+  mb-5 
   rounded-lg
   ;
 }
@@ -92,10 +95,10 @@ button:hover {
 .add-button {
   @apply 
   bg-transparent
-  border-blue-500
+  border-green-600
   border-2
   border-solid
-  text-blue-500
+  text-green-600
   cursor-pointer 
   float-right 
   mb-5 
@@ -103,7 +106,57 @@ button:hover {
 }
 
 .add-button:hover {
-  @apply bg-blue-500 text-white;
+  @apply bg-green-600 text-white;
+}
+
+.edit-button {
+  @apply 
+  border-blue-50
+  bg-blue-500
+  border-2
+  border-solid
+  text-white
+  cursor-pointer 
+  float-right 
+  mb-5 
+  rounded-lg;
+}
+
+.edit-button:hover {
+  @apply  bg-transparent
+  border-blue-500 text-blue-500;
+}
+
+.publish-button {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.publish-button:hover {
+  background: #2980b9;
+}
+
+.cancel-button {
+  @apply 
+  bg-transparent
+  border-gray-500
+  border-2
+  border-solid
+  text-gray-500
+  cursor-pointer 
+  float-right 
+  mb-5 
+  rounded-lg;
+}
+
+.cancel-button:hover {
+  @apply bg-gray-500 text-white;
 }
 
 /* Modal Overlay */

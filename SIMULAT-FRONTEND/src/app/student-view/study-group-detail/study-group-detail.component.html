@@ -2,7 +2,7 @@
   <section class="header-section">
     <div class="title-container">
       <h2 *ngIf="!isEditing" class="group-name">{{studyGroup.name}}</h2>
-      <button *ngIf="isAdminOrInstructor" (click)="toggleEdit()" class="edit-btn">
+      <button *ngIf="isAdminOrInstructor" (click)="toggleEdit()" class="edit-button">
         {{ isEditing ? 'Cancel' : 'Edit' }}
       </button>
     </div>
@@ -23,7 +23,7 @@
                required>
         <small>Minimum allowed: {{getMemberCount()}}</small>
       </div>
-      <button type="submit" class="save-btn">Save Changes</button>
+      <button type="submit" class="save-button">Save Changes</button>
     </form>
   </section>
 
@@ -60,7 +60,7 @@
     </div>
     <button (click)="joinGroup()" 
             [disabled]="isGroupFull()"
-            class="join-btn">
+            class="join-button">
       Join Group
     </button>
   </section>
