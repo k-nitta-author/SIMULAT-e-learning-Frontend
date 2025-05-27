@@ -64,30 +64,3 @@
   background-color: #0142A1;
 }
 
-/* Table styles */
-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  margin-top: 20px;
-  background-color: white;
-  color: black;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-th, td {
-  border: none;
-  padding: 8px;
-  text-align: left;
-  color: black;
-}
-
-th {
-  border-bottom: 1px solid #ddd;
-}
-
-td {
-  border-bottom: 1px solid #ddd;
-}

@@ -36,7 +36,7 @@ button {
   border-marian-blue
   cursor-pointer 
   rounded-lg
-  mr-3;
+  mr-1;
 }
 
 button:hover {
@@ -140,6 +140,25 @@ button:hover {
 
 .publish-button:hover {
   background: #2980b9;
+}
+
+.save-button {
+  @apply 
+  bg-green-600
+  text-white 
+  border-solid
+  border-2
+  border-green-600
+  cursor-pointer 
+  float-right 
+  mb-5 
+  rounded-lg;
+}
+
+.save-button:hover {
+  @apply 
+  text-green-600
+  bg-transparent;
 }
 
 .cancel-button {
