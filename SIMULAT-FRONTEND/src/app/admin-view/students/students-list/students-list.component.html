@@ -16,7 +16,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let student of students">
+    <tr *ngFor="let student of students" [hidden]="!student.active">
       <td>{{ student.id }}</td>
       <td>
         <a [routerLink]="['/account', student.id]" class="student-link">
