@@ -3,25 +3,20 @@ footer {
     bg-marian-blue 
     text-white 
     flex 
+    flex-wrap
     items-center 
     justify-around
     gap-8
     p-4
-    w-full 
-    fixed 
-    bottom-0 
+    w-full
+    max-w-full
+    bottom-0
     border-t-2 
-    border-gray-700 
-    overflow-hidden;
+    border-gray-700;
 
     height: 6rem;
 }
 
-@media (max-width: 767px) {
-  footer {
-    display: none;
-  }
-}
 
 .footer-copyright {
     @apply 
@@ -66,7 +61,8 @@ h5 {
         items-center 
         text-center 
         px-4 
-        py-6 
+        pt-6
+        pb-36
         gap-4; 
     }
 

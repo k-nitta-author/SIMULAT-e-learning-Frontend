@@ -24,6 +24,7 @@ button {
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.2s;
+  max-height: fit-content;
 
   @apply 
   bg-marian-blue
@@ -53,7 +54,6 @@ button:hover {
   border-2
   border-red-600
   cursor-pointer 
-  float-right 
   mb-5 
   rounded-lg
   ;
@@ -111,13 +111,12 @@ button:hover {
 
 .edit-button {
   @apply 
-  border-blue-50
+  border-blue-500
   bg-blue-500
   border-2
   border-solid
   text-white
   cursor-pointer 
-  float-right 
   mb-5 
   rounded-lg;
 }
@@ -128,18 +127,22 @@ button:hover {
 }
 
 .publish-button {
-  background: #3498db;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.3s;
+  @apply 
+  bg-blue-700
+  text-white 
+  border-solid
+  border-2
+  border-blue-700
+  cursor-pointer 
+  float-right 
+  mb-5 
+  rounded-lg;
 }
 
 .publish-button:hover {
-  background: #2980b9;
+  @apply 
+  text-blue-700
+  bg-transparent;
 }
 
 .save-button {

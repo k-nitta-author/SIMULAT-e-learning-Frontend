@@ -89,22 +89,27 @@ section {
   gap: 0.5rem;
 }
 
-button {
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
+.join-button {
+  @apply 
+  border-none
+  bg-transparent
+  text-blue-800
+  cursor-pointer 
+  mb-5 
+  rounded-lg;
 }
 
-.join-button {
-  background: #007bff;
-  color: white;
-  width: fit-content;
+.join-button:hover {
+  @apply
+   text-blue-500
+   underline;
 }
 
 .join-button:disabled {
-  background: #cccccc;
   cursor: not-allowed;
+
+  @apply
+  text-gray-400;
 }
 
 .messages {

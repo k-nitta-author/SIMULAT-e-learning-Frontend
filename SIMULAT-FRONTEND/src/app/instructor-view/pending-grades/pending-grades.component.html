@@ -42,7 +42,7 @@
               <td>
                 <div class="action-buttons">
                   <ng-container *ngIf="editMode['assignment-' + item.id + '-' + score.student_id] || score.pending">
-                    <button (click)="submitGrade(item.id, score.student_id, 'assignment')">Submit</button>
+                    <button class="publish-button" (click)="submitGrade(item.id, score.student_id, 'assignment')">Submit</button>
                     <button class="cancel-button" *ngIf="!score.pending" (click)="cancelEdit(item.id, score.student_id, 'assignment')">Cancel</button>
                   </ng-container>
                   <button class="edit-button" *ngIf="!editMode['assignment-' + item.id + '-' + score.student_id] && !score.pending" 
