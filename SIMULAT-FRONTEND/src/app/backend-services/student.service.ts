@@ -88,11 +88,12 @@ export class StudentService {
 
   // Updates user data
   updateStudent(id: string, student: Student): Observable<Student> {
-    const studentData = {
-      ...student,
+    const { password, ...studentData } = student;
+    const data = {
+      ...studentData,
       active: student.active ?? true  // Preserve active status or default to true
     };
-    return this.http.put<Student>(`${this.apiUrl}/user/${id}`, studentData);
+    return this.http.put<Student>(`${this.apiUrl}/user/${id}`, data);
   }
 
   // Grants or takes away user privileges
