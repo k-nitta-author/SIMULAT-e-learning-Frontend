@@ -40,7 +40,7 @@
     <tbody>
       <tr *ngFor="let group of studyGroups">
         <td><a [routerLink]="['/study-group', group.id]" class="group-name-link">{{group.name}}</a></td>
-        <td><a [routerLink]="['/course-detail', 1]" class="course-link">{{group.course_id}}</a></td>
+        <td><a [routerLink]="['/course-detail', group.course_id]" class="course-link">{{group.course_id}}</a></td>
         <td>{{group.memberships.length}}/{{group.max_members}}</td>
         <td>
           <div class="action-buttons">
