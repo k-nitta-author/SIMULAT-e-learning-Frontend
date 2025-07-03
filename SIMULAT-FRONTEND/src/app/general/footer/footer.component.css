@@ -1,5 +1,9 @@
 footer {
     @apply 
+    fixed 
+    bottom-0 
+    left-0 
+    right-0
     bg-marian-blue 
     text-white 
     flex 
