@@ -1,0 +1,84 @@
+.landing_section {
+    @apply 
+    flex 
+    flex-col
+    min-h-screen
+    max-w-sm /* further reduced from max-w-screen-md */
+    mx-auto
+    py-2 /* add a little vertical padding */
+    justify-center /* vertically center content */
+    ;
+}
+
+.simulat-login-section,
+.announcement-section {
+    @apply 
+    flex-1 
+    max-w-xs  /* reduced from max-w-sm */
+    mx-auto
+    flex
+    flex-col
+    items-center
+    justify-center /* vertically center login section */
+    my-2 /* reduce vertical margin */
+    ;
+}
+
+@media (max-width: 640px) {
+    .simulat-login-section,
+    .announcement-section {
+        @apply w-full;
+    }
+}
+
+.simulat-section {
+    @apply 
+    w-full
+    max-w-xs /* reduced from max-w-sm */
+    text-center
+    mb-2 /* reduced from mb-4 */
+    bg-marian-blue
+    text-white
+    p-3 /* reduced from p-4 */
+    rounded-lg /* reduced from rounded-xl */
+    shadow-md /* reduced shadow */
+    mx-auto;
+}
+
+.simulat-login-section {
+    @apply 
+    flex-1 
+    max-w-xs
+    mx-auto
+    flex
+    flex-col
+    items-center
+    justify-center
+    min-w-0
+    my-2;
+}
+
+@media (max-width: 900px) {
+    .simulat-section,
+    .simulat-login-section {
+        width: 100%;
+        @apply mb-1; /* reduced from mb-2 */
+    }
+}
+
+.simulat-title {
+    @apply 
+    text-xl /* reduced from text-2xl */
+    font-bold
+    mb-1; /* reduced from mb-2 */
+}
+
+.simulat-description {
+    @apply 
+    text-xs /* reduced from text-sm */
+    max-w-xs /* reduced from max-w-md */
+    mx-auto
+    leading-tight /* reduced line height */
+    text-justify
+    mb-0; /* remove bottom margin */
+}

@@ -1,9 +1,72 @@
 .login-form {
     @apply 
     bg-white 
-    p-5 
+    p-3 /* reduced from p-5 */
     rounded-lg 
     shadow-lg 
-    max-w-md 
+    max-w-xs /* reduced from max-w-md */
     ;
+}
+
+.forgot-password-link {
+    @apply 
+    text-right 
+    mb-2 /* reduced from mb-4 */
+    ;
+}
+
+.forgot-password-link a {
+    @apply 
+    text-blue-600 
+    underline 
+    cursor-pointer 
+    text-xs /* reduced from text-sm */
+    ;
+}
+
+/* Vertically center the login form section */
+.login-section {
+    @apply flex items-center justify-center bg-gray-50;
+    /* Added bg-gray-50 for subtle background */
+}
+
+/* Vertically and horizontally center modal content */
+.modal-backdrop {
+    @apply fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50 min-h-screen;
+    /* Added min-h-screen for full viewport height */
+}
+
+.modal {
+    @apply bg-white p-4 rounded-lg shadow-xl w-full max-w-xs flex flex-col items-center justify-center mx-auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-height: unset;
+    height: auto;
+    /* Remove any stretching, keep only content height */
+}
+
+.modal-actions {
+    @apply 
+    flex 
+    gap-2 /* reduced from gap-4 */
+    mt-2 /* reduced from mt-4 */
+    justify-end
+    ;
+}
+
+/* Reduce vertical spacing between form elements */
+.login-form input,
+.login-form button {
+    @apply mb-2;
+}
+
+.login-form label {
+    @apply text-xs;
+}
+
+/* Compact button styles */
+.login-form button {
+    @apply py-1 px-3 text-sm;
 }

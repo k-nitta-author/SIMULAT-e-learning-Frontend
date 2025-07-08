@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { NgIf } from '@angular/common';
 
 interface LoginResponse {
   privileges: {
@@ -17,13 +18,17 @@ interface LoginResponse {
 @Component({
   selector: 'app-login-form',
   standalone: true,
-  imports: [FormsModule, HttpClientModule, RouterModule],
+  imports: [FormsModule, HttpClientModule, RouterModule, NgIf],
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent {
   username: string = '';
   password: string = '';
+
+  // Forgot password modal state and form
+  showForgotPasswordModal: boolean = false;
+  forgotPasswordEmail: string = '';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -46,5 +51,21 @@ export class LoginFormComponent {
       },
       err => console.error('Login error', err)
     );
+  }
+
+  openForgotPasswordModal() {
+    this.showForgotPasswordModal = true;
+    this.forgotPasswordEmail = '';
+  }
+
+  closeForgotPasswordModal() {
+    this.showForgotPasswordModal = false;
+    this.forgotPasswordEmail = '';
+  }
+
+  submitForgotPassword() {
+    const url = 'https://simulat-e-learning-backend.onrender.com/user/forgot password';
+    this.http.post(url, { email: this.forgotPasswordEmail }).subscribe();
+    this.closeForgotPasswordModal();
   }
 }

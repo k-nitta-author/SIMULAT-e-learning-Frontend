@@ -2,19 +2,17 @@
     @apply 
     flex 
     flex-col
-    items-center
-    justify-center
     min-h-screen
-    max-w-screen-xl
+    max-w-screen-md /* reduced from max-w-screen-xl */
     mx-auto
-    py-8; 
+    py-0;
 }
 
-.login-section,
+.simulat-login-section,
 .announcement-section {
     @apply 
     flex-1 
-    max-w-xl  /* changed from max-w-lg to max-w-xl for wider form */
+    max-w-sm  /* reduced from max-w-xl */
     mx-auto
     flex
     flex-col
@@ -22,8 +20,20 @@
 }
 
 @media (max-width: 640px) {
-    .login-section,
+    .simulat-login-section,
     .announcement-section {
         @apply w-full;
     }
+}
+
+.home-page-header {
+    @apply bg-white rounded-lg shadow p-4 mb-4 text-center max-w-xl mx-auto;
+}
+
+.home-page-header h2 {
+    @apply text-4xl md:text-3xl font-bold text-marian-blue mb-2;
+}
+
+.home-page-header p {
+    @apply text-sm text-gray-600;
 }

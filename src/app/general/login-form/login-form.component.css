@@ -1,0 +1,49 @@
+.login-form {
+    @apply 
+    bg-white 
+    p-2 /* reduced from p-3 */
+    rounded-md /* reduced from rounded-lg */
+    shadow-md /* reduced shadow */
+    max-w-xs
+    w-full /* ensure full width in container */
+    ;
+}
+
+.forgot-password-link {
+    @apply 
+    text-right 
+    mb-1 /* reduced from mb-2 */
+    ;
+}
+
+.forgot-password-link a {
+    @apply 
+    text-blue-600 
+    underline 
+    cursor-pointer 
+    text-xs
+    ;
+}
+
+/* Vertically center the login form section */
+.login-section {
+    @apply flex items-center justify-center min-h-screen;
+}
+
+/* Vertically and horizontally center modal content */
+.modal-backdrop {
+    @apply fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50;
+}
+
+.modal {
+    @apply bg-white p-2 /* reduced from p-4 */ rounded-md shadow-md w-full max-w-xs flex flex-col items-center justify-center mx-auto;
+}
+
+.modal-actions {
+    @apply 
+    flex 
+    gap-1 /* reduced from gap-2 */
+    mt-1 /* reduced from mt-2 */
+    justify-end
+    ;
+}
