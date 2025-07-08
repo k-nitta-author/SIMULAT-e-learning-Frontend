@@ -67,3 +67,33 @@ header h1 {
 .content-title-link h2 {
   @apply hover:underline;
 }
+
+.file-widget {
+  @apply bg-gray-50 rounded-lg p-4 mb-8 border border-gray-100;
+}
+
+.file-widget-title {
+  @apply text-lg font-semibold mb-3 text-gray-700;
+}
+
+.file-list {
+  @apply divide-y divide-gray-200;
+}
+
+.file-item {
+  @apply flex items-center justify-between py-2;
+}
+.file-item:nth-child(even) {
+  @apply bg-gray-100;
+}
+.file-item:nth-child(odd) {
+  @apply bg-white;
+}
+
+.file-name {
+  @apply text-gray-800;
+}
+
+.file-download-btn {
+  @apply bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition-colors text-sm;
+}

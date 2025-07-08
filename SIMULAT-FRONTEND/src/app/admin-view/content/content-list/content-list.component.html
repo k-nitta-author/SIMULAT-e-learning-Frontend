@@ -127,5 +127,24 @@
       </tbody>
     </table>
   </div>
+
+  <!-- File Upload/Download Widget -->
+  <div class="file-widget">
+    <h3>Files</h3>
+    <div *ngIf="isFileLoading" class="loading-state">Loading files...</div>
+    <div *ngIf="fileError" class="error-state">{{ fileError }}</div>
+    <div *ngIf="!isFileLoading && fileList.length === 0" class="empty-state">No files found.</div>
+    <ul *ngIf="fileList.length > 0" class="file-list">
+      <li *ngFor="let file of fileList" class="file-item">
+        <span>{{ file }}</span>
+        <button type="button" (click)="downloadFile(file)">Download</button>
+      </li>
+    </ul>
+    <form (submit)="$event.preventDefault(); uploadFile();" class="upload-form">
+      <input type="file" (change)="onFileSelected($event)" [disabled]="isUploading" />
+      <button type="submit" [disabled]="!selectedFile || isUploading">Upload</button>
+      <span *ngIf="isUploading">Uploading... {{ uploadProgress }}%</span>
+    </form>
+  </div>
 </div>
 

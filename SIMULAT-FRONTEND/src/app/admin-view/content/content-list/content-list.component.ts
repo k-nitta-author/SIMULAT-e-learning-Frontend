@@ -28,10 +28,19 @@ export class ContentListComponent implements OnInit {
     term_id: 0
   }; // Store new content temporarily for form
 
+  // File management state
+  fileList: string[] = [];
+  fileError: string | null = null;
+  isFileLoading: boolean = false;
+  selectedFile: File | null = null;
+  isUploading: boolean = false;
+  uploadProgress: number = 0;
+
   constructor(private contentService: ContentService) {}
 
   ngOnInit(): void {
     this.loadContent(); // Load content on initialization
+    this.loadFiles();   // Load files on initialization
   }
 
   // Load all content
@@ -138,6 +147,69 @@ export class ContentListComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error deleting content:', error);
+      }
+    });
+  }
+
+  // --- File Management Methods ---
+
+  loadFiles(): void {
+    this.isFileLoading = true;
+    this.fileError = null;
+    // Replace with your backend service call
+    this.contentService.getFiles().subscribe({
+      next: (files: string[]) => {
+        this.fileList = files;
+        this.isFileLoading = false;
+      },
+      error: (err) => {
+        this.fileError = 'Failed to load files.';
+        this.isFileLoading = false;
+      }
+    });
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+    }
+  }
+
+  uploadFile(): void {
+    if (!this.selectedFile) return;
+    this.isUploading = true;
+    this.uploadProgress = 0;
+    this.fileError = null;
+    this.contentService.uploadFile(this.selectedFile).subscribe({
+      next: (event: any) => {
+        if (event.type === 'progress') {
+          this.uploadProgress = Math.round((100 * event.loaded) / event.total);
+        } else if (event.type === 'response') {
+          this.isUploading = false;
+          this.selectedFile = null;
+          this.loadFiles();
+        }
+      },
+      error: (err) => {
+        this.fileError = 'File upload failed.';
+        this.isUploading = false;
+      }
+    });
+  }
+
+  downloadFile(filename: string): void {
+    this.contentService.downloadFile(filename).subscribe({
+      next: (blob: Blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: () => {
+        this.fileError = 'Failed to download file.';
       }
     });
   }

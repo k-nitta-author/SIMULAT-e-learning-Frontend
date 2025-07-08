@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpEventType, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 
 export interface Course {
@@ -53,6 +53,7 @@ export interface ServiceResponse<T> {
 })
 export class ContentService {
   private apiEndpoint = 'https://simulat-e-learning-backend.onrender.com/content';
+  private filesEndpoint = 'https://simulat-e-learning-backend.onrender.com/files';
 
   constructor(private http: HttpClient) { }
 
@@ -121,6 +122,42 @@ export class ContentService {
       .pipe(
         map(response => response),
         catchError(error => throwError(error))
+      );
+  }
+
+  // --- File Management Methods ---
+
+  getFiles(): Observable<string[]> {
+    return this.http.get<{ files: string[] }>(`${this.filesEndpoint}`)
+      .pipe(
+        map(response => response.files),
+        catchError(error => throwError(() => error))
+      );
+  }
+
+  uploadFile(file: File): Observable<HttpEvent<any>> {
+    const formData = new FormData();
+    formData.append('file', file);
+    const req = new HttpRequest('POST', `${this.filesEndpoint}/upload`, formData, {
+      reportProgress: true
+    });
+    return this.http.request(req).pipe(
+      catchError(error => throwError(() => error))
+    );
+  }
+
+  downloadFile(filename: string): Observable<Blob> {
+    return this.http.get(`${this.filesEndpoint}/${encodeURIComponent(filename)}`, {
+      responseType: 'blob'
+    }).pipe(
+      catchError(error => throwError(() => error))
+    );
+  }
+
+  deleteFile(filename: string): Observable<any> {
+    return this.http.delete(`${this.filesEndpoint}/delete/${encodeURIComponent(filename)}`)
+      .pipe(
+        catchError(error => throwError(() => error))
       );
   }
 }

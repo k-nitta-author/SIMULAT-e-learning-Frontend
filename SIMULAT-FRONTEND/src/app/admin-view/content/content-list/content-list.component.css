@@ -145,3 +145,51 @@ td {
 .badge-exercise {
   @apply bg-purple-100 text-purple-800;
 }
+
+.file-widget {
+  @apply bg-gradient-to-br from-blue-50 to-white rounded-xl shadow-lg p-6 mt-10 border border-blue-100;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.file-widget h3 {
+  @apply text-lg font-semibold mb-4 text-blue-800 tracking-wide;
+}
+
+.file-list {
+  @apply mb-4 divide-y divide-blue-100;
+}
+
+.file-item {
+  @apply flex items-center justify-between py-2;
+}
+
+.file-item span {
+  @apply truncate max-w-[250px] text-gray-700;
+}
+
+.file-item button {
+  @apply bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded shadow transition-all duration-150 text-xs font-semibold ml-2;
+}
+
+.upload-form {
+  @apply flex items-center gap-3 mt-2;
+}
+
+.upload-form input[type="file"] {
+  @apply block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4
+    file:rounded-full file:border-0
+    file:text-sm file:font-semibold
+    file:bg-blue-50 file:text-blue-700
+    hover:file:bg-blue-100;
+  max-width: 250px;
+}
+
+.upload-form button[type="submit"] {
+  @apply bg-green-500 hover:bg-green-600 text-white px-4 py-1 rounded shadow text-sm font-semibold transition-all duration-150;
+}
+
+.upload-form span {
+  @apply ml-2 text-blue-700 font-medium;
+}

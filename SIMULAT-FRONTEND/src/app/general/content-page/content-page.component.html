@@ -3,6 +3,22 @@
     <h1>Learning Content</h1>
   </header>
 
+  <!-- File Widget Section -->
+  <section class="file-widget">
+    <h2 class="file-widget-title">Files</h2>
+    <div *ngIf="filesLoading" class="loading-state">Loading files...</div>
+    <div *ngIf="filesError" class="error-state">{{ filesError }}</div>
+    <div *ngIf="!filesLoading && !filesError">
+      <div *ngIf="files.length === 0" class="empty-state">No files available.</div>
+      <ul *ngIf="files.length > 0" class="file-list">
+        <li *ngFor="let file of files" class="file-item">
+          <span class="file-name">{{ file }}</span>
+          <button class="file-download-btn" (click)="downloadFile(file)">Download</button>
+        </li>
+      </ul>
+    </div>
+  </section>
+
   <!-- Loading State -->
   <div *ngIf="isLoading" class="loading-state">
     Loading content...
